@@ -1,0 +1,130 @@
+@import "tailwindcss";
+
+:root {
+  --ink: #070b12;
+  --ink-elevated: #0e1522;
+  --fog: #9aa8bd;
+  --snow: #eef2f7;
+  --afterburn: #e8a045;
+  --afterburn-soft: #f0c078;
+  --horizon: #3d6f9a;
+  --vapor: rgba(120, 170, 210, 0.35);
+  --font-display: var(--font-syne);
+  --font-body: var(--font-instrument);
+}
+
+@theme inline {
+  --color-ink: var(--ink);
+  --color-ink-elevated: var(--ink-elevated);
+  --color-fog: var(--fog);
+  --color-snow: var(--snow);
+  --color-afterburn: var(--afterburn);
+  --color-afterburn-soft: var(--afterburn-soft);
+  --color-horizon: var(--horizon);
+  --font-sans: var(--font-body);
+  --font-display: var(--font-display);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  min-height: 100%;
+  margin: 0;
+  background: var(--ink);
+  color: var(--snow);
+  font-family: var(--font-body), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--afterburn) 45%, transparent);
+  color: var(--ink);
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(1.1rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes drift {
+  from {
+    transform: translate3d(-2%, 0, 0) scale(1.05);
+  }
+  to {
+    transform: translate3d(2%, -1%, 0) scale(1.08);
+  }
+}
+
+@keyframes glow-pulse {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 0.85;
+  }
+}
+
+@keyframes underline-in {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.anim-rise {
+  animation: rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.anim-rise-delay-1 {
+  animation-delay: 0.12s;
+}
+
+.anim-rise-delay-2 {
+  animation-delay: 0.24s;
+}
+
+.anim-rise-delay-3 {
+  animation-delay: 0.36s;
+}
+
+.sky-drift {
+  animation: drift 28s ease-in-out infinite alternate;
+}
+
+.horizon-glow {
+  animation: glow-pulse 7s ease-in-out infinite;
+}
+
+.cta-underline {
+  transform-origin: left center;
+  animation: underline-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.55s both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .anim-rise,
+  .anim-rise-delay-1,
+  .anim-rise-delay-2,
+  .anim-rise-delay-3,
+  .sky-drift,
+  .horizon-glow,
+  .cta-underline {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
