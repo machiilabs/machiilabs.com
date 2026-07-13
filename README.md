@@ -4,6 +4,13 @@ Studio site for **Mach II Labs** — `https://machiilabs.com`
 
 Standalone Next.js app on its own GitHub repo and Vercel project. Not related to other personal or product repositories.
 
+## Company principles
+
+- **No subscriptions — ever.** Mach II Labs does not use subscription billing, recurring plans, or SaaS-style lock-in.
+- **Skagway** — free forever.
+- **Ketchikan** (SafeHaven) — trial + one-time purchase.
+- **No app telemetry by default.** Products must not phone home with usage analytics or silent diagnostics; bug reports are user-initiated only. (Studio support-process metrics are fine.)
+
 ## Local development
 
 ```bash
