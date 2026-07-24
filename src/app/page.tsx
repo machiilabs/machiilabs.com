@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Home() {
   return (
     <div className="relative min-h-dvh overflow-hidden bg-ink text-snow">
@@ -56,10 +58,10 @@ export default function Home() {
           files, your time, and how craft feels in the hand.
         </p>
 
-        <div className="anim-rise anim-rise-delay-3 mt-10 flex flex-wrap items-center gap-x-8 gap-y-4">
+        <div className="anim-rise anim-rise-delay-3 mt-10 flex flex-col gap-5 sm:gap-6">
           <a
             href="mailto:support@machiilabs.com"
-            className="group relative inline-flex items-center font-display text-base font-semibold tracking-wide text-snow transition-colors hover:text-afterburn-soft"
+            className="group relative inline-flex w-fit items-center font-display text-base font-semibold tracking-wide text-snow transition-colors hover:text-afterburn-soft"
           >
             Contact the lab
             <span
@@ -67,7 +69,13 @@ export default function Home() {
               className="cta-underline absolute -bottom-1 left-0 h-px w-full bg-afterburn"
             />
           </a>
-          <span className="text-sm text-fog/80">First product coming soon</span>
+          <Link
+            href="/skagway"
+            className="max-w-lg text-base leading-snug text-fog transition-colors hover:text-afterburn-soft sm:text-lg"
+          >
+            Try our full-powered Video Collection Library tool, Skagway
+            — free forever!
+          </Link>
         </div>
       </main>
 

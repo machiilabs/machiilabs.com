@@ -1,0 +1,23 @@
+---
+description: Mach II Labs never uses subscriptions; product monetization models
+alwaysApply: true
+---
+
+# No subscriptions — ever
+
+**Mach II Labs NEVER does subscriptions.**
+
+Do not propose, design, market, or implement:
+
+- Subscription billing
+- Recurring plans
+- SaaS-style monthly/yearly lock-in
+
+## Product monetization
+
+| Product | Model |
+|---------|--------|
+| **Skagway** | Free forever |
+| **Ketchikan** (SafeHaven rename) | Trial + one-time purchase |
+
+Future Mach II Labs products: free forever and/or trial + one-time purchase / paid license only — never subscriptions.
