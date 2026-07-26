@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { MANUAL_HOME, MANUAL_PAGES } from "./manual";
+import { MANUAL_HOME, MANUAL_PAGES, manualSectionId } from "./manual";
+import { ManualInline } from "./manual-inline";
+import { ManualSteps } from "./manual-shell";
 import { ManualFigure, ManualShell } from "./manual-shell";
 
 export const metadata: Metadata = {
@@ -25,51 +27,42 @@ export default function SkagwayManualIndexPage() {
 
   return (
     <ManualShell currentSlug="first-launch">
-      <p className="font-display text-[0.7rem] font-semibold tracking-[0.28em] text-afterburn-soft uppercase sm:text-xs">
+      <p className="text-xs font-semibold tracking-wide text-[#6b7280] uppercase">
         Manual
       </p>
-      <h1 className="mt-5 font-display text-[clamp(2.25rem,6vw,3.5rem)] leading-[1.08] font-extrabold tracking-[-0.04em] text-snow">
+      <h1 className="mt-3 text-3xl font-bold tracking-tight text-[#1a1a1a] sm:text-4xl">
         {MANUAL_HOME.title}
       </h1>
-      <p className="mt-6 text-lg leading-relaxed text-fog sm:text-xl">
-        {MANUAL_HOME.summary}
+      <p className="mt-4 text-base leading-relaxed text-[#4b5563] sm:text-lg">
+        <ManualInline text={MANUAL_HOME.summary} />
       </p>
 
       <ManualFigure page={MANUAL_HOME} />
 
-      <div className="mt-12 space-y-12">
+      <div className="mt-10 space-y-10">
         {MANUAL_HOME.sections.map((section) => (
-          <section key={section.title}>
-            <h2 className="font-display text-xl font-bold tracking-tight text-snow sm:text-2xl">
-              {section.title}
+          <section key={section.title} id={manualSectionId(section.title)}>
+            <h2 className="scroll-mt-8 text-xl font-semibold tracking-tight text-[#1a1a1a]">
+              <ManualInline text={section.title} />
             </h2>
-            <ol className="mt-5 space-y-3 pl-6 text-base leading-relaxed text-fog sm:text-lg">
-              {section.steps.map((step) => (
-                <li key={step} className="list-decimal pl-2">
-                  {step}
-                </li>
-              ))}
-            </ol>
+            <ManualSteps steps={section.steps} />
             {section.note ? (
-              <p className="mt-5 border-l-2 border-afterburn/60 pl-4 text-sm leading-relaxed text-fog">
-                {section.note}
+              <p className="mt-4 border-l-2 border-[#93c5fd] pl-4 text-sm leading-relaxed text-[#4b5563]">
+                <ManualInline text={section.note} />
               </p>
             ) : null}
           </section>
         ))}
       </div>
 
-      <div className="mt-16 flex flex-wrap items-center justify-between gap-4 border-t border-white/10 pt-8 text-sm">
-        <Link
-          href="/skagway"
-          className="text-fog transition-colors hover:text-snow"
-        >
+      <div className="mt-14 flex flex-wrap items-center justify-between gap-4 border-t border-[#e5e7eb] pt-6 text-sm">
+        <Link href="/skagway" className="text-[#4b5563] hover:text-[#1a1a1a]">
           ← Skagway
         </Link>
         {next ? (
           <Link
             href={`/skagway/manual/${next.slug}`}
-            className="text-fog transition-colors hover:text-snow"
+            className="text-[#4b5563] hover:text-[#1a1a1a]"
           >
             {next.title} →
           </Link>

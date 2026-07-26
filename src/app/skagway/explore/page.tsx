@@ -64,7 +64,7 @@ const features: Feature[] = [
   {
     title: "Find anything in seconds",
     body: [
-      "Quick Filter narrows thousands of videos with a click: star ratings, duration ranges, quality from SD to 8K+, tags, and built-in smart libraries like Recently Added, Top Rated, and Duplicates.",
+      "Search matches titles, file names, original file names, tags, and custom fields — multi-word queries AND across those fields. Quick Filter narrows further with ratings, duration, quality, tags, and smart libraries like Recently Added, Top Rated, and Duplicates.",
       "Need surgical precision? Advanced Filter builds rule sets — “tagged Vacation AND rated 4+ stars, OR tagged Favorite” — with the same attributes available to saved collections.",
     ],
     screenshot: "explore-filter.png",
@@ -124,26 +124,26 @@ const features: Feature[] = [
   {
     title: "Real file tools, with safety nets",
     body: [
-      "Rename, move between drives, re-encode stubborn formats to MP4, or send files to the Trash — right from the library. Long jobs run in queues that survive quitting the app.",
-      "Cross-drive moves copy and verify before removing the original. Re-encodes keep a backup until you delete it. Skagway is careful with your files because they’re yours, not its.",
+      "Edit titles, bulk-rename files, move between volumes, or Fix for Built-in Player… (re-encode to MP4) — right from the library. Cross-volume moves and re-encodes show as header pills and a bottom activity strip; open the queues from there or the View menu.",
+      "Cross-volume moves copy and verify before removing the original. Re-encodes keep a backup until you delete it. Queues survive quitting the app.",
     ],
     screenshot: "explore-file-ops.png",
     screenshotAlt:
-      "Skagway context menu with file operations like Move Files and Re-encode to MP4",
+      "Skagway context menu with Bulk Rename…, Move Files…, and Fix for Built-in Player…",
     screenshotHint:
-      "Right-click context menu on a grid card showing Move Files…, Re-encode to MP4…, Show in Finder, and the delete options.",
+      "Right-click context menu showing Bulk Rename…, Move Files…, Fix for Built-in Player…, Edit Title… / Rename File…. Bonus: a header queue pill or activity strip while a job runs.",
   },
   {
     title: "Your data is portable",
     body: [
-      "Export ratings, tags, and every field — built-in or custom — to CSV or JSON Lines. Import them into the same or different library, another Mac, or your own scripts. New fields will be automatically added as Custom fields in the database.",
+      "Export to CSV or JSON Lines with clear groups: Match keys, Importable fields (including Title), and Export-only facts like Original File Name. Import matches by path or fingerprint; unknown columns can become custom fields.",
       "The library itself is a single file you can copy for backup in one menu command. No export maze, no lock-in.",
     ],
     screenshot: "explore-export.png",
     screenshotAlt:
-      "Skagway Export Metadata sheet with format selection and field checklist",
+      "Skagway Export Metadata sheet with Match keys, Importable, and Export only sections",
     screenshotHint:
-      "The Export Metadata… sheet showing the CSV / JSON Lines choice and the field list.",
+      "The Export Metadata… sheet showing CSV / JSON Lines and the three field sections (Match keys, Importable, Export only).",
   },
 ];
 

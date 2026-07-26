@@ -1,0 +1,16 @@
+---
+description: Keep the Skagway manual search index in sync when editing docs
+globs: src/app/skagway/manual/**
+---
+
+# Skagway manual search index
+
+`manual.ts` is the source of truth. The search corpus is **generated** — never hand-edit `search-index.generated.ts`.
+
+After any content change under `src/app/skagway/manual/`:
+
+1. Run `npm run manual:index` (also runs on `predev` / `prebuild`).
+2. Commit `search-index.generated.ts` with the content change.
+3. Optionally verify with `npm run manual:index:check`.
+
+See `src/app/skagway/manual/README.md` for the full workflow.

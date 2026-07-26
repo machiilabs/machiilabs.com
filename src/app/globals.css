@@ -145,3 +145,35 @@ body {
     transform: none !important;
   }
 }
+
+/* Skagway Manual — light docs surface (product pages stay dark) */
+.manual-docs {
+  --manual-bg: #fafafa;
+  --manual-surface: #ffffff;
+  --manual-text: #1a1a1a;
+  --manual-muted: #4b5563;
+  --manual-border: #e5e7eb;
+  --manual-link: #1d4ed8;
+  --manual-active-bg: #eff6ff;
+  --manual-accent: #1d4ed8;
+  background: #fafafa !important;
+  color: #1a1a1a !important;
+  color-scheme: light;
+  font-family:
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    "Segoe UI",
+    Helvetica,
+    Arial,
+    sans-serif;
+}
+
+.manual-docs ::selection {
+  background: #dbeafe;
+  color: #1a1a1a;
+}
+
+.manual-docs a {
+  text-decoration: none;
+}

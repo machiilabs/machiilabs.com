@@ -3,6 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "manual:index": "npx tsx scripts/generate-manual-search-index.ts",
+    "manual:index:check": "npx tsx scripts/generate-manual-search-index.ts --check",
+    "predev": "npm run manual:index",
+    "prebuild": "npm run manual:index",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
@@ -23,6 +27,7 @@
     "eslint": "^9",
     "eslint-config-next": "16.2.10",
     "tailwindcss": "^4",
+    "tsx": "^4.23.1",
     "typescript": "^5"
   }
 }
