@@ -1,40 +1,42 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 170" role="img" aria-label="Mach II Labs">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 70" role="img" aria-label="Mach II Labs">
   <title>Mach II Labs</title>
+  <desc>Primary stacked lockup: Mach II on chevron foot; LABS flush to bar end with solid horizon extension.</desc>
   <defs>
     <linearGradient id="machii-horizon-stacked" x1="0" y1="0" x2="1" y2="0">
       <stop offset="0%" stop-color="#9aa8bd"/>
       <stop offset="100%" stop-color="#3d6f9a"/>
     </linearGradient>
   </defs>
-  <!-- Mark + stacked wordmark: tip above Mach II, bar with fog LABS -->
-  <g transform="translate(0 8)">
-    <path
-      d="M 32.224 23.157 L 14.112 53.685 L 16.405 53.653 L 32.139 36.629 L 48.096 53.76 L 50.005 53.675 Z"
-      fill="#e8a045"
-      transform="scale(2.35)"
-    />
-    <path
-      d="M 4.448 54.56 L 4.501 59.925 L 59.659 59.861 L 59.712 54.539 Z"
-      fill="url(#machii-horizon-stacked)"
-      transform="scale(2.35)"
-    />
-  </g>
+  <!-- Mark (64 space) -->
+  <path
+    d="M 32.224 23.157 L 14.112 53.685 L 16.405 53.653 L 32.139 36.629 L 48.096 53.76 L 50.005 53.675 Z"
+    fill="#e8a045"
+  />
+  <path
+    d="M 4.448 54.56 L 4.501 59.925 L 59.659 59.861 L 59.712 54.539 Z"
+    fill="url(#machii-horizon-stacked)"
+  />
+  <!-- Mach II baseline on chevron foot; starts at bar right -->
   <text
-    x="178"
-    y="92"
+    x="59.712"
+    y="53.685"
     fill="#eef2f7"
     font-family="Inter, Syne, Avenir Next, Segoe UI, Helvetica Neue, sans-serif"
-    font-size="52"
+    font-size="24"
     font-weight="800"
     letter-spacing="-0.04em"
   >Mach II</text>
+  <!-- LABS on bar band (horizon — matches bar extension) -->
   <text
-    x="178"
-    y="128"
-    fill="#9aa8bd"
+    x="59.712"
+    y="58.6"
+    fill="#3d6f9a"
     font-family="Inter, Syne, Avenir Next, Segoe UI, Helvetica Neue, sans-serif"
-    font-size="17"
+    font-size="7.7"
     font-weight="700"
+    font-style="italic"
     letter-spacing="0.28em"
   >LABS</text>
+  <!-- Solid horizon extension after LABS to Mach II right edge -->
+  <rect x="88" y="54.56" width="56.7" height="5.365" fill="#3d6f9a"/>
 </svg>

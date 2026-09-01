@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-label="Mach II Labs brand layout">
   <title>Mach II Labs — Brand Layout</title>
-  <desc>Official brand sheet: mark, wordmark, lockups, palette, clear space, minimum size, typography. No squircle.</desc>
+  <desc>Official brand sheet: mark, primary stacked lockup (Mach II on chevron foot; LABS flush to bar end with solid horizon extension), palette, clear space, minimum size, typography. No squircle.</desc>
 
   <defs>
     <linearGradient id="horizon" x1="0" y1="0" x2="1" y2="0">
@@ -20,6 +20,38 @@
       />
     </g>
 
+    <!--
+      Primary lockup in mark viewBox units (64).
+      Font size 24 ≈ 64/2.65 (site STACKED_MARK_EM).
+      Mach II baseline = chevron foot (53.685).
+      Wordmark x = bar right (59.712).
+      Solid #3d6f9a bar continues after LABS to Mach II’s right edge.
+    -->
+    <g id="lockup-primary">
+      <use href="#mark"/>
+      <text
+        x="59.712"
+        y="53.685"
+        fill="#eef2f7"
+        font-family="Inter, Syne, Avenir Next, Segoe UI, Helvetica Neue, sans-serif"
+        font-size="24"
+        font-weight="800"
+        letter-spacing="-0.04em"
+      >Mach II</text>
+      <text
+        x="59.712"
+        y="58.6"
+        fill="#3d6f9a"
+        font-family="Inter, Syne, Avenir Next, Segoe UI, Helvetica Neue, sans-serif"
+        font-size="7.7"
+        font-weight="700"
+        font-style="italic"
+        letter-spacing="0.28em"
+      >LABS</text>
+      <!-- Extension after LABS → Mach II right (~85 units wide at font 24) -->
+      <rect x="88" y="54.56" width="56.7" height="5.365" fill="#3d6f9a"/>
+    </g>
+
     <style type="text/css"><![CDATA[
       .label {
         fill: #9aa8bd;
@@ -32,6 +64,13 @@
         fill: #eef2f7;
         font-family: Inter, Syne, Avenir Next, Segoe UI, Helvetica Neue, sans-serif;
         font-weight: 800;
+      }
+      .labs {
+        fill: #3d6f9a;
+        font-family: Inter, Syne, Avenir Next, Segoe UI, Helvetica Neue, sans-serif;
+        font-weight: 700;
+        font-style: italic;
+        letter-spacing: 0.28em;
       }
       .meta {
         fill: #9aa8bd;
@@ -56,53 +95,54 @@
   <text class="meta" x="1152" y="36" text-anchor="end">Official · no squircle</text>
   <line class="rule" x1="48" y1="52" x2="1152" y2="52"/>
 
-  <!-- ===== Hero lockup (mark + stacked wordmark; LABS in fog) ===== -->
-  <g transform="translate(48 88)">
-    <use href="#mark" transform="scale(2.5)"/>
-    <text class="word" x="188" y="108" font-size="56" letter-spacing="-0.04em">Mach II</text>
-    <text class="word" x="188" y="142" font-size="18" font-weight="700" letter-spacing="0.28em" fill="#9aa8bd">LABS</text>
+  <!-- ===== Primary hero lockup ===== -->
+  <g transform="translate(48 72)">
+    <text class="label" x="0" y="0">PRIMARY LOCKUP</text>
+    <use href="#lockup-primary" transform="translate(0 16) scale(2.35)"/>
+    <text class="meta" x="0" y="200">Mach II on chevron foot · LABS flush to bar · solid horizon extension (#3d6f9a)</text>
   </g>
 
-  <line class="rule" x1="48" y1="280" x2="1152" y2="280"/>
+  <line class="rule" x1="48" y1="290" x2="1152" y2="290"/>
 
   <!-- ===== Row 2: Mark | Wordmark | Lockups | Palette ===== -->
   <!-- Mark -->
-  <g transform="translate(48 312)">
+  <g transform="translate(48 322)">
     <text class="label" x="0" y="0">MARK</text>
     <use href="#mark" transform="translate(8 24) scale(1.75)"/>
   </g>
 
-  <line class="rule" x1="220" y1="300" x2="220" y2="560"/>
+  <line class="rule" x1="220" y1="310" x2="220" y2="560"/>
 
   <!-- Wordmark stacked -->
-  <g transform="translate(248 312)">
+  <g transform="translate(248 322)">
     <text class="label" x="0" y="0">WORDMARK</text>
     <text class="word" x="0" y="64" font-size="36" letter-spacing="-0.04em">Mach II</text>
-    <text class="word" x="0" y="100" font-size="18" font-weight="700" letter-spacing="0.28em" fill="#9aa8bd">LABS</text>
+    <text class="labs" x="0" y="100" font-size="18">LABS</text>
+    <text class="meta" x="0" y="128" font-size="11">Snow + Horizon · LABS matches bar extension</text>
   </g>
 
-  <line class="rule" x1="460" y1="300" x2="460" y2="560"/>
+  <line class="rule" x1="460" y1="310" x2="460" y2="560"/>
 
   <!-- Lockup options -->
-  <g transform="translate(488 312)">
+  <g transform="translate(488 322)">
     <text class="label" x="0" y="0">LOCKUP OPTIONS</text>
-    <!-- Horizontal -->
-    <g transform="translate(0 36)">
-      <use href="#mark" transform="scale(0.7)"/>
-      <text class="word" x="52" y="38" font-size="22" letter-spacing="-0.03em">Mach II Labs</text>
+    <!-- Horizontal (nav / compact) -->
+    <g transform="translate(0 28)">
+      <text class="meta" x="0" y="0" font-size="10">HORIZONTAL (nav)</text>
+      <use href="#mark" transform="translate(0 10) scale(0.7)"/>
+      <text class="word" x="52" y="48" font-size="22" letter-spacing="-0.03em">Mach II Labs</text>
     </g>
-    <!-- Mark + stacked word -->
-    <g transform="translate(0 120)">
-      <use href="#mark" transform="scale(0.7)"/>
-      <text class="word" x="52" y="28" font-size="20" letter-spacing="-0.03em">Mach II</text>
-      <text class="word" x="52" y="48" font-size="12" font-weight="700" letter-spacing="0.28em" fill="#9aa8bd">LABS</text>
+    <!-- Primary stacked (small) -->
+    <g transform="translate(0 100)">
+      <text class="meta" x="0" y="0" font-size="10">STACKED (primary)</text>
+      <use href="#lockup-primary" transform="translate(0 8) scale(0.85)"/>
     </g>
   </g>
 
-  <line class="rule" x1="820" y1="300" x2="820" y2="560"/>
+  <line class="rule" x1="820" y1="310" x2="820" y2="560"/>
 
   <!-- Color palette -->
-  <g transform="translate(848 312)">
+  <g transform="translate(848 322)">
     <text class="label" x="0" y="0">COLOR PALETTE</text>
     <g transform="translate(0 28)">
       <rect width="44" height="44" rx="6" fill="#e8a045"/>
@@ -129,11 +169,9 @@
   <line class="rule" x1="48" y1="580" x2="1152" y2="580"/>
 
   <!-- ===== Row 3: Clear space | Min size | Typography ===== -->
-  <!-- Clear space -->
   <g transform="translate(48 612)">
     <text class="label" x="0" y="0">CLEAR SPACE</text>
     <g transform="translate(24 28)">
-      <!-- Clear-space frame = mark + ¼ width (~16 units in 64 space, scaled) -->
       <rect x="0" y="0" width="112" height="112" fill="none" stroke="#ffffff28" stroke-width="1" stroke-dasharray="4 4"/>
       <use href="#mark" transform="translate(24 24) scale(1)"/>
       <text class="meta" x="4" y="14" font-size="10">X</text>
@@ -144,7 +182,6 @@
 
   <line class="rule" x1="280" y1="590" x2="280" y2="760"/>
 
-  <!-- Minimum size -->
   <g transform="translate(308 612)">
     <text class="label" x="0" y="0">MINIMUM SIZE</text>
     <g transform="translate(0 36)">
@@ -152,23 +189,21 @@
       <text class="meta" x="32" y="14">Mark ≥ 24px</text>
     </g>
     <g transform="translate(0 88)">
-      <use href="#mark" transform="scale(0.375)"/>
-      <text class="word" x="32" y="16" font-size="14" letter-spacing="-0.02em">Mach II Labs</text>
-      <text class="meta" x="32" y="36">Horizontal lockup ≥ 120px</text>
+      <use href="#lockup-primary" transform="scale(0.45)"/>
+      <text class="meta" x="0" y="52">Stacked lockup ≥ 140px wide</text>
     </g>
   </g>
 
   <line class="rule" x1="620" y1="590" x2="620" y2="760"/>
 
-  <!-- Typography -->
   <g transform="translate(648 612)">
     <text class="label" x="0" y="0">TYPOGRAPHY</text>
     <text class="word" x="0" y="72" font-size="72" letter-spacing="-0.04em">Aa</text>
     <text class="meta" x="120" y="48">Inter Bold / Extra Bold</text>
-    <text class="meta" x="120" y="70">Primary wordmark</text>
-    <text class="meta" x="120" y="92">Geometric neo-grotesque</text>
+    <text class="meta" x="120" y="70">Mach II = Snow · LABS = Horizon</text>
+    <text class="meta" x="120" y="92">Bar extension = Horizon solid</text>
   </g>
 
   <line class="rule" x1="48" y1="772" x2="1152" y2="772"/>
-  <text class="meta" x="48" y="792">machiilabs.com · /logo-mark.svg</text>
+  <text class="meta" x="48" y="792">machiilabs.com · /logo-mark.svg · /logo-stacked.svg</text>
 </svg>

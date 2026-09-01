@@ -8,7 +8,7 @@ type MachiiLogoProps = {
   withWordmark?: boolean;
   /**
    * inline — single-line “Mach II Labs” (nav).
-   * stacked — “Mach II” over fog “LABS” (hero / brand lockup).
+   * stacked — “Mach II” over horizon “LABS” (hero / brand lockup).
    */
   wordmarkLayout?: "inline" | "stacked";
   /** Mark size in pixels for inline layout (default 36). Ignored when stacked (uses em). */
@@ -21,16 +21,20 @@ type MachiiLogoProps = {
 
 /** logo-mark.svg viewBox fractions (0–64). */
 const TIP = 23.157 / 64;
+const CHEVRON_BOTTOM = 53.685 / 64;
 const BAR_TOP = 54.56 / 64;
 const BAR_BOTTOM = 59.925 / 64;
+const BAR_RIGHT = 59.712 / 64;
 /** Full mark box in ems for stacked lockup (optical height ≈ tip→bar). */
 const STACKED_MARK_EM = 2.65;
+/** Horizon bar end stop — solid extensions use this. */
+const HORIZON_END = "#3d6f9a";
 
 /**
  * Official Mach II Labs mark (chevron + horizon bar).
  *
  * Inline: wordmark caps sit between tip and bar.
- * Stacked: mark spans Mach II + LABS; tip above the M, bar with LABS (fog).
+ * Stacked: Mach II / LABS start at the mark bar’s right edge; solid bar continues past LABS.
  */
 export function MachiiLogo({
   href = "/",
@@ -144,9 +148,17 @@ function stackedLockup(className: string, withWordmark: boolean) {
   const box = `${STACKED_MARK_EM}em`;
   const opticalHeight = `calc(${STACKED_MARK_EM}em * ${BAR_BOTTOM - TIP})`;
   const offsetTop = `calc(-${STACKED_MARK_EM}em * ${TIP})`;
+  const barTopPct = ((BAR_TOP - TIP) / (BAR_BOTTOM - TIP)) * 100;
+  const barHeightPct = ((BAR_BOTTOM - BAR_TOP) / (BAR_BOTTOM - TIP)) * 100;
+  const chevronBottomPct = ((CHEVRON_BOTTOM - TIP) / (BAR_BOTTOM - TIP)) * 100;
+  // Pull wordmark left so it starts at the original bar’s right edge (not the SVG box).
+  const barRightInset = `${STACKED_MARK_EM * (1 - BAR_RIGHT)}em`;
 
   return (
-    <span className={`inline-flex items-end gap-[0.3em] ${className}`}>
+    <span
+      className={`relative inline-flex items-end ${className}`}
+      style={{ height: opticalHeight }}
+    >
       <MarkImage
         box={box}
         opticalHeight={opticalHeight}
@@ -155,14 +167,45 @@ function stackedLockup(className: string, withWordmark: boolean) {
       />
       {withWordmark ? (
         <span
-          className="flex flex-col justify-between"
-          style={{ height: opticalHeight, paddingTop: "0.1em" }}
+          className="relative"
+          style={{
+            marginLeft: `-${barRightInset}`,
+            height: opticalHeight,
+          }}
         >
-          <span className="text-[1em] leading-none font-extrabold tracking-[-0.04em] text-snow">
+          {/* Mach II baseline on the chevron foot (just above the bar). */}
+          <span
+            className="absolute left-0 text-[1em] leading-none font-extrabold tracking-[-0.04em] text-snow"
+            style={{
+              top: `${chevronBottomPct}%`,
+              transform: "translateY(-100%)",
+            }}
+          >
             Mach&nbsp;II
           </span>
-          <span className="text-[0.32em] leading-none font-bold tracking-[0.28em] text-fog uppercase">
-            Labs
+          {/* LABS starts at bar end; solid extension continues to Mach II’s right edge. */}
+          <span
+            className="absolute left-0 flex w-full items-center"
+            style={{
+              top: `${barTopPct}%`,
+              height: `${barHeightPct}%`,
+            }}
+          >
+            <span className="relative z-10 text-[0.32em] leading-none font-bold tracking-[0.28em] text-horizon uppercase italic">
+              Labs
+            </span>
+            <span
+              aria-hidden
+              className="h-full min-w-[0.35em] flex-1"
+              style={{ background: HORIZON_END }}
+            />
+          </span>
+          {/* Width driver: invisible Mach II so the bar-after spans the wordmark. */}
+          <span
+            aria-hidden
+            className="invisible text-[1em] leading-none font-extrabold tracking-[-0.04em]"
+          >
+            Mach&nbsp;II
           </span>
         </span>
       ) : null}
