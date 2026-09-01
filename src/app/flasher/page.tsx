@@ -1,7 +1,13 @@
 import type { Metadata } from "next";
+import { Inter } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
 import { MachiiLogo } from "@/components/machii-logo";
+
+const inter = Inter({
+  subsets: ["latin"],
+  weight: ["700"],
+});
 
 export const metadata: Metadata = {
   title: "HP 15C Flasher",
@@ -71,7 +77,9 @@ export default function FlasherPage() {
             <p className="font-display text-[0.7rem] font-semibold tracking-[0.28em] text-fog uppercase">
               Mac only · free forever · macOS 13+
             </p>
-            <h1 className="mt-4 font-display text-[clamp(2.5rem,8vw,4.75rem)] leading-[0.95] font-extrabold tracking-[-0.03em] text-snow">
+            <h1
+              className={`${inter.className} mt-4 text-[clamp(2.5rem,8vw,4.75rem)] leading-[0.95] font-bold tracking-[-0.03em] text-snow`}
+            >
               HP 15C Flasher
             </h1>
             <p className="mt-5 text-lg leading-relaxed text-fog sm:text-xl">
