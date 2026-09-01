@@ -1,0 +1,221 @@
+import type { Metadata } from "next";
+import Image from "next/image";
+import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "HP 15C Flasher",
+  description:
+    "Native macOS app that flashes HP 15C Collector’s Edition firmware over the official pogo cable. The app guides you through every step. Free forever from Mach II Labs.",
+  openGraph: {
+    title: "HP 15C Flasher — Mach II Labs",
+    description:
+      "Guided native SAM-BA programmer for the HP 15C Collector’s Edition. Windows SAM-BA not required. Free forever.",
+    url: "https://machiilabs.com/flasher",
+  },
+  twitter: {
+    title: "HP 15C Flasher — Mach II Labs",
+    description:
+      "Guided native SAM-BA programmer for the HP 15C Collector’s Edition. Free forever.",
+  },
+  alternates: {
+    canonical: "https://machiilabs.com/flasher",
+  },
+};
+
+const DOWNLOAD_URL =
+  "https://downloads.machiilabs.com/HP15CFlasher-1.0.0-190.dmg";
+const VERSION = "1.0.0";
+const SHA256 =
+  "0cb627dc9d918851dd03b7ec119ab96f2931beab5c50fd025d229f947cdebe4e";
+const DMG_FILENAME = "HP15CFlasher-1.0.0-190.dmg";
+
+export default function FlasherPage() {
+  return (
+    <div className="relative min-h-dvh overflow-hidden bg-ink text-snow">
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0"
+        style={{
+          background: `
+            radial-gradient(100% 70% at 80% 0%, rgba(61, 111, 154, 0.28) 0%, transparent 55%),
+            radial-gradient(80% 50% at 10% 90%, rgba(232, 160, 69, 0.1) 0%, transparent 50%),
+            linear-gradient(165deg, #05080f 0%, #0a1220 45%, #081018 100%)
+          `,
+        }}
+      />
+
+      <header className="relative z-10 border-b border-white/5">
+        <div className="mx-auto flex w-full max-w-6xl items-center justify-between gap-6 px-6 py-4 sm:px-10">
+          <Link
+            href="/"
+            className="font-display text-sm font-semibold tracking-wide text-fog transition-colors hover:text-snow"
+          >
+            Mach II Labs
+          </Link>
+          <nav className="flex items-center gap-5 text-sm">
+            <Link
+              href="/flasher/guide"
+              className="text-fog transition-colors hover:text-snow"
+            >
+              Users guide
+            </Link>
+            <a
+              href="mailto:support@machiilabs.com"
+              className="text-fog transition-colors hover:text-snow"
+            >
+              Support
+            </a>
+          </nav>
+        </div>
+      </header>
+
+      <main className="relative z-10 mx-auto w-full max-w-6xl px-6 pb-24 pt-14 sm:px-10 sm:pt-20">
+        <section className="grid items-start gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:gap-16 xl:gap-20">
+          <div className="relative z-20 max-w-xl lg:pt-2">
+            <p className="font-display text-[0.7rem] font-semibold tracking-[0.28em] text-fog uppercase">
+              Mac only · free forever · macOS 13+
+            </p>
+            <h1 className="mt-4 font-display text-[clamp(2.5rem,8vw,4.75rem)] leading-[0.95] font-extrabold tracking-[-0.03em] text-snow">
+              HP 15C Flasher
+            </h1>
+            <p className="mt-5 text-lg leading-relaxed text-fog sm:text-xl">
+              A Mac app that flashes HP 15C Collector&apos;s Edition firmware
+              over the official pogo cable. Windows SAM-BA is not required —
+              this software runs on Mac only, and the app guides you through
+              every step of the flashing process.
+            </p>
+
+            <div className="mt-10 flex flex-wrap items-center gap-4">
+              <a
+                href={DOWNLOAD_URL}
+                className="inline-flex items-center justify-center rounded-md bg-afterburn px-5 py-3 font-display text-sm font-bold tracking-wide text-ink transition-opacity hover:opacity-90"
+              >
+                Download v{VERSION} for Mac
+              </a>
+              <Link
+                href="/flasher/guide"
+                className="inline-flex items-center font-display text-sm font-semibold tracking-wide text-snow underline-offset-4 hover:text-afterburn-soft hover:underline"
+              >
+                Read the users guide →
+              </Link>
+            </div>
+            <p className="mt-3 text-sm text-fog/70">
+              Notarized DMG · Windows SAM-BA not required · No HP firmware
+              included
+            </p>
+            <details className="mt-4 text-sm text-fog/70">
+              <summary className="cursor-pointer text-fog transition-colors hover:text-snow">
+                How do I verify the download?
+              </summary>
+              <ol className="mt-3 list-decimal space-y-2 pl-5 text-xs leading-relaxed text-fog/60">
+                <li>
+                  Check the filename is{" "}
+                  <span className="font-mono text-fog/80">{DMG_FILENAME}</span>
+                </li>
+                <li>
+                  In Terminal, run{" "}
+                  <code className="break-all font-mono text-fog/80">
+                    shasum -a 256 {DMG_FILENAME}
+                  </code>
+                </li>
+                <li>
+                  Ensure the output value is{" "}
+                  <span className="break-all font-mono text-fog/80">
+                    {SHA256}
+                  </span>
+                </li>
+              </ol>
+            </details>
+          </div>
+
+          <div className="relative z-0 mt-8 min-w-0 w-full lg:mt-[1in] lg:ml-[0.5in]">
+            <div className="product-stage">
+              <div className="product-frame bg-black p-[20px] sm:p-[30px]">
+                <Image
+                  src="/flasher/HP15C Flasher.png"
+                  alt="HP 15C Flasher — guided flashing wizard"
+                  width={2024}
+                  height={1744}
+                  priority
+                  sizes="(max-width: 1024px) 100vw, 48vw"
+                  className="h-auto w-full"
+                />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="mt-20 grid gap-12 sm:grid-cols-2">
+          <div>
+            <h2 className="font-display text-lg font-bold text-snow">
+              Step by Step Workflow
+            </h2>
+            <p className="mt-3 text-base leading-relaxed text-fog">
+              A seven-step wizard with diagrams and Continue / Back navigation.
+              Status feedback when the cable and SAM-BA connect. There is no
+              other software you need to install.
+            </p>
+          </div>
+          <div>
+            <h2 className="font-display text-lg font-bold text-snow">
+              Safe flash layout
+            </h2>
+            <p className="mt-3 text-base leading-relaxed text-fog">
+              Writing starts at address 0x04000. The SAM-BA bootloader below that
+              is left intact. Optional backup before you flash; verify after
+              write; checksum check on the calculator when you&apos;re done.
+            </p>
+          </div>
+          <div>
+            <h2 className="font-display text-lg font-bold text-snow">
+              What you need
+            </h2>
+            <ul className="mt-3 list-disc space-y-2 pl-5 text-base leading-relaxed text-fog">
+              <li>A Mac running macOS 13 or later (Mac only — not Windows or Linux)</li>
+              <li>HP 15C Collector&apos;s Edition</li>
+              <li>Official USB-C (or USB-A) pogo programming cable</li>
+              <li>
+                A 114,688-byte (112 KB) firmware <code className="font-mono text-snow">.bin</code> you
+                already have — this download does not include HP firmware
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h2 className="font-display text-lg font-bold text-snow">
+              Privacy
+            </h2>
+            <p className="mt-3 text-base leading-relaxed text-fog">
+              Offline. No telemetry, no network, no automatic diagnostics.
+              Firmware files never leave this Mac.
+            </p>
+          </div>
+        </section>
+
+        <aside className="mt-16 max-w-3xl border-l-2 border-afterburn/70 pl-5">
+          <p className="text-base leading-relaxed text-fog">
+            <span className="font-semibold text-snow">Cable warning.</span> Use
+            the pogo cable only on the HP 15C Collector&apos;s Edition. Do not
+            use it on an HP 15C Limited Edition, a pre-2015 12C, an HP 20b, or an
+            HP 30b — different protocol and voltage; the cable can permanently
+            damage those calculators.
+          </p>
+        </aside>
+      </main>
+
+      <footer className="relative z-10 border-t border-white/5 px-6 py-5 sm:px-10">
+        <div className="mx-auto flex max-w-6xl flex-col gap-1 text-sm text-fog/70 sm:flex-row sm:items-center sm:justify-between">
+          <span>
+            © {new Date().getFullYear()} Mach II Labs · HP 15C Flasher · free
+            forever
+          </span>
+          <a
+            href="mailto:support@machiilabs.com"
+            className="transition-colors hover:text-snow"
+          >
+            support@machiilabs.com
+          </a>
+        </div>
+      </footer>
+    </div>
+  );
+}

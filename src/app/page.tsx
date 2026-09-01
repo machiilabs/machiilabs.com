@@ -1,9 +1,27 @@
+import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "Mach II Labs",
+  description:
+    "Independent Mac software lab. First release: HP 15C Flasher — a guided native app for flashing HP 15C Collector’s Edition firmware. Free forever.",
+  openGraph: {
+    title: "Mach II Labs",
+    description:
+      "Independent Mac software lab. First release: HP 15C Flasher for Mac.",
+    url: "https://machiilabs.com",
+  },
+  twitter: {
+    title: "Mach II Labs",
+    description:
+      "Independent Mac software lab. First release: HP 15C Flasher for Mac.",
+  },
+};
 
 export default function Home() {
   return (
     <div className="relative min-h-dvh overflow-hidden bg-ink text-snow">
-      {/* Full-bleed atmosphere */}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 sky-drift"
@@ -23,7 +41,6 @@ export default function Home() {
             "linear-gradient(to top, rgba(232, 160, 69, 0.22) 0%, rgba(61, 111, 154, 0.18) 35%, transparent 100%)",
         }}
       />
-      {/* Velocity lines */}
       <svg
         aria-hidden
         className="pointer-events-none absolute inset-0 h-full w-full opacity-40"
@@ -54,28 +71,69 @@ export default function Home() {
         </h1>
 
         <p className="anim-rise anim-rise-delay-2 mt-8 max-w-xl text-lg leading-relaxed text-fog sm:text-xl">
-          Serious Mac software, built with intent — tools that respect your
-          files, your time, and how craft feels in the hand.
+          Serious Mac software, built with intent — starting with a guided
+          flasher for the HP 15C Collector&apos;s Edition.
         </p>
 
-        <div className="anim-rise anim-rise-delay-3 mt-10 flex flex-col gap-5 sm:gap-6">
+        <div className="anim-rise anim-rise-delay-3 mt-10 flex flex-col gap-6">
+          <div className="flex max-w-3xl flex-col items-start gap-8 sm:flex-row sm:items-center sm:gap-12">
+            <div className="min-w-0 max-w-xl flex-1">
+              <p className="font-display text-sm font-semibold tracking-[0.18em] text-afterburn-soft uppercase">
+                First release
+              </p>
+              <Link
+                href="/flasher"
+                className="mt-3 block font-display text-2xl font-bold tracking-tight text-snow transition-colors hover:text-afterburn-soft sm:text-3xl"
+              >
+                HP 15C Flasher
+              </Link>
+              <p className="mt-3 text-base leading-relaxed text-fog sm:text-lg">
+                A Mac-only SAM-BA programmer for the Collector&apos;s Edition.
+                The app walks you through every step of the flashing process —
+                free forever.
+              </p>
+              <div className="mt-5 flex flex-wrap items-center gap-x-6 gap-y-3">
+                <Link
+                  href="/flasher"
+                  className="group relative inline-flex w-fit items-center font-display text-base font-semibold tracking-wide text-snow transition-colors hover:text-afterburn-soft"
+                >
+                  Get HP 15C Flasher
+                  <span
+                    aria-hidden
+                    className="cta-underline absolute -bottom-1 left-0 h-px w-full bg-afterburn"
+                  />
+                </Link>
+                <Link
+                  href="/flasher/guide"
+                  className="text-base text-fog transition-colors hover:text-afterburn-soft"
+                >
+                  Users guide →
+                </Link>
+              </div>
+            </div>
+
+            <Link
+              href="/flasher"
+              className="shrink-0 overflow-hidden rounded-[22%] transition-opacity hover:opacity-90"
+              aria-label="HP 15C Flasher"
+            >
+              <Image
+                src="/flasher/app-icon.png"
+                alt=""
+                width={1024}
+                height={1024}
+                priority
+                className="h-36 w-36 sm:h-44 sm:w-44 lg:h-52 lg:w-52"
+              />
+            </Link>
+          </div>
+
           <a
             href="mailto:support@machiilabs.com"
-            className="group relative inline-flex w-fit items-center font-display text-base font-semibold tracking-wide text-snow transition-colors hover:text-afterburn-soft"
+            className="w-fit text-base text-fog/80 transition-colors hover:text-snow"
           >
             Contact the lab
-            <span
-              aria-hidden
-              className="cta-underline absolute -bottom-1 left-0 h-px w-full bg-afterburn"
-            />
           </a>
-          <Link
-            href="/skagway"
-            className="max-w-lg text-base leading-snug text-fog transition-colors hover:text-afterburn-soft sm:text-lg"
-          >
-            Try our full-powered Video Collection Library tool, Skagway
-            — free forever!
-          </Link>
         </div>
       </main>
 
