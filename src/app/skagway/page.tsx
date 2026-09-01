@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { MachiiLogo } from "@/components/machii-logo";
 
 export const metadata: Metadata = {
   title: "Mac Video Organizer & Library — Skagway",
@@ -49,12 +50,7 @@ export default function SkagwayPage() {
       </div>
 
       <header className="relative z-10 mx-auto flex w-full max-w-6xl items-center justify-between px-6 pt-8 sm:px-10">
-        <Link
-          href="/"
-          className="font-display text-sm font-semibold tracking-[0.18em] text-fog uppercase transition-colors hover:text-snow"
-        >
-          Mach&nbsp;II Labs
-        </Link>
+        <MachiiLogo />
         <a
           href="mailto:support@machiilabs.com"
           className="text-sm text-fog/80 transition-colors hover:text-snow"

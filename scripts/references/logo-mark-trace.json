@@ -1,0 +1,39 @@
+{
+  "viewBox": "0 0 64 64",
+  "note": "Closed paths in mark-box space. Fills/gradients applied later.",
+  "imageSpace": {
+    "markBox": { "x": 100, "y": 0, "w": 600, "h": 600 },
+    "paths": [
+      {
+        "id": "squircle",
+        "name": "squircle",
+        "nextId": 1,
+        "nodes": []
+      },
+      {
+        "id": "chevron",
+        "name": "chevron",
+        "nextId": 7,
+        "nodes": [
+          { "id": 1, "x": 402.1, "y": 217.1 },
+          { "id": 2, "x": 232.3, "y": 503.3 },
+          { "id": 3, "x": 253.8, "y": 503 },
+          { "id": 4, "x": 401.3, "y": 343.4 },
+          { "id": 5, "x": 550.9, "y": 504 },
+          { "id": 6, "x": 568.8, "y": 503.2 }
+        ]
+      },
+      {
+        "id": "bar",
+        "name": "bar",
+        "nextId": 5,
+        "nodes": [
+          { "id": 1, "x": 141.7, "y": 511.5 },
+          { "id": 2, "x": 142.2, "y": 561.8 },
+          { "id": 3, "x": 659.3, "y": 561.2 },
+          { "id": 4, "x": 659.8, "y": 511.3 }
+        ]
+      }
+    ]
+  }
+}

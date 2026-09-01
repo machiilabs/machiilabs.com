@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 64" role="img" aria-label="Mach II Labs">
+  <title>Mach II Labs</title>
+  <defs>
+    <linearGradient id="machii-horizon-lockup" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#9aa8bd"/>
+      <stop offset="100%" stop-color="#3d6f9a"/>
+    </linearGradient>
+  </defs>
+  <g transform="translate(0 0)">
+    <path
+      d="M 32.224 23.157 L 14.112 53.685 L 16.405 53.653 L 32.139 36.629 L 48.096 53.76 L 50.005 53.675 Z"
+      fill="#e8a045"
+    />
+    <path
+      d="M 4.448 54.56 L 4.501 59.925 L 59.659 59.861 L 59.712 54.539 Z"
+      fill="url(#machii-horizon-lockup)"
+    />
+  </g>
+  <text
+    x="80"
+    y="42"
+    fill="#eef2f7"
+    font-family="Inter, Syne, Avenir Next, Segoe UI, Helvetica Neue, sans-serif"
+    font-size="28"
+    font-weight="800"
+    letter-spacing="-0.04em"
+  >Mach II Labs</text>
+</svg>

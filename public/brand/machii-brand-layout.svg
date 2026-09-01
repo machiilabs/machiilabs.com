@@ -1,0 +1,174 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-label="Mach II Labs brand layout">
+  <title>Mach II Labs — Brand Layout</title>
+  <desc>Official brand sheet: mark, wordmark, lockups, palette, clear space, minimum size, typography. No squircle.</desc>
+
+  <defs>
+    <linearGradient id="horizon" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#9aa8bd"/>
+      <stop offset="100%" stop-color="#3d6f9a"/>
+    </linearGradient>
+
+    <!-- Official mark in 64×64 design space -->
+    <g id="mark">
+      <path
+        d="M 32.224 23.157 L 14.112 53.685 L 16.405 53.653 L 32.139 36.629 L 48.096 53.76 L 50.005 53.675 Z"
+        fill="#e8a045"
+      />
+      <path
+        d="M 4.448 54.56 L 4.501 59.925 L 59.659 59.861 L 59.712 54.539 Z"
+        fill="url(#horizon)"
+      />
+    </g>
+
+    <style type="text/css"><![CDATA[
+      .label {
+        fill: #9aa8bd;
+        font-family: Inter, Syne, Avenir Next, Segoe UI, Helvetica Neue, sans-serif;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.18em;
+      }
+      .word {
+        fill: #eef2f7;
+        font-family: Inter, Syne, Avenir Next, Segoe UI, Helvetica Neue, sans-serif;
+        font-weight: 800;
+      }
+      .meta {
+        fill: #9aa8bd;
+        font-family: Inter, Syne, Avenir Next, Segoe UI, Helvetica Neue, sans-serif;
+        font-size: 12px;
+        font-weight: 500;
+      }
+      .hex {
+        fill: #eef2f7;
+        font-family: "SF Mono", ui-monospace, Menlo, Consolas, monospace;
+        font-size: 11px;
+      }
+      .rule { stroke: #ffffff18; stroke-width: 1; fill: none; }
+    ]]></style>
+  </defs>
+
+  <!-- Page -->
+  <rect width="1200" height="800" fill="#070b12"/>
+
+  <!-- Title -->
+  <text class="label" x="48" y="36">MACH II LABS · BRAND LAYOUT</text>
+  <text class="meta" x="1152" y="36" text-anchor="end">Official · no squircle</text>
+  <line class="rule" x1="48" y1="52" x2="1152" y2="52"/>
+
+  <!-- ===== Hero lockup (mark + stacked wordmark; LABS in fog) ===== -->
+  <g transform="translate(48 88)">
+    <use href="#mark" transform="scale(2.5)"/>
+    <text class="word" x="188" y="108" font-size="56" letter-spacing="-0.04em">Mach II</text>
+    <text class="word" x="188" y="142" font-size="18" font-weight="700" letter-spacing="0.28em" fill="#9aa8bd">LABS</text>
+  </g>
+
+  <line class="rule" x1="48" y1="280" x2="1152" y2="280"/>
+
+  <!-- ===== Row 2: Mark | Wordmark | Lockups | Palette ===== -->
+  <!-- Mark -->
+  <g transform="translate(48 312)">
+    <text class="label" x="0" y="0">MARK</text>
+    <use href="#mark" transform="translate(8 24) scale(1.75)"/>
+  </g>
+
+  <line class="rule" x1="220" y1="300" x2="220" y2="560"/>
+
+  <!-- Wordmark stacked -->
+  <g transform="translate(248 312)">
+    <text class="label" x="0" y="0">WORDMARK</text>
+    <text class="word" x="0" y="64" font-size="36" letter-spacing="-0.04em">Mach II</text>
+    <text class="word" x="0" y="100" font-size="18" font-weight="700" letter-spacing="0.28em" fill="#9aa8bd">LABS</text>
+  </g>
+
+  <line class="rule" x1="460" y1="300" x2="460" y2="560"/>
+
+  <!-- Lockup options -->
+  <g transform="translate(488 312)">
+    <text class="label" x="0" y="0">LOCKUP OPTIONS</text>
+    <!-- Horizontal -->
+    <g transform="translate(0 36)">
+      <use href="#mark" transform="scale(0.7)"/>
+      <text class="word" x="52" y="38" font-size="22" letter-spacing="-0.03em">Mach II Labs</text>
+    </g>
+    <!-- Mark + stacked word -->
+    <g transform="translate(0 120)">
+      <use href="#mark" transform="scale(0.7)"/>
+      <text class="word" x="52" y="28" font-size="20" letter-spacing="-0.03em">Mach II</text>
+      <text class="word" x="52" y="48" font-size="12" font-weight="700" letter-spacing="0.28em" fill="#9aa8bd">LABS</text>
+    </g>
+  </g>
+
+  <line class="rule" x1="820" y1="300" x2="820" y2="560"/>
+
+  <!-- Color palette -->
+  <g transform="translate(848 312)">
+    <text class="label" x="0" y="0">COLOR PALETTE</text>
+    <g transform="translate(0 28)">
+      <rect width="44" height="44" rx="6" fill="#e8a045"/>
+      <text class="meta" x="56" y="18">AMBER</text>
+      <text class="hex" x="56" y="36">#e8a045</text>
+    </g>
+    <g transform="translate(0 88)">
+      <rect width="44" height="44" rx="6" fill="#9aa8bd"/>
+      <text class="meta" x="56" y="18">FOG</text>
+      <text class="hex" x="56" y="36">#9aa8bd</text>
+    </g>
+    <g transform="translate(0 148)">
+      <rect width="44" height="44" rx="6" fill="#3d6f9a"/>
+      <text class="meta" x="56" y="18">HORIZON</text>
+      <text class="hex" x="56" y="36">#3d6f9a</text>
+    </g>
+    <g transform="translate(0 208)">
+      <rect width="44" height="44" rx="6" fill="#eef2f7"/>
+      <text class="meta" x="56" y="18">SNOW</text>
+      <text class="hex" x="56" y="36">#eef2f7</text>
+    </g>
+  </g>
+
+  <line class="rule" x1="48" y1="580" x2="1152" y2="580"/>
+
+  <!-- ===== Row 3: Clear space | Min size | Typography ===== -->
+  <!-- Clear space -->
+  <g transform="translate(48 612)">
+    <text class="label" x="0" y="0">CLEAR SPACE</text>
+    <g transform="translate(24 28)">
+      <!-- Clear-space frame = mark + ¼ width (~16 units in 64 space, scaled) -->
+      <rect x="0" y="0" width="112" height="112" fill="none" stroke="#ffffff28" stroke-width="1" stroke-dasharray="4 4"/>
+      <use href="#mark" transform="translate(24 24) scale(1)"/>
+      <text class="meta" x="4" y="14" font-size="10">X</text>
+      <text class="meta" x="100" y="14" font-size="10" text-anchor="end">X</text>
+      <text class="meta" x="56" y="108" font-size="10" text-anchor="middle">X ≥ ¼ mark width</text>
+    </g>
+  </g>
+
+  <line class="rule" x1="280" y1="590" x2="280" y2="760"/>
+
+  <!-- Minimum size -->
+  <g transform="translate(308 612)">
+    <text class="label" x="0" y="0">MINIMUM SIZE</text>
+    <g transform="translate(0 36)">
+      <use href="#mark" transform="scale(0.375)"/>
+      <text class="meta" x="32" y="14">Mark ≥ 24px</text>
+    </g>
+    <g transform="translate(0 88)">
+      <use href="#mark" transform="scale(0.375)"/>
+      <text class="word" x="32" y="16" font-size="14" letter-spacing="-0.02em">Mach II Labs</text>
+      <text class="meta" x="32" y="36">Horizontal lockup ≥ 120px</text>
+    </g>
+  </g>
+
+  <line class="rule" x1="620" y1="590" x2="620" y2="760"/>
+
+  <!-- Typography -->
+  <g transform="translate(648 612)">
+    <text class="label" x="0" y="0">TYPOGRAPHY</text>
+    <text class="word" x="0" y="72" font-size="72" letter-spacing="-0.04em">Aa</text>
+    <text class="meta" x="120" y="48">Inter Bold / Extra Bold</text>
+    <text class="meta" x="120" y="70">Primary wordmark</text>
+    <text class="meta" x="120" y="92">Geometric neo-grotesque</text>
+  </g>
+
+  <line class="rule" x1="48" y1="772" x2="1152" y2="772"/>
+  <text class="meta" x="48" y="792">machiilabs.com · /logo-mark.svg</text>
+</svg>

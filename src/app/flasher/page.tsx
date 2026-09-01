@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { MachiiLogo } from "@/components/machii-logo";
 
 export const metadata: Metadata = {
   title: "HP 15C Flasher",
@@ -46,12 +47,7 @@ export default function FlasherPage() {
 
       <header className="relative z-10 border-b border-white/5">
         <div className="mx-auto flex w-full max-w-6xl items-center justify-between gap-6 px-6 py-4 sm:px-10">
-          <Link
-            href="/"
-            className="font-display text-sm font-semibold tracking-wide text-fog transition-colors hover:text-snow"
-          >
-            Mach II Labs
-          </Link>
+          <MachiiLogo />
           <nav className="flex items-center gap-5 text-sm">
             <Link
               href="/flasher/guide"
@@ -171,7 +167,7 @@ export default function FlasherPage() {
               What you need
             </h2>
             <ul className="mt-3 list-disc space-y-2 pl-5 text-base leading-relaxed text-fog">
-              <li>A Mac running macOS 13 or later (Mac only — not Windows or Linux)</li>
+              <li>A Mac running macOS 13 or later</li>
               <li>HP 15C Collector&apos;s Edition</li>
               <li>Official USB-C (or USB-A) pogo programming cable</li>
               <li>

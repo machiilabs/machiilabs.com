@@ -1,6 +1,13 @@
 import type { Metadata } from "next";
+import { Inter } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
+import { MachiiLogo } from "@/components/machii-logo";
+
+const inter = Inter({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800"],
+});
 
 export const metadata: Metadata = {
   title: "Mach II Labs",
@@ -21,7 +28,9 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <div className="relative min-h-dvh overflow-hidden bg-ink text-snow">
+    <div
+      className={`${inter.className} relative min-h-dvh overflow-hidden bg-ink text-snow`}
+    >
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 sky-drift"
@@ -60,30 +69,33 @@ export default function Home() {
         </g>
       </svg>
 
-      <main className="relative z-10 mx-auto flex min-h-dvh w-full max-w-6xl flex-col justify-end px-6 pb-16 pt-24 sm:px-10 sm:pb-20 lg:justify-center lg:pb-24 lg:pt-20">
-        <p className="anim-rise font-display text-[0.7rem] font-semibold tracking-[0.28em] text-fog uppercase sm:text-xs">
-          Independent software lab
-        </p>
+      <header className="relative z-10 mx-auto flex w-full max-w-6xl items-center px-6 pt-8 sm:px-10">
+        <MachiiLogo wordmarkClassName="text-sm font-semibold tracking-wide text-fog transition-colors group-hover:text-snow" />
+      </header>
 
-        <h1 className="anim-rise anim-rise-delay-1 mt-5 font-display text-[clamp(3.25rem,12vw,8.5rem)] leading-[0.9] font-extrabold tracking-[-0.04em] text-snow">
-          Mach&nbsp;II
-          <span className="block text-afterburn-soft">Labs</span>
+      <main className="relative z-10 mx-auto flex min-h-[calc(100dvh-5rem)] w-full max-w-6xl flex-col justify-end px-6 pb-16 pt-10 sm:px-10 sm:pb-20 lg:justify-center lg:pb-24 lg:pt-12">
+        <h1 className="anim-rise">
+          <MachiiLogo
+            href={null}
+            wordmarkLayout="stacked"
+            className="text-[clamp(2.75rem,9vw,5.5rem)]"
+          />
         </h1>
 
-        <p className="anim-rise anim-rise-delay-2 mt-8 max-w-xl text-lg leading-relaxed text-fog sm:text-xl">
+        <p className="anim-rise anim-rise-delay-1 mt-8 max-w-xl text-lg leading-relaxed text-fog sm:text-xl">
           Serious Mac software, built with intent — starting with a guided
           flasher for the HP 15C Collector&apos;s Edition.
         </p>
 
-        <div className="anim-rise anim-rise-delay-3 mt-10 flex flex-col gap-6">
+        <div className="anim-rise anim-rise-delay-2 mt-10 flex flex-col gap-6">
           <div className="flex max-w-3xl flex-col items-start gap-8 sm:flex-row sm:items-center sm:gap-12">
             <div className="min-w-0 max-w-xl flex-1">
-              <p className="font-display text-sm font-semibold tracking-[0.18em] text-afterburn-soft uppercase">
-                First release
+              <p className="text-sm font-semibold tracking-[0.18em] text-afterburn-soft uppercase">
+                Newest release
               </p>
               <Link
                 href="/flasher"
-                className="mt-3 block font-display text-2xl font-bold tracking-tight text-snow transition-colors hover:text-afterburn-soft sm:text-3xl"
+                className="mt-3 block text-2xl font-bold tracking-tight text-snow transition-colors hover:text-afterburn-soft sm:text-3xl"
               >
                 HP 15C Flasher
               </Link>
@@ -95,7 +107,7 @@ export default function Home() {
               <div className="mt-5 flex flex-wrap items-center gap-x-6 gap-y-3">
                 <Link
                   href="/flasher"
-                  className="group relative inline-flex w-fit items-center font-display text-base font-semibold tracking-wide text-snow transition-colors hover:text-afterburn-soft"
+                  className="group relative inline-flex w-fit items-center text-base font-semibold tracking-wide text-snow transition-colors hover:text-afterburn-soft"
                 >
                   Get HP 15C Flasher
                   <span

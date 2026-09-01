@@ -1,0 +1,1033 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logo Mark Tracer — Mach II Labs</title>
+    <style>
+        :root {
+            --bg: #0a0a0c;
+            --panel: #141418;
+            --line: #c8c8c8;
+            --accent: #e8a045;
+            --warn: #e0a060;
+            --muted: #888890;
+            --path: #6ec8e0;
+        }
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background: var(--bg);
+            color: var(--line);
+            font-family: "IBM Plex Mono", "SF Mono", Consolas, monospace;
+            font-size: 13px;
+            display: flex;
+            flex-direction: column;
+        }
+        header {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px 16px;
+            align-items: center;
+            padding: 10px 14px;
+            background: var(--panel);
+            border-bottom: 1px solid #222;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            color: var(--accent);
+        }
+        .row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+        button, label.btn, select {
+            background: #1e1e24;
+            color: var(--line);
+            border: 1px solid #333;
+            border-radius: 4px;
+            padding: 6px 10px;
+            font: inherit;
+            cursor: pointer;
+        }
+        button:hover, label.btn:hover, select:hover { border-color: var(--accent); color: #fff; }
+        button.active { border-color: var(--accent); background: #2a2218; color: var(--accent); }
+        button.danger:hover { border-color: #c66; color: #f88; }
+        label.btn input { display: none; }
+        #zoomLabel {
+            min-width: 3.5em;
+            color: var(--accent);
+            font-variant-numeric: tabular-nums;
+        }
+        #stageWrap {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 16px;
+            overflow: auto;
+        }
+        #stage {
+            position: relative;
+            width: 800px;
+            height: 600px;
+            flex-shrink: 0;
+            border: 1px solid #333;
+            box-shadow: 0 0 0 1px #000, 0 12px 40px rgba(0,0,0,0.5);
+            cursor: crosshair;
+            overflow: hidden;
+            touch-action: none;
+        }
+        #stage.panning { cursor: grabbing; }
+        canvas {
+            position: absolute;
+            inset: 0;
+            width: 800px;
+            height: 600px;
+            image-rendering: auto;
+        }
+        #hud {
+            padding: 8px 14px 14px;
+            background: var(--panel);
+            border-top: 1px solid #222;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+        @media (max-width: 900px) {
+            #hud { grid-template-columns: 1fr; }
+        }
+        .panel h2 {
+            margin: 0 0 6px;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--muted);
+        }
+        textarea {
+            width: 100%;
+            height: 200px;
+            background: #0c0c10;
+            color: var(--accent);
+            border: 1px solid #333;
+            border-radius: 4px;
+            padding: 8px;
+            font: inherit;
+            font-size: 11px;
+            resize: vertical;
+        }
+        .hint { color: var(--muted); line-height: 1.45; margin: 0; }
+        .hint kbd {
+            display: inline-block;
+            padding: 1px 5px;
+            border: 1px solid #444;
+            border-radius: 3px;
+            background: #1a1a1e;
+            font-size: 11px;
+        }
+        #status { color: var(--warn); min-height: 1.2em; }
+        .path-swatch {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 2px;
+            margin-right: 4px;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>LOGO MARK TRACER</h1>
+        <div class="row">
+            <label class="btn">Load image
+                <input type="file" id="fileInput" accept="image/*">
+            </label>
+            <label class="btn">Load JSON
+                <input type="file" id="jsonInput" accept="application/json,.json">
+            </label>
+        </div>
+        <div class="row">
+            <button type="button" id="zoomOutBtn">−</button>
+            <span id="zoomLabel">100%</span>
+            <button type="button" id="zoomInBtn">+</button>
+            <button type="button" id="zoomResetBtn">Reset view</button>
+        </div>
+        <div class="row">
+            <button type="button" id="nodeMode" class="active">Place / drag</button>
+            <button type="button" id="boxMode">Set mark box</button>
+            <button type="button" id="undoBtn">Undo</button>
+            <button type="button" id="deleteBtn" class="danger">Delete node</button>
+            <button type="button" id="clearBtn" class="danger">Clear path</button>
+        </div>
+        <div class="row">
+            <label style="color:var(--muted)">Active path
+                <select id="pathSelect"></select>
+            </label>
+            <button type="button" id="addPathBtn">+ Path</button>
+            <button type="button" id="renamePathBtn">Rename</button>
+        </div>
+        <div class="row">
+            <button type="button" id="exportBtn">Export JSON</button>
+            <button type="button" id="copySvgBtn">Copy SVG paths</button>
+            <button type="button" id="pasteBtn">Paste previous</button>
+            <label style="color:var(--muted)">BG opacity
+                <input type="range" id="opacity" min="15" max="100" value="80" style="vertical-align:middle">
+            </label>
+            <label style="color:var(--muted)">
+                <input type="checkbox" id="showOthers" checked> Other paths
+            </label>
+        </div>
+        <div id="status"></div>
+    </header>
+
+    <div id="stageWrap">
+        <div id="stage">
+            <canvas id="bg" width="800" height="600"></canvas>
+            <canvas id="fg" width="800" height="600"></canvas>
+        </div>
+    </div>
+
+    <div id="hud">
+        <div class="panel">
+            <h2>How to use</h2>
+            <p class="hint">
+                Same workflow as the lunar-lander / pogo-wing tracers: load the concept mark,
+                set the square mark box, trace each closed outline, export paths.
+                You specify fills/gradients later; this tool only owns geometry.<br><br>
+                1. Reference auto-loads from <code>scripts/references/logo-mark.png</code>
+                   (or load any image).<br>
+                2. <strong>Set mark box</strong>: click top-left then bottom-right of the
+                   rounded-square mark. That box becomes viewBox <code>0 0 64 64</code>.<br>
+                3. Pick an <strong>active path</strong> (squircle / chevron / bar — add more
+                   if needed). <strong>Place / drag</strong> around the outline:
+                   each click <em>appends</em> the next node after the last one.
+                   Click <em>on</em> an existing edge (orange ghost) to insert between
+                   nodes. Drag to move. Select + <strong>Delete node</strong> /
+                   right-click / <kbd>⌫</kbd>.<br>
+                4. <strong>Scroll</strong> zoom · <kbd>Space</kbd>+drag pan.<br>
+                5. <strong>Copy SVG paths</strong> → paste into chat / a draft
+                   <code>logo-mark.svg</code>. Colors come next from you.<br>
+                6. <strong>Paste previous</strong> or Load JSON to resume.<br><br>
+                <kbd>N</kbd> nodes · <kbd>B</kbd> mark box · <kbd>Z</kbd> undo ·
+                <kbd>1</kbd>–<kbd>9</kbd> switch path · <kbd>+</kbd>/<kbd>−</kbd> zoom
+            </p>
+        </div>
+        <div class="panel">
+            <h2>Output <span id="counts" style="color:var(--muted)"></span></h2>
+            <textarea id="out" placeholder="Set the mark box, then trace paths. Paste JSON here to resume."></textarea>
+        </div>
+    </div>
+
+    <script>
+        const W = 800, H = 600;
+        const ZOOM_MIN = 1;
+        const ZOOM_MAX = 32;
+        const VIEW = 64;
+
+        const PATH_COLORS = [
+            '#6ec8e0', '#e8a045', '#9aa8bd', '#7ec8a3', '#c86ee0', '#e06e6e'
+        ];
+
+        const bg = document.getElementById('bg');
+        const fg = document.getElementById('fg');
+        const bctx = bg.getContext('2d');
+        const ctx = fg.getContext('2d');
+        const stage = document.getElementById('stage');
+        const statusEl = document.getElementById('status');
+        const outEl = document.getElementById('out');
+        const countsEl = document.getElementById('counts');
+        const zoomLabel = document.getElementById('zoomLabel');
+        const pathSelect = document.getElementById('pathSelect');
+
+        let img = null;
+        let imgLayout = null;
+        let bgOpacity = 0.8;
+        let showOthers = true;
+        let mode = 'node'; // node | box
+        let markBox = null; // {x,y,w,h} world
+        let boxDraft = null;
+        let history = [];
+
+        /** @type {{ id: string, name: string, nodes: {id:number,x:number,y:number}[], nextId: number }[]} */
+        let paths = [
+            { id: 'squircle', name: 'squircle', nodes: [], nextId: 1 },
+            { id: 'chevron', name: 'chevron', nodes: [], nextId: 1 },
+            { id: 'bar', name: 'bar', nodes: [], nextId: 1 }
+        ];
+        let activePathId = 'chevron';
+        let selectedId = null;
+
+        let viewZoom = 1;
+        let viewPanX = 0;
+        let viewPanY = 0;
+        let spaceDown = false;
+        let panning = false;
+        let panLast = null;
+        let didPan = false;
+        let dragging = null;
+        let didDrag = false;
+        let hoverWorld = null;
+
+        function activePath() {
+            return paths.find(p => p.id === activePathId) || paths[0];
+        }
+
+        function setStatus(msg) {
+            statusEl.textContent = msg || '';
+        }
+
+        function snapshot() {
+            return JSON.stringify({
+                paths,
+                activePathId,
+                selectedId,
+                markBox,
+                boxDraft
+            });
+        }
+
+        function pushHistory() {
+            history.push(snapshot());
+            if (history.length > 100) history.shift();
+        }
+
+        function undo() {
+            if (!history.length) return;
+            const snap = JSON.parse(history.pop());
+            paths = snap.paths;
+            activePathId = snap.activePathId;
+            selectedId = snap.selectedId;
+            markBox = snap.markBox;
+            boxDraft = snap.boxDraft;
+            refreshPathSelect();
+            setStatus('Undo');
+            redraw();
+        }
+
+        function refreshPathSelect() {
+            pathSelect.innerHTML = '';
+            paths.forEach((p, i) => {
+                const opt = document.createElement('option');
+                opt.value = p.id;
+                opt.textContent = `${p.name} (${p.nodes.length})`;
+                if (p.id === activePathId) opt.selected = true;
+                pathSelect.appendChild(opt);
+            });
+        }
+
+        function snapRadius() {
+            return 12 / viewZoom;
+        }
+
+        function nodes() {
+            return activePath().nodes;
+        }
+
+        function nearestNode(x, y, maxDist) {
+            let best = null;
+            let bestD = maxDist;
+            for (const n of nodes()) {
+                const d = Math.hypot(n.x - x, n.y - y);
+                if (d < bestD) {
+                    bestD = d;
+                    best = n;
+                }
+            }
+            return best;
+        }
+
+        function findNode(id) {
+            return nodes().find(n => n.id === id);
+        }
+
+        function screenToWorld(sx, sy) {
+            const rect = stage.getBoundingClientRect();
+            const cx = (sx - rect.left) * (W / rect.width);
+            const cy = (sy - rect.top) * (H / rect.height);
+            return {
+                x: viewPanX + cx / viewZoom,
+                y: viewPanY + cy / viewZoom
+            };
+        }
+
+        function setMode(m) {
+            mode = m;
+            boxDraft = null;
+            document.getElementById('nodeMode').classList.toggle('active', m === 'node');
+            document.getElementById('boxMode').classList.toggle('active', m === 'box');
+            setStatus(m === 'node'
+                ? `Editing “${activePath().name}” — click to place/insert; drag to move`
+                : 'Click top-left of the mark squircle, then bottom-right');
+        }
+
+        function distToSegment(p, a, b) {
+            const dx = b.x - a.x;
+            const dy = b.y - a.y;
+            const len2 = dx * dx + dy * dy;
+            if (len2 < 1e-6) return { d: Math.hypot(p.x - a.x, p.y - a.y), t: 0 };
+            let t = ((p.x - a.x) * dx + (p.y - a.y) * dy) / len2;
+            t = Math.max(0, Math.min(1, t));
+            return {
+                d: Math.hypot(p.x - (a.x + t * dx), p.y - (a.y + t * dy)),
+                t
+            };
+        }
+
+        function nearestSegment(x, y) {
+            const ns = nodes();
+            if (ns.length < 2) return null;
+            let best = null;
+            let bestD = Infinity;
+            for (let i = 0; i < ns.length; i++) {
+                const a = ns[i];
+                const b = ns[(i + 1) % ns.length];
+                const hit = distToSegment({ x, y }, a, b);
+                if (hit.d < bestD) {
+                    bestD = hit.d;
+                    best = {
+                        index: i + 1,
+                        d: hit.d,
+                        x: a.x + (b.x - a.x) * hit.t,
+                        y: a.y + (b.y - a.y) * hit.t
+                    };
+                }
+            }
+            return best;
+        }
+
+        function addNode(x, y) {
+            const path = activePath();
+            const near = nearestNode(x, y, snapRadius());
+            if (near) {
+                selectedId = near.id;
+                setStatus(`Selected #${near.id} on “${path.name}” — Delete / ⌫ to remove`);
+                return near;
+            }
+            pushHistory();
+            const n = {
+                id: path.nextId++,
+                x: Math.round(x * 10) / 10,
+                y: Math.round(y * 10) / 10
+            };
+            // Insert on a segment only when the click is clearly on that edge
+            // (refinement). Otherwise append after the last node so tracing
+            // continues around the outline: click1 → click2 → click3…
+            const insertThreshold = snapRadius() * 1.35;
+            const insert = path.nodes.length >= 2 ? nearestSegment(x, y) : null;
+            if (insert && insert.d <= insertThreshold) {
+                path.nodes.splice(insert.index, 0, n);
+                setStatus(`Inserted #${n.id} on “${path.name}” (on segment)`);
+            } else {
+                path.nodes.push(n);
+                setStatus(`Appended #${n.id} on “${path.name}” — next click continues`);
+            }
+            selectedId = n.id;
+            return n;
+        }
+
+        function deleteSelected() {
+            const path = activePath();
+            if (selectedId == null) {
+                setStatus('Select a node first, then Delete');
+                return;
+            }
+            pushHistory();
+            const id = selectedId;
+            const idx = path.nodes.findIndex(n => n.id === id);
+            path.nodes = path.nodes.filter(n => n.id !== id);
+            if (path.nodes.length) {
+                selectedId = path.nodes[Math.min(idx, path.nodes.length - 1)].id;
+            } else {
+                selectedId = null;
+            }
+            setStatus(`Deleted #${id}`);
+            redraw();
+        }
+
+        function worldToNorm(p) {
+            if (!markBox) return null;
+            return [
+                Math.round(((p.x - markBox.x) / markBox.w) * 10000) / 10000,
+                Math.round(((p.y - markBox.y) / markBox.h) * 10000) / 10000
+            ];
+        }
+
+        function normToView(nx, ny) {
+            return [
+                Math.round(nx * VIEW * 1000) / 1000,
+                Math.round(ny * VIEW * 1000) / 1000
+            ];
+        }
+
+        function pathToSvgD(path) {
+            if (!markBox || path.nodes.length < 2) return null;
+            const pts = path.nodes.map(n => {
+                const nn = worldToNorm(n);
+                return nn ? normToView(nn[0], nn[1]) : null;
+            }).filter(Boolean);
+            if (pts.length < 2) return null;
+            const [x0, y0] = pts[0];
+            let d = `M ${x0} ${y0}`;
+            for (let i = 1; i < pts.length; i++) {
+                d += ` L ${pts[i][0]} ${pts[i][1]}`;
+            }
+            d += ' Z';
+            return d;
+        }
+
+        function buildExport() {
+            ensureDefaultMarkBox();
+            const drawing = {};
+            for (const p of paths) {
+                drawing[p.id] = {
+                    name: p.name,
+                    nodes01: markBox
+                        ? p.nodes.map(n => worldToNorm(n)).filter(Boolean)
+                        : [],
+                    svgD: pathToSvgD(p)
+                };
+            }
+            return {
+                viewBox: `0 0 ${VIEW} ${VIEW}`,
+                note: 'Closed paths in mark-box space. Fills/gradients applied later.',
+                imageSpace: {
+                    markBox,
+                    paths: paths.map(p => ({
+                        id: p.id,
+                        name: p.name,
+                        nextId: p.nextId,
+                        nodes: p.nodes.map(n => ({ id: n.id, x: n.x, y: n.y }))
+                    }))
+                },
+                drawing
+            };
+        }
+
+        function buildSvgSnippet() {
+            ensureDefaultMarkBox();
+            const data = buildExport();
+            if (!markBox) {
+                return '<!-- Load the logo image, then Set mark box (or use the auto box) and trace paths -->';
+            }
+            const withPaths = paths.some(p => data.drawing[p.id] && data.drawing[p.id].svgD);
+            if (!withPaths) {
+                return '<!-- Mark box is set, but no path has 2+ nodes yet — trace squircle / chevron / bar first -->';
+            }
+            const parts = [
+                `<!-- Paste into public/logo-mark.svg — colors TBD -->`,
+                `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${data.viewBox}" role="img" aria-label="Mach II Labs">`,
+                `  <title>Mach II Labs mark</title>`
+            ];
+            for (const p of paths) {
+                const d = data.drawing[p.id].svgD;
+                if (!d) {
+                    parts.push(`  <!-- ${p.name}: not enough nodes -->`);
+                    continue;
+                }
+                parts.push(`  <path id="${p.id}" d="${d}" fill="none" stroke="#e8a045" stroke-width="0.5"/>`);
+            }
+            parts.push(`</svg>`);
+            return parts.join('\n');
+        }
+
+        function parseImported(text) {
+            const raw = (text || '').trim();
+            if (!raw) return null;
+            try {
+                const data = JSON.parse(raw);
+                if (data.imageSpace && Array.isArray(data.imageSpace.paths)) {
+                    return { imageSpace: data.imageSpace };
+                }
+            } catch (_) {}
+            return null;
+        }
+
+        function applyImported(text) {
+            const parsed = parseImported(text);
+            if (!parsed) {
+                setStatus('Paste a previous JSON export');
+                return false;
+            }
+            pushHistory();
+            const src = parsed.imageSpace;
+            markBox = src.markBox || markBox;
+            paths = (src.paths || []).map(p => ({
+                id: p.id,
+                name: p.name || p.id,
+                nextId: p.nextId || ((p.nodes || []).reduce((m, n) => Math.max(m, n.id), 0) + 1),
+                nodes: (p.nodes || []).map(n => ({ id: n.id, x: n.x, y: n.y }))
+            }));
+            if (!paths.length) {
+                paths = [{ id: 'chevron', name: 'chevron', nodes: [], nextId: 1 }];
+            }
+            if (!paths.find(p => p.id === activePathId)) {
+                activePathId = paths[0].id;
+            }
+            selectedId = null;
+            refreshPathSelect();
+            setStatus(`Pasted: ${paths.length} paths`);
+            redraw();
+            return true;
+        }
+
+        function refreshOut() {
+            const data = buildExport();
+            const total = paths.reduce((s, p) => s + p.nodes.length, 0);
+            countsEl.textContent =
+                `(${total} nodes · ${paths.length} paths` +
+                (markBox ? ', box set' : ', no mark box') + ')';
+            outEl.value = JSON.stringify(data, null, 2);
+            refreshPathSelect();
+        }
+
+        function updateImageLayout() {
+            if (!img) {
+                imgLayout = null;
+                return;
+            }
+            const scale = Math.min(W / img.width, H / img.height);
+            const dw = img.width * scale;
+            const dh = img.height * scale;
+            imgLayout = { dx: (W - dw) / 2, dy: (H - dh) / 2, dw, dh };
+        }
+
+        /** Reference PNG is already the mark — default the box to the full image. */
+        function ensureDefaultMarkBox() {
+            if (markBox || !imgLayout) return;
+            markBox = {
+                x: Math.round(imgLayout.dx * 10) / 10,
+                y: Math.round(imgLayout.dy * 10) / 10,
+                w: Math.round(imgLayout.dw * 10) / 10,
+                h: Math.round(imgLayout.dh * 10) / 10
+            };
+        }
+
+        function drawBg() {
+            bctx.clearRect(0, 0, W, H);
+            bctx.fillStyle = '#000';
+            bctx.fillRect(0, 0, W, H);
+            if (!img || !imgLayout) return;
+            bctx.save();
+            bctx.translate(-viewPanX * viewZoom, -viewPanY * viewZoom);
+            bctx.scale(viewZoom, viewZoom);
+            bctx.globalAlpha = bgOpacity;
+            bctx.drawImage(img, imgLayout.dx, imgLayout.dy, imgLayout.dw, imgLayout.dh);
+            bctx.restore();
+        }
+
+        function drawClosed(pts, fill, stroke, lineWidth) {
+            if (pts.length < 2) return;
+            ctx.beginPath();
+            ctx.moveTo(pts[0].x, pts[0].y);
+            for (let i = 1; i < pts.length; i++) ctx.lineTo(pts[i].x, pts[i].y);
+            ctx.closePath();
+            if (fill) {
+                ctx.fillStyle = fill;
+                ctx.fill();
+            }
+            ctx.strokeStyle = stroke;
+            ctx.lineWidth = (lineWidth || 1.6) / viewZoom;
+            ctx.stroke();
+        }
+
+        function redraw() {
+            drawBg();
+            ctx.clearRect(0, 0, W, H);
+            ctx.save();
+            ctx.translate(-viewPanX * viewZoom, -viewPanY * viewZoom);
+            ctx.scale(viewZoom, viewZoom);
+
+            if (markBox) {
+                ctx.strokeStyle = '#e8a045';
+                ctx.lineWidth = 1 / viewZoom;
+                ctx.setLineDash([4 / viewZoom, 4 / viewZoom]);
+                ctx.strokeRect(markBox.x, markBox.y, markBox.w, markBox.h);
+                ctx.setLineDash([]);
+            }
+            if (boxDraft) {
+                ctx.strokeStyle = '#e0a060';
+                ctx.lineWidth = 1 / viewZoom;
+                const arm = 10 / viewZoom;
+                ctx.beginPath();
+                ctx.moveTo(boxDraft.x - arm, boxDraft.y);
+                ctx.lineTo(boxDraft.x + arm, boxDraft.y);
+                ctx.moveTo(boxDraft.x, boxDraft.y - arm);
+                ctx.lineTo(boxDraft.x, boxDraft.y + arm);
+                ctx.stroke();
+            }
+
+            paths.forEach((p, i) => {
+                const color = PATH_COLORS[i % PATH_COLORS.length];
+                const isActive = p.id === activePathId;
+                if (!isActive && !showOthers) return;
+                if (p.nodes.length < 2) return;
+                drawClosed(
+                    p.nodes,
+                    isActive ? color + '44' : color + '18',
+                    isActive ? color : color + '88',
+                    isActive ? 2 : 1.2
+                );
+            });
+
+            const path = activePath();
+            if (hoverWorld && mode === 'node' && !dragging && path.nodes.length >= 2
+                && !nearestNode(hoverWorld.x, hoverWorld.y, snapRadius())) {
+                const ghost = nearestSegment(hoverWorld.x, hoverWorld.y);
+                if (ghost) {
+                    ctx.beginPath();
+                    ctx.arc(ghost.x, ghost.y, 4.5 / viewZoom, 0, Math.PI * 2);
+                    ctx.fillStyle = 'rgba(224,160,96,0.85)';
+                    ctx.fill();
+                    ctx.strokeStyle = '#e0a060';
+                    ctx.lineWidth = 1 / viewZoom;
+                    ctx.stroke();
+                }
+            }
+
+            const r = 4 / viewZoom;
+            for (const n of path.nodes) {
+                ctx.beginPath();
+                ctx.arc(n.x, n.y, r, 0, Math.PI * 2);
+                ctx.fillStyle = n.id === selectedId ? '#e8a045' : '#1a4a8a';
+                ctx.fill();
+                ctx.strokeStyle = n.id === selectedId ? '#ffe0c0' : '#6ec8e0';
+                ctx.lineWidth = 1 / viewZoom;
+                ctx.stroke();
+            }
+
+            ctx.restore();
+            zoomLabel.textContent = Math.round(viewZoom * 100) + '%';
+            refreshOut();
+        }
+
+        function loadImageFile(file) {
+            const url = URL.createObjectURL(file);
+            const im = new Image();
+            im.onload = () => {
+                img = im;
+                updateImageLayout();
+                ensureDefaultMarkBox();
+                viewZoom = 1;
+                viewPanX = 0;
+                viewPanY = 0;
+                setStatus(`Loaded ${file.name} (${im.width}×${im.height}) — mark box auto-set`);
+                redraw();
+                URL.revokeObjectURL(url);
+            };
+            im.src = url;
+        }
+
+        async function tryPreloadImage() {
+            const pathsTry = [
+                'references/logo-mark.png',
+                '../public/logo-mark.png',
+                '../public/brand/logo-mark-concept3-exact.png'
+            ];
+            for (const path of pathsTry) {
+                try {
+                    const res = await fetch(path, { cache: 'no-store' });
+                    if (!res.ok) continue;
+                    const blob = await res.blob();
+                    const url = URL.createObjectURL(blob);
+                    const im = new Image();
+                    await new Promise((resolve, reject) => {
+                        im.onload = resolve;
+                        im.onerror = reject;
+                        im.src = url;
+                    });
+                    img = im;
+                    updateImageLayout();
+                    ensureDefaultMarkBox();
+                    setStatus(`Loaded ${path} — mark box auto-set to image; refine with Set mark box if needed`);
+                    redraw();
+                    return;
+                } catch (_) {}
+            }
+            setStatus('Load logo-mark.png to begin');
+        }
+
+        document.getElementById('fileInput').addEventListener('change', (e) => {
+            const f = e.target.files && e.target.files[0];
+            if (f) loadImageFile(f);
+        });
+        document.getElementById('jsonInput').addEventListener('change', async (e) => {
+            const f = e.target.files && e.target.files[0];
+            if (!f) return;
+            if (!applyImported(await f.text())) {
+                setStatus('Could not read that JSON as a logo trace');
+            }
+        });
+
+        document.getElementById('nodeMode').onclick = () => setMode('node');
+        document.getElementById('boxMode').onclick = () => setMode('box');
+        document.getElementById('undoBtn').onclick = undo;
+        document.getElementById('deleteBtn').onclick = deleteSelected;
+        document.getElementById('clearBtn').onclick = () => {
+            const path = activePath();
+            if (!confirm(`Clear all nodes on “${path.name}”?`)) return;
+            pushHistory();
+            path.nodes = [];
+            path.nextId = 1;
+            selectedId = null;
+            redraw();
+        };
+        document.getElementById('addPathBtn').onclick = () => {
+            const name = prompt('New path name', `path${paths.length + 1}`);
+            if (!name) return;
+            const id = name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || `path-${paths.length + 1}`;
+            if (paths.some(p => p.id === id)) {
+                setStatus(`Path id “${id}” already exists`);
+                return;
+            }
+            pushHistory();
+            paths.push({ id, name, nodes: [], nextId: 1 });
+            activePathId = id;
+            selectedId = null;
+            refreshPathSelect();
+            setMode('node');
+            redraw();
+        };
+        document.getElementById('renamePathBtn').onclick = () => {
+            const path = activePath();
+            const name = prompt('Rename path', path.name);
+            if (!name) return;
+            pushHistory();
+            path.name = name;
+            refreshPathSelect();
+            redraw();
+        };
+        pathSelect.onchange = () => {
+            activePathId = pathSelect.value;
+            selectedId = null;
+            setMode('node');
+            redraw();
+        };
+
+        document.getElementById('exportBtn').onclick = () => {
+            const blob = new Blob([outEl.value], { type: 'application/json' });
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = 'logo-mark-trace.json';
+            a.click();
+        };
+        document.getElementById('copySvgBtn').onclick = async () => {
+            ensureDefaultMarkBox();
+            redraw();
+            const svg = buildSvgSnippet();
+            await navigator.clipboard.writeText(svg);
+            if (svg.startsWith('<!--')) {
+                setStatus(svg.replace(/^<!--\s*|\s*-->$/g, ''));
+            } else {
+                setStatus('SVG paths copied — paste into chat or a draft logo-mark.svg');
+            }
+        };
+        document.getElementById('pasteBtn').onclick = async () => {
+            try {
+                applyImported(await navigator.clipboard.readText());
+            } catch (_) {
+                setStatus('Could not read clipboard — paste into the output box instead');
+                outEl.focus();
+            }
+        };
+        outEl.addEventListener('paste', (e) => {
+            const text = (e.clipboardData && e.clipboardData.getData('text')) || '';
+            if (parseImported(text)) {
+                e.preventDefault();
+                applyImported(text);
+            }
+        });
+        document.getElementById('opacity').oninput = (e) => {
+            bgOpacity = Number(e.target.value) / 100;
+            redraw();
+        };
+        document.getElementById('showOthers').oninput = (e) => {
+            showOthers = e.target.checked;
+            redraw();
+        };
+
+        function zoomAt(sx, sy, factor) {
+            const before = screenToWorld(sx, sy);
+            viewZoom = Math.min(ZOOM_MAX, Math.max(ZOOM_MIN, viewZoom * factor));
+            const rect = stage.getBoundingClientRect();
+            const cx = (sx - rect.left) * (W / rect.width);
+            const cy = (sy - rect.top) * (H / rect.height);
+            viewPanX = before.x - cx / viewZoom;
+            viewPanY = before.y - cy / viewZoom;
+            redraw();
+        }
+        document.getElementById('zoomInBtn').onclick = () =>
+            zoomAt(stage.getBoundingClientRect().left + 400, stage.getBoundingClientRect().top + 300, 1.25);
+        document.getElementById('zoomOutBtn').onclick = () =>
+            zoomAt(stage.getBoundingClientRect().left + 400, stage.getBoundingClientRect().top + 300, 0.8);
+        document.getElementById('zoomResetBtn').onclick = () => {
+            viewZoom = 1;
+            viewPanX = 0;
+            viewPanY = 0;
+            redraw();
+        };
+
+        stage.addEventListener('wheel', (e) => {
+            e.preventDefault();
+            zoomAt(e.clientX, e.clientY, e.deltaY < 0 ? 1.12 : 1 / 1.12);
+        }, { passive: false });
+
+        stage.addEventListener('contextmenu', (e) => {
+            e.preventDefault();
+            const w = screenToWorld(e.clientX, e.clientY);
+            const n = nearestNode(w.x, w.y, snapRadius() * 1.5);
+            if (n) {
+                selectedId = n.id;
+                deleteSelected();
+            }
+        });
+
+        stage.addEventListener('pointerdown', (e) => {
+            if (spaceDown || e.button === 1) {
+                panning = true;
+                didPan = false;
+                panLast = { x: e.clientX, y: e.clientY };
+                stage.classList.add('panning');
+                stage.setPointerCapture(e.pointerId);
+                return;
+            }
+            if (e.button !== 0 || mode !== 'node') return;
+            const w = screenToWorld(e.clientX, e.clientY);
+            const n = nearestNode(w.x, w.y, snapRadius() * 1.4);
+            if (n) {
+                dragging = { id: n.id };
+                didDrag = false;
+                selectedId = n.id;
+                stage.setPointerCapture(e.pointerId);
+                redraw();
+            }
+        });
+
+        stage.addEventListener('pointermove', (e) => {
+            hoverWorld = screenToWorld(e.clientX, e.clientY);
+            if (panning && panLast) {
+                const dx = (e.clientX - panLast.x) * (W / stage.getBoundingClientRect().width);
+                const dy = (e.clientY - panLast.y) * (H / stage.getBoundingClientRect().height);
+                if (Math.hypot(dx, dy) > 1) didPan = true;
+                viewPanX -= dx / viewZoom;
+                viewPanY -= dy / viewZoom;
+                panLast = { x: e.clientX, y: e.clientY };
+                redraw();
+                return;
+            }
+            if (!dragging) {
+                redraw();
+                return;
+            }
+            const w = screenToWorld(e.clientX, e.clientY);
+            const n = findNode(dragging.id);
+            if (!n) return;
+            if (!didDrag) pushHistory();
+            didDrag = true;
+            n.x = Math.round(w.x * 10) / 10;
+            n.y = Math.round(w.y * 10) / 10;
+            redraw();
+        });
+
+        stage.addEventListener('pointerleave', () => {
+            hoverWorld = null;
+            redraw();
+        });
+
+        stage.addEventListener('pointerup', (e) => {
+            if (panning) {
+                panning = false;
+                panLast = null;
+                stage.classList.remove('panning');
+                if (didPan) return;
+            }
+            if (dragging) {
+                const wasDrag = didDrag;
+                dragging = null;
+                didDrag = false;
+                if (wasDrag) {
+                    setStatus('Moved node');
+                    return;
+                }
+            }
+            if (e.button !== 0 || spaceDown) return;
+            const w = screenToWorld(e.clientX, e.clientY);
+            if (mode === 'box') {
+                if (!boxDraft) {
+                    pushHistory();
+                    boxDraft = { x: Math.round(w.x * 10) / 10, y: Math.round(w.y * 10) / 10 };
+                    setStatus('Now click the bottom-right corner of the mark');
+                    redraw();
+                    return;
+                }
+                pushHistory();
+                const x = Math.min(boxDraft.x, w.x);
+                const y = Math.min(boxDraft.y, w.y);
+                const bw = Math.abs(w.x - boxDraft.x);
+                const bh = Math.abs(w.y - boxDraft.y);
+                if (bw < 8 || bh < 8) {
+                    setStatus('Mark box too small — try again');
+                    boxDraft = null;
+                    redraw();
+                    return;
+                }
+                markBox = {
+                    x: Math.round(x * 10) / 10,
+                    y: Math.round(y * 10) / 10,
+                    w: Math.round(bw * 10) / 10,
+                    h: Math.round(bh * 10) / 10
+                };
+                boxDraft = null;
+                setStatus(`Mark box ${markBox.w}×${markBox.h} — trace paths`);
+                setMode('node');
+                redraw();
+                return;
+            }
+            if (mode === 'node') {
+                addNode(w.x, w.y);
+                redraw();
+            }
+        });
+
+        window.addEventListener('keydown', (e) => {
+            if (e.key === ' ' && !e.repeat) {
+                spaceDown = true;
+                e.preventDefault();
+            }
+            if (e.target && (e.target.tagName === 'TEXTAREA' || e.target.tagName === 'INPUT')) return;
+            if (e.key === 'n' || e.key === 'N') setMode('node');
+            if (e.key === 'b' || e.key === 'B') setMode('box');
+            if (e.key === 'z' || e.key === 'Z') { e.preventDefault(); undo(); }
+            if (e.key === 'Backspace' || e.key === 'Delete') {
+                e.preventDefault();
+                deleteSelected();
+            }
+            if (e.key === '+' || e.key === '=') {
+                zoomAt(stage.getBoundingClientRect().left + 400, stage.getBoundingClientRect().top + 300, 1.25);
+            }
+            if (e.key === '-' || e.key === '_') {
+                zoomAt(stage.getBoundingClientRect().left + 400, stage.getBoundingClientRect().top + 300, 0.8);
+            }
+            if (/^[1-9]$/.test(e.key)) {
+                const idx = Number(e.key) - 1;
+                if (paths[idx]) {
+                    activePathId = paths[idx].id;
+                    selectedId = null;
+                    refreshPathSelect();
+                    setMode('node');
+                    redraw();
+                }
+            }
+        });
+        window.addEventListener('keyup', (e) => {
+            if (e.key === ' ') spaceDown = false;
+        });
+
+        refreshPathSelect();
+        setMode('node');
+        tryPreloadImage();
+        redraw();
+    </script>
+</body>
+</html>

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { MachiiLogo } from "@/components/machii-logo";
 
 export const metadata: Metadata = {
   title: "Users Guide — HP 15C Flasher",
@@ -61,9 +62,7 @@ export default function FlasherGuidePage() {
       <header className="border-b border-[#e5e7eb] bg-white">
         <div className="mx-auto flex w-full max-w-3xl items-center justify-between gap-6 px-6 py-4 sm:px-8">
           <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-sm">
-            <Link href="/" className="text-[#4b5563] hover:text-[#1a1a1a]">
-              Mach II Labs
-            </Link>
+            <MachiiLogo tone="light" />
             <Link
               href="/flasher"
               className="font-semibold text-[#1a1a1a]"
