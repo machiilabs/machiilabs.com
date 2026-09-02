@@ -13,7 +13,7 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "Mach II Labs",
   description:
-    "Independent Mac software lab. First release: 15CE Flasher — a guided native app for flashing HP 15C Collector’s Edition firmware. Free forever.",
+    "Independent Mac software lab. First release: 15CE Flasher — a guided native app for flashing HP 15c Collector’s Edition firmware. Free forever.",
   openGraph: {
     title: "Mach II Labs",
     description:
@@ -89,7 +89,7 @@ export default function Home() {
 
         <p className="anim-rise anim-rise-delay-2 mt-8 max-w-xl text-lg leading-relaxed text-fog sm:text-xl">
           Focused Mac tools for people who notice the small stuff — starting
-          with a guided flasher for the HP 15C Collector&apos;s Edition.
+          with a guided flasher for the HP 15c Collector&apos;s Edition.
         </p>
 
         <div className="anim-rise anim-rise-delay-3 mt-10 flex flex-col gap-6">
@@ -105,7 +105,8 @@ export default function Home() {
                 15CE Flasher
               </Link>
               <p className="mt-3 text-base leading-relaxed text-fog sm:text-lg">
-                A Mac-only SAM-BA programmer for the Collector&apos;s Edition.
+                A Mac-only SAM-BA programmer for the HP 15c Collector&apos;s
+                Edition.
                 The app walks you through every step of the flashing process —
                 free forever.
               </p>

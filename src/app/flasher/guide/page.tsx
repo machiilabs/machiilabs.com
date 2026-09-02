@@ -5,11 +5,11 @@ import { MachiiLogo } from "@/components/machii-logo";
 export const metadata: Metadata = {
   title: "Users Guide — 15CE Flasher",
   description:
-    "Short guide to 15CE Flasher: the app walks you through every step of flashing HP 15C Collector’s Edition firmware on Mac.",
+    "Short guide to 15CE Flasher: the app walks you through every step of flashing HP 15c Collector’s Edition firmware on Mac.",
   openGraph: {
     title: "Users Guide — 15CE Flasher",
     description:
-      "Install 15CE Flasher and follow the on-screen instructions to flash HP 15C Collector’s Edition firmware on Mac.",
+      "Install 15CE Flasher and follow the on-screen instructions to flash HP 15c Collector’s Edition firmware on Mac.",
     url: "https://machiilabs.com/flasher/guide",
   },
   alternates: {
@@ -93,7 +93,7 @@ export default function FlasherGuidePage() {
             <li>
               A Mac running macOS 13 or later (this software runs on Mac only)
             </li>
-            <li>HP 15C Collector&apos;s Edition only</li>
+            <li>HP 15c Collector&apos;s Edition only</li>
             <li>Official USB-C or USB-A pogo programming cable</li>
             <li>
               A 114,688-byte firmware{" "}
@@ -110,7 +110,7 @@ export default function FlasherGuidePage() {
           </ul>
           <p className="mt-4 border-l-2 border-[#f59e0b] pl-4 text-sm leading-relaxed text-[#4b5563]">
             <span className="font-bold text-[#1a1a1a]">Cable Warning.</span>{" "}
-            Do not use this cable on an HP 15C Limited Edition, a pre-2015 12C,
+            Do not use this cable on an HP 15c Limited Edition, a pre-2015 12C,
             an HP 20b, or an HP 30b — it can permanently damage those machines.
           </p>
           <p className="mt-4 border-l-2 border-[#9ca3af] pl-4 text-sm leading-relaxed text-[#4b5563]">
@@ -163,7 +163,7 @@ export default function FlasherGuidePage() {
 
         <section className="mt-14">
           <h2 className="text-xl font-semibold tracking-tight text-[#1a1a1a]">
-            Flash your HP15C Collector&apos;s Edition
+            Flash your HP 15c Collector&apos;s Edition
           </h2>
           <p className="mt-4 text-base leading-relaxed text-[#374151]">
             Run the <strong>15CE Flasher</strong> application and follow the

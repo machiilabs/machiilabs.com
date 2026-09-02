@@ -12,17 +12,17 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "15CE Flasher",
   description:
-    "Native macOS app that flashes HP 15C Collector’s Edition firmware over the official pogo cable. The app guides you through every step. Free forever from Mach II Labs.",
+    "Native macOS app that flashes HP 15c Collector’s Edition firmware over the official pogo cable. The app guides you through every step. Free forever from Mach II Labs.",
   openGraph: {
     title: "15CE Flasher — Mach II Labs",
     description:
-      "Guided native SAM-BA programmer for the HP 15C Collector’s Edition. Windows SAM-BA not required. Free forever.",
+      "Guided native SAM-BA programmer for the HP 15c Collector’s Edition. Windows SAM-BA not required. Free forever.",
     url: "https://machiilabs.com/flasher",
   },
   twitter: {
     title: "15CE Flasher — Mach II Labs",
     description:
-      "Guided native SAM-BA programmer for the HP 15C Collector’s Edition. Free forever.",
+      "Guided native SAM-BA programmer for the HP 15c Collector’s Edition. Free forever.",
   },
   alternates: {
     canonical: "https://machiilabs.com/flasher",
@@ -83,7 +83,7 @@ export default function FlasherPage() {
               15CE Flasher
             </h1>
             <p className="mt-5 text-lg leading-relaxed text-fog sm:text-xl">
-              A Mac app that flashes HP 15C Collector&apos;s Edition firmware
+              A Mac app that flashes HP 15c Collector&apos;s Edition firmware
               over the official pogo cable. Windows SAM-BA is not required —
               this software runs on Mac only, and the app guides you through
               every step of the flashing process.
@@ -176,7 +176,7 @@ export default function FlasherPage() {
             </h2>
             <ul className="mt-3 list-disc space-y-2 pl-5 text-base leading-relaxed text-fog">
               <li>A Mac running macOS 13 or later</li>
-              <li>HP 15C Collector&apos;s Edition</li>
+              <li>HP 15c Collector&apos;s Edition</li>
               <li>Official USB-C (or USB-A) pogo programming cable</li>
               <li>
                 A 114,688-byte (112 KB) firmware <code className="font-mono text-snow">.bin</code> you
@@ -197,8 +197,8 @@ export default function FlasherPage() {
         <aside className="mt-16 max-w-3xl border-l-2 border-afterburn/70 pl-5">
           <p className="text-base leading-relaxed text-fog">
             <span className="font-semibold text-snow">Cable warning.</span> Use
-            the pogo cable only on the HP 15C Collector&apos;s Edition. Do not
-            use it on an HP 15C Limited Edition, a pre-2015 12C, an HP 20b, or an
+            the pogo cable only on the HP 15c Collector&apos;s Edition. Do not
+            use it on an HP 15c Limited Edition, a pre-2015 12C, an HP 20b, or an
             HP 30b — different protocol and voltage; the cable can permanently
             damage those calculators.
           </p>
