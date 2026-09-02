@@ -10,19 +10,29 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "15CE Flasher",
+  title: "15CE Flasher — Flash HP 15c CE Firmware on Mac",
   description:
-    "Native macOS app that flashes HP 15c Collector’s Edition firmware over the official pogo cable. The app guides you through every step. Free forever from Mach II Labs.",
+    "Free native macOS app to flash HP 15c Collector’s Edition firmware over the official pogo cable. Guided steps — no Windows SAM-BA required.",
   openGraph: {
-    title: "15CE Flasher — Mach II Labs",
+    title: "15CE Flasher — Flash HP 15c CE Firmware on Mac",
     description:
-      "Guided native SAM-BA programmer for the HP 15c Collector’s Edition. Windows SAM-BA not required. Free forever.",
+      "Guided native Mac app for HP 15c Collector’s Edition firmware. Pogo cable, no Windows SAM-BA. Free forever from Mach II Labs.",
     url: "https://machiilabs.com/flasher",
+    images: [
+      {
+        url: "/flasher/og.png",
+        width: 1200,
+        height: 630,
+        alt: "15CE Flasher — Flash HP 15c CE firmware on Mac",
+      },
+    ],
   },
   twitter: {
-    title: "15CE Flasher — Mach II Labs",
+    card: "summary_large_image",
+    title: "15CE Flasher — Flash HP 15c CE Firmware on Mac",
     description:
-      "Guided native SAM-BA programmer for the HP 15c Collector’s Edition. Free forever.",
+      "Guided native Mac app for HP 15c Collector’s Edition firmware. No Windows SAM-BA. Free forever.",
+    images: ["/flasher/og.png"],
   },
   alternates: {
     canonical: "https://machiilabs.com/flasher",
@@ -36,9 +46,36 @@ const SHA256 =
   "614964b543aeaf35921ac396191786ea617bb6ef6e379de80819d80fda555405";
 const DMG_FILENAME = "15CEFlasher-1.1.0-203.dmg";
 
+const softwareJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  name: "15CE Flasher",
+  applicationCategory: "UtilitiesApplication",
+  operatingSystem: "macOS",
+  description:
+    "Native macOS app that guides you through flashing HP 15c Collector’s Edition firmware over the official pogo cable. Windows SAM-BA not required.",
+  url: "https://machiilabs.com/flasher",
+  downloadUrl: DOWNLOAD_URL,
+  softwareVersion: VERSION,
+  offers: {
+    "@type": "Offer",
+    price: "0",
+    priceCurrency: "USD",
+  },
+  publisher: {
+    "@type": "Organization",
+    name: "Mach II Labs",
+    url: "https://machiilabs.com",
+  },
+};
+
 export default function FlasherPage() {
   return (
     <div className="relative min-h-dvh overflow-hidden bg-ink text-snow">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareJsonLd) }}
+      />
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0"

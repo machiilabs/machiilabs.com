@@ -3,14 +3,29 @@ import Link from "next/link";
 import { MachiiLogo } from "@/components/machii-logo";
 
 export const metadata: Metadata = {
-  title: "Users Guide — 15CE Flasher",
+  title: "Users Guide — Flash HP 15c CE on Mac with 15CE Flasher",
   description:
-    "Short guide to 15CE Flasher: the app walks you through every step of flashing HP 15c Collector’s Edition firmware on Mac.",
+    "Short guide to 15CE Flasher: install the Mac app and follow on-screen steps to flash HP 15c Collector’s Edition firmware over the pogo cable.",
   openGraph: {
     title: "Users Guide — 15CE Flasher",
     description:
-      "Install 15CE Flasher and follow the on-screen instructions to flash HP 15c Collector’s Edition firmware on Mac.",
+      "Install 15CE Flasher and flash HP 15c Collector’s Edition firmware on Mac — guided steps, no Windows SAM-BA.",
     url: "https://machiilabs.com/flasher/guide",
+    images: [
+      {
+        url: "/flasher/og.png",
+        width: 1200,
+        height: 630,
+        alt: "15CE Flasher — Flash HP 15c CE firmware on Mac",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Users Guide — 15CE Flasher",
+    description:
+      "Install 15CE Flasher and flash HP 15c Collector’s Edition firmware on Mac.",
+    images: ["/flasher/og.png"],
   },
   alternates: {
     canonical: "https://machiilabs.com/flasher/guide",

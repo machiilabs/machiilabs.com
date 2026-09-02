@@ -21,21 +21,30 @@ export const metadata: Metadata = {
     template: "%s · Mach II Labs",
   },
   description:
-    "Independent Mac software lab. First release: 15CE Flasher — guided firmware flashing for the HP 15c Collector’s Edition.",
+    "Independent Mac software lab. First release: 15CE Flasher — free guided app to flash HP 15c Collector’s Edition firmware on Mac.",
   openGraph: {
     title: "Mach II Labs",
     description:
-      "Independent Mac software lab. First release: 15CE Flasher for Mac.",
+      "Independent Mac software lab. 15CE Flasher: flash HP 15c Collector’s Edition firmware on Mac — free forever.",
     url: "https://machiilabs.com",
     siteName: "Mach II Labs",
     locale: "en_US",
     type: "website",
+    images: [
+      {
+        url: "/flasher/og.png",
+        width: 1200,
+        height: 630,
+        alt: "15CE Flasher — Flash HP 15c CE firmware on Mac",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Mach II Labs",
     description:
-      "Independent Mac software lab. First release: 15CE Flasher for Mac.",
+      "Independent Mac software lab. 15CE Flasher for HP 15c Collector’s Edition — free forever.",
+    images: ["/flasher/og.png"],
   },
   robots: {
     index: true,

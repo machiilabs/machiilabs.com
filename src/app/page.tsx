@@ -13,17 +13,27 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "Mach II Labs",
   description:
-    "Independent Mac software lab. First release: 15CE Flasher — a guided native app for flashing HP 15c Collector’s Edition firmware. Free forever.",
+    "Independent Mac software lab. First release: 15CE Flasher — free guided app to flash HP 15c Collector’s Edition firmware on Mac. Free forever.",
   openGraph: {
-    title: "Mach II Labs",
+    title: "Mach II Labs — 15CE Flasher for HP 15c CE",
     description:
-      "Independent Mac software lab. First release: 15CE Flasher for Mac.",
+      "Flash HP 15c Collector’s Edition firmware on Mac with 15CE Flasher. Guided native app, free forever.",
     url: "https://machiilabs.com",
+    images: [
+      {
+        url: "/flasher/og.png",
+        width: 1200,
+        height: 630,
+        alt: "15CE Flasher — Flash HP 15c CE firmware on Mac",
+      },
+    ],
   },
   twitter: {
-    title: "Mach II Labs",
+    card: "summary_large_image",
+    title: "Mach II Labs — 15CE Flasher for HP 15c CE",
     description:
-      "Independent Mac software lab. First release: 15CE Flasher for Mac.",
+      "Flash HP 15c Collector’s Edition firmware on Mac. Free forever.",
+    images: ["/flasher/og.png"],
   },
 };
 
