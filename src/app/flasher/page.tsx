@@ -10,17 +10,17 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "HP 15C Flasher",
+  title: "15CE Flasher",
   description:
     "Native macOS app that flashes HP 15C Collector’s Edition firmware over the official pogo cable. The app guides you through every step. Free forever from Mach II Labs.",
   openGraph: {
-    title: "HP 15C Flasher — Mach II Labs",
+    title: "15CE Flasher — Mach II Labs",
     description:
       "Guided native SAM-BA programmer for the HP 15C Collector’s Edition. Windows SAM-BA not required. Free forever.",
     url: "https://machiilabs.com/flasher",
   },
   twitter: {
-    title: "HP 15C Flasher — Mach II Labs",
+    title: "15CE Flasher — Mach II Labs",
     description:
       "Guided native SAM-BA programmer for the HP 15C Collector’s Edition. Free forever.",
   },
@@ -30,11 +30,11 @@ export const metadata: Metadata = {
 };
 
 const DOWNLOAD_URL =
-  "https://downloads.machiilabs.com/HP15CFlasher-1.0.0-190.dmg";
-const VERSION = "1.0.0";
+  "https://downloads.machiilabs.com/15CEFlasher-1.1.0-203.dmg";
+const VERSION = "1.1.0";
 const SHA256 =
-  "0cb627dc9d918851dd03b7ec119ab96f2931beab5c50fd025d229f947cdebe4e";
-const DMG_FILENAME = "HP15CFlasher-1.0.0-190.dmg";
+  "614964b543aeaf35921ac396191786ea617bb6ef6e379de80819d80fda555405";
+const DMG_FILENAME = "15CEFlasher-1.1.0-203.dmg";
 
 export default function FlasherPage() {
   return (
@@ -80,7 +80,7 @@ export default function FlasherPage() {
             <h1
               className={`${inter.className} mt-4 text-[clamp(2.5rem,8vw,4.75rem)] leading-[0.95] font-bold tracking-[-0.03em] text-snow`}
             >
-              HP 15C Flasher
+              15CE Flasher
             </h1>
             <p className="mt-5 text-lg leading-relaxed text-fog sm:text-xl">
               A Mac app that flashes HP 15C Collector&apos;s Edition firmware
@@ -119,7 +119,7 @@ export default function FlasherPage() {
                 <li>
                   In Terminal, run{" "}
                   <code className="break-all font-mono text-fog/80">
-                    shasum -a 256 {DMG_FILENAME}
+                    shasum -a 256 /path/to/15CEFlasher-1.1.0-203.dmg
                   </code>
                 </li>
                 <li>
@@ -136,8 +136,8 @@ export default function FlasherPage() {
             <div className="product-stage">
               <div className="product-frame bg-black p-[20px] sm:p-[30px]">
                 <Image
-                  src="/flasher/HP15C Flasher.png"
-                  alt="HP 15C Flasher — guided flashing wizard"
+                  src="/flasher/15CE Flasher.png"
+                  alt="15CE Flasher — guided flashing wizard"
                   width={2024}
                   height={1744}
                   priority
@@ -190,7 +190,6 @@ export default function FlasherPage() {
             </h2>
             <p className="mt-3 text-base leading-relaxed text-fog">
               Offline. No telemetry, no network, no automatic diagnostics.
-              Firmware files never leave this Mac.
             </p>
           </div>
         </section>
@@ -204,12 +203,27 @@ export default function FlasherPage() {
             damage those calculators.
           </p>
         </aside>
+
+        <aside className="mt-8 max-w-3xl border-l-2 border-white/20 pl-5">
+          <p className="text-base leading-relaxed text-fog">
+            <span className="font-semibold text-snow">Disclaimer.</span> 15CE
+            Flasher and related documentation are provided as is, without
+            warranty of any kind. Although we have employed several safeguards
+            to help keep this software safe, flashing firmware can wipe user
+            memory, leave the calculator unusable, or permanently brick the
+            device. You are solely responsible for backups, choosing a correct
+            firmware file, and following the app&apos;s instructions. If the
+            instructions are not clear in DEMO mode, do not execute in FLASH
+            mode. Mach II Labs is not liable for damage, data loss, or repair
+            costs arising from use of this software.
+          </p>
+        </aside>
       </main>
 
       <footer className="relative z-10 border-t border-white/5 px-6 py-5 sm:px-10">
         <div className="mx-auto flex max-w-6xl flex-col gap-1 text-sm text-fog/70 sm:flex-row sm:items-center sm:justify-between">
           <span>
-            © {new Date().getFullYear()} Mach II Labs · HP 15C Flasher · free
+            © {new Date().getFullYear()} Mach II Labs · 15CE Flasher · free
             forever
           </span>
           <a

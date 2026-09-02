@@ -13,17 +13,17 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "Mach II Labs",
   description:
-    "Independent Mac software lab. First release: HP 15C Flasher — a guided native app for flashing HP 15C Collector’s Edition firmware. Free forever.",
+    "Independent Mac software lab. First release: 15CE Flasher — a guided native app for flashing HP 15C Collector’s Edition firmware. Free forever.",
   openGraph: {
     title: "Mach II Labs",
     description:
-      "Independent Mac software lab. First release: HP 15C Flasher for Mac.",
+      "Independent Mac software lab. First release: 15CE Flasher for Mac.",
     url: "https://machiilabs.com",
   },
   twitter: {
     title: "Mach II Labs",
     description:
-      "Independent Mac software lab. First release: HP 15C Flasher for Mac.",
+      "Independent Mac software lab. First release: 15CE Flasher for Mac.",
   },
 };
 
@@ -74,8 +74,12 @@ export default function Home() {
         <MachiiLogo wordmarkClassName="text-sm font-semibold tracking-wide text-fog transition-colors group-hover:text-snow" />
       </header>
 
-      <main className="relative z-10 mx-auto flex min-h-[calc(100dvh-5rem)] w-full max-w-6xl flex-col justify-end px-6 pb-16 pt-10 sm:px-10 sm:pb-20 lg:justify-center lg:pb-24 lg:pt-12">
-        <h1 className="anim-rise">
+      <main className="relative z-10 mx-auto flex min-h-[calc(100dvh-5rem)] w-full max-w-6xl flex-col justify-start px-6 pb-16 pt-5 sm:px-10 sm:pb-20 lg:pb-24 lg:pt-6">
+        <p className="anim-rise text-[0.7rem] font-semibold tracking-[0.28em] text-fog uppercase sm:text-xs">
+          Independent software lab
+        </p>
+
+        <h1 className="anim-rise anim-rise-delay-1 mt-5">
           <MachiiLogo
             href={null}
             wordmarkLayout="stacked"
@@ -83,12 +87,12 @@ export default function Home() {
           />
         </h1>
 
-        <p className="anim-rise anim-rise-delay-1 mt-8 max-w-xl text-lg leading-relaxed text-fog sm:text-xl">
-          Serious Mac software, built with intent — starting with a guided
-          flasher for the HP 15C Collector&apos;s Edition.
+        <p className="anim-rise anim-rise-delay-2 mt-8 max-w-xl text-lg leading-relaxed text-fog sm:text-xl">
+          Focused Mac tools for people who notice the small stuff — starting
+          with a guided flasher for the HP 15C Collector&apos;s Edition.
         </p>
 
-        <div className="anim-rise anim-rise-delay-2 mt-10 flex flex-col gap-6">
+        <div className="anim-rise anim-rise-delay-3 mt-10 flex flex-col gap-6">
           <div className="flex max-w-3xl flex-col items-start gap-8 sm:flex-row sm:items-center sm:gap-12">
             <div className="min-w-0 max-w-xl flex-1">
               <p className="text-sm font-semibold tracking-[0.18em] text-afterburn-soft uppercase">
@@ -98,7 +102,7 @@ export default function Home() {
                 href="/flasher"
                 className="mt-3 block text-2xl font-bold tracking-tight text-snow transition-colors hover:text-afterburn-soft sm:text-3xl"
               >
-                HP 15C Flasher
+                15CE Flasher
               </Link>
               <p className="mt-3 text-base leading-relaxed text-fog sm:text-lg">
                 A Mac-only SAM-BA programmer for the Collector&apos;s Edition.
@@ -110,7 +114,7 @@ export default function Home() {
                   href="/flasher"
                   className="group relative inline-flex w-fit items-center text-base font-semibold tracking-wide text-snow transition-colors hover:text-afterburn-soft"
                 >
-                  Get HP 15C Flasher
+                  Get 15CE Flasher
                   <span
                     aria-hidden
                     className="cta-underline absolute -bottom-1 left-0 h-px w-full bg-afterburn"
@@ -128,7 +132,7 @@ export default function Home() {
             <Link
               href="/flasher"
               className="shrink-0 overflow-hidden rounded-[22%] transition-opacity hover:opacity-90"
-              aria-label="HP 15C Flasher"
+              aria-label="15CE Flasher"
             >
               <Image
                 src="/flasher/app-icon.png"

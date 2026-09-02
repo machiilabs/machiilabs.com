@@ -21,11 +21,11 @@ export const metadata: Metadata = {
     template: "%s · Mach II Labs",
   },
   description:
-    "Independent Mac software lab. First release: HP 15C Flasher — guided firmware flashing for the Collector’s Edition.",
+    "Independent Mac software lab. First release: 15CE Flasher — guided firmware flashing for the Collector’s Edition.",
   openGraph: {
     title: "Mach II Labs",
     description:
-      "Independent Mac software lab. First release: HP 15C Flasher for Mac.",
+      "Independent Mac software lab. First release: 15CE Flasher for Mac.",
     url: "https://machiilabs.com",
     siteName: "Mach II Labs",
     locale: "en_US",
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Mach II Labs",
     description:
-      "Independent Mac software lab. First release: HP 15C Flasher for Mac.",
+      "Independent Mac software lab. First release: 15CE Flasher for Mac.",
   },
   robots: {
     index: true,
