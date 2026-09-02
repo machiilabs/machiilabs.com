@@ -10,14 +10,17 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "15CE Flasher — Flash HP 15c CE Firmware on Mac",
+  title: {
+    absolute: "15CE Flasher — HP 15c CE on Mac",
+  },
   description:
     "Free native macOS app to flash HP 15c Collector’s Edition firmware over the official pogo cable. Guided steps — no Windows SAM-BA required.",
   openGraph: {
-    title: "15CE Flasher — Flash HP 15c CE Firmware on Mac",
+    title: "15CE Flasher — HP 15c CE on Mac",
     description:
       "Guided native Mac app for HP 15c Collector’s Edition firmware. Pogo cable, no Windows SAM-BA. Free forever from Mach II Labs.",
     url: "https://machiilabs.com/flasher",
+    siteName: "Mach II Labs",
     images: [
       {
         url: "/flasher/og.png",
@@ -29,7 +32,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "15CE Flasher — Flash HP 15c CE Firmware on Mac",
+    title: "15CE Flasher — HP 15c CE on Mac",
     description:
       "Guided native Mac app for HP 15c Collector’s Edition firmware. No Windows SAM-BA. Free forever.",
     images: ["/flasher/og.png"],

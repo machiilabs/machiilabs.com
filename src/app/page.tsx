@@ -19,6 +19,7 @@ export const metadata: Metadata = {
     description:
       "Flash HP 15c Collector’s Edition firmware on Mac with 15CE Flasher. Guided native app, free forever.",
     url: "https://machiilabs.com",
+    siteName: "Mach II Labs",
     images: [
       {
         url: "/flasher/og.png",
