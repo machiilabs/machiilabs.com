@@ -248,8 +248,9 @@ export const MANUAL_PAGES: ManualPage[] = [
         title: "Play All",
         steps: [
           "Click Play All in the toolbar (or press ⇧⌘P) to play the current filtered view from the first playable video.",
-          "Skagway auto-advances to the next video only during a Play All session. Stopping playback or playing a single video ends the session.",
-          "Loop Play All (toolbar toggle, View menu, or Settings → Video) repeats the view when the last video finishes — off by default.",
+          "Missing files are skipped. Auto-advance and Loop run only during this Play All session.",
+          "Loop Play All (toolbar toggle, View menu, or Settings → Video) is off by default. When it is on, finishing the last playable video starts the first one again.",
+          "Stopping playback or playing a single video (Space on one card) ends the session. Loop then has no effect until you Play All again.",
         ],
       },
       {
@@ -290,7 +291,8 @@ export const MANUAL_PAGES: ManualPage[] = [
         title: "Quick Filter (⇧⌘F)",
         steps: [
           "Click the filter button in the toolbar or press ⇧⌘F to open the Quick Filter drawer above the grid.",
-          "Combine anything: a Smart Library or Collection, an exact star rating, a duration range (with presets like < 1 min or > 30 min), quality buckets (SD through 8K+), and tags.",
+          "Combine anything: a Smart Library, Collection, or Album; a rating; a duration range (presets like < 1 min or > 30 min); quality buckets (SD through 8K+); and tags.",
+          "Rating is one row: No Stars (unrated), then 1–5 stars, then Or Higher on the right. Click a star to match only that rating. Turn Or Higher on to match that rating and every higher one (4 → 4 and 5). Or Higher is off by default, session-only, and unavailable for No Stars and for 5 stars. The filter pill reads Rating 4, Rating 4+, or No stars.",
           "Tags can match Any (at least one) or All of the selected tags — use the toggle in the Tags card.",
           "Everything you pick applies together, and search still works on top.",
         ],
