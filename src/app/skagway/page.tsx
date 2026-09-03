@@ -105,7 +105,7 @@ export default function SkagwayPage() {
                 Manual
               </Link>
               <span className="w-full text-sm text-fog/80 sm:w-auto">
-                macOS 26+ · notarized DMG (version 0.63.0)
+                macOS 26+ · notarized DMG (version 0.79.0)
               </span>
             </div>
           </div>

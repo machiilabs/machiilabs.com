@@ -2,6 +2,18 @@
 
 How-to docs for Skagway. Content lives in TypeScript so the site and the search index stay in sync.
 
+## Inline UI formatting
+
+[`manual-inline.tsx`](./manual-inline.tsx) auto-styles action chrome as **bold monospace**:
+
+- Menu paths (`File → Add Folder…`, `right-click → …`)
+- Labels ending in `…` (sheets / menu items)
+- Known buttons and commands (`Add Files…` is covered by `…`; also `Scan for New Videos`, `Move Here`, …)
+- Short dialog actions after “click” / “then” (`Add`, `Scan`, `Create`)
+- Brace tokens (`{Inc 1}`) and keystrokes (`⌘F`, `Space`)
+
+Write UI labels with the same capitalization as the app so they match. Section headings stay in the normal heading font (not mono).
+
 ## Update workflow
 
 1. **Edit content** in [`manual.ts`](./manual.ts) (pages, sections, steps).

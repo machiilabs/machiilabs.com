@@ -25,7 +25,7 @@ export const metadata: Metadata = {
 };
 
 const DOWNLOAD_URL = "https://downloads.machiilabs.com/Skagway.dmg";
-const VERSION = "0.63.0";
+const VERSION = "0.79.0";
 
 type Feature = {
   title: string;
@@ -47,7 +47,7 @@ const features: Feature[] = [
     screenshotAlt:
       "Skagway grid view showing a large video library with thumbnails, durations, and ratings",
     screenshotHint:
-      "Full window in Grid view with a well-populated library — rich thumbnails, a few rated videos, the toolbar visible.",
+      "Full window in Grid view with a well-populated library — rich thumbnails, a few rated videos, toolbar with Grid/List, Sort, Play All, and Search videos.",
   },
   {
     title: "See inside a video without opening it",
@@ -64,79 +64,79 @@ const features: Feature[] = [
   {
     title: "Find anything in seconds",
     body: [
-      "Search matches titles, file names, original file names, tags, and custom fields — multi-word queries AND across those fields. Quick Filter narrows further with ratings, duration, quality, tags, and smart libraries like Recently Added, Top Rated, and Duplicates.",
+      "Search matches titles, file names, original file names, tags, and custom fields — multi-word queries AND across those fields. Quick Filter narrows further with ratings, duration, quality, tags, and smart libraries like Recently Added, Last Added, Top Rated, and Duplicates.",
       "Need surgical precision? Advanced Filter builds rule sets — “tagged Vacation AND rated 4+ stars, OR tagged Favorite” — with the same attributes available to saved collections.",
     ],
     screenshot: "explore-filter.png",
     screenshotAlt:
       "Skagway Quick Filter drawer with Smart Libraries, Rating, Duration, Quality, and Tags",
     screenshotHint:
-      "Quick Filter drawer open (⇧⌘F) over the grid, showing the Smart Libraries, Rating, Duration, Quality, and Tags cards.",
+      "Quick Filter drawer open (⇧⌘F) over the grid, showing Smart Libraries (including Last Added if available), Rating, Duration, Quality, and Tags.",
   },
   {
-    title: "Collections that curate themselves",
+    title: "Collections that curate themselves — and albums that play in order",
     body: [
       "Save any set of rules as a smart collection and it stays current on its own — rate or tag a new video and it joins every collection it matches. No re-filing, ever.",
-      "Want hand-picked sets too? Albums hold exactly the videos you choose. Both live one click away in the filter drawer.",
+      "Albums are hand-picked playlists: drag to set Album Order, then Play All through them. Both live one click away in the filter drawer.",
     ],
     screenshot: "explore-collections.png",
     screenshotAlt:
       "Skagway collection editor with match rules, next to a list of collections and albums",
     screenshotHint:
-      "The New Collection editor with two or three rules visible — or the Collections card showing a few smart collections and albums.",
+      "The New Collection editor with two or three rules — or an album open with Album Order active and cards ready to drag.",
   },
   {
     title: "Rate, tag, and define your own metadata",
     body: [
-      "Select a video — or fifty — and the Inspector puts ratings, tags, and technical details one click away. Multi-select editing applies changes to everything at once.",
-      "Go beyond the built-ins with custom fields: text, numbers, dates — whatever your library needs. Custom fields flow through sorting, columns, filters, collections, and export.",
+      "Select a video — or fifty — and the Inspector puts ratings, tags, subtitles, and technical details one click away. Multi-select editing applies changes to everything at once.",
+      "Go beyond the built-ins with custom fields: text, numbers, dates, booleans — whatever your library needs. Custom fields are per-library and flow through sorting, columns, filters, collections, and export.",
     ],
     screenshot: "explore-inspector.png",
     screenshotAlt:
-      "Skagway Inspector with rating stars, tag chips, and custom metadata fields",
+      "Skagway Inspector with rating stars, tag chips, subtitles picker, and custom metadata fields",
     screenshotHint:
-      "Inspector for a selected video: filled rating stars, several tag chips, and at least one custom field with a value.",
+      "Inspector for a selected video: Title, Subtitles picker, filled rating stars, several tag chips, and at least one custom field with a value.",
   },
   {
     title: "A player that stays out of your way",
     body: [
-      "One floating player, three sizes: compact in the corner, a draggable window, or edge-to-edge full screen — switch on the fly without restarting playback.",
-      "Custom transport controls give you scrubbing with a live frame preview, ±15 second skips, playback speed, and volume — all without leaving the library. Skagway remembers where you stopped and resumes automatically. Sidecar .srt subtitles show up on their own.",
+      "One floating player, three sizes: compact in the inspector, a draggable window, or edge-to-edge full screen — switch with shortcuts or the player’s traffic lights without restarting playback.",
+      "Custom transport controls give you scrubbing with a live frame preview, ±15 second skips, playback speed, and volume. Skagway remembers where you stopped and resumes automatically. Sidecar .srt subtitles and burned-in flags live in the Inspector.",
     ],
     screenshot: "explore-player.png",
     screenshotAlt:
-      "Skagway floating player with custom transport controls over the library grid",
+      "Skagway floating player with traffic lights and custom transport controls over the library grid",
     screenshotHint:
-      "Floating player (windowed) over the grid with the custom transport bar fully visible: scrubber, ±15s skips, play/pause, speed, and volume. Bookmark diamond ticks on the scrubber are a plus.",
+      "Floating player (windowed) over the grid with traffic lights and the transport bar fully visible: scrubber, ±15s skips, play/pause, speed, and volume. Bookmark diamond ticks are a plus.",
   },
   {
-    title: "Bookmark any moment",
+    title: "Play All, or bookmark any moment",
     body: [
-      "Hit a scene worth returning to? Bookmark it — ⌥⌘B, a double-click on the scrubber, or the bookmark button in the Inspector. Each bookmark saves the exact frame, a name you can edit, and a still for quick recognition.",
-      "Bookmarks appear as diamond ticks on the timeline and as a list in the Inspector. Click any one to jump straight there. After a jump while watching, a return chip takes you back to where you were — so exploring never costs you your place.",
+      "Play All (⇧⌘P) walks the current filtered view from the first playable video — with optional Loop Play All when you want it to repeat. Surprise Me! and Shuffle are still one click away for random discovery.",
+      "Hit a scene worth returning to? Bookmark it — ⌥⌘B, a double-click on the scrubber, or the Inspector. Each bookmark saves the exact frame, a name, and a still. After a jump while watching, a return chip takes you back.",
     ],
     screenshot: "explore-bookmarks.png",
     screenshotAlt:
       "Skagway Inspector Bookmarks section with named bookmarks and stills, and diamond ticks on the player timeline",
     screenshotHint:
-      "Player open with at least three bookmarks: diamond ticks on the scrubber, and the Inspector BOOKMARKS list showing stills, names, and timecodes.",
+      "Player open with at least three bookmarks: diamond ticks on the scrubber, and the Inspector BOOKMARKS list showing stills, names, and timecodes. Bonus: Play All / Loop controls visible in the toolbar.",
   },
   {
     title: "Real file tools, with safety nets",
     body: [
-      "Edit titles, bulk-rename files, move between volumes, or Fix for Built-in Player… (re-encode to MP4) — right from the library. Cross-volume moves and re-encodes show as header pills and a bottom activity strip; open the queues from there or the View menu.",
+      "Edit titles, bulk-rename files, move between volumes, Fix for Built-in Player… (re-encode to MP4), or set a poster from any image — right from the library. Cross-volume moves and re-encodes show as header pills and a bottom activity strip.",
       "Cross-volume moves copy and verify before removing the original. Re-encodes keep a backup until you delete it. Queues survive quitting the app.",
     ],
     screenshot: "explore-file-ops.png",
     screenshotAlt:
-      "Skagway context menu with Bulk Rename…, Move Files…, and Fix for Built-in Player…",
+      "Skagway context menu with Bulk Rename…, Move Files…, Fix for Built-in Player…, and Set Poster from Image…",
     screenshotHint:
-      "Right-click context menu showing Bulk Rename…, Move Files…, Fix for Built-in Player…, Edit Title… / Rename File…. Bonus: a header queue pill or activity strip while a job runs.",
+      "Right-click context menu showing Bulk Rename…, Move Files…, Fix for Built-in Player…, Set Poster from Image…, Edit Title… / Rename File…. Bonus: a header queue pill or activity strip while a job runs.",
   },
   {
     title: "Your data is portable",
     body: [
-      "Export to CSV or JSON Lines with clear groups: Match keys, Importable fields (including Title), and Export-only facts like Original File Name. Import matches by path or fingerprint; unknown columns can become custom fields.",
+      "Export to CSV or JSON Lines with clear groups: Match keys, Importable fields (Title, Plays, Resume Position, Subtitles, and more), and Export-only facts like Original File Name. Import matches by path or fingerprint; unknown columns can become custom fields.",
       "The library itself is a single file you can copy for backup in one menu command. No export maze, no lock-in.",
     ],
     screenshot: "explore-export.png",
@@ -150,7 +150,7 @@ const features: Feature[] = [
 const quickPoints = [
   {
     title: "Keyboard-driven",
-    body: "Arrows, Space, and one consistent modifier scheme. Triage hundreds of clips without touching the mouse.",
+    body: "Arrows, Space, Play All, and one consistent modifier scheme. Triage hundreds of clips without touching the mouse.",
   },
   {
     title: "Tuned for scale",
@@ -158,7 +158,7 @@ const quickPoints = [
   },
   {
     title: "Private by default",
-    body: "Skagway makes no network connections. No telemetry, no analytics, no account. Everything stays on your Mac.",
+    body: "No telemetry, no analytics, no account. Optional update checks stay off until you turn them on — and they never upload your library.",
   },
 ];
 

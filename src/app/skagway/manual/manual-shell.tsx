@@ -5,7 +5,10 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 import {
   manualPageHref,
+  manualSectionId,
   type ManualPage,
+  type ManualScreenshot,
+  type ManualSection,
   type ManualStep,
   type ManualTable,
 } from "./manual";
@@ -66,6 +69,7 @@ export function ManualSteps({ steps }: { steps: ManualStep[] }) {
         const text = typeof step === "string" ? step : step.text;
         const substeps = typeof step === "string" ? null : step.substeps;
         const table = typeof step === "string" ? null : step.table;
+        const screenshot = typeof step === "string" ? null : step.screenshot;
 
         return (
           <li key={text} className="pl-1">
@@ -80,6 +84,15 @@ export function ManualSteps({ steps }: { steps: ManualStep[] }) {
               </ol>
             ) : null}
             {table ? <ManualStepTable table={table} /> : null}
+            {screenshot ? (
+              <ManualFigure
+                screenshot={screenshot.filename}
+                alt={screenshot.alt}
+                hint={screenshot.hint}
+                scale={screenshot.scale}
+                className="mt-3"
+              />
+            ) : null}
           </li>
         );
       })}
@@ -216,47 +229,130 @@ export function ManualIcon({
   );
 }
 
-export function ManualFigure({ page }: { page: ManualPage }) {
-  if (!page.screenshot) return null;
-
-  const ready = manualScreenshotExists(page.screenshot);
-  const scale = page.screenshotScale ?? 1;
+export function ManualFigure({
+  screenshot,
+  alt,
+  hint,
+  scale = 1,
+  className = "mt-8",
+}: {
+  screenshot: string;
+  alt?: string;
+  hint?: string;
+  scale?: number;
+  className?: string;
+}) {
+  const ready = manualScreenshotExists(screenshot);
   const figureStyle =
     scale < 1 ? { width: `${Math.round(scale * 100)}%` } : undefined;
 
   if (!ready) {
     return (
       <figure
-        className="mt-8 border border-dashed border-[#d1d5db] bg-white px-6 py-14 text-center"
+        className={`${className} border border-dashed border-[#d1d5db] bg-white px-6 py-14 text-center`}
         style={figureStyle}
       >
         <p className="text-sm font-semibold text-[#1a1a1a]">Screenshot needed</p>
         <p className="mt-2 font-mono text-sm text-[#6b7280]">
-          public/skagway/manual/{page.screenshot}
+          public/skagway/manual/{screenshot}
         </p>
-        <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-[#4b5563]">
-          {page.screenshotHint}
-        </p>
+        {hint ? (
+          <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-[#4b5563]">
+            {hint}
+          </p>
+        ) : null}
       </figure>
     );
   }
 
   return (
     <figure
-      className="mt-8 border border-[#e5e7eb] bg-white p-2 sm:p-3"
+      className={`${className} border border-[#e5e7eb] bg-white p-2 sm:p-3`}
       style={figureStyle}
     >
       <Image
-        src={manualScreenshotSrc(page.screenshot)}
-        alt={page.screenshotAlt ?? page.title}
+        src={manualScreenshotSrc(screenshot)}
+        alt={alt ?? screenshot}
         width={2400}
         height={1500}
         className="h-auto w-full"
         sizes="(max-width: 768px) 100vw, 48rem"
         unoptimized
       />
-      <figcaption className="sr-only">{page.screenshotAlt}</figcaption>
+      {alt ? <figcaption className="sr-only">{alt}</figcaption> : null}
     </figure>
+  );
+}
+
+export function ManualPageFigure({ page }: { page: ManualPage }) {
+  if (!page.screenshot) return null;
+  return (
+    <ManualFigure
+      screenshot={page.screenshot}
+      alt={page.screenshotAlt ?? page.title}
+      hint={page.screenshotHint}
+      scale={page.screenshotScale}
+    />
+  );
+}
+
+export function ManualSectionScreenshots({
+  screenshots,
+}: {
+  screenshots?: ManualScreenshot[];
+}) {
+  if (!screenshots?.length) return null;
+  return (
+    <div className="mt-6 space-y-4">
+      {screenshots.map((shot) => (
+        <ManualFigure
+          key={shot.filename}
+          screenshot={shot.filename}
+          alt={shot.alt}
+          hint={shot.hint}
+          scale={shot.scale}
+          className="mt-0"
+        />
+      ))}
+    </div>
+  );
+}
+
+export function ManualSectionBlock({ section }: { section: ManualSection }) {
+  return (
+    <section id={manualSectionId(section.title)}>
+      <h2 className="scroll-mt-8 text-xl font-semibold tracking-tight text-[#1a1a1a]">
+        {section.title}
+      </h2>
+      <ManualSteps steps={section.steps} />
+      <ManualSectionScreenshots screenshots={section.screenshots} />
+      {section.note ? (
+        <p className="mt-4 flex flex-wrap items-center gap-3 border-l-2 border-[#93c5fd] pl-4 text-sm leading-relaxed text-[#4b5563]">
+          {section.noteIcon ? (
+            <ManualIcon
+              filename={section.noteIcon}
+              alt={section.noteIconAlt ?? section.note}
+            />
+          ) : null}
+          <span>
+            <ManualInline text={section.note} />
+            {section.noteHref && section.noteLinkLabel ? (
+              <>
+                {" "}
+                See the{" "}
+                <Link
+                  href={section.noteHref}
+                  className="font-medium text-[#1d4ed8] underline-offset-2 hover:underline"
+                >
+                  <ManualInline text={section.noteLinkLabel} />
+                </Link>{" "}
+                page.
+              </>
+            ) : null}
+          </span>
+        </p>
+      ) : null}
+    </section>
   );
 }
 

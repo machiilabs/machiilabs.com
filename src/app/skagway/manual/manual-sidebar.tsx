@@ -7,7 +7,6 @@ import {
   manualPageHref,
   manualSectionId,
 } from "./manual";
-import { ManualInline } from "./manual-inline";
 
 /** Scroll the sidebar so the active page link is in view (not stuck at the top). */
 function scrollActiveNavIntoView(el: HTMLElement) {
@@ -66,7 +65,7 @@ export function ManualSidebar({ currentSlug }: { currentSlug?: string }) {
                         href={`${href}#${manualSectionId(section.title)}`}
                         className="block py-1 text-[0.8125rem] text-[#4b5563] hover:text-[#1a1a1a]"
                       >
-                        <ManualInline text={section.title} />
+                        {section.title}
                       </a>
                     </li>
                   ))}

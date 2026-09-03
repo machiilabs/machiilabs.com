@@ -1,19 +1,16 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import {
   getManualNeighbors,
   getManualPage,
   MANUAL_PAGES,
-  manualSectionId,
 } from "../manual";
 import { ManualInline } from "../manual-inline";
 import {
-  ManualFigure,
-  ManualIcon,
+  ManualPageFigure,
   ManualPager,
+  ManualSectionBlock,
   ManualShell,
-  ManualSteps,
 } from "../manual-shell";
 
 type Props = {
@@ -66,42 +63,11 @@ export default async function SkagwayManualTopicPage({ params }: Props) {
         <ManualInline text={page.summary} />
       </p>
 
-      <ManualFigure page={page} />
+      <ManualPageFigure page={page} />
 
       <div className="mt-10 space-y-10">
         {page.sections.map((section) => (
-          <section key={section.title} id={manualSectionId(section.title)}>
-            <h2 className="scroll-mt-8 text-xl font-semibold tracking-tight text-[#1a1a1a]">
-              <ManualInline text={section.title} />
-            </h2>
-            <ManualSteps steps={section.steps} />
-            {section.note ? (
-              <p className="mt-4 flex flex-wrap items-center gap-3 border-l-2 border-[#93c5fd] pl-4 text-sm leading-relaxed text-[#4b5563]">
-                {section.noteIcon ? (
-                  <ManualIcon
-                    filename={section.noteIcon}
-                    alt={section.noteIconAlt ?? section.note}
-                  />
-                ) : null}
-                <span>
-                  <ManualInline text={section.note} />
-                  {section.noteHref && section.noteLinkLabel ? (
-                    <>
-                      {" "}
-                      See the{" "}
-                      <Link
-                        href={section.noteHref}
-                        className="font-medium text-[#1d4ed8] underline-offset-2 hover:underline"
-                      >
-                        {section.noteLinkLabel}
-                      </Link>{" "}
-                      page.
-                    </>
-                  ) : null}
-                </span>
-              </p>
-            ) : null}
-          </section>
+          <ManualSectionBlock key={section.title} section={section} />
         ))}
       </div>
 

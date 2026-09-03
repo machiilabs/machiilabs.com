@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { MANUAL_HOME, MANUAL_PAGES, manualSectionId } from "./manual";
+import { MANUAL_HOME, MANUAL_PAGES } from "./manual";
 import { ManualInline } from "./manual-inline";
-import { ManualSteps } from "./manual-shell";
-import { ManualFigure, ManualShell } from "./manual-shell";
+import {
+  ManualPageFigure,
+  ManualSectionBlock,
+  ManualShell,
+} from "./manual-shell";
 
 export const metadata: Metadata = {
   title: "Manual — Skagway",
@@ -37,21 +40,11 @@ export default function SkagwayManualIndexPage() {
         <ManualInline text={MANUAL_HOME.summary} />
       </p>
 
-      <ManualFigure page={MANUAL_HOME} />
+      <ManualPageFigure page={MANUAL_HOME} />
 
       <div className="mt-10 space-y-10">
         {MANUAL_HOME.sections.map((section) => (
-          <section key={section.title} id={manualSectionId(section.title)}>
-            <h2 className="scroll-mt-8 text-xl font-semibold tracking-tight text-[#1a1a1a]">
-              <ManualInline text={section.title} />
-            </h2>
-            <ManualSteps steps={section.steps} />
-            {section.note ? (
-              <p className="mt-4 border-l-2 border-[#93c5fd] pl-4 text-sm leading-relaxed text-[#4b5563]">
-                <ManualInline text={section.note} />
-              </p>
-            ) : null}
-          </section>
+          <ManualSectionBlock key={section.title} section={section} />
         ))}
       </div>
 
