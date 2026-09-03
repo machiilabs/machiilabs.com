@@ -6,8 +6,8 @@
  * Regenerate: npm run manual:index
  * (also runs on predev / prebuild)
  *
- * Generated: 2026-09-03T21:23:23.473Z
- * Documents: 75
+ * Generated: 2026-09-03T21:44:26.418Z
+ * Documents: 76
  */
 import type { ManualSearchDocument } from "./search-documents";
 
@@ -307,7 +307,7 @@ export const MANUAL_SEARCH_INDEX: ManualSearchDocument[] = [
     "sectionTitle": "Custom metadata",
     "href": "/skagway/manual/organize#custom-metadata",
     "title": "Organize » Custom metadata",
-    "body": "Define your own fields under Settings → Custom Metadata — for example “Featuring”, “Project”, or “Shoot Date”. Fields are stored in this library’s catalog.\nField types: String, Text, Number, Date, Date & Time, and Boolean.\nEdit values in the Inspector’s CUSTOM section for any selection.\nCustom fields show up everywhere: the Sort menu, List view columns, Advanced Filter rules, collection rules, and metadata export."
+    "body": "Define your own fields under Settings → Custom Metadata — for example “Featuring”, “Project”, or “Shoot Date”. Fields are stored in this library’s catalog.\nField types: String, Text, Number, Date, Date & Time, and Boolean.\nEdit values in the Inspector’s CUSTOM section for any selection.\nCustom fields show up everywhere: search, the Sort menu, List view columns, Advanced Filter rules, collection rules, and metadata export."
   },
   {
     "id": "organize__edit-many-at-once",
@@ -325,7 +325,7 @@ export const MANUAL_SEARCH_INDEX: ManualSearchDocument[] = [
     "sectionTitle": null,
     "href": "/skagway/manual/playback",
     "title": "Playback",
-    "body": "The floating player, bookmarks, resume, and subtitles.\nSkagway plays videos in a single floating player with custom transport controls — compact, windowed, or full screen — plus video bookmarks, saved resume positions, and automatic sidecar subtitles."
+    "body": "The floating player, bookmarks, resume, and subtitles.\nSkagway plays videos in a single floating player — compact, windowed, or full screen — plus Play All through the current view, bookmarks, resume positions, and sidecar subtitles."
   },
   {
     "id": "playback__start-and-stop",
@@ -335,6 +335,15 @@ export const MANUAL_SEARCH_INDEX: ManualSearchDocument[] = [
     "href": "/skagway/manual/playback#start-and-stop",
     "title": "Playback » Start and stop",
     "body": "Select a video and press Space, double-click its grid card, or click Play in the Inspector.\nSpace toggles play/pause while the player is open.\nPress ⌥Space to play from the very beginning, ignoring any saved position.\nPress Esc (or the red traffic-light Stop) to stop — Skagway saves where you left off.\nIf focus is in a text field (Search, a custom metadata field, and so on), press Esc once first so Space plays the video instead of typing a space in the field."
+  },
+  {
+    "id": "playback__play-all-p",
+    "pageSlug": "playback",
+    "pageTitle": "Playback",
+    "sectionTitle": "Play All (⇧⌘P)",
+    "href": "/skagway/manual/playback#play-all-p",
+    "title": "Playback » Play All (⇧⌘P)",
+    "body": "View → Play All, the toolbar control, or ⇧⌘P starts the first playable video in whatever you are looking at now (filtered grid, collection, search, or album) and advances when each one finishes.\nMissing files are skipped. Auto-advance and Loop run only during that Play All session.\nLoop Play All is off by default (toolbar, View menu, Settings → Video). When it is on, the last playable video is followed by the first.\nEsc / Stop, or playing a single video with Space, ends the session. Loop then does nothing until you Play All again.\nOn the Browse page this is covered with search and sort. Album Order is the playlist sequence Play All uses when you are in an album."
   },
   {
     "id": "playback__transport-controls",
@@ -532,7 +541,7 @@ export const MANUAL_SEARCH_INDEX: ManualSearchDocument[] = [
     "sectionTitle": "Save Copy… — back up the catalog",
     "href": "/skagway/manual/export-import#save-copy-back-up-the-catalog",
     "title": "Export / Import » Save Copy… — back up the catalog",
-    "body": "File → Save Copy… writes a timestamped duplicate of the library file (for example Skagway-20260716-224500.machii).\nThe current library stays open; the copy is completely independent.\nOpen a copy anytime with File → Open Library…."
+    "body": "File → Save Copy… writes a timestamped duplicate of the library file (for example Skagway-20260716-224500.machii).\nThe current library stays open; the copy is completely independent. Save Copy keeps the original thumbnail-cache pointer — it does not create a second cache.\nOpen a copy anytime with File → Open Library…."
   },
   {
     "id": "export-import__when-to-use-which",
@@ -613,7 +622,7 @@ export const MANUAL_SEARCH_INDEX: ManualSearchDocument[] = [
     "sectionTitle": "Video",
     "href": "/skagway/manual/settings#video",
     "title": "Settings » Video",
-    "body": "Default Filmstrip Size — rows and columns for filmstrip previews, with a Regenerate filmstrips button.\nSurprise Me! auto-plays selected video — jump and play, or just jump.\nLoop Play All — whether Play All repeats the view when it reaches the end.\nHover preview on Grid cards — the silent moving preview on hover.\nTag blind default state / Filter drawer height — how the Inspector tags list and Quick Filter drawer remember size.\nPlayer opens at — Compact, Full screen, or Last used size.\nFade resume banner after delay — whether and when the “Resumed at…” banner fades out."
+    "body": "Default Filmstrip Size — rows and columns for filmstrip previews, with a Regenerate filmstrips button.\nSurprise Me! auto-plays selected video — jump and play, or just jump.\nLoop Play All — while a Play All session is running, finishing the last video starts the first again. Off by default; no effect when you play a single video.\nHover preview on Grid cards — the silent moving preview on hover.\nTag blind default state / Filter drawer height — how the Inspector tags list and Quick Filter drawer remember size.\nPlayer opens at — Compact, Full screen, or Last used size.\nFade resume banner after delay — whether and when the “Resumed at…” banner fades out."
   },
   {
     "id": "settings__data-sources",
@@ -622,7 +631,7 @@ export const MANUAL_SEARCH_INDEX: ManualSearchDocument[] = [
     "sectionTitle": "Data Sources",
     "href": "/skagway/manual/settings#data-sources",
     "title": "Settings » Data Sources",
-    "body": "The folders Skagway scans, in one list — Add Folder…, Show in Finder, Exclude… a nested subfolder from scanning, or Remove.\nAdding a folder here just registers it; run File → Scan for New Videos to index its contents.\nRemoving a folder doesn’t remove already-indexed videos from the library. Exclude… skips a subfolder on future scans without removing the parent source."
+    "body": "The folders Skagway scans, in one list — Add Folder…, Show in Finder, Exclude… a nested subfolder from scanning, or Remove.\nAdding a folder here just registers it; run File → Scan for New Videos to index its contents.\nRemoving a folder doesn’t remove already-indexed videos from the library. Exclude… skips a nested subfolder on future scans (Add Folder, Scan for New Videos, and drops). You cannot exclude the source folder itself. Videos already in the library stay listed."
   },
   {
     "id": "settings__extensions",
@@ -649,7 +658,7 @@ export const MANUAL_SEARCH_INDEX: ManualSearchDocument[] = [
     "sectionTitle": "Custom Metadata",
     "href": "/skagway/manual/settings#custom-metadata",
     "title": "Settings » Custom Metadata",
-    "body": "Define your own fields for this library: a name plus a type (String, Text, Number, Date, Date & Time, or Boolean).\nValues are edited per video in the Inspector, and fields flow through to sorting, List columns, filters, collections, and export."
+    "body": "Define your own fields for this library: a name plus a type (String, Text, Number, Date, Date & Time, or Boolean).\nValues are edited per video in the Inspector, and fields flow through to search, sorting, List columns, filters, collections, and export."
   },
   {
     "id": "privacy__page",

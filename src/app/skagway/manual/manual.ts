@@ -285,7 +285,7 @@ export const MANUAL_PAGES: ManualPage[] = [
     screenshotAlt:
       "Skagway Quick Filter drawer showing Smart Libraries, Collections, Rating, Duration, Quality, and Tags cards",
     screenshotHint:
-      "Open the Quick Filter drawer (⇧⌘F) over a populated library so the Smart Libraries, Collections, Rating, Duration, Quality, and Tags cards are visible.",
+      "Open the Quick Filter drawer (⇧⌘F) so Smart Libraries, Collections, Rating (No Stars / stars / Or Higher), Duration, Quality, and Tags are visible.",
     sections: [
       {
         title: "Quick Filter (⇧⌘F)",
@@ -423,7 +423,7 @@ export const MANUAL_PAGES: ManualPage[] = [
           "Define your own fields under Settings → Custom Metadata — for example “Featuring”, “Project”, or “Shoot Date”. Fields are stored in this library’s catalog.",
           "Field types: String, Text, Number, Date, Date & Time, and Boolean.",
           "Edit values in the Inspector’s CUSTOM section for any selection.",
-          "Custom fields show up everywhere: the Sort menu, List view columns, Advanced Filter rules, collection rules, and metadata export.",
+          "Custom fields show up everywhere: search, the Sort menu, List view columns, Advanced Filter rules, collection rules, and metadata export.",
         ],
       },
       {
@@ -441,7 +441,7 @@ export const MANUAL_PAGES: ManualPage[] = [
     title: "Playback",
     blurb: "The floating player, bookmarks, resume, and subtitles.",
     summary:
-      "Skagway plays videos in a single floating player with custom transport controls — compact, windowed, or full screen — plus video bookmarks, saved resume positions, and automatic sidecar subtitles.",
+      "Skagway plays videos in a single floating player — compact, windowed, or full screen — plus Play All through the current view, bookmarks, resume positions, and sidecar subtitles.",
     screenshot: "playback.png",
     screenshotAlt:
       "Skagway floating player with custom transport controls and bookmark ticks on the timeline",
@@ -457,6 +457,18 @@ export const MANUAL_PAGES: ManualPage[] = [
           "Press Esc (or the red traffic-light Stop) to stop — Skagway saves where you left off.",
         ],
         note: "If focus is in a text field (Search, a custom metadata field, and so on), press Esc once first so Space plays the video instead of typing a space in the field.",
+      },
+      {
+        title: "Play All (⇧⌘P)",
+        steps: [
+          "View → Play All, the toolbar control, or ⇧⌘P starts the first playable video in whatever you are looking at now (filtered grid, collection, search, or album) and advances when each one finishes.",
+          "Missing files are skipped. Auto-advance and Loop run only during that Play All session.",
+          "Loop Play All is off by default (toolbar, View menu, Settings → Video). When it is on, the last playable video is followed by the first.",
+          "Esc / Stop, or playing a single video with Space, ends the session. Loop then does nothing until you Play All again.",
+        ],
+        note: "On the Browse page this is covered with search and sort. Album Order is the playlist sequence Play All uses when you are in an album.",
+        noteHref: "/skagway/manual/browse",
+        noteLinkLabel: "Browse",
       },
       {
         title: "Transport controls",
@@ -721,7 +733,7 @@ export const MANUAL_PAGES: ManualPage[] = [
         title: "Save Copy… — back up the catalog",
         steps: [
           "File → Save Copy… writes a timestamped duplicate of the library file (for example Skagway-20260716-224500.machii).",
-          "The current library stays open; the copy is completely independent.",
+          "The current library stays open; the copy is completely independent. Save Copy keeps the original thumbnail-cache pointer — it does not create a second cache.",
           "Open a copy anytime with File → Open Library….",
         ],
       },
@@ -819,7 +831,7 @@ export const MANUAL_PAGES: ManualPage[] = [
         steps: [
           "Default Filmstrip Size — rows and columns for filmstrip previews, with a Regenerate filmstrips button.",
           "Surprise Me! auto-plays selected video — jump and play, or just jump.",
-          "Loop Play All — whether Play All repeats the view when it reaches the end.",
+          "Loop Play All — while a Play All session is running, finishing the last video starts the first again. Off by default; no effect when you play a single video.",
           "Hover preview on Grid cards — the silent moving preview on hover.",
           "Tag blind default state / Filter drawer height — how the Inspector tags list and Quick Filter drawer remember size.",
           "Player opens at — Compact, Full screen, or Last used size.",
@@ -831,7 +843,7 @@ export const MANUAL_PAGES: ManualPage[] = [
         steps: [
           "The folders Skagway scans, in one list — Add Folder…, Show in Finder, Exclude… a nested subfolder from scanning, or Remove.",
           "Adding a folder here just registers it; run File → Scan for New Videos to index its contents.",
-          "Removing a folder doesn’t remove already-indexed videos from the library. Exclude… skips a subfolder on future scans without removing the parent source.",
+          "Removing a folder doesn’t remove already-indexed videos from the library. Exclude… skips a nested subfolder on future scans (Add Folder, Scan for New Videos, and drops). You cannot exclude the source folder itself. Videos already in the library stay listed.",
         ],
       },
       {
@@ -853,7 +865,7 @@ export const MANUAL_PAGES: ManualPage[] = [
         title: "Custom Metadata",
         steps: [
           "Define your own fields for this library: a name plus a type (String, Text, Number, Date, Date & Time, or Boolean).",
-          "Values are edited per video in the Inspector, and fields flow through to sorting, List columns, filters, collections, and export.",
+          "Values are edited per video in the Inspector, and fields flow through to search, sorting, List columns, filters, collections, and export.",
         ],
       },
     ],
