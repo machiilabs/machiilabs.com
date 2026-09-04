@@ -25,7 +25,7 @@ export const metadata: Metadata = {
 };
 
 const DOWNLOAD_URL = "https://downloads.machiilabs.com/Skagway.dmg";
-const VERSION = "0.79.0";
+const VERSION = "1.0.0";
 
 type Feature = {
   title: string;

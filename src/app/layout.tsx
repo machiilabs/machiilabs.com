@@ -21,30 +21,30 @@ export const metadata: Metadata = {
     template: "%s · Mach II Labs",
   },
   description:
-    "Independent Mac software lab. First release: 15CE Flasher — free guided app to flash HP 15c Collector’s Edition firmware on Mac.",
+    "Independent Mac software lab. Skagway 1.0 — free Mac video organizer. Also: 15CE Flasher for HP 15c Collector’s Edition.",
   openGraph: {
-    title: "Mach II Labs",
+    title: "Mach II Labs — Skagway 1.0",
     description:
-      "Independent Mac software lab. 15CE Flasher: flash HP 15c Collector’s Edition firmware on Mac — free forever.",
+      "Skagway 1.0 is out: a free Mac video organizer for the files already on your drives. Free forever.",
     url: "https://machiilabs.com",
     siteName: "Mach II Labs",
     locale: "en_US",
     type: "website",
     images: [
       {
-        url: "/flasher/og.png",
+        url: "/skagway/product.png",
         width: 1200,
         height: 630,
-        alt: "15CE Flasher — Flash HP 15c CE firmware on Mac",
+        alt: "Skagway — Mac video organizer and library",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Mach II Labs",
+    title: "Mach II Labs — Skagway 1.0",
     description:
-      "Independent Mac software lab. 15CE Flasher for HP 15c Collector’s Edition — free forever.",
-    images: ["/flasher/og.png"],
+      "Skagway 1.0 is out: a free Mac video organizer for the files already on your drives.",
+    images: ["/skagway/product.png"],
   },
   robots: {
     index: true,

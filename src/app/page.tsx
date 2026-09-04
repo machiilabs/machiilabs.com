@@ -13,28 +13,28 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "Mach II Labs",
   description:
-    "Independent Mac software lab. First release: 15CE Flasher — free guided app to flash HP 15c Collector’s Edition firmware on Mac. Free forever.",
+    "Independent Mac software lab. Skagway 1.0 — free video organizer for files already on your drives. Also: 15CE Flasher for HP 15c CE.",
   openGraph: {
-    title: "Mach II Labs — 15CE Flasher for HP 15c CE",
+    title: "Mach II Labs — Skagway 1.0",
     description:
-      "Flash HP 15c Collector’s Edition firmware on Mac with 15CE Flasher. Guided native app, free forever.",
+      "Skagway 1.0 is out: a free Mac video organizer for the files already on your drives. Free forever.",
     url: "https://machiilabs.com",
     siteName: "Mach II Labs",
     images: [
       {
-        url: "/flasher/og.png",
+        url: "/skagway/product.png",
         width: 1200,
         height: 630,
-        alt: "15CE Flasher — Flash HP 15c CE firmware on Mac",
+        alt: "Skagway — Mac video organizer and library",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Mach II Labs — 15CE Flasher for HP 15c CE",
+    title: "Mach II Labs — Skagway 1.0",
     description:
-      "Flash HP 15c Collector’s Edition firmware on Mac. Free forever.",
-    images: ["/flasher/og.png"],
+      "Skagway 1.0 is out: a free Mac video organizer for the files already on your drives.",
+    images: ["/skagway/product.png"],
   },
 };
 
@@ -99,15 +99,67 @@ export default function Home() {
         </h1>
 
         <p className="anim-rise anim-rise-delay-2 mt-8 max-w-xl text-lg leading-relaxed text-fog sm:text-xl">
-          Focused Mac tools for people who notice the small stuff — starting
-          with a guided flasher for the HP 15c Collector&apos;s Edition.
+          Focused Mac tools for people who notice the small stuff — free forever,
+          no subscriptions.
         </p>
 
-        <div className="anim-rise anim-rise-delay-3 mt-10 flex flex-col gap-6">
+        <div className="anim-rise anim-rise-delay-3 mt-10 flex flex-col gap-12">
           <div className="flex max-w-3xl flex-col items-start gap-8 sm:flex-row sm:items-center sm:gap-12">
             <div className="min-w-0 max-w-xl flex-1">
               <p className="text-sm font-semibold tracking-[0.18em] text-afterburn-soft uppercase">
-                Newest release
+                Newest release · v1.0.0
+              </p>
+              <Link
+                href="/skagway"
+                className="mt-3 block text-2xl font-bold tracking-tight text-snow transition-colors hover:text-afterburn-soft sm:text-3xl"
+              >
+                Skagway
+              </Link>
+              <p className="mt-3 text-base leading-relaxed text-fog sm:text-lg">
+                A Mac video organizer and library for the files already on your
+                drives — browse, tag, filter, and play large collections without
+                locking media into a proprietary container.
+              </p>
+              <div className="mt-5 flex flex-wrap items-center gap-x-6 gap-y-3">
+                <Link
+                  href="/skagway"
+                  className="group relative inline-flex w-fit items-center text-base font-semibold tracking-wide text-snow transition-colors hover:text-afterburn-soft"
+                >
+                  Get Skagway
+                  <span
+                    aria-hidden
+                    className="cta-underline absolute -bottom-1 left-0 h-px w-full bg-afterburn"
+                  />
+                </Link>
+                <Link
+                  href="/skagway/manual"
+                  className="text-base text-fog transition-colors hover:text-afterburn-soft"
+                >
+                  Manual →
+                </Link>
+              </div>
+            </div>
+
+            <Link
+              href="/skagway"
+              className="shrink-0 overflow-hidden rounded-xl border border-white/10 bg-black/40 transition-opacity hover:opacity-90"
+              aria-label="Skagway"
+            >
+              <Image
+                src="/skagway/product.png"
+                alt=""
+                width={4704}
+                height={2504}
+                priority
+                className="h-auto w-44 sm:w-52 lg:w-60"
+              />
+            </Link>
+          </div>
+
+          <div className="flex max-w-3xl flex-col items-start gap-8 border-t border-white/10 pt-10 sm:flex-row sm:items-center sm:gap-12">
+            <div className="min-w-0 max-w-xl flex-1">
+              <p className="text-sm font-semibold tracking-[0.18em] text-fog/80 uppercase">
+                Also from the lab
               </p>
               <Link
                 href="/flasher"
@@ -117,9 +169,7 @@ export default function Home() {
               </Link>
               <p className="mt-3 text-base leading-relaxed text-fog sm:text-lg">
                 A Mac-only SAM-BA programmer for the HP 15c Collector&apos;s
-                Edition.
-                The app walks you through every step of the flashing process —
-                free forever.
+                Edition. Guided flashing, free forever.
               </p>
               <div className="mt-5 flex flex-wrap items-center gap-x-6 gap-y-3">
                 <Link
@@ -151,8 +201,7 @@ export default function Home() {
                 alt=""
                 width={1024}
                 height={1024}
-                priority
-                className="h-36 w-36 sm:h-44 sm:w-44 lg:h-52 lg:w-52"
+                className="h-28 w-28 sm:h-32 sm:w-32 lg:h-36 lg:w-36"
               />
             </Link>
           </div>
