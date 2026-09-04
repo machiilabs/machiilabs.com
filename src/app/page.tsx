@@ -117,8 +117,10 @@ export default function Home() {
               </Link>
               <p className="mt-3 text-base leading-relaxed text-fog sm:text-lg">
                 A Mac video organizer and library for the files already on your
-                drives — browse, tag, filter, and play large collections without
-                locking media into a proprietary container.
+                drives — browse, tag, filter, and play without locking media into
+                a proprietary container. Built to stay fast with thousands of
+                videos in the library — serious software, not a toy. And it&apos;s
+                free forever.
               </p>
               <div className="mt-5 flex flex-wrap items-center gap-x-6 gap-y-3">
                 <Link
