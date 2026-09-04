@@ -7,11 +7,11 @@ export const metadata: Metadata = {
     absolute: "How to Flash HP 15c CE Firmware on a Mac — 15CE Flasher Guide",
   },
   description:
-    "How to flash HP 15c Collector’s Edition firmware on a Mac with 15CE Flasher: install the free app, use the official pogo cable, and follow guided steps — no Windows SAM-BA.",
+    "How to flash HP 15c Collector’s Edition firmware on a Mac with 15CE Flasher: install the free app, use the official pogo cable, and follow guided on-screen steps.",
   openGraph: {
     title: "How to Flash HP 15c CE Firmware on a Mac — 15CE Flasher Guide",
     description:
-      "Step-by-step: flash HP 15c Collector’s Edition firmware on Mac with 15CE Flasher. No Windows SAM-BA required.",
+      "Step-by-step: flash HP 15c Collector’s Edition firmware on Mac with 15CE Flasher over the official pogo cable.",
     url: "https://machiilabs.com/flasher/guide",
     siteName: "Mach II Labs",
     images: [
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "How to Flash HP 15c CE Firmware on a Mac — 15CE Flasher Guide",
     description:
-      "Flash HP 15c Collector’s Edition firmware on a Mac with 15CE Flasher. Guided steps, no Windows SAM-BA.",
+      "Flash HP 15c Collector’s Edition firmware on a Mac with 15CE Flasher. Guided steps over the pogo cable.",
     images: ["/flasher/og.png"],
   },
   alternates: {
@@ -77,8 +77,7 @@ export default function FlasherGuidePage() {
           Use{" "}
           <strong className="font-semibold text-[#1a1a1a]">15CE Flasher</strong>{" "}
           to flash HP 15c Collector&apos;s Edition firmware on a Mac over the
-          official pogo cable — no Windows SAM-BA. You do not need a separate
-          procedure document:{" "}
+          official pogo cable. You do not need a separate procedure document:{" "}
           <strong className="font-semibold text-[#1a1a1a]">
             the app guides you through every step
           </strong>{" "}
@@ -112,7 +111,8 @@ export default function FlasherGuidePage() {
           </h2>
           <ul className="mt-4 list-disc space-y-2 pl-6 text-base leading-relaxed text-[#374151]">
             <li>
-              A Mac running macOS 13 or later (this software runs on Mac only)
+              A Mac running macOS 13 or later (this software runs on Mac only —
+              you do not need Windows SAM-BA)
             </li>
             <li>HP 15c Collector&apos;s Edition only</li>
             <li>Official USB-C or USB-A pogo programming cable</li>

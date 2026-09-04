@@ -15,11 +15,11 @@ export const metadata: Metadata = {
     absolute: "Flash HP 15c CE Firmware on Mac — 15CE Flasher",
   },
   description:
-    "Flash HP 15c Collector’s Edition firmware on a Mac with 15CE Flasher. Free guided app over the official pogo cable — no Windows SAM-BA required.",
+    "Flash HP 15c Collector’s Edition firmware on a Mac with 15CE Flasher. Free guided app over the official pogo cable — Mac only, free forever.",
   openGraph: {
     title: "Flash HP 15c CE Firmware on Mac — 15CE Flasher",
     description:
-      "Free Mac app to flash HP 15c Collector’s Edition firmware over the pogo cable. Guided steps — no Windows SAM-BA. Free forever from Mach II Labs.",
+      "Free Mac app to flash HP 15c Collector’s Edition firmware over the pogo cable. Guided steps. Free forever from Mach II Labs.",
     url: "https://machiilabs.com/flasher",
     siteName: "Mach II Labs",
     images: [
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Flash HP 15c CE Firmware on Mac — 15CE Flasher",
     description:
-      "Free Mac app to flash HP 15c Collector’s Edition firmware. No Windows SAM-BA. Free forever.",
+      "Free Mac app to flash HP 15c Collector’s Edition firmware over the pogo cable. Free forever.",
     images: ["/flasher/og.png"],
   },
   alternates: {
@@ -57,7 +57,7 @@ const softwareJsonLd = {
   applicationCategory: "UtilitiesApplication",
   operatingSystem: "macOS",
   description:
-    "Flash HP 15c Collector’s Edition firmware on a Mac over the official pogo cable. Guided native app — Windows SAM-BA not required.",
+    "Flash HP 15c Collector’s Edition firmware on a Mac over the official pogo cable. Guided native app from Mach II Labs.",
   url: "https://machiilabs.com/flasher",
   downloadUrl: DOWNLOAD_URL,
   softwareVersion: VERSION,
@@ -124,7 +124,7 @@ export default function FlasherPage() {
               15CE Flasher
             </h1>
             <p className="mt-5 font-display text-2xl leading-snug font-semibold tracking-tight text-snow sm:text-3xl">
-              Flash HP 15c CE firmware on a Mac — no Windows SAM-BA.
+              Flash HP 15c CE firmware on a Mac.
             </p>
             <p className="mt-4 text-lg leading-relaxed text-fog sm:text-xl">
               Free guided app for the HP 15c Collector&apos;s Edition over the
@@ -145,8 +145,11 @@ export default function FlasherPage() {
               </Link>
             </div>
             <p className="mt-3 text-sm text-fog/70">
-              Notarized DMG · Windows SAM-BA not required · No HP firmware
-              included
+              Notarized DMG · Mac only · No HP firmware included
+            </p>
+            <p className="mt-2 text-sm text-fog/60">
+              Built for Mac users who previously needed Windows SAM-BA — you
+              don&apos;t anymore.
             </p>
             <details className="mt-4 text-sm text-fog/70">
               <summary className="cursor-pointer text-fog transition-colors hover:text-snow">
