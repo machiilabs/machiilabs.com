@@ -98,9 +98,8 @@ export default function Home() {
           />
         </h1>
 
-        <p className="anim-rise anim-rise-delay-2 mt-8 max-w-xl text-lg leading-relaxed text-fog sm:text-xl">
-          Focused Mac tools for people who notice the small stuff — free forever,
-          no subscriptions.
+        <p className="anim-rise anim-rise-delay-2 mt-8 max-w-2xl font-display text-2xl leading-snug font-semibold tracking-tight text-snow sm:text-3xl">
+          Focused Mac tools for people who notice the small stuff.
         </p>
 
         <div className="anim-rise anim-rise-delay-3 mt-10 flex flex-col gap-12">
@@ -119,8 +118,8 @@ export default function Home() {
                 A Mac video organizer and library for the files already on your
                 drives — browse, tag, filter, and play without locking media into
                 a proprietary container. Built to stay fast with thousands of
-                videos in the library — serious software, not a toy. And it&apos;s
-                free forever.
+                videos in the library — serious software, not a toy. And it&apos;s{" "}
+                <span className="font-semibold text-snow">free forever</span>.
               </p>
               <div className="mt-5 flex flex-wrap items-center gap-x-6 gap-y-3">
                 <Link
@@ -171,7 +170,8 @@ export default function Home() {
               </Link>
               <p className="mt-3 text-base leading-relaxed text-fog sm:text-lg">
                 A Mac-only SAM-BA programmer for the HP 15c Collector&apos;s
-                Edition. Guided flashing, free forever.
+                Edition. Guided flashing,{" "}
+                <span className="font-semibold text-snow">free forever</span>.
               </p>
               <div className="mt-5 flex flex-wrap items-center gap-x-6 gap-y-3">
                 <Link
