@@ -262,6 +262,12 @@ export default function FlasherPage() {
             costs arising from use of this software.
           </p>
         </aside>
+
+        <p className="mt-12 max-w-3xl text-sm leading-relaxed text-fog/60">
+          Mach II Labs is not affiliated with HP, Atmel, or Microchip. The
+          download does not include HP firmware. Flash helper applet from Atmel
+          SAM-BA 2.16 redistributed under the SAM Software Package License.
+        </p>
       </main>
 
       <footer className="relative z-10 border-t border-white/5 px-6 py-5 sm:px-10">
