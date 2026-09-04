@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
+import { DownloadButton } from "@/components/download-button";
 import { MachiiLogo } from "@/components/machii-logo";
 
 const inter = Inter({
@@ -130,12 +131,10 @@ export default function FlasherPage() {
             </p>
 
             <div className="mt-10 flex flex-wrap items-center gap-4">
-              <a
+              <DownloadButton
                 href={DOWNLOAD_URL}
-                className="inline-flex items-center justify-center rounded-md bg-afterburn px-5 py-3 font-display text-sm font-bold tracking-wide text-ink transition-opacity hover:opacity-90"
-              >
-                Download v{VERSION} for Mac
-              </a>
+                meta={`v${VERSION} · macOS 13+`}
+              />
               <Link
                 href="/flasher/guide"
                 className="inline-flex items-center font-display text-sm font-semibold tracking-wide text-snow underline-offset-4 hover:text-afterburn-soft hover:underline"

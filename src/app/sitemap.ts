@@ -23,14 +23,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     {
       url: `${BASE}/skagway`,
       lastModified: now,
-      changeFrequency: "monthly",
-      priority: 0.7,
-    },
-    {
-      url: `${BASE}/skagway/explore`,
-      lastModified: now,
-      changeFrequency: "monthly",
-      priority: 0.6,
+      changeFrequency: "weekly",
+      priority: 0.95,
     },
     {
       url: `${BASE}/skagway/manual`,
