@@ -36,12 +36,12 @@ export const metadata: Metadata = {
 };
 
 const DOWNLOAD_URL =
-  "https://downloads.machiilabs.com/15CEFlasher-1.1.0-203.dmg";
+  "https://downloads.machiilabs.com/15CEFlasher-1.2.1-213.dmg";
 const FIRMWARE_URL =
   "https://hpcalcs.com/downloads/apps/HP_IAR_USB%20120ms.bin";
 const SHA256 =
-  "614964b543aeaf35921ac396191786ea617bb6ef6e379de80819d80fda555405";
-const DMG_FILENAME = "15CEFlasher-1.1.0-203.dmg";
+  "6870d96105001aaef0a636760752da829616c9c3efb2224bb06ec5101bdea858";
+const DMG_FILENAME = "15CEFlasher-1.2.1-213.dmg";
 
 export default function FlasherGuidePage() {
   return (
@@ -166,7 +166,7 @@ export default function FlasherGuidePage() {
             <li>
               Optionally verify the SHA-256. In Terminal, run:
               <pre className="mt-2 overflow-x-auto rounded-md bg-[#eceae4] px-3 py-2 font-mono text-sm text-[#1a1a1a]">
-                shasum -a 256 /path/to/15CEFlasher-1.1.0-203.dmg
+                {`shasum -a 256 /path/to/${DMG_FILENAME}`}
               </pre>
               <span className="mt-2 block">
                 It should equal:{" "}
@@ -184,12 +184,78 @@ export default function FlasherGuidePage() {
 
         <section className="mt-14">
           <h2 className="text-xl font-semibold tracking-tight text-[#1a1a1a]">
-            Flash your HP 15c Collector&apos;s Edition
+            Choose a mode
           </h2>
           <p className="mt-4 text-base leading-relaxed text-[#374151]">
-            Run the <strong>15CE Flasher</strong> application and follow the
-            on-screen instructions.
+            When you open 15CE Flasher, pick how you want to work:
           </p>
+          <ul className="mt-4 list-disc space-y-2 pl-6 text-base leading-relaxed text-[#374151]">
+            <li>
+              <strong className="font-semibold text-[#1a1a1a]">DEMO</strong> —
+              simulated calculator and full wizard walkthrough. Use this first if
+              you have never flashed a CE.
+            </li>
+            <li>
+              <strong className="font-semibold text-[#1a1a1a]">FLASH</strong> —
+              the seven-step wizard for one calculator: backup, firmware,
+              connect, flash, checksum check.
+            </li>
+            <li>
+              <strong className="font-semibold text-[#1a1a1a]">BATCH</strong> —
+              sequential flash with the same firmware for experienced operators
+              (see below).
+            </li>
+          </ul>
+        </section>
+
+        <section className="mt-14">
+          <h2 className="text-xl font-semibold tracking-tight text-[#1a1a1a]">
+            Flash your HP 15c Collector&apos;s Edition (FLASH mode)
+          </h2>
+          <p className="mt-4 text-base leading-relaxed text-[#374151]">
+            Run the <strong>15CE Flasher</strong> application, choose{" "}
+            <strong>FLASH</strong>, and follow the on-screen instructions.
+          </p>
+        </section>
+
+        <section className="mt-14">
+          <h2 className="text-xl font-semibold tracking-tight text-[#1a1a1a]">
+            Batch mode (many units, same firmware)
+          </h2>
+          <p className="mt-4 text-base leading-relaxed text-[#374151]">
+            Choose <strong>BATCH</strong>{" "}on the welcome screen if you flash
+            several Collector&apos;s Editions in a row — for example at a
+            calculator shop or repair bench. This mode is for experienced
+            operators who already know ERASE+RESET and accept that user memory is
+            wiped on every unit.
+          </p>
+          <ol className="mt-4 list-decimal space-y-2.5 pl-6 text-base leading-relaxed text-[#374151]">
+            <li>
+              Choose your firmware <code className="font-mono text-sm">.bin</code>{" "}
+              once. The app remembers it across launches; use{" "}
+              <strong>Choose Firmware…</strong> anytime to switch files.
+            </li>
+            <li>
+              Pick backup policy: skip backup, or auto-save numbered backups
+              (for example{" "}
+              <code className="font-mono text-sm">hp15c-20260904-141530-001.bin</code>
+              ) to a folder you choose.
+            </li>
+            <li>
+              Click <strong>Start batch</strong>, then for each calculator:
+              hold <strong>ERASE</strong>, press <strong>RESET</strong>, release{" "}
+              <strong>ERASE</strong>. The app connects and flashes automatically.
+            </li>
+            <li>
+              When a unit finishes, press <strong>RESET</strong> on the cable,
+              turn the calculator on, and confirm the checksum if you like. Click{" "}
+              <strong>Next unit</strong> and repeat ERASE+RESET for the next CE.
+            </li>
+            <li>
+              Click <strong>Stop batch</strong> when you are done — the app quits,
+              same as <strong>Done</strong> in FLASH mode.
+            </li>
+          </ol>
         </section>
 
         <section className="mt-14">
@@ -213,7 +279,8 @@ export default function FlasherGuidePage() {
             Pogo cable won&apos;t seat in the calculator
           </h3>
           <p className="mt-2 text-base leading-relaxed text-[#374151]">
-            You&apos;re in good company — the fit is fiddly. The pogo head is
+            You&apos;re in good company — the fit can take some getting used to
+            at first. The pogo head is
             not symmetrical: it has a <strong>wide</strong> side and a{" "}
             <strong>narrow</strong> side. Line those up with the port and
             squeeze in the sides as you push. Even then, you may need to fidget

@@ -44,11 +44,12 @@ export const metadata: Metadata = {
 };
 
 const DOWNLOAD_URL =
-  "https://downloads.machiilabs.com/15CEFlasher-1.1.0-203.dmg";
-const VERSION = "1.1.0";
+  "https://downloads.machiilabs.com/15CEFlasher-1.2.1-213.dmg";
+const VERSION = "1.2.1";
+const BUILD = "213";
 const SHA256 =
-  "614964b543aeaf35921ac396191786ea617bb6ef6e379de80819d80fda555405";
-const DMG_FILENAME = "15CEFlasher-1.1.0-203.dmg";
+  "6870d96105001aaef0a636760752da829616c9c3efb2224bb06ec5101bdea858";
+const DMG_FILENAME = "15CEFlasher-1.2.1-213.dmg";
 
 const softwareJsonLd = {
   "@context": "https://schema.org",
@@ -135,7 +136,7 @@ export default function FlasherPage() {
             <div className="mt-10 flex flex-wrap items-center gap-4">
               <DownloadButton
                 href={DOWNLOAD_URL}
-                meta={`v${VERSION} · macOS 13+`}
+                meta={`v${VERSION} (${BUILD}) · macOS 13+`}
               />
               <Link
                 href="/flasher/guide"
@@ -163,7 +164,7 @@ export default function FlasherPage() {
                 <li>
                   In Terminal, run{" "}
                   <code className="break-all font-mono text-fog/80">
-                    shasum -a 256 /path/to/15CEFlasher-1.1.0-203.dmg
+                    shasum -a 256 /path/to/{DMG_FILENAME}
                   </code>
                 </li>
                 <li>
@@ -194,6 +195,21 @@ export default function FlasherPage() {
         </section>
 
         <section className="mt-20 grid gap-12 sm:grid-cols-2">
+          <div>
+            <h2 className="font-display text-lg font-bold text-snow">
+              Three modes
+            </h2>
+            <p className="mt-3 text-base leading-relaxed text-fog">
+              <strong className="font-semibold text-snow">DEMO</strong> walks
+              through the wizard with a simulated calculator — no hardware
+              required to learn the steps.{" "}
+              <strong className="font-semibold text-snow">FLASH</strong> is the
+              full seven-step wizard for one CE.{" "}
+              <strong className="font-semibold text-snow">BATCH</strong> is for
+              experienced operators and those who want to flash multiple
+              calculators in sequence.
+            </p>
+          </div>
           <div>
             <h2 className="font-display text-lg font-bold text-snow">
               Step by Step Workflow
