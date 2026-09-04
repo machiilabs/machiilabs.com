@@ -4,14 +4,14 @@ import { MachiiLogo } from "@/components/machii-logo";
 
 export const metadata: Metadata = {
   title: {
-    absolute: "15CE Flasher Guide — HP 15c CE on Mac",
+    absolute: "How to Flash HP 15c CE Firmware on a Mac — 15CE Flasher Guide",
   },
   description:
-    "Short guide to 15CE Flasher: install the Mac app and follow on-screen steps to flash HP 15c Collector’s Edition firmware over the pogo cable.",
+    "How to flash HP 15c Collector’s Edition firmware on a Mac with 15CE Flasher: install the free app, use the official pogo cable, and follow guided steps — no Windows SAM-BA.",
   openGraph: {
-    title: "15CE Flasher Guide — HP 15c CE on Mac",
+    title: "How to Flash HP 15c CE Firmware on a Mac — 15CE Flasher Guide",
     description:
-      "Install 15CE Flasher and flash HP 15c Collector’s Edition firmware on Mac — guided steps, no Windows SAM-BA.",
+      "Step-by-step: flash HP 15c Collector’s Edition firmware on Mac with 15CE Flasher. No Windows SAM-BA required.",
     url: "https://machiilabs.com/flasher/guide",
     siteName: "Mach II Labs",
     images: [
@@ -25,9 +25,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "15CE Flasher Guide — HP 15c CE on Mac",
+    title: "How to Flash HP 15c CE Firmware on a Mac — 15CE Flasher Guide",
     description:
-      "Install 15CE Flasher and flash HP 15c Collector’s Edition firmware on Mac.",
+      "Flash HP 15c Collector’s Edition firmware on a Mac with 15CE Flasher. Guided steps, no Windows SAM-BA.",
     images: ["/flasher/og.png"],
   },
   alternates: {
@@ -68,16 +68,19 @@ export default function FlasherGuidePage() {
 
       <main className="mx-auto w-full max-w-3xl px-6 pb-24 pt-12 sm:px-8">
         <p className="text-xs font-semibold tracking-wide text-[#6b7280] uppercase">
-          Users guide
+          15CE Flasher · Users guide
         </p>
         <h1 className="mt-3 text-3xl font-bold tracking-tight text-[#1a1a1a] sm:text-4xl">
-          15CE Flasher
+          How to flash HP 15c CE firmware on a Mac
         </h1>
         <p className="mt-5 text-lg leading-relaxed text-[#374151]">
-          You do not need a separate procedure document to flash the calculator.
+          Use{" "}
+          <strong className="font-semibold text-[#1a1a1a]">15CE Flasher</strong>{" "}
+          to flash HP 15c Collector&apos;s Edition firmware on a Mac over the
+          official pogo cable — no Windows SAM-BA. You do not need a separate
+          procedure document:{" "}
           <strong className="font-semibold text-[#1a1a1a]">
-            {" "}
-            The app guides you through every step
+            the app guides you through every step
           </strong>{" "}
           with diagrams, status messages, and Continue / Back.
         </p>
