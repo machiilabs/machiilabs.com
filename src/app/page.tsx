@@ -118,7 +118,7 @@ export default function Home() {
                 A Mac video organizer and library for the files already on your
                 drives — browse, tag, filter, and play without locking media into
                 a proprietary container. Built to stay fast with thousands of
-                videos in the library — serious software, not a toy. And it&apos;s{" "}
+                videos in the library — serious software. And it&apos;s{" "}
                 <span className="font-semibold text-snow">free forever</span>.
               </p>
               <div className="mt-5 flex flex-wrap items-center gap-x-6 gap-y-3">
