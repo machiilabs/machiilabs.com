@@ -91,6 +91,7 @@ export function ManualSteps({ steps }: { steps: ManualStep[] }) {
                 hint={screenshot.hint}
                 scale={screenshot.scale}
                 className="mt-3"
+                needsUpdate={screenshot.needsUpdate}
               />
             ) : null}
           </li>
@@ -229,37 +230,72 @@ export function ManualIcon({
   );
 }
 
+function ManualShotBrief({
+  screenshot,
+  hint,
+  stale,
+}: {
+  screenshot: string;
+  hint?: string;
+  stale: boolean;
+}) {
+  return (
+    <div className="border border-dashed border-[#d1d5db] bg-[#f9fafb] px-6 py-8 text-left">
+      <p className="text-sm font-semibold text-[#1a1a1a]">
+        {stale ? "Screenshot needs update" : "Screenshot needed"}
+      </p>
+      <p className="mt-2 font-mono text-xs text-[#6b7280]">
+        public/skagway/manual/{screenshot}
+      </p>
+      {hint ? (
+        <p className="mt-3 text-sm leading-relaxed text-[#4b5563]">{hint}</p>
+      ) : null}
+    </div>
+  );
+}
+
 export function ManualFigure({
   screenshot,
   alt,
   hint,
   scale = 1,
   className = "mt-8",
+  needsUpdate = false,
 }: {
   screenshot: string;
   alt?: string;
   hint?: string;
   scale?: number;
   className?: string;
+  needsUpdate?: boolean;
 }) {
-  const ready = manualScreenshotExists(screenshot);
+  const exists = manualScreenshotExists(screenshot);
   const figureStyle =
     scale < 1 ? { width: `${Math.round(scale * 100)}%` } : undefined;
 
-  if (!ready) {
+  if (!exists || needsUpdate) {
     return (
-      <figure
-        className={`${className} border border-dashed border-[#d1d5db] bg-white px-6 py-14 text-center`}
-        style={figureStyle}
-      >
-        <p className="text-sm font-semibold text-[#1a1a1a]">Screenshot needed</p>
-        <p className="mt-2 font-mono text-sm text-[#6b7280]">
-          public/skagway/manual/{screenshot}
-        </p>
-        {hint ? (
-          <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-[#4b5563]">
-            {hint}
-          </p>
+      <figure className={className} style={figureStyle}>
+        <ManualShotBrief
+          screenshot={screenshot}
+          hint={hint}
+          stale={exists && needsUpdate}
+        />
+        {exists && needsUpdate ? (
+          <div className="mt-3 border border-[#e5e7eb] bg-white p-2 sm:p-3">
+            <p className="mb-2 text-xs font-medium tracking-wide text-[#9ca3af] uppercase">
+              Current capture (outdated)
+            </p>
+            <Image
+              src={manualScreenshotSrc(screenshot)}
+              alt={alt ?? screenshot}
+              width={2400}
+              height={1500}
+              className="h-auto w-full opacity-80"
+              sizes="(max-width: 768px) 100vw, 48rem"
+              unoptimized
+            />
+          </div>
         ) : null}
       </figure>
     );
@@ -292,6 +328,7 @@ export function ManualPageFigure({ page }: { page: ManualPage }) {
       alt={page.screenshotAlt ?? page.title}
       hint={page.screenshotHint}
       scale={page.screenshotScale}
+      needsUpdate={page.screenshotNeedsUpdate}
     />
   );
 }
@@ -312,6 +349,7 @@ export function ManualSectionScreenshots({
           hint={shot.hint}
           scale={shot.scale}
           className="mt-0"
+          needsUpdate={shot.needsUpdate}
         />
       ))}
     </div>

@@ -25,6 +25,15 @@ Write UI labels with the same capitalization as the app so they match. Section h
 
 3. **Commit both** `manual.ts` and `search-index.generated.ts`.
 
+## Screenshots
+
+PNG files live in `public/skagway/manual/`. Each page (and some inline steps) names a file plus a **capture brief** (`screenshotHint`).
+
+- If the PNG is **missing**, the page shows a dashed “Screenshot needed” box with the filename and brief.
+- If the PNG exists but is **stale**, set `screenshotNeedsUpdate: true` (or `needsUpdate: true` on an inline shot). The page shows a “Screenshot needs update” brief **above** the current capture, labeled outdated.
+
+Clear the flag after you drop in a current PNG. Do not leave a stale shot unmarked — readers will treat it as current.
+
 `npm run manual:index` also runs automatically on **`predev`** and **`prebuild`**, so a normal `npm run dev` / `npm run build` refreshes the index before the app starts. Do not treat the index as a separate optional step.
 
 ### Verify the index is current

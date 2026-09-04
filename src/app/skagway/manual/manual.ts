@@ -21,6 +21,8 @@ export type ManualScreenshot = {
   hint?: string;
   /** Display width as a fraction of the content column (e.g. 0.75). Default 1. */
   scale?: number;
+  /** File is missing or predates 0.80 — show an on-page capture brief. */
+  needsUpdate?: boolean;
 };
 
 /** A top-level step, optionally with lettered substeps, a table, and/or a figure. */
@@ -70,6 +72,8 @@ export type ManualPage = {
   screenshotHint?: string;
   /** Display width as a fraction of the content column (e.g. 0.75). Default 1. */
   screenshotScale?: number;
+  /** Hero figure is missing or predates 0.80 — show an on-page capture brief. */
+  screenshotNeedsUpdate?: boolean;
   sections: ManualSection[];
 };
 
@@ -79,30 +83,30 @@ export const MANUAL_HOME: ManualPage = {
   title: "First launch",
   blurb: "Choose where Skagway stores its data, then add your first videos.",
   summary:
-    "The first time you run Skagway, you choose where the catalog and each library’s thumbnail cache live — including options that keep locations off your boot disk. In most cases Skagway then opens an empty home library so you can start adding videos right away.",
+    "The first time you run Skagway, you choose where the catalog and thumbnail cache live. Then an empty home library opens so you can add videos.",
   screenshot: "first-launch.png",
   screenshotAlt:
     "Skagway “Choose where Skagway stores its data” setup screen with privacy bullets and Use standard location / Choose Folder… buttons",
   screenshotHint:
-    "Library home setup step 1: title “Choose where Skagway stores its data”, the privacy bullets (Nothing leaves your Mac, You control the catalog and cache, Media on an encrypted volume, Use defaults on this Mac), and both buttons — Use standard location on this Mac and Choose Folder… — fully readable. Bonus: cache placement step (“Where should this library’s cache live?”) or the empty-library “Drag videos here” invite.",
+    "Home-setup screen: title “Choose where Skagway stores its data”; privacy copy readable; both buttons — Use standard location on this Mac and Choose Folder….",
   sections: [
     {
       title: "What Skagway stores",
       steps: [
-        "A library is Skagway’s catalog — titles, thumbnails, ratings, tags, bookmarks, and collections. Your video files themselves are never moved into it.",
-        "Skagway is not a vault: it does not modify or protect your source media. Place sensitive media on an encrypted volume if you need that protection at the disk level.",
-        "Each library keeps its own thumbnail cache location (stored in the library file). Opening one library never depends on another volume’s cache.",
+        "A library is Skagway’s catalog — titles, thumbnails, ratings, tags, bookmarks, and collections. Your video files stay where they are.",
+        "Skagway does not modify or protect source media. Put sensitive files on an encrypted volume if you need that at the disk level.",
+        "Each library keeps its own thumbnail cache. Opening one library never depends on another volume’s cache.",
       ],
     },
     {
       title: "Choose where Skagway stores its data",
       steps: [
-        "Use standard location on this Mac — recommended when you are not putting the catalog on an encrypted volume. The library goes under Application Support; the cache under ~/Library/Caches/Skagway/.",
+        "Use standard location on this Mac — library under Application Support; cache under ~/Library/Caches/Skagway/.",
         "Choose Folder… — pick a folder yourself (for example on an encrypted or external volume).",
         {
           text: "If you chose a custom folder, Skagway asks Where should this library’s cache live?",
           substeps: [
-            "Co-locate with library — creates a Skagway-cache folder next to the library (recommended when the library sits with your media).",
+            "Co-locate with library — a Skagway-cache folder next to the library.",
             "System default — this library’s cache under ~/Library/Caches/Skagway.",
             "Choose Folder… — pick any folder for this library’s thumbnails.",
           ],
@@ -110,8 +114,8 @@ export const MANUAL_HOME: ManualPage = {
         {
           text: "Then Skagway asks How should Skagway find this library?",
           substeps: [
-            "Remember this location — keeps a bookmark so Skagway can reopen it (no plain path stored in preferences).",
-            "Ask every time I open Skagway — nothing is remembered on the boot disk; you open the library file each launch.",
+            "Remember this location — Skagway can reopen it next time.",
+            "Ask every time I open Skagway — you open the library file each launch.",
           ],
         },
       ],
@@ -121,20 +125,19 @@ export const MANUAL_HOME: ManualPage = {
       title: "Your library opens",
       steps: [
         "After setup, Skagway relaunches briefly — that is normal.",
-        "With Use standard location or Remember this location, Skagway opens your home library automatically, creating an empty .machii catalog if one doesn’t exist yet.",
-        "If you chose Ask every time I open Skagway, you’ll see a simple screen with no library open. Use File → Open Library…, New Library…, or Open Recent — the location is not remembered on this Mac.",
-        "Create Home Library / Open Home Library, New Library…, Open Library…, and Open Recent also stay available in the File menu whenever you need them.",
+        "With Use standard location or Remember this location, Skagway opens your home library automatically (and creates an empty .machii catalog if needed).",
+        "If you chose Ask every time I open Skagway, no library is remembered — use File → Open Library…, New Library…, or Open Recent.",
       ],
     },
     {
       title: "Add your first videos",
       steps: [
-        "An empty library shows Drag videos here — drop video files or folders onto that area to import them (it becomes Drop to add to your library while you drag).",
+        "An empty library shows Drag videos here — drop video files or folders onto that area.",
         "Or click Add Files… and select video files or folders, then Add.",
         "You can also choose File → Add Folder… (⇧⌘O), pick folders, and click Scan.",
         "Skagway indexes recognized videos and builds thumbnails in the background.",
       ],
-      note: "Folders you add — or the parent folders of files you add — are saved as Data Sources in Settings so Skagway can scan and watch them later. File → Change Library Location… and File → Change Thumbnail Cache Location… let you move those later.",
+        note: "Folders you add are saved as Data Sources so Skagway can scan them later. Change their locations later from the File menu.",
     },
   ],
 };
@@ -149,24 +152,24 @@ export const MANUAL_PAGES: ManualPage[] = [
     screenshot: "library-file-menu.png",
     screenshotAlt: "Skagway with the File menu open",
     screenshotHint:
-      "Open Skagway’s File menu so Bulk Rename…, Change Library Location…, Change Thumbnail Cache Location…, Add Folder…, Scan commands, and library create/open items are readable. Keep enough of the app window visible for context.",
+      "Full File menu with shortcuts readable: Bulk Rename…, Change Library Location…, Change Thumbnail Cache Location…, Add Folder…, Scan for New Videos, Scan for Subtitles, and create/open/recent library items.",
     screenshotScale: 0.75,
     sections: [
       {
         title: "Add your video folders",
         steps: [
-          "In an empty library, drag video files or folders onto Drag videos here, or click Add Files… to pick them in a dialog.",
-          "Or choose File → Add Folder… (⇧⌘O), select one or more folders, and click Scan.",
-          "Skagway indexes every recognized video inside (subfolders included) and generates thumbnails in the background.",
-          "Folders you add — or the parent folders of files you add — are registered as Data Sources automatically.",
+          "In an empty library, drag files or folders onto Drag videos here, or click Add Files….",
+          "Or choose File → Add Folder… (⇧⌘O), pick folders, and click Scan.",
+          "Skagway indexes recognized videos (subfolders included) and builds thumbnails in the background.",
+          "Added folders are registered as Data Sources automatically.",
         ],
-        note: "Added folders are listed under Settings → Data Sources. You can Exclude… nested subfolders from scanning there. Your files stay exactly where they are on disk.",
+        note: "Manage those folders under Settings → Data Sources. Your files stay where they are on disk.",
       },
       {
         title: "Keep the library current",
         steps: [
-          "Scan for New Videos — checks every watched folder for files added since the last scan. The header shows progress, then “Found N new files” or “No new files found”. Videos from that scan appear in the Last Added smart library.",
-          "Scan for Subtitles — re-checks the videos currently shown for matching .srt subtitle files and updates their subtitle badges.",
+          "Scan for New Videos — checks watched folders for files added since the last scan. New ones appear in Last Added.",
+          "Scan for Subtitles — re-checks the current view for matching .srt files and updates subtitle badges.",
         ],
         note: "Scan for New Videos is also available as a button on the toolbar.",
         noteIcon: "scan-for-new-videos-icon.png",
@@ -175,21 +178,21 @@ export const MANUAL_PAGES: ManualPage[] = [
       {
         title: "Create, open, and switch libraries",
         steps: [
-          "Open Home Library / Create Home Library — open or create the library at your chosen home location (wording depends on whether the file exists).",
-          "New Library… — create a separate .machii catalog at a location you choose.",
+          "Open Home Library / Create Home Library — the library at your chosen home location.",
+          "New Library… — create a separate .machii catalog.",
           "Open Library… — open any existing .machii file.",
-          "Open Recent — recently used libraries, with Clear Menu at the bottom.",
+          "Open Recent — recently used libraries.",
           "Change Library Location… — run the first-launch location setup again for the catalog.",
-          "Change Thumbnail Cache Location… — move this library’s thumbnail cache (each library stores its own cache path).",
-          "Close Library… — close the catalog. With a remembered home location Skagway can reopen it from File → Open Home Library; with Ask every time, open a library again from the File menu.",
+          "Change Thumbnail Cache Location… — move this library’s thumbnail cache.",
+          "Close Library… — close the catalog. Reopen it from the File menu.",
         ],
-        note: "Opening an existing library or creating a new one does not delete the library you were working with. It’s still on disk, ready to open again. Skagway restarts briefly when switching.",
+        note: "Switching libraries does not delete the one you left. Skagway restarts briefly.",
       },
       {
         title: "Copy or delete the library file",
         steps: [
-          "Save Copy… — writes a timestamped duplicate (Skagway-20260716-224500.machii, for example) wherever you choose. The original stays open; open the copy later with Open Library….",
-          "Delete This Library… — permanently deletes the .machii catalog file after a confirmation. Your video files are not touched.",
+          "Save Copy… — writes a timestamped duplicate wherever you choose. The original stays open; open the copy later with Open Library….",
+          "Delete This Library… — deletes the .machii catalog after a confirmation. Your video files are not touched.",
         ],
         note: "Backups and moving metadata between libraries are covered in more detail.",
         noteHref: "/skagway/manual/export-import",
@@ -214,14 +217,14 @@ export const MANUAL_PAGES: ManualPage[] = [
     screenshotAlt:
       "Skagway grid view with the toolbar: view switcher, sort menu, Play All, and Search videos field",
     screenshotHint:
-      "Main window in Grid view with a populated library. The toolbar should show the Grid/List switcher, Sort menu, Play All / Loop Play All, the Search videos field, and the video count.",
+      "Populated Grid. Toolbar: Grid/List, Sort, Play All and Loop Play All, Search videos, and the video count. Optional: a search that matches a title or tag.",
     sections: [
       {
         title: "Grid and List",
         steps: [
           "Switch views with the Grid / List control in the toolbar, or press ⌘1 for Grid and ⌘2 for List.",
-          "Grid cards show the thumbnail, Title, duration, date added, and rating stars. A captions badge appears when subtitles are available, and a thin progress bar marks partially watched videos.",
-          "Hold the pointer over a grid card for a moment and Live Preview plays a short, silent tour through the video — see the Playback page for details.",
+          "Grid cards show the thumbnail, Title, duration, date, and rating. A captions badge and a watch-progress bar appear when relevant.",
+          "Hold the pointer over a grid card for Live Preview — see the Playback page.",
           "Double-click a grid card to play it inside Skagway. Double-click a List row to open it in your external player.",
         ],
       },
@@ -238,7 +241,7 @@ export const MANUAL_PAGES: ManualPage[] = [
         title: "Sort, shuffle, and Surprise Me!",
         steps: [
           "Open the Sort menu to order by Title, Date Added, Duration, File Size, Rating, Resolution, or Plays — plus any custom fields you’ve defined.",
-          "While viewing an album, Album Order appears at the top of the Sort menu so you can play and browse in the playlist order you arranged.",
+          "While viewing an album, Album Order appears at the top of the Sort menu.",
           "Click the arrow beside the Sort menu to flip between ascending and descending.",
           "Shuffle (⇧⌘R) puts the whole view in a random order; picking any sort exits it. Click Shuffle again to reshuffle.",
           "Surprise Me! (⇧⌘S) jumps to one random video — and can auto-play it (Settings → Video).",
@@ -247,18 +250,16 @@ export const MANUAL_PAGES: ManualPage[] = [
       {
         title: "Play All",
         steps: [
-          "Click Play All in the toolbar (or press ⇧⌘P) to play the current filtered view from the first playable video.",
-          "Missing files are skipped. Auto-advance and Loop run only during this Play All session.",
-          "Loop Play All (toolbar toggle, View menu, or Settings → Video) is off by default. When it is on, finishing the last playable video starts the first one again.",
-          "Stopping playback or playing a single video (Space on one card) ends the session. Loop then has no effect until you Play All again.",
+          "Play All (⇧⌘P) plays the current view from the first playable video and advances when each one finishes.",
+          "Loop Play All repeats the list. Stopping or playing a single video ends the session.",
         ],
       },
       {
         title: "Search",
         steps: [
           "Press ⌘F or click the Search videos field, then type part of what you’re looking for.",
-          "Search matches Title, File Name, Original File Name, Tags, and custom metadata values — case-insensitive, contains-style.",
-          "Multiple words narrow the results (AND): every word must appear somewhere, but each word may hit a different field (for example one word in a tag and another in the title).",
+          "Search matches Title, file names, tags, and custom fields.",
+          "Multiple words narrow the results — every word must appear somewhere, not necessarily in the same field.",
           "Click the × in the field (or clear it) to show the full library again.",
         ],
         note: "For ratings, duration, quality, and other structured criteria, use the filters.",
@@ -285,16 +286,16 @@ export const MANUAL_PAGES: ManualPage[] = [
     screenshotAlt:
       "Skagway Quick Filter drawer showing Smart Libraries, Collections, Rating, Duration, Quality, and Tags cards",
     screenshotHint:
-      "Open the Quick Filter drawer (⇧⌘F) so Smart Libraries, Collections, Rating (No Stars / stars / Or Higher), Duration, Quality, and Tags are visible.",
+      "Quick Filter drawer (⇧⌘F) over a populated library. Rating row: No Stars, 1–5 stars, Or Higher. Smart Libraries, Collections, Duration, Quality, and Tags visible.",
     sections: [
       {
         title: "Quick Filter (⇧⌘F)",
         steps: [
           "Click the filter button in the toolbar or press ⇧⌘F to open the Quick Filter drawer above the grid.",
-          "Combine anything: a Smart Library, Collection, or Album; a rating; a duration range (presets like < 1 min or > 30 min); quality buckets (SD through 8K+); and tags.",
-          "Rating is one row: No Stars (unrated), then 1–5 stars, then Or Higher on the right. Click a star to match only that rating. Turn Or Higher on to match that rating and every higher one (4 → 4 and 5). Or Higher is off by default, session-only, and unavailable for No Stars and for 5 stars. The filter pill reads Rating 4, Rating 4+, or No stars.",
-          "Tags can match Any (at least one) or All of the selected tags — use the toggle in the Tags card.",
-          "Everything you pick applies together, and search still works on top.",
+          "Combine a Smart Library, collection, or album with rating, duration, quality, and tags.",
+          "Click No Stars or a star rating. Or Higher includes that rating and every higher one.",
+          "Tags can match Any or All of the selected tags.",
+          "Everything you pick applies together. Search still works on top.",
         ],
       },
       {
@@ -306,7 +307,7 @@ export const MANUAL_PAGES: ManualPage[] = [
           "Duplicates — videos whose file content matches another video, grouped by fingerprint.",
           "Corrupt — files Skagway couldn’t read metadata or a thumbnail from.",
           "Missing — files whose path no longer exists (unmounted drive, moved file). Click the refresh arrow to rescan.",
-          "Last Added — videos found by the most recent Scan for New Videos (appears when that set is non-empty).",
+          "Last Added — videos found by the most recent Scan for New Videos.",
           "Recently Converted and Last Metadata Import appear after you use re-encoding or metadata import.",
         ],
         note: "Choose which Smart Libraries appear under Settings → Library → Smart Libraries.",
@@ -315,9 +316,8 @@ export const MANUAL_PAGES: ManualPage[] = [
         title: "Advanced Filter (⇧⌘V)",
         steps: [
           "Press ⇧⌘V to switch the drawer to the Advanced Filter rule editor.",
-          "Build rules on any attribute: Name, Extension, Path, Parent Folder, Volume, File Size, Duration, Width, Height, Quality, Video Codec, Date Imported, Date Created, Plays, Rating, Tag, and your custom fields.",
-          "Operators include equals, contains, starts with, is greater than, is between, and more — the editor adapts to each attribute (star picker for Rating, date picker for dates, tag menu for Tag).",
-          "Rules cluster into groups. Within a group, match ALL or ANY; groups combine with an outer ALL/ANY — e.g. (Tag is Vacation AND Rating ≥ 4) OR Tag is Favorite.",
+          "Build rules on any video attribute or custom field. Operators change to match the attribute.",
+          "Group rules with ALL or ANY — for example (Tag is Vacation AND Rating ≥ 4) OR Tag is Favorite.",
           "Click Save as Collection… to keep the rule set permanently.",
         ],
         note: "Quick Filter and Advanced Filter are exclusive — opening one clears the other, so they never combine unexpectedly.",
@@ -340,36 +340,34 @@ export const MANUAL_PAGES: ManualPage[] = [
       "Collections are saved rule sets that update themselves as the library changes. Albums are hand-picked playlists you control video by video — including a saved Album Order. Both live in the Quick Filter drawer.",
     screenshot: "collections.png",
     screenshotAlt:
-      "Skagway collection editor with match groups and rules",
+      "Skagway album open with Sort set to Album Order and collections listed in Quick Filter",
     screenshotHint:
-      "The New Collection editor sheet with Match ALL/ANY and at least two rules — or the Collections card listing smart collections and albums. Bonus: an album open with Album Order selected and grip handles visible.",
+      "An album open with Sort → Album Order and grip badges on cards, or the Collections card listing smart collections and albums.",
     sections: [
       {
         title: "Create a smart collection",
         steps: [
           "Open the Quick Filter drawer (⇧⌘F) and click New Collection in the Collections card.",
           "Name it, then add rules — the same attributes and operators as Advanced Filter, with ALL/ANY groups.",
-          "Click Create. The collection appears in the Collections card and stays up to date automatically: tag or rate a new video and it joins matching collections on its own.",
+          "Click Create. The collection stays up to date as you tag and rate.",
         ],
       },
       {
         title: "Collections and the Advanced Filter work together",
         steps: [
-          "Built a live Advanced Filter you want to keep? Click Save as Collection… in the drawer header.",
-          "Want to tweak an existing collection interactively? Right-click it and choose Edit as Advanced Filter… — its rules load into the drawer.",
-          "Right-click also offers Edit Collection… and Delete Collection.",
+          "To keep a live Advanced Filter, click Save as Collection… in the drawer header.",
+          "Right-click a collection for Edit as Advanced Filter…, Edit Collection…, or Delete Collection.",
         ],
       },
       {
         title: "Albums — hand-picked playlists",
         steps: [
-          "Select some videos, right-click, and choose New Album from Selection… (or click New Album in the drawer for an empty one).",
-          "Add more videos anytime with right-click → Add to Album. New videos append to the end of the album order.",
-          "While viewing an album, choose Sort → Album Order, then drag cards (or list rows) to rearrange. Multi-select moves as a block.",
-          "While viewing an album, right-click a video and choose Remove from “album name” to take it out.",
-          "Rename or delete an album by right-clicking it in the Collections card (Rename Album… / Delete Album).",
+          "Select videos, right-click, and choose New Album from Selection… — or New Album in the drawer for an empty one.",
+          "Add more with right-click → Add to Album.",
+          "With Sort → Album Order, drag cards or rows to rearrange.",
+          "Right-click a video to Remove it from the album, or right-click the album to rename or delete it.",
         ],
-        note: "Albums use a stacked-rectangles icon; smart collections use a folder icon. Removing a video from an album never touches the file. Play All respects Album Order when that sort is active.",
+        note: "Removing a video from an album never touches the file. Play All uses Album Order when that sort is active.",
       },
     ],
   },
@@ -383,29 +381,28 @@ export const MANUAL_PAGES: ManualPage[] = [
     screenshotAlt:
       "Skagway Inspector with rating stars, assigned tags, the Add tags list, and custom fields",
     screenshotHint:
-      "A selected video with the Inspector visible: display Title at the top (ideally different from the file name), Subtitles picker, filled rating stars, at least one assigned tag, and a custom field if defined.",
+      "Selected video with the Inspector open: display Title, Subtitles picker, filled rating stars, at least one assigned tag, and a custom field if defined.",
     sections: [
       {
         title: "Title (display name)",
         steps: [
-          "Every video has a Title used for sorting, List view, and search. It can differ from the file name on disk.",
-          "Press Return on a selected video (or right-click → Edit Title…) to edit it inline.",
-          "Import Metadata can write Title; renaming the file with Rename File… or Bulk Rename… does not clear a custom Title.",
+          "Title is the display name used for sorting, List view, and search. It can differ from the file name.",
+          "Press Return (or right-click → Edit Title…) to edit it.",
+          "Renaming the file does not change Title.",
         ],
       },
       {
         title: "Subtitles",
         steps: [
-          "In the Inspector, set Subtitles to None, Burned-in, Sidecar, or Burned-in + Sidecar so the badge and filters match how the video is captioned.",
+          "Set Subtitles in the Inspector so the badge and filters match how the video is captioned.",
           "Sidecar .srt files next to the video are detected automatically — see the Playback page.",
         ],
       },
       {
         title: "Rate videos",
         steps: [
-          "Select one or more videos and click a star in the RATING row — the rating applies to the whole selection.",
+          "Select one or more videos and click a star in the RATING row.",
           "Click the same star again to clear the rating.",
-          "Ratings drive the Top Rated smart library, the Rating sort, and rating rules in filters and collections.",
         ],
       },
       {
@@ -420,10 +417,10 @@ export const MANUAL_PAGES: ManualPage[] = [
       {
         title: "Custom metadata",
         steps: [
-          "Define your own fields under Settings → Custom Metadata — for example “Featuring”, “Project”, or “Shoot Date”. Fields are stored in this library’s catalog.",
+          "Define your own fields under Settings → Custom Metadata.",
           "Field types: String, Text, Number, Date, Date & Time, and Boolean.",
           "Edit values in the Inspector’s CUSTOM section for any selection.",
-          "Custom fields show up everywhere: search, the Sort menu, List view columns, Advanced Filter rules, collection rules, and metadata export.",
+          "Custom fields show up in search, sort, List columns, filters, collections, and export.",
         ],
       },
       {
@@ -446,7 +443,7 @@ export const MANUAL_PAGES: ManualPage[] = [
     screenshotAlt:
       "Skagway floating player with custom transport controls and bookmark ticks on the timeline",
     screenshotHint:
-      "Floating player (windowed) over the grid with traffic lights, the custom transport bar (scrubber, ±15s, play/pause, speed, volume), and at least two diamond bookmark ticks on the timeline.",
+      "Windowed floating player over the grid: traffic lights, transport (scrubber, skip, play/pause, speed, volume), and at least two diamond bookmark ticks on the timeline.",
     sections: [
       {
         title: "Start and stop",
@@ -456,83 +453,70 @@ export const MANUAL_PAGES: ManualPage[] = [
           "Press ⌥Space to play from the very beginning, ignoring any saved position.",
           "Press Esc (or the red traffic-light Stop) to stop — Skagway saves where you left off.",
         ],
-        note: "If focus is in a text field (Search, a custom metadata field, and so on), press Esc once first so Space plays the video instead of typing a space in the field.",
+        note: "If focus is in a text field, press Esc once first so Space plays instead of typing.",
       },
       {
         title: "Play All (⇧⌘P)",
         steps: [
-          "View → Play All, the toolbar control, or ⇧⌘P starts the first playable video in whatever you are looking at now (filtered grid, collection, search, or album) and advances when each one finishes.",
-          "Missing files are skipped. Auto-advance and Loop run only during that Play All session.",
-          "Loop Play All is off by default (toolbar, View menu, Settings → Video). When it is on, the last playable video is followed by the first.",
-          "Esc / Stop, or playing a single video with Space, ends the session. Loop then does nothing until you Play All again.",
+          "Play All (⇧⌘P) plays the current view and advances when each video finishes.",
+          "Loop Play All repeats the list. Stopping or playing a single video ends the session.",
         ],
-        note: "On the Browse page this is covered with search and sort. Album Order is the playlist sequence Play All uses when you are in an album.",
+        note: "Album Order is the sequence Play All uses when you are in an album. Search and sort are on the Browse page.",
         noteHref: "/skagway/manual/browse",
         noteLinkLabel: "Browse",
       },
       {
         title: "Transport controls",
         steps: [
-          "The scrubber shows elapsed time, a progress track, and total duration. Hover along it for a live frame preview at that point; click to seek.",
-          "Skip back / Skip forward 15 seconds (⌥← / ⌥→) from the transport bar or View menu.",
-          "Playback speed cycles through rates from 0.5× to 2×.",
-          "Mute and volume live on the same row — the volume slider collapses to mute-only when the player is narrow.",
+          "Hover the scrubber for a frame preview; click to seek.",
+          "Skip back / forward 15 seconds with ⌥← / ⌥→.",
+          "Playback speed cycles from 0.5× to 2×.",
         ],
       },
       {
         title: "Bookmarks",
         steps: [
-          "While a video is playing, press ⌥⌘B (View → Bookmark Current Position), click the bookmark button in the Inspector’s BOOKMARKS header, or double-click the scrubber at the moment you want.",
-          "Each bookmark stores the exact time, a name (defaults to the timecode — click to rename), and a still frame.",
-          "Bookmarks appear as diamond ticks on the timeline and as a list under BOOKMARKS in the Inspector (stills, names, and times, ordered from start to finish).",
-          "Click a tick, a still, or the play button on a bookmark row to jump there. If you jump while already watching, a return chip (↩) appears so you can get back to where you were — it lasts for that session only.",
-          "Delete a bookmark with the trash button on its row — it is removed immediately, with no confirmation.",
+          "While playing, press ⌥⌘B or double-click the scrubber.",
+          "Bookmarks appear as diamonds on the timeline and as a list in the Inspector — click one to jump there, or delete it from its row.",
         ],
-        note: "Bookmarks live in the library file. Their still frames are cached on this Mac — after Save Copy or moving the library elsewhere, the bookmarks still jump correctly; stills regenerate as you revisit them.",
+        note: "Bookmarks live in the library file. Still frames regenerate if you move the library.",
       },
       {
         title: "Play from the filmstrip",
         steps: [
-          "Switch the Inspector preview to Filmstrip (the Still / Filmstrip toggle, or ⌥⌘T) to see a grid of frames sampled across the whole video.",
-          "Click any frame — playback starts right at that point in the video.",
-          "It’s the quickest way to jump to a scene you can already see, without scrubbing.",
+          "Switch the Inspector preview to Filmstrip (⌥⌘T) to see frames sampled across the video.",
+          "Click a frame to start playback there.",
         ],
         note: "Clicking the Still preview starts playback too, from the beginning or the saved resume position.",
       },
       {
         title: "Three sizes, one player",
         steps: [
-          "Compact (⌃⌘C) — docks into the Inspector’s preview area and follows its size.",
-          "Windowed (⌃⌘W) — a floating panel you can drag by its title bar and resize from the corner; size and position are remembered.",
-          "Full screen (⌃⌘F) — edge to edge, without restarting playback. Esc stops playback; use the traffic lights or ⌃⌘F to leave full screen without stopping.",
-          "The player’s traffic lights also switch sizes: red stops; yellow and green jump between Compact, Windowed, and Full screen.",
-          "Choose which size the player opens at under Settings → Video → Player opens at.",
+          "Compact (⌃⌘C) — docks into the Inspector preview.",
+          "Windowed (⌃⌘W) — a floating panel; size and position are remembered.",
+          "Full screen (⌃⌘F) — edge to edge without restarting. Esc stops; ⌃⌘F or the traffic lights leave full screen without stopping.",
+          "Choose the opening size under Settings → Video → Player opens at.",
         ],
       },
       {
         title: "Resume where you left off",
         steps: [
-          "Reopening a partially watched video resumes automatically; a banner shows “Resumed at …” with a Start at beginning button.",
-          "Grid cards show a thin progress bar for partially watched videos.",
-          "Resume is separate from bookmarks — resume is “where I stopped,” bookmarks are moments you chose to keep.",
-          "The banner can fade out on its own — see Settings → Video → Fade resume banner after delay.",
+          "Reopening a partially watched video resumes automatically. A banner offers Start at beginning.",
+          "Grid cards show a thin progress bar. The banner can fade — see Settings → Video.",
         ],
       },
       {
         title: "Live Preview",
         steps: [
-          "Rest the pointer on a grid card for a moment and the thumbnail comes alive: a silent preview that skips through the video, playing short clips from start to finish.",
-          "No clicking, no scrubbing — it’s the fastest way to see what’s inside a video without opening it.",
-          "Only one card previews at a time, and Live Preview pauses automatically while the floating player is open.",
-          "Turn it off or on under Settings → Video → Hover preview on Grid cards.",
+          "Rest the pointer on a grid card for a silent preview through the video.",
+          "It pauses while the player is open. Toggle it under Settings → Video → Hover preview on Grid cards.",
         ],
       },
       {
         title: "Subtitles",
         steps: [
-          "Put an .srt file next to the video with the same name (movie.mp4 → movie.srt; movie.en.srt also works) and Skagway can show it during playback.",
-          "In the Inspector, set Subtitles to None, Burned-in, Sidecar, or Burned-in + Sidecar so the grid badge and filters match reality.",
-          "Added subtitle files later? Run File → Scan for Subtitles to refresh detection.",
+          "Put an .srt file next to the video with the same name (movie.mp4 → movie.srt; movie.en.srt also works).",
+          "Set Subtitles in the Inspector so the badge and filters match. File → Scan for Subtitles if you add files later.",
         ],
       },
       {
@@ -558,12 +542,12 @@ export const MANUAL_PAGES: ManualPage[] = [
     title: "File operations",
     blurb: "Rename, bulk rename, move, re-encode, delete — with queues and safety nets.",
     summary:
-      "Right-click any video (or selection) for file operations. Long jobs — cross-volume moves and re-encodes — show as header pills and a bottom activity strip, and open managed queues that survive restarts.",
+      "Right-click any video (or selection) for file operations. Long jobs show progress in the bottom activity strip and open queues that survive restarts.",
     screenshot: "file-operations.png",
     screenshotAlt:
       "Skagway grid context menu with Bulk Rename…, Move Files…, and Fix for Built-in Player…",
     screenshotHint:
-      "Right-click a grid card so the context menu shows Bulk Rename…, Move Files…, Fix for Built-in Player…, and Set Poster from Image… (plus everyday items). Bonus: header queue pills or the bottom activity strip visible while a move or re-encode is running.",
+      "Right-click a grid card so the full context menu is readable, including Bulk Rename…, Move Files…, Fix for Built-in Player…, and Set Poster from Image….",
     screenshotScale: 0.75,
     sections: [
       {
@@ -622,8 +606,8 @@ export const MANUAL_PAGES: ManualPage[] = [
               ],
             },
           },
-          "Watch the live Preview columns (Current File Name / New File Name / Status). Skipped rows show why (empty name, too long, illegal characters, collision).",
-          "Click Rename N Files to apply. Skagway uses a two-phase rename so a cancel or crash can restore; a results sheet offers Retry Failed when needed.",
+          "Watch the live Preview columns. Skipped rows show why.",
+          "Click Rename N Files to apply. A results sheet offers Retry Failed if anything goes wrong.",
         ],
         note: "Original File Name is preserved in the catalog for search and export — bulk rename changes the file on disk, not that historical name.",
       },
@@ -633,8 +617,7 @@ export const MANUAL_PAGES: ManualPage[] = [
           "Right-click → Move Files… and choose a destination folder (Move Here).",
           "Moves on the same volume are instant and do not appear in the Move Queue.",
           "Cross-volume moves copy first, verify, then remove the original — a crash cannot lose the only copy.",
-          "While work is running, the bottom activity strip and a header folder pill show progress (Moving N%). Click either, or choose View → Move Queue…, to open the queue.",
-          "In Move Queue you can Move to Top, Abort, Abort All, Retry failed jobs, Clear completed rows, or Dismiss a row.",
+          "Cross-volume progress shows in the bottom activity strip. Click the strip or View → Move Queue… to abort, retry, or reorder.",
         ],
       },
       {
@@ -642,9 +625,8 @@ export const MANUAL_PAGES: ManualPage[] = [
         steps: [
           "Right-click → Fix for Built-in Player… converts a video to a widely compatible MP4 (H.264/AAC). This requires ffmpeg — set it up once under Settings → Tools.",
           "The original file is kept as a _backup until you delete it, so nothing is lost if an encode fails or you change your mind.",
-          "Jobs run one at a time. The activity strip and a header re-encode pill show progress; click either, or View → Re-encode Queue…, to manage the queue.",
-          "In Re-encode Queue: Move to Top, Abort, Retry, Restore from backup, Delete Backup, Delete All Backups, Clear finished rows, or Dismiss. Rows can stay visible after success while a backup remains.",
-          "Finished conversions appear in the Recently Converted smart library.",
+          "Jobs run one at a time. Open the queue from the activity strip, the header pill after it finishes, or View → Re-encode Queue… — restore or delete backups there.",
+          "Finished conversions appear in Recently Converted.",
         ],
       },
       {
@@ -655,18 +637,18 @@ export const MANUAL_PAGES: ManualPage[] = [
             screenshot: {
               filename: "queue-activity-strip.png",
               alt: "Skagway bottom activity strip showing move or re-encode progress",
-              hint: "Crop of the bottom activity strip while a move or re-encode is running — text + percent readable (for example Re-encode 42% or Moving 18% · +2).",
+              hint: "Tight crop of the bottom activity strip while a move or re-encode is running — text and percent readable (for example Re-encode 42% or Moving 18% · +2).",
             },
           },
           {
-            text: "Icon-only capsules also appear in the header (to the right of the video count) when that job isn’t already featured in the strip — folder for moves, circular arrows for re-encode; failures use a warning style.",
+            text: "After a re-encode finishes, a circular-arrows pill stays in the header so you can still open the queue. Moves use the activity strip only; successful ones clear themselves.",
             screenshot: {
               filename: "queue-header-pills.png",
-              alt: "Skagway header queue pills next to the video count",
-              hint: "Crop of the header to the right of the video count showing the icon-only queue pills (folder for moves and/or circular arrows for re-encode). A warning-style failed pill is a plus.",
+              alt: "Skagway header re-encode pill next to the video count",
+              hint: "Tight crop of the header to the right of the video count after a re-encode has finished (backup still kept): one circular-arrows pill.",
             },
           },
-          "Successful moves clear themselves from the queue when done. Re-encode rows often remain so you can still Restore or Delete Backup.",
+          "Re-encode rows stay while a backup remains.",
         ],
       },
       {
@@ -701,39 +683,38 @@ export const MANUAL_PAGES: ManualPage[] = [
     title: "Export / Import",
     blurb: "Metadata as CSV or JSON Lines, plus library copies.",
     summary:
-      "Your titles, ratings, tags, plays, resume positions, and custom fields are yours to take: export them to CSV or JSON Lines (with clear match / importable / export-only field groups), import them into another library, and copy the whole catalog file for backup.",
+      "Export titles, ratings, tags, and other metadata as CSV or JSON Lines, import them into another library, or copy the catalog file for backup.",
     screenshot: "export-import.png",
     screenshotAlt:
       "Skagway Export Metadata sheet with CSV / JSON Lines and the Match keys, Importable, and Export only field sections",
     screenshotHint:
-      "The Export Metadata sheet showing format (CSV / JSON Lines), the three field sections (Match keys, Importable, Export only) with Title, Plays, Resume Position, and Original File Name visible, and Export… / Cancel.",
+      "Export Metadata sheet: format (CSV / JSON Lines), field sections (Match keys, Importable, Export only) with Title, Plays, Resume Position, and Original File Name visible, plus Export… / Cancel.",
     sections: [
       {
         title: "Export Metadata… (⌥⌘E)",
         steps: [
           "File → Export Metadata… exports every video currently shown — filters and search included. Right-click → Export Metadata… exports just the selection.",
           "Pick CSV (for spreadsheets) or JSON Lines (for scripts and tools).",
-          "Fields are grouped: Match keys (Path, Content Fingerprint — used to find videos on import), Importable (Title, Rating, Tags, Subtitles, Plays, Resume Position, and custom fields — written back by Import Metadata), and Export only (File Name, Original File Name, Last Played, size, duration, codec, and other read-only facts).",
-          "Check the fields you want; checked fields stay at the top of each section. Drag to reorder within a section.",
+          "Fields are grouped: Match keys (to find videos on import), Importable (written back), and Export only (read-only facts).",
+          "Check the fields you want and drag to reorder within a section.",
           "Your format and field choices are remembered for next time.",
         ],
       },
       {
         title: "Import Metadata… (⌥⌘I)",
         steps: [
-          "File → Import Metadata… opens a previously exported CSV or JSON Lines file — the format is detected automatically.",
-          "Rows are matched by Path first, then by Content Fingerprint — not by Database ID — so a file that moved can still be matched.",
-          "Importable values are applied when they differ: Title, Rating, Subtitles, Plays, Resume Position, custom fields; tags are merged in (importing never removes a tag).",
-          "Unknown columns can be skipped or imported as new Custom Metadata fields (you’ll see Column, Sample, and Type) — use Skip all or Import selected.",
-          "A summary shows Matched / Updated / Unmatched — with Review unmatched… for leftovers — then Done.",
-          "Everything the import touched is collected in the Last Metadata Import smart library so you can review the result.",
+          "File → Import Metadata… opens a CSV or JSON Lines export — the format is detected automatically.",
+          "Rows match by Path, then Content Fingerprint, so a file that moved can still be found.",
+          "Importable values update when they differ; tags are merged in, never removed.",
+          "Unknown columns can be skipped or imported as new custom fields. A summary shows Matched / Updated / Unmatched.",
+          "Touched videos appear in Last Metadata Import.",
         ],
       },
       {
         title: "Save Copy… — back up the catalog",
         steps: [
-          "File → Save Copy… writes a timestamped duplicate of the library file (for example Skagway-20260716-224500.machii).",
-          "The current library stays open; the copy is completely independent. Save Copy keeps the original thumbnail-cache pointer — it does not create a second cache.",
+          "File → Save Copy… writes a timestamped duplicate of the library file.",
+          "The current library stays open. Save Copy keeps the original cache pointer — it does not create a second cache.",
           "Open a copy anytime with File → Open Library….",
         ],
       },
@@ -752,7 +733,7 @@ export const MANUAL_PAGES: ManualPage[] = [
     title: "Keyboard",
     blurb: "The complete shortcut map.",
     summary:
-      "Skagway is built for keyboard-driven triage. One modifier scheme throughout: ⌥ marks an alternate action, ⇧ reveals or adds something, and ⌃ is reserved for player sizing.",
+      "Skagway is built for the keyboard. ⌥ is an alternate action, ⇧ reveals or adds, and ⌃ sizes the player.",
     sections: [
       {
         title: "Views and navigation",
@@ -813,15 +794,15 @@ export const MANUAL_PAGES: ManualPage[] = [
     screenshot: "settings.png",
     screenshotAlt: "Skagway Settings window on the Library tab",
     screenshotHint:
-      "The Settings window on the Library tab, tall enough to show Smart Libraries toggles, Change Library Location… / Change Thumbnail Cache Location…, and List view columns.",
+      "Settings window on the Library tab: Smart Libraries toggles, Change Library Location… / Change Thumbnail Cache Location…, and List view columns.",
     sections: [
       {
         title: "Library",
         steps: [
-          "Exclude corrupt files from filters — hides unreadable files from normal browsing; they stay visible in the Corrupt smart library and in search.",
+          "Exclude corrupt files from filters — they stay in the Corrupt smart library and in search.",
           "Confirm deletions — ask before moving files to the Trash.",
           "Change Library Location… / Change Thumbnail Cache Location… — move this library’s catalog or its per-library thumbnail cache.",
-          "Automatically check for updates — off by default; optional Sparkle checks do not send usage analytics.",
+          "Automatically check for updates — off by default; checks do not send usage analytics.",
           "Smart Libraries — choose which smart libraries appear, and tune Recently Added / Recently Played day windows and the Top Rated star threshold.",
           "List view columns — pick the columns List view shows (Title is always on).",
         ],
@@ -831,7 +812,7 @@ export const MANUAL_PAGES: ManualPage[] = [
         steps: [
           "Default Filmstrip Size — rows and columns for filmstrip previews, with a Regenerate filmstrips button.",
           "Surprise Me! auto-plays selected video — jump and play, or just jump.",
-          "Loop Play All — while a Play All session is running, finishing the last video starts the first again. Off by default; no effect when you play a single video.",
+          "Loop Play All — during Play All, finishing the last video starts the first again.",
           "Hover preview on Grid cards — the silent moving preview on hover.",
           "Tag blind default state / Filter drawer height — how the Inspector tags list and Quick Filter drawer remember size.",
           "Player opens at — Compact, Full screen, or Last used size.",
@@ -841,9 +822,9 @@ export const MANUAL_PAGES: ManualPage[] = [
       {
         title: "Data Sources",
         steps: [
-          "The folders Skagway scans, in one list — Add Folder…, Show in Finder, Exclude… a nested subfolder from scanning, or Remove.",
-          "Adding a folder here just registers it; run File → Scan for New Videos to index its contents.",
-          "Removing a folder doesn’t remove already-indexed videos from the library. Exclude… skips a nested subfolder on future scans (Add Folder, Scan for New Videos, and drops). You cannot exclude the source folder itself. Videos already in the library stay listed.",
+          "The folders Skagway scans — Add Folder…, Show in Finder, Exclude… a nested subfolder, or Remove.",
+          "Adding a folder only registers it; run File → Scan for New Videos to index it.",
+          "Remove does not drop already-indexed videos. Exclude… skips a nested subfolder on future scans — not the source folder itself.",
         ],
       },
       {
@@ -865,7 +846,7 @@ export const MANUAL_PAGES: ManualPage[] = [
         title: "Custom Metadata",
         steps: [
           "Define your own fields for this library: a name plus a type (String, Text, Number, Date, Date & Time, or Boolean).",
-          "Values are edited per video in the Inspector, and fields flow through to search, sorting, List columns, filters, collections, and export.",
+          "Edit values in the Inspector. Fields also appear in search, sort, List columns, filters, and export.",
         ],
       },
     ],
@@ -882,16 +863,16 @@ export const MANUAL_PAGES: ManualPage[] = [
         steps: [
           "The library catalog: the .machii file you created (by default in ~/Library/Application Support/Skagway/).",
           "Thumbnails and filmstrips: each library’s own cache (system Caches, a Skagway-cache folder next to the library, or a folder you chose).",
-          "Settings: standard macOS preferences on your Mac — library location bookmarks, not plain paths, when you use Remember this location.",
-          "Your video files: exactly where you put them. Skagway never relocates, re-wraps, or uploads them.",
+          "Settings: standard macOS preferences on this Mac.",
+          "Your video files: exactly where you put them. Skagway never relocates or uploads them.",
         ],
       },
       {
         title: "Network and updates",
         steps: [
           "No telemetry, no analytics, and no automatic upload of library paths, play history, or browsing behavior.",
-          "Skagway → Check for Updates… and Settings → Automatically check for updates use Sparkle against downloads.machiilabs.com — only when you ask, or when you turn automatic checks on.",
-          "Help → Skagway Help opens this manual in your browser. Contact Support… opens your email client to support@machiilabs.com.",
+          "Check for Updates… and automatic update checks only ask whether a newer build exists — and only when you ask, or when you turn them on.",
+          "Help → Skagway Help opens this manual. Contact Support… opens email to support@machiilabs.com.",
         ],
       },
       {
