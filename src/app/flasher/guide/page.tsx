@@ -226,8 +226,7 @@ export default function FlasherGuidePage() {
             Choose <strong>BATCH</strong>{" "}on the welcome screen when you already
             know ERASE+RESET and want a shorter path than guided FLASH mode —
             including when you flash more than one Collector&apos;s Edition with
-            the same firmware. User memory is wiped on every unit; accept that
-            before you start.
+            the same firmware.
           </p>
           <ol className="mt-4 list-decimal space-y-2.5 pl-6 text-base leading-relaxed text-[#374151]">
             <li>
