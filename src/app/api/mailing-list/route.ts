@@ -37,13 +37,20 @@ export async function POST(request: Request) {
       if (insertError.code === "23505") {
         return NextResponse.json({ ok: true });
       }
-      console.error("mailing-list insert", insertError.message);
-      return NextResponse.json({ ok: false, error: "server" }, { status: 500 });
+      console.error("mailing-list insert", insertError.code, insertError.message);
+      return NextResponse.json(
+        { ok: false, error: "db", code: insertError.code ?? null },
+        { status: 500 },
+      );
     }
 
     return NextResponse.json({ ok: true });
   } catch (err) {
-    console.error("mailing-list", err);
+    const message = err instanceof Error ? err.message : String(err);
+    console.error("mailing-list", message);
+    if (message.includes("Missing NEXT_PUBLIC_SUPABASE_URL") || message.includes("SUPABASE_SERVICE_ROLE_KEY")) {
+      return NextResponse.json({ ok: false, error: "config" }, { status: 500 });
+    }
     return NextResponse.json({ ok: false, error: "server" }, { status: 500 });
   }
 }
