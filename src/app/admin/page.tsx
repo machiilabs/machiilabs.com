@@ -25,6 +25,11 @@ const PORTALS = [
     blurb: "Auth, database, project settings",
   },
   {
+    name: "Announcement list",
+    href: "https://supabase.com/dashboard/project/rddzasjcgrdlugeducsu/editor?schema=public",
+    blurb: "Product announcement subscribers (Table Editor)",
+  },
+  {
     name: "Cloudflare",
     href: "https://dash.cloudflare.com",
     blurb: "DNS for machiilabs.com",

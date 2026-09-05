@@ -69,6 +69,7 @@ Copy [`.env.example`](.env.example) and set:
 |----------|---------|
 | `NEXT_PUBLIC_SUPABASE_URL` | Project URL |
 | `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Anon / publishable key |
+| `SUPABASE_SERVICE_ROLE_KEY` | Server-only; mailing-list writes (never expose to the browser) |
 | `ADMIN_EMAILS` | Comma-separated allowlist (e.g. `you@example.com`) |
 
 Also set the same vars in the Vercel project. Auth redirect allow-list already includes localhost, `machiilabs.com`, and the Vercel alias.

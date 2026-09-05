@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
+import { AnnouncementSignup } from "@/components/announcement-signup";
 import { MachiiLogo } from "@/components/machii-logo";
 
 const inter = Inter({
@@ -214,18 +215,28 @@ export default function Home() {
           >
             Contact the lab
           </a>
+
+          <AnnouncementSignup />
         </div>
       </main>
 
       <footer className="relative z-10 border-t border-white/5 px-6 py-5 sm:px-10">
         <div className="mx-auto flex max-w-6xl flex-col gap-1 text-sm text-fog/70 sm:flex-row sm:items-center sm:justify-between">
           <span>© {new Date().getFullYear()} Mach II Labs</span>
-          <a
-            href="mailto:support@machiilabs.com"
-            className="transition-colors hover:text-snow"
-          >
-            support@machiilabs.com
-          </a>
+          <div className="flex flex-wrap gap-x-5 gap-y-1">
+            <Link
+              href="/privacy"
+              className="transition-colors hover:text-snow"
+            >
+              Privacy
+            </Link>
+            <a
+              href="mailto:support@machiilabs.com"
+              className="transition-colors hover:text-snow"
+            >
+              support@machiilabs.com
+            </a>
+          </div>
         </div>
       </footer>
     </div>
