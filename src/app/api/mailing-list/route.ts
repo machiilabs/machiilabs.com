@@ -38,16 +38,7 @@ export async function POST(request: Request) {
         return NextResponse.json({ ok: true });
       }
       console.error("mailing-list insert", insertError.code, insertError.message);
-      // Temporary prod diagnostics — message is not secret (no key material).
-      return NextResponse.json(
-        {
-          ok: false,
-          error: "db",
-          code: insertError.code ?? null,
-          detail: insertError.message,
-        },
-        { status: 500 },
-      );
+      return NextResponse.json({ ok: false, error: "db" }, { status: 500 });
     }
 
     return NextResponse.json({ ok: true });
