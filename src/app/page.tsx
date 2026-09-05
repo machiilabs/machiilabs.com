@@ -171,7 +171,7 @@ export default function Home() {
               </Link>
               <p className="mt-3 text-base leading-relaxed text-fog sm:text-lg">
                 A Mac-only SAM-BA programmer for the HP 15c Collector&apos;s
-                Edition. Guided flashing,{" "}
+                Edition. Firmware updates without hassle,{" "}
                 <span className="font-semibold text-snow">free forever</span>.
               </p>
               <div className="mt-5 flex flex-wrap items-center gap-x-6 gap-y-3">
@@ -209,13 +209,6 @@ export default function Home() {
             </Link>
           </div>
 
-          <a
-            href="mailto:support@machiilabs.com"
-            className="w-fit text-base text-fog/80 transition-colors hover:text-snow"
-          >
-            Contact the lab
-          </a>
-
           <AnnouncementSignup />
         </div>
       </main>
@@ -231,10 +224,10 @@ export default function Home() {
               Privacy
             </Link>
             <a
-              href="mailto:support@machiilabs.com"
+              href="mailto:contact@machiilabs.com"
               className="transition-colors hover:text-snow"
             >
-              support@machiilabs.com
+              Contact Mach II Labs
             </a>
           </div>
         </div>

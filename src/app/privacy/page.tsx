@@ -32,7 +32,7 @@ export default function PrivacyPage() {
               If you opt in on the home page, we store your{" "}
               <strong className="font-medium text-snow">email address</strong>{" "}
               so we can send occasional product announcements (new releases,
-              important updates). Not a newsletter drip.
+              important updates).
             </li>
             <li>
               We keep that address only so we can email you those announcements.

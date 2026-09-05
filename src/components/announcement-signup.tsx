@@ -40,8 +40,8 @@ export function AnnouncementSignup() {
         Product announcements
       </p>
       <p className="mt-3 text-base leading-relaxed text-fog sm:text-lg">
-        Occasional notes when Mach II Labs ships something new. No newsletter
-        drip — unsubscribe anytime.
+        Occasional notes when Mach II Labs ships something new. Unsubscribe
+        anytime.
       </p>
       {status === "done" ? (
         <p className="mt-5 text-sm text-snow" role="status">
