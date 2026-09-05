@@ -30,6 +30,11 @@ const PORTALS = [
     blurb: "DNS for machiilabs.com",
   },
   {
+    name: "Google Search Console",
+    href: "https://search.google.com/search-console?resource_id=sc-domain%3Amachiilabs.com",
+    blurb: "Indexing, sitemaps, search performance",
+  },
+  {
     name: "Apple Developer",
     href: "https://developer.apple.com/account",
     blurb: "Certificates, identifiers, App Store Connect",

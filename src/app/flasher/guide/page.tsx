@@ -220,14 +220,14 @@ export default function FlasherGuidePage() {
 
         <section className="mt-14">
           <h2 className="text-xl font-semibold tracking-tight text-[#1a1a1a]">
-            Batch mode (many units, same firmware)
+            Batch mode (quick path for experienced users)
           </h2>
           <p className="mt-4 text-base leading-relaxed text-[#374151]">
-            Choose <strong>BATCH</strong>{" "}on the welcome screen if you flash
-            several Collector&apos;s Editions in a row — for example at a
-            calculator shop or repair bench. This mode is for experienced
-            operators who already know ERASE+RESET and accept that user memory is
-            wiped on every unit.
+            Choose <strong>BATCH</strong>{" "}on the welcome screen when you already
+            know ERASE+RESET and want a shorter path than guided FLASH mode —
+            including when you flash more than one Collector&apos;s Edition with
+            the same firmware. User memory is wiped on every unit; accept that
+            before you start.
           </p>
           <ol className="mt-4 list-decimal space-y-2.5 pl-6 text-base leading-relaxed text-[#374151]">
             <li>
