@@ -236,7 +236,13 @@ export default function FlasherPage() {
             </h2>
             <ul className="mt-3 list-disc space-y-2 pl-5 text-base leading-relaxed text-fog">
               <li>A Mac running macOS 13 or later</li>
-              <li>HP 15c Collector&apos;s Edition</li>
+              <li>
+                HP 15c Collector&apos;s Edition (primary). There are field
+                reports that Flasher also works with the HP 16c CE and post-2015
+                HP 12c. These calculators use the same
+                ATSAM4LC2C chip as the HP 15c CE — use at your own risk and
+                confirm the firmware file matches the calculator.
+              </li>
               <li>Official USB-C (or USB-A) pogo programming cable</li>
               <li>
                 A 114,688-byte (112 KB) firmware <code className="font-mono text-snow">.bin</code> you
@@ -257,10 +263,11 @@ export default function FlasherPage() {
         <aside className="mt-16 max-w-3xl border-l-2 border-afterburn/70 pl-5">
           <p className="text-base leading-relaxed text-fog">
             <span className="font-semibold text-snow">Cable warning.</span> Use
-            the pogo cable only on the HP 15c Collector&apos;s Edition. Do not
-            use it on an HP 15c Limited Edition, a pre-2015 12C, an HP 20b, or an
-            HP 30b — different protocol and voltage; the cable can permanently
-            damage those calculators.
+            the pogo cable only on calculators designed for it (HP 15c
+            Collector&apos;s Edition and the same post-2015 USB-pogo family). Do
+            not use it on an HP 15c Limited Edition, a pre-2015 12C, an HP 20b,
+            or an HP 30b — different protocol and voltage; the cable can
+            permanently damage those calculators.
           </p>
         </aside>
 

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { MachiiLogo } from "@/components/machii-logo";
 
 export const metadata: Metadata = {
   title: "Privacy",
@@ -11,11 +12,22 @@ export const metadata: Metadata = {
 export default function PrivacyPage() {
   return (
     <div className="min-h-dvh bg-ink text-snow">
+      <header className="border-b border-white/5">
+        <div className="mx-auto flex w-full max-w-6xl items-center justify-between gap-6 px-6 py-4 sm:px-10">
+          <MachiiLogo />
+          <nav className="flex items-center gap-5 text-sm">
+            <a
+              href="mailto:support@machiilabs.com"
+              className="text-fog transition-colors hover:text-snow"
+            >
+              Support
+            </a>
+          </nav>
+        </div>
+      </header>
+
       <main className="mx-auto w-full max-w-2xl px-6 py-16 sm:px-10">
-        <p className="font-display text-xs font-semibold tracking-[0.2em] text-afterburn uppercase">
-          Mach II Labs
-        </p>
-        <h1 className="mt-3 font-display text-3xl font-bold tracking-tight">
+        <h1 className="font-display text-3xl font-bold tracking-tight">
           Privacy
         </h1>
         <p className="mt-4 text-base leading-relaxed text-snow sm:text-lg">

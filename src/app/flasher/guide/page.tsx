@@ -114,7 +114,13 @@ export default function FlasherGuidePage() {
               A Mac running macOS 13 or later (this software runs on Mac only —
               you do not need Windows SAM-BA)
             </li>
-            <li>HP 15c Collector&apos;s Edition only</li>
+            <li>
+              HP 15c Collector&apos;s Edition (primary). There are field reports
+              that Flasher also works with the HP 16c CE and post-2015 HP 12c.
+              These calculators use the same ATSAM4LC2C
+              chip as the HP 15c CE — use at your own risk and confirm the
+              firmware file matches the calculator.
+            </li>
             <li>Official USB-C or USB-A pogo programming cable</li>
             <li>
               A 114,688-byte firmware{" "}
