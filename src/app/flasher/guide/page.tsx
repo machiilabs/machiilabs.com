@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { MachiiLogo } from "@/components/machii-logo";
+import { downloadApiPath } from "@/lib/downloads";
 
 export const metadata: Metadata = {
   title: {
@@ -35,8 +36,7 @@ export const metadata: Metadata = {
   },
 };
 
-const DOWNLOAD_URL =
-  "https://downloads.machiilabs.com/15CEFlasher-1.2.1-213.dmg";
+const DOWNLOAD_HREF = downloadApiPath("flasher");
 const FIRMWARE_URL =
   "https://hpcalcs.com/downloads/apps/HP_IAR_USB%20120ms.bin";
 const SHA256 =
@@ -86,7 +86,7 @@ export default function FlasherGuidePage() {
 
         <div className="mt-8 flex flex-wrap gap-4 text-sm">
           <a
-            href={DOWNLOAD_URL}
+            href={DOWNLOAD_HREF}
             className="font-semibold text-[#1d4ed8] underline-offset-2 hover:underline"
           >
             Download 15CE Flasher
@@ -156,7 +156,7 @@ export default function FlasherGuidePage() {
             <li>
               Download{" "}
               <a
-                href={DOWNLOAD_URL}
+                href={DOWNLOAD_HREF}
                 className="font-medium text-[#1d4ed8] underline-offset-2 hover:underline"
               >
                 {DMG_FILENAME}

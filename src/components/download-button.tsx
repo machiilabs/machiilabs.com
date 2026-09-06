@@ -1,5 +1,7 @@
+import { downloadApiPath, type DownloadProduct } from "@/lib/downloads";
+
 type DownloadButtonProps = {
-  href: string;
+  product: DownloadProduct;
   /** Shown after the label, e.g. "v1.0.0 · macOS 26+" */
   meta: string;
   /** Primary label. Default: "Download free" */
@@ -8,15 +10,16 @@ type DownloadButtonProps = {
 
 /**
  * Primary product download CTA — shared by Skagway and 15CE Flasher.
+ * Goes through /api/download so clicks are countable on Vercel.
  */
 export function DownloadButton({
-  href,
+  product,
   meta,
   label = "Download free",
 }: DownloadButtonProps) {
   return (
     <a
-      href={href}
+      href={downloadApiPath(product)}
       className="inline-flex items-center gap-3 bg-afterburn px-7 py-3.5 font-display text-base font-bold tracking-wide text-ink transition-colors hover:bg-afterburn-soft"
     >
       {label}

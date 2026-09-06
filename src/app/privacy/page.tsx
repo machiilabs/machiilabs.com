@@ -4,7 +4,7 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "Privacy",
   description:
-    "How Mach II Labs handles the optional product-announcement email list and site contact.",
+    "How Mach II Labs handles the website, optional product-announcement email list, and apps.",
   alternates: { canonical: "https://machiilabs.com/privacy" },
 };
 
@@ -18,12 +18,30 @@ export default function PrivacyPage() {
         <h1 className="mt-3 font-display text-3xl font-bold tracking-tight">
           Privacy
         </h1>
-        <p className="mt-4 text-sm leading-relaxed text-fog">
-          Short and specific. We do not run site analytics or app telemetry by
-          default.
+        <p className="mt-4 text-base leading-relaxed text-snow sm:text-lg">
+          We don&apos;t sell your data to anyone. Ever.
         </p>
 
         <section className="mt-12">
+          <h2 className="font-display text-lg font-semibold text-snow">
+            Website
+          </h2>
+          <ul className="mt-4 list-disc space-y-2 pl-5 text-sm leading-relaxed text-fog">
+            <li>
+              We use standard web analytics to collect aggregate visit stats so
+              we can count traffic to each page on machiilabs.com. It is
+              cookieless, does not collect personally identifying information,
+              and does not build advertising profiles.
+            </li>
+            <li>
+              App download buttons go through a short redirect on our site so we
+              can count how often our applications are downloaded. The file
+              itself is served from downloads.machiilabs.com.
+            </li>
+          </ul>
+        </section>
+
+        <section className="mt-10">
           <h2 className="font-display text-lg font-semibold text-snow">
             Product announcement list
           </h2>
@@ -40,14 +58,7 @@ export default function PrivacyPage() {
             </li>
             <li>
               You can leave anytime via the link in an announcement (when we
-              send one). That removes your address from our list. Or email{" "}
-              <a
-                href="mailto:support@machiilabs.com"
-                className="text-snow underline-offset-4 hover:underline"
-              >
-                support@machiilabs.com
-              </a>
-              .
+              send one). That removes your address from our list.
             </li>
           </ul>
         </section>
@@ -67,8 +78,17 @@ export default function PrivacyPage() {
             Apps
           </h2>
           <p className="mt-3 text-sm leading-relaxed text-fog">
-            Mach II Labs products do not phone home with usage analytics or
-            silent diagnostics. Bug reports are user-initiated.
+            Mach II Labs products do not send usage analytics or silent
+            diagnostics. Bug reports are user-initiated via email to{" "}
+            <a
+              href="mailto:support@machiilabs.com"
+              className="text-snow underline-offset-4 hover:underline"
+            >
+              support@machiilabs.com
+            </a>
+            . Some apps offer optional update checks that are off by default;
+            if you turn them on, the app only asks whether a newer build
+            exists — nothing about how you use the app.
           </p>
         </section>
 

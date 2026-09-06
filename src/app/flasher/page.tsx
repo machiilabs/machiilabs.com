@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { DownloadButton } from "@/components/download-button";
 import { MachiiLogo } from "@/components/machii-logo";
+import { PRODUCT_DOWNLOADS } from "@/lib/downloads";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -43,8 +44,7 @@ export const metadata: Metadata = {
   },
 };
 
-const DOWNLOAD_URL =
-  "https://downloads.machiilabs.com/15CEFlasher-1.2.1-213.dmg";
+const DOWNLOAD_URL = PRODUCT_DOWNLOADS.flasher;
 const VERSION = "1.2.1";
 const BUILD = "213";
 const SHA256 =
@@ -135,7 +135,7 @@ export default function FlasherPage() {
 
             <div className="mt-10 flex flex-wrap items-center gap-4">
               <DownloadButton
-                href={DOWNLOAD_URL}
+                product="flasher"
                 meta={`v${VERSION} (${BUILD}) · macOS 13+`}
               />
               <Link

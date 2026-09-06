@@ -26,7 +26,6 @@ export const metadata: Metadata = {
   },
 };
 
-const DOWNLOAD_URL = "https://downloads.machiilabs.com/Skagway.dmg";
 const VERSION = "1.0.0";
 
 type Feature = {
@@ -226,7 +225,7 @@ export default function SkagwayPage() {
 
             <div className="anim-rise anim-rise-delay-3 mt-10 flex flex-wrap items-center gap-x-8 gap-y-4">
               <DownloadButton
-                href={DOWNLOAD_URL}
+                product="skagway"
                 meta={`v${VERSION} · macOS 26+`}
               />
               <Link
@@ -295,7 +294,7 @@ export default function SkagwayPage() {
           </p>
           <div className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-5">
             <DownloadButton
-              href={DOWNLOAD_URL}
+              product="skagway"
               meta={`v${VERSION} · macOS 26+`}
             />
             <Link

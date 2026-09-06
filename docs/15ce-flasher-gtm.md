@@ -2,7 +2,7 @@
 
 Short outreach plan for people who may want to flash an HP 15c Collector’s Edition. Pair with the on-site SEO foundation (`/flasher`, sitemap, OG card).
 
-**Privacy:** no site analytics, tracking pixels, or app telemetry. Bug reports stay user-initiated.
+**Privacy:** no app telemetry. Website may use cookieless visit metrics and download counts. Bug reports stay user-initiated.
 
 ## Where to post (priority order)
 
@@ -28,7 +28,7 @@ Lead with the problem, then the product, then links. Stay factual.
 
 ## What we will not do
 
-- No Google Analytics, tracking pixels, or app phone-home
+- No app phone-home / usage telemetry in Flasher or Skagway
 - No SEO spam or doorway pages
 - No bought backlinks
 - No “affiliate” or paid placement for this free tool (unless you consciously decide otherwise later)
