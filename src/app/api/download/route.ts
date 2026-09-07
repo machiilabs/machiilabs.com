@@ -10,7 +10,7 @@ function isProduct(value: string | null): value is DownloadProduct {
 }
 
 /**
- * Countable download hop: /api/download?product=flasher|skagway
+ * Countable download hop: /api/download?product=flasher|winflasher|skagway
  * Records one row in site_download_events, then 302 to the CDN file.
  */
 export async function GET(request: Request) {
