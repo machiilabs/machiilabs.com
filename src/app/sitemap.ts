@@ -38,15 +38,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.65,
     },
-    {
-      url: `${BASE}/skagway/manual/first-launch`,
-      lastModified: now,
-      changeFrequency: "monthly",
-      priority: 0.55,
-    },
   ];
 
-  const manualRoutes: MetadataRoute.Sitemap = MANUAL_PAGES.map((page) => ({
+  // first-launch lives at /skagway/manual (redirect); do not list the redirect URL.
+  const manualRoutes: MetadataRoute.Sitemap = MANUAL_PAGES.filter(
+    (page) => page.slug !== "first-launch",
+  ).map((page) => ({
     url: `${BASE}/skagway/manual/${page.slug}`,
     lastModified: now,
     changeFrequency: "monthly" as const,

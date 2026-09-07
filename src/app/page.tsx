@@ -15,6 +15,9 @@ export const metadata: Metadata = {
   title: "Mach II Labs",
   description:
     "Independent Mac software lab. Skagway 1.0 — free video organizer for files already on your drives. Also: 15CE Flasher for HP 15c CE.",
+  alternates: {
+    canonical: "https://machiilabs.com",
+  },
   openGraph: {
     title: "Mach II Labs — Skagway 1.0",
     description:
