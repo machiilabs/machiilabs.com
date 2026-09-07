@@ -30,6 +30,11 @@ const PORTALS = [
     blurb: "Product announcement subscribers (Table Editor)",
   },
   {
+    name: "Download counts",
+    href: "https://supabase.com/dashboard/project/rddzasjcgrdlugeducsu/editor?schema=public",
+    blurb: "site_download_events — one row per Flasher/Skagway download click",
+  },
+  {
     name: "Cloudflare",
     href: "https://dash.cloudflare.com",
     blurb: "DNS for machiilabs.com",
