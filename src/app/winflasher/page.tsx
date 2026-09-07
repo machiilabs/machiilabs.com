@@ -26,7 +26,7 @@ const VERSION = "0.1.0";
 const BUILD = "100";
 const EXE_FILENAME = "15CEFlasher-Win-0.1.0-100.exe";
 const SHA256 =
-  "107221896365fd3e74feb9fd1d8cfcfce637ca6b695a0ab3e0391a7fbfeff110";
+  "2e7fc5c31fc83b613abd7c49416229a6e2220a54c0de4eea95248431b8fbb425";
 
 export default function WinFlasherPage() {
   return (
