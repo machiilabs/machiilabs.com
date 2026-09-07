@@ -1,15 +1,8 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
-import { DownloadButton } from "@/components/download-button";
 import { MachiiLogo } from "@/components/machii-logo";
-import { PRODUCT_DOWNLOADS } from "@/lib/downloads";
-
-const inter = Inter({
-  subsets: ["latin"],
-  weight: ["700"],
-});
+import { PRODUCT_DOWNLOADS, downloadApiPath } from "@/lib/downloads";
 
 export const metadata: Metadata = {
   title: {
@@ -45,6 +38,7 @@ export const metadata: Metadata = {
 };
 
 const DOWNLOAD_URL = PRODUCT_DOWNLOADS.flasher;
+const DOWNLOAD_HREF = downloadApiPath("flasher");
 const VERSION = "1.2.1";
 const BUILD = "213";
 const SHA256 =
@@ -76,36 +70,25 @@ const softwareJsonLd = {
 
 export default function FlasherPage() {
   return (
-    <div className="relative min-h-dvh overflow-hidden bg-ink text-snow">
+    <div className="min-h-dvh bg-[#f7f6f3] text-[#1a1a1a]">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareJsonLd) }}
       />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0"
-        style={{
-          background: `
-            radial-gradient(100% 70% at 80% 0%, rgba(61, 111, 154, 0.28) 0%, transparent 55%),
-            radial-gradient(80% 50% at 10% 90%, rgba(232, 160, 69, 0.1) 0%, transparent 50%),
-            linear-gradient(165deg, #05080f 0%, #0a1220 45%, #081018 100%)
-          `,
-        }}
-      />
 
-      <header className="relative z-10 border-b border-white/5">
+      <header className="border-b border-[#e5e7eb] bg-white">
         <div className="mx-auto flex w-full max-w-6xl items-center justify-between gap-6 px-6 py-4 sm:px-10">
-          <MachiiLogo />
+          <MachiiLogo tone="light" />
           <nav className="flex items-center gap-5 text-sm">
             <Link
               href="/flasher/guide"
-              className="text-fog transition-colors hover:text-snow"
+              className="text-[#4b5563] transition-colors hover:text-[#1a1a1a]"
             >
               Users guide
             </Link>
             <a
               href="mailto:support@machiilabs.com"
-              className="text-fog transition-colors hover:text-snow"
+              className="text-[#4b5563] transition-colors hover:text-[#1a1a1a]"
             >
               Support
             </a>
@@ -113,63 +96,66 @@ export default function FlasherPage() {
         </div>
       </header>
 
-      <main className="relative z-10 mx-auto w-full max-w-6xl px-6 pb-24 pt-14 sm:px-10 sm:pt-20">
-        <section className="grid items-start gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:gap-16 xl:gap-20">
-          <div className="relative z-20 max-w-xl lg:pt-2">
-            <p className="font-display text-[0.7rem] font-semibold tracking-[0.28em] text-fog uppercase">
+      <main className="mx-auto w-full max-w-6xl px-6 pb-24 pt-12 sm:px-10 sm:pt-16">
+        <section className="grid items-start gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:gap-14 xl:gap-16">
+          <div className="max-w-xl">
+            <p className="text-xs font-semibold tracking-wide text-[#6b7280] uppercase">
               Mac only · free forever · macOS 13+
             </p>
-            <h1
-              className={`${inter.className} mt-4 text-[clamp(2.5rem,8vw,4.75rem)] leading-[0.95] font-bold tracking-[-0.03em] text-snow`}
-            >
+            <h1 className="mt-3 font-display text-[clamp(2.25rem,6vw,3.75rem)] leading-[1.05] font-bold tracking-tight text-[#1a1a1a]">
               15CE Flasher
             </h1>
-            <p className="mt-5 font-display text-2xl leading-snug font-semibold tracking-tight text-snow sm:text-3xl">
+            <p className="mt-4 text-xl font-semibold tracking-tight text-[#1a1a1a] sm:text-2xl">
               Flash HP 15c CE firmware on a Mac.
             </p>
-            <p className="mt-4 text-lg leading-relaxed text-fog sm:text-xl">
+            <p className="mt-4 text-base leading-relaxed text-[#374151] sm:text-lg">
               Free guided app for the HP 15c Collector&apos;s Edition over the
               official pogo cable. Mac only — the app walks you through every
               step of the flashing process.
             </p>
 
-            <div className="mt-10 flex flex-wrap items-center gap-4">
-              <DownloadButton
-                product="flasher"
-                meta={`v${VERSION} (${BUILD}) · macOS 13+`}
-              />
+            <div className="mt-8 flex flex-wrap items-center gap-4">
+              <a
+                href={DOWNLOAD_HREF}
+                className="inline-flex items-center gap-3 bg-[#1a1a1a] px-6 py-3.5 text-base font-semibold tracking-wide text-white transition-colors hover:bg-[#374151]"
+              >
+                Download free
+                <span className="text-sm font-medium text-white/70">
+                  v{VERSION} ({BUILD}) · macOS 13+
+                </span>
+              </a>
               <Link
                 href="/flasher/guide"
-                className="inline-flex items-center font-display text-sm font-semibold tracking-wide text-snow underline-offset-4 hover:text-afterburn-soft hover:underline"
+                className="inline-flex items-center text-sm font-semibold tracking-wide text-[#1d4ed8] underline-offset-2 hover:underline"
               >
                 Read the users guide →
               </Link>
             </div>
-            <p className="mt-3 text-sm text-fog/70">
+            <p className="mt-3 text-sm text-[#6b7280]">
               Notarized DMG · Mac only · No HP firmware included
             </p>
-            <p className="mt-2 text-sm text-fog/60">
+            <p className="mt-2 text-sm text-[#6b7280]">
               Built for Mac users who previously needed Windows SAM-BA — you
               don&apos;t anymore.
             </p>
-            <details className="mt-4 text-sm text-fog/70">
-              <summary className="cursor-pointer text-fog transition-colors hover:text-snow">
+            <details className="mt-4 text-sm text-[#6b7280]">
+              <summary className="cursor-pointer text-[#4b5563] transition-colors hover:text-[#1a1a1a]">
                 How do I verify the download?
               </summary>
-              <ol className="mt-3 list-decimal space-y-2 pl-5 text-xs leading-relaxed text-fog/60">
+              <ol className="mt-3 list-decimal space-y-2 pl-5 text-xs leading-relaxed text-[#6b7280]">
                 <li>
                   Check the filename is{" "}
-                  <span className="font-mono text-fog/80">{DMG_FILENAME}</span>
+                  <span className="font-mono text-[#374151]">{DMG_FILENAME}</span>
                 </li>
                 <li>
                   In Terminal, run{" "}
-                  <code className="break-all font-mono text-fog/80">
+                  <code className="break-all font-mono text-[#374151]">
                     shasum -a 256 /path/to/{DMG_FILENAME}
                   </code>
                 </li>
                 <li>
                   Ensure the output value is{" "}
-                  <span className="break-all font-mono text-fog/80">
+                  <span className="break-all font-mono text-[#374151]">
                     {SHA256}
                   </span>
                 </li>
@@ -177,93 +163,92 @@ export default function FlasherPage() {
             </details>
           </div>
 
-          <div className="relative z-0 mt-8 min-w-0 w-full lg:mt-[1in] lg:ml-[0.5in]">
-            <div className="product-stage">
-              <div className="product-frame bg-black p-[20px] sm:p-[30px]">
-                <Image
-                  src="/flasher/15CE Flasher.png"
-                  alt="15CE Flasher — guided flashing wizard"
-                  width={2024}
-                  height={1744}
-                  priority
-                  sizes="(max-width: 1024px) 100vw, 48vw"
-                  className="h-auto w-full"
-                />
-              </div>
+          <div className="min-w-0 w-full">
+            <div className="overflow-hidden border border-[#e5e7eb] bg-white shadow-sm">
+              <Image
+                src="/flasher/15CE Flasher.png"
+                alt="15CE Flasher — guided flashing wizard"
+                width={2024}
+                height={1744}
+                priority
+                sizes="(max-width: 1024px) 100vw, 48vw"
+                className="h-auto w-full"
+              />
             </div>
           </div>
         </section>
 
-        <section className="mt-20 grid gap-12 sm:grid-cols-2">
+        <section className="mt-20 grid gap-10 border-t border-[#e5e7eb] pt-14 sm:grid-cols-2 sm:gap-12">
           <div>
-            <h2 className="font-display text-lg font-bold text-snow">
+            <h2 className="text-lg font-semibold tracking-tight text-[#1a1a1a]">
               Three modes
             </h2>
-            <p className="mt-3 text-base leading-relaxed text-fog">
-              <strong className="font-semibold text-snow">DEMO</strong> walks
-              through the wizard with a simulated calculator — no hardware
+            <p className="mt-3 text-base leading-relaxed text-[#374151]">
+              <strong className="font-semibold text-[#1a1a1a]">DEMO</strong>{" "}
+              walks through the wizard with a simulated calculator — no hardware
               required to learn the steps.{" "}
-              <strong className="font-semibold text-snow">FLASH</strong> is the
-              full seven-step wizard for one CE.{" "}
-              <strong className="font-semibold text-snow">BATCH</strong> is for
-              experienced operators and those who want to flash multiple
+              <strong className="font-semibold text-[#1a1a1a]">FLASH</strong> is
+              the full seven-step wizard for one CE.{" "}
+              <strong className="font-semibold text-[#1a1a1a]">BATCH</strong> is
+              for experienced operators and those who want to flash multiple
               calculators in sequence.
             </p>
           </div>
           <div>
-            <h2 className="font-display text-lg font-bold text-snow">
+            <h2 className="text-lg font-semibold tracking-tight text-[#1a1a1a]">
               Step by Step Workflow
             </h2>
-            <p className="mt-3 text-base leading-relaxed text-fog">
+            <p className="mt-3 text-base leading-relaxed text-[#374151]">
               A seven-step wizard with diagrams and Continue / Back navigation.
               Status feedback when the cable and SAM-BA connect. There is no
               other software you need to install.
             </p>
           </div>
           <div>
-            <h2 className="font-display text-lg font-bold text-snow">
+            <h2 className="text-lg font-semibold tracking-tight text-[#1a1a1a]">
               Safe flash layout
             </h2>
-            <p className="mt-3 text-base leading-relaxed text-fog">
+            <p className="mt-3 text-base leading-relaxed text-[#374151]">
               Writing starts at address 0x04000. The SAM-BA bootloader below that
               is left intact. Optional backup before you flash; verify after
               write; checksum check on the calculator when you&apos;re done.
             </p>
           </div>
           <div>
-            <h2 className="font-display text-lg font-bold text-snow">
+            <h2 className="text-lg font-semibold tracking-tight text-[#1a1a1a]">
               What you need
             </h2>
-            <ul className="mt-3 list-disc space-y-2 pl-5 text-base leading-relaxed text-fog">
+            <ul className="mt-3 list-disc space-y-2 pl-5 text-base leading-relaxed text-[#374151]">
               <li>A Mac running macOS 13 or later</li>
               <li>
                 HP 15c Collector&apos;s Edition (primary). There are field
                 reports that Flasher also works with the HP 16c CE and post-2015
-                HP 12c. These calculators use the same
-                ATSAM4LC2C chip as the HP 15c CE — use at your own risk and
-                confirm the firmware file matches the calculator.
+                HP 12c. These calculators use the same ATSAM4LC2C chip as the HP
+                15c CE — use at your own risk and confirm the firmware file
+                matches the calculator.
               </li>
               <li>Official USB-C (or USB-A) pogo programming cable</li>
               <li>
-                A 114,688-byte (112 KB) firmware <code className="font-mono text-snow">.bin</code> you
-                already have — this download does not include HP firmware
+                A 114,688-byte (112 KB) firmware{" "}
+                <code className="font-mono text-sm text-[#1a1a1a]">.bin</code>{" "}
+                you already have — this download does not include HP firmware
               </li>
             </ul>
           </div>
           <div>
-            <h2 className="font-display text-lg font-bold text-snow">
+            <h2 className="text-lg font-semibold tracking-tight text-[#1a1a1a]">
               Privacy
             </h2>
-            <p className="mt-3 text-base leading-relaxed text-fog">
+            <p className="mt-3 text-base leading-relaxed text-[#374151]">
               Offline. No telemetry, no network, no automatic diagnostics.
             </p>
           </div>
         </section>
 
-        <aside className="mt-16 max-w-3xl border-l-2 border-afterburn/70 pl-5">
-          <p className="text-base leading-relaxed text-fog">
-            <span className="font-semibold text-snow">Cable warning.</span> Use
-            the pogo cable only on calculators designed for it (HP 15c
+        <aside className="mt-14 max-w-3xl border-l-2 border-[#f59e0b] pl-5">
+          <p className="text-base leading-relaxed text-[#374151]">
+            <span className="font-semibold text-[#1a1a1a]">Cable warning.</span>{" "}
+            Use the pogo cable only on calculators designed for it (HP 15c
             Collector&apos;s Edition and the same post-2015 USB-pogo family). Do
             not use it on an HP 15c Limited Edition, a pre-2015 12C, an HP 20b,
             or an HP 30b — different protocol and voltage; the cable can
@@ -271,10 +256,10 @@ export default function FlasherPage() {
           </p>
         </aside>
 
-        <aside className="mt-8 max-w-3xl border-l-2 border-white/20 pl-5">
-          <p className="text-base leading-relaxed text-fog">
-            <span className="font-semibold text-snow">Disclaimer.</span> 15CE
-            Flasher and related documentation are provided as is, without
+        <aside className="mt-6 max-w-3xl border-l-2 border-[#9ca3af] pl-5">
+          <p className="text-base leading-relaxed text-[#374151]">
+            <span className="font-semibold text-[#1a1a1a]">Disclaimer.</span>{" "}
+            15CE Flasher and related documentation are provided as is, without
             warranty of any kind. Although we have employed several safeguards
             to help keep this software safe, flashing firmware can wipe user
             memory, leave the calculator unusable, or permanently brick the
@@ -286,22 +271,22 @@ export default function FlasherPage() {
           </p>
         </aside>
 
-        <p className="mt-12 max-w-3xl text-sm leading-relaxed text-fog/60">
+        <p className="mt-12 max-w-3xl text-sm leading-relaxed text-[#6b7280]">
           Mach II Labs is not affiliated with HP, Atmel, or Microchip. The
           download does not include HP firmware. Flash helper applet from Atmel
           SAM-BA 2.16 redistributed under the SAM Software Package License.
         </p>
       </main>
 
-      <footer className="relative z-10 border-t border-white/5 px-6 py-5 sm:px-10">
-        <div className="mx-auto flex max-w-6xl flex-col gap-1 text-sm text-fog/70 sm:flex-row sm:items-center sm:justify-between">
+      <footer className="border-t border-[#e5e7eb] bg-white px-6 py-5 sm:px-10">
+        <div className="mx-auto flex max-w-6xl flex-col gap-1 text-sm text-[#6b7280] sm:flex-row sm:items-center sm:justify-between">
           <span>
             © {new Date().getFullYear()} Mach II Labs · 15CE Flasher · free
             forever
           </span>
           <a
             href="mailto:support@machiilabs.com"
-            className="transition-colors hover:text-snow"
+            className="transition-colors hover:text-[#1a1a1a]"
           >
             support@machiilabs.com
           </a>
