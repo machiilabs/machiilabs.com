@@ -23,10 +23,10 @@ export const metadata: Metadata = {
 
 const DOWNLOAD_HREF = downloadApiPath("winflasher");
 const VERSION = "0.1.0";
-const BUILD = "103";
-const EXE_FILENAME = "15CEFlasher-Win-0.1.0-103.exe";
+const BUILD = "104";
+const EXE_FILENAME = "15CEFlasher-Win-0.1.0-104.exe";
 const SHA256 =
-  "6dd801ce985fd8bf769b845de89a4206abcb9998f9287dac5e42b81e41f3ead9";
+  "5f9cb63e8714bd8cedddb29e209038f2fa05657f0ef988b9e279e93bd2e917f9";
 
 export default function WinFlasherPage() {
   return (
