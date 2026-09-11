@@ -44,6 +44,13 @@ export type DownloadDashboardData = {
   buckets: DownloadBucket[];
 };
 
+export type DownloadSummary = {
+  lastHour: number;
+  last24Hours: number;
+  allTime: number;
+  lastDownloadedAt: string | null;
+};
+
 const EMPTY_COUNTS = (): DownloadCounts => ({
   flasher: 0,
   winflasher: 0,

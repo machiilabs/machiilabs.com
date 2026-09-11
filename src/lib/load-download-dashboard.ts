@@ -5,6 +5,7 @@ import {
   periodWindow,
   type DownloadDashboardData,
   type DownloadPeriodId,
+  type DownloadSummary,
 } from "@/lib/download-stats";
 
 const PAGE_SIZE = 1000;
@@ -40,12 +41,7 @@ async function fetchDownloadEvents(since: Date | null): Promise<
   return rows;
 }
 
-export type DownloadSummary = {
-  lastHour: number;
-  last24Hours: number;
-  allTime: number;
-  lastDownloadedAt: string | null;
-};
+export type { DownloadSummary };
 
 export async function loadDownloadSummary(): Promise<DownloadSummary> {
   const events = await fetchDownloadEvents(null);
