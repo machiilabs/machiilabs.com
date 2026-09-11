@@ -46,11 +46,11 @@ const MAC_SHA256 =
   "6870d96105001aaef0a636760752da829616c9c3efb2224bb06ec5101bdea858";
 const MAC_FILENAME = "15CEFlasher-1.2.1-213.dmg";
 
-const WIN_VERSION = "1.0.0";
-const WIN_BUILD = "108";
+const WIN_VERSION = "1.0.1";
+const WIN_BUILD = "109";
 const WIN_SHA256 =
-  "94b0cb7f9bfa764b49292639457027f185051639e2df3350afba7c241be5f554";
-const WIN_FILENAME = "15CEFlasher-Win-1.0.0-108.exe";
+  "6e9d900f394f849f1c735f3a30ae2e6fea1af5b2b6bdce8339b85abc8607a03c";
+const WIN_FILENAME = "15CEFlasher-Win-1.0.1-109.exe";
 
 const softwareJsonLd = {
   "@context": "https://schema.org",
@@ -268,7 +268,7 @@ export default function FlasherPage() {
               , <strong className="font-semibold text-[#1a1a1a]">
                 Connection Probe
               </strong>{" "}
-              lets you confirm the cable and SAM-BA detection before you choose
+              lets you confirm the cable and SAM-BA detection before flashing
               firmware.
             </p>
           </div>

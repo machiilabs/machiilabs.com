@@ -46,8 +46,8 @@ const MAC_SHA256 =
 const MAC_FILENAME = "15CEFlasher-1.2.1-213.dmg";
 
 const WIN_SHA256 =
-  "94b0cb7f9bfa764b49292639457027f185051639e2df3350afba7c241be5f554";
-const WIN_FILENAME = "15CEFlasher-Win-1.0.0-108.exe";
+  "6e9d900f394f849f1c735f3a30ae2e6fea1af5b2b6bdce8339b85abc8607a03c";
+const WIN_FILENAME = "15CEFlasher-Win-1.0.1-109.exe";
 
 export default function FlasherGuidePage() {
   return (
@@ -255,7 +255,7 @@ export default function FlasherGuidePage() {
                 Connection Probe
               </strong>{" "}
               (Windows only) — connect to real hardware and confirm SAM-BA
-              detection without choosing firmware or flashing. See below.
+              detection without flashing firmware. See below.
             </li>
             <li>
               <strong className="font-semibold text-[#1a1a1a]">FLASH</strong> —
@@ -278,7 +278,7 @@ export default function FlasherGuidePage() {
             After ERASE+RESET, Windows may list more than one COM port on the
             programming cable. 15CE Flasher uses the Atmel SAM-BA port (
             <code className="font-mono text-sm">03EB:6124</code>), not FTDI. If
-            you want to confirm the cable and calculator before choosing
+            you want to confirm the cable and calculator before flashing
             firmware, pick <strong>Connection Probe</strong> on the welcome
             screen.
           </p>
