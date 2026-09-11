@@ -106,7 +106,7 @@ export default function FlasherPage() {
               href="/flasher/guide"
               className="text-[#4b5563] transition-colors hover:text-[#1a1a1a]"
             >
-              Users guide
+              Install help
             </Link>
             <a
               href="mailto:support@machiilabs.com"
@@ -139,7 +139,7 @@ export default function FlasherPage() {
               href="/flasher/guide"
               className="mt-6 inline-flex items-center text-sm font-semibold tracking-wide text-[#1d4ed8] underline-offset-2 hover:underline"
             >
-              Read the users guide →
+              Install help &amp; troubleshooting →
             </Link>
           </div>
 
@@ -316,7 +316,7 @@ export default function FlasherPage() {
                   href="/flasher/guide"
                   className="font-medium text-[#1d4ed8] underline-offset-2 hover:underline"
                 >
-                  users guide
+                  install help
                 </Link>
                 )
               </li>
