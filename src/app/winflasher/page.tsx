@@ -5,14 +5,14 @@ import { downloadApiPath } from "@/lib/downloads";
 
 export const metadata: Metadata = {
   title: {
-    absolute: "15CE Flasher for Windows — Beta",
+    absolute: "15CE Flasher for Windows",
   },
   description:
-    "Windows beta for flashing HP 15c Collector's Edition firmware. Connection probe and guided flasher from Mach II Labs.",
+    "Flash HP 15c Collector's Edition firmware on Windows. Connection probe, guided FLASH, and BATCH modes from Mach II Labs.",
   openGraph: {
-    title: "15CE Flasher for Windows — Beta",
+    title: "15CE Flasher for Windows",
     description:
-      "Windows beta app to detect and flash HP 15c CE firmware over the pogo cable.",
+      "Windows app to detect and flash HP 15c CE firmware over the pogo cable.",
     url: "https://machiilabs.com/winflasher",
     siteName: "Mach II Labs",
   },
@@ -22,11 +22,11 @@ export const metadata: Metadata = {
 };
 
 const DOWNLOAD_HREF = downloadApiPath("winflasher");
-const VERSION = "0.1.0";
-const BUILD = "107";
-const EXE_FILENAME = "15CEFlasher-Win-0.1.0-107.exe";
+const VERSION = "1.0.0";
+const BUILD = "108";
+const EXE_FILENAME = "15CEFlasher-Win-1.0.0-108.exe";
 const SHA256 =
-  "f904e292c6546a90a588479f192e00adf0ea659306845ec882602a510c988ef7";
+  "94b0cb7f9bfa764b49292639457027f185051639e2df3350afba7c241be5f554";
 
 export default function WinFlasherPage() {
   return (
@@ -53,15 +53,16 @@ export default function WinFlasherPage() {
 
       <main className="mx-auto w-full max-w-3xl px-6 pb-24 pt-12 sm:px-10 sm:pt-16">
         <p className="text-xs font-semibold tracking-wide text-[#6b7280] uppercase">
-          Windows beta · free · Win 10/11
+          Windows · free · Win 10/11
         </p>
         <h1 className="mt-3 font-display text-[clamp(2rem,5vw,3rem)] leading-[1.05] font-bold tracking-tight">
           15CE Flasher for Windows
         </h1>
         <p className="mt-4 text-lg leading-relaxed text-[#374151]">
-          Beta build for the HP 15c Collector&apos;s Edition programming cable.
-          Includes a <strong>Connection Probe</strong> to verify SAM-BA detection,
-          plus FLASH, BATCH, and DEMO modes.
+          Flash HP 15c Collector&apos;s Edition firmware on Windows with the
+          official pogo programming cable. Includes a{" "}
+          <strong>Connection Probe</strong> to verify SAM-BA detection, plus
+          FLASH, BATCH, and DEMO modes.
         </p>
 
         <div className="mt-8 flex flex-wrap items-center gap-4">
@@ -69,7 +70,7 @@ export default function WinFlasherPage() {
             href={DOWNLOAD_HREF}
             className="inline-flex items-center gap-3 bg-[#1a1a1a] px-6 py-3.5 text-base font-semibold tracking-wide text-white transition-colors hover:bg-[#374151]"
           >
-            Download beta
+            Download free
             <span className="text-sm font-normal opacity-80">
               v{VERSION} ({BUILD})
             </span>
@@ -99,7 +100,7 @@ export default function WinFlasherPage() {
           <div>
             <dt className="font-semibold text-[#6b7280]">SmartScreen</dt>
             <dd className="mt-1 text-[#374151]">
-              Beta builds are unsigned. If Windows blocks the app, choose{" "}
+              This build is unsigned. If Windows blocks the app, choose{" "}
               <strong>More info</strong> → <strong>Run anyway</strong>.
             </dd>
           </div>
@@ -115,18 +116,6 @@ export default function WinFlasherPage() {
             <strong>Connected: ATSAM4LC2C</strong>, Windows is talking to the
             calculator over the correct COM port (Atmel <code>03EB:6124</code>,
             not FTDI).
-          </p>
-        </section>
-
-        <section className="mt-8 rounded-lg border border-amber-200 bg-amber-50 p-5 text-sm text-amber-950">
-          <p className="font-semibold">Beta notice</p>
-          <p className="mt-2">
-            This Windows port is in active testing. Flash only with a known-good
-            firmware file. The Mac app at{" "}
-            <Link href="/flasher" className="underline hover:text-[#1a1a1a]">
-              machiilabs.com/flasher
-            </Link>{" "}
-            remains the primary supported release.
           </p>
         </section>
       </main>
