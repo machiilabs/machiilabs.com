@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { MachiiLogo } from "@/components/machii-logo";
 import { downloadApiPath } from "@/lib/downloads";
@@ -42,12 +43,12 @@ const FIRMWARE_URL =
   "https://hpcalcs.com/downloads/apps/HP_IAR_USB%20120ms.bin";
 
 const MAC_SHA256 =
-  "6870d96105001aaef0a636760752da829616c9c3efb2224bb06ec5101bdea858";
-const MAC_FILENAME = "15CEFlasher-1.2.1-213.dmg";
+  "16b92b28b137fa773cd1b9f31e28e677dc99b982b835d78bf952aa90ffa39c30";
+const MAC_FILENAME = "15CEFlasher-1.3.0-217.dmg";
 
 const WIN_SHA256 =
-  "6e9d900f394f849f1c735f3a30ae2e6fea1af5b2b6bdce8339b85abc8607a03c";
-const WIN_FILENAME = "15CEFlasher-Win-1.0.1-109.exe";
+  "66108db0837e31e67b2a08d2eb3fd4fe235cc933730279d56fe312a2ec973dda";
+const WIN_FILENAME = "15CEFlasher-Win-1.1.0-110.exe";
 
 export default function FlasherGuidePage() {
   return (
@@ -258,8 +259,8 @@ export default function FlasherGuidePage() {
               <strong className="font-semibold text-[#1a1a1a]">
                 Connection Probe
               </strong>{" "}
-              (Windows only) — connect to real hardware and confirm SAM-BA
-              detection without flashing firmware. See below.
+              — connect to real hardware and confirm SAM-BA detection without
+              flashing firmware. See below.
             </li>
             <li>
               <strong className="font-semibold text-[#1a1a1a]">FLASH</strong> —
@@ -276,15 +277,13 @@ export default function FlasherGuidePage() {
 
         <section className="mt-14">
           <h2 className="text-xl font-semibold tracking-tight text-[#1a1a1a]">
-            Connection Probe (Windows)
+            Connection Probe
           </h2>
           <p className="mt-4 text-base leading-relaxed text-[#374151]">
-            After ERASE+RESET, Windows may list more than one COM port on the
-            programming cable. 15CE Flasher uses the Atmel SAM-BA port (
-            <code className="font-mono text-sm">03EB:6124</code>), not FTDI. If
-            you want to confirm the cable and calculator before flashing
-            firmware, pick <strong>Connection Probe</strong> on the welcome
-            screen.
+            Pick <strong>Connection Probe</strong> on the welcome screen to
+            confirm the cable and calculator before you choose firmware or
+            flash. The app connects and identifies the chip, then you can quit
+            and start <strong>FLASH</strong> or <strong>BATCH</strong>.
           </p>
           <ol className="mt-4 list-decimal space-y-2.5 pl-6 text-base leading-relaxed text-[#374151]">
             <li>
@@ -292,33 +291,175 @@ export default function FlasherGuidePage() {
               release <strong>ERASE</strong>.
             </li>
             <li>
-              When the app shows <strong>Connected: ATSAM4LC2C</strong>, Windows
-              is talking to the calculator over the correct port.
+              When the app shows <strong>Connected: ATSAM4LC2C</strong>, the
+              calculator is in programming mode and SAM-BA is responding.
             </li>
             <li>
               Quit and choose <strong>FLASH</strong> or <strong>BATCH</strong>{" "}
               when you are ready to proceed.
             </li>
           </ol>
-          <p className="mt-4 text-base leading-relaxed text-[#374151]">
-            On Mac, use <strong>DEMO</strong> to learn the wizard without
-            hardware, or go straight to <strong>FLASH</strong> — on the
-            Programming mode step the status bar shows{" "}
-            <strong>Connected: ATSAM4LC2C</strong> when the cable is ready.
+          <p className="mt-4 border-l-2 border-[#e5e7eb] pl-4 text-sm leading-relaxed text-[#6b7280]">
+            <strong className="text-[#4b5563]">Windows:</strong> after
+            ERASE+RESET, Windows may list more than one COM port. The app uses
+            the Atmel SAM-BA port (
+            <code className="font-mono text-xs">03EB:6124</code>), not FTDI.
+          </p>
+          <p className="mt-3 border-l-2 border-[#e5e7eb] pl-4 text-sm leading-relaxed text-[#6b7280]">
+            <strong className="text-[#4b5563]">Mac:</strong> the programming
+            port appears as <code className="font-mono text-xs">cu.usbmodem…</code>
+            . Use <strong>DEMO</strong> to learn the full wizard without
+            hardware; use <strong>Connection Probe</strong> to test a real
+            calculator without flashing.
           </p>
         </section>
 
         <section className="mt-14">
           <h2 className="text-xl font-semibold tracking-tight text-[#1a1a1a]">
-            Flash your HP 15c Collector&apos;s Edition (FLASH mode)
+            FLASH mode walkthrough
           </h2>
           <p className="mt-4 text-base leading-relaxed text-[#374151]">
-            Choose <strong>FLASH</strong> and follow the on-screen instructions.
-            Hold <strong>ERASE</strong>, press <strong>RESET</strong>, then
-            release <strong>ERASE</strong> when the wizard reaches programming
-            mode. Continue once the app shows{" "}
-            <strong>Connected: ATSAM4LC2C</strong>.
+            Choose <strong>FLASH</strong> on the welcome screen. The app opens a
+            seven-step wizard with a step checklist on the left (Mac and
+            Windows), diagrams on each step, and <strong>Back</strong> /{" "}
+            <strong>Next</strong> at the bottom. The status bar at the bottom of
+            the window shows connection progress once you reach programming mode.
           </p>
+          <figure className="mt-6 overflow-hidden rounded-lg border border-[#e5e7eb] bg-white">
+            <Image
+              src="/flasher/15CE Flasher.png"
+              alt="15CE Flasher wizard with the seven-step checklist and cable step"
+              width={2024}
+              height={1744}
+              className="h-auto w-full"
+            />
+            <figcaption className="border-t border-[#e5e7eb] px-4 py-3 text-sm text-[#6b7280]">
+              The in-app wizard — follow the highlighted step; the app is the
+              source of truth for button labels and status text.
+            </figcaption>
+          </figure>
+
+          <h3 className="mt-10 text-base font-semibold text-[#1a1a1a]">
+            The seven steps
+          </h3>
+          <ol className="mt-4 list-decimal space-y-3 pl-6 text-base leading-relaxed text-[#374151]">
+            <li>
+              <strong className="text-[#1a1a1a]">Cable</strong> — Open the
+              battery door, seat the keyed POGO plug, and connect USB to your Mac
+              or PC.
+            </li>
+            <li>
+              <strong className="text-[#1a1a1a]">Programming mode</strong> —
+              Hold <strong>ERASE</strong>, press <strong>RESET</strong>, then
+              release <strong>ERASE</strong>. Wait until the app reports{" "}
+              <strong>Connected: ATSAM4LC2C</strong> before you continue.
+            </li>
+            <li>
+              <strong className="text-[#1a1a1a]">Backup</strong> — Save a copy
+              of the firmware currently on the calculator, or skip backup if you
+              already have one.
+            </li>
+            <li>
+              <strong className="text-[#1a1a1a]">Firmware</strong> — Choose the
+              114,688-byte <code className="font-mono text-sm">.bin</code> file
+              you want to install. The app checks size and checksum.
+            </li>
+            <li>
+              <strong className="text-[#1a1a1a]">Flash</strong> — Confirm the
+              warning dialog, then write firmware starting at address{" "}
+              <code className="font-mono text-sm">0x04000</code>. The bootloader
+              below that address is not overwritten.
+            </li>
+            <li>
+              <strong className="text-[#1a1a1a]">Restart</strong> — Press{" "}
+              <strong>RESET</strong> on the cable box, turn the calculator on,
+              and clear <strong>Pr Error</strong> with any key.
+            </li>
+            <li>
+              <strong className="text-[#1a1a1a]">Checksum</strong> — Optional
+              check on the calculator that the new firmware matches what you
+              flashed.
+            </li>
+          </ol>
+
+          <h3 className="mt-10 text-base font-semibold text-[#1a1a1a]">
+            Programming mode — where most issues show up
+          </h3>
+          <p className="mt-3 text-base leading-relaxed text-[#374151]">
+            The calculator display stays off in programming mode; the ON key is
+            ignored. Keep <strong>ERASE</strong> held while you press and
+            release <strong>RESET</strong>, then release <strong>ERASE</strong>.
+            When connection succeeds, the status bar shows{" "}
+            <strong>Connected: ATSAM4LC2C</strong> and{" "}
+            <strong>Next</strong> becomes available.
+          </p>
+          <p className="mt-3 text-base leading-relaxed text-[#374151]">
+            If you are unsure the cable is connected correctly, run{" "}
+            <strong>Connection Probe</strong> first (see above), then start{" "}
+            <strong>FLASH</strong>.
+          </p>
+          <figure className="mt-4 overflow-hidden rounded-lg border border-[#e5e7eb] bg-white">
+            <Image
+              src="/flasher/guide/wizard-programming-mode.png"
+              alt="Diagram: hold ERASE, press RESET, then release ERASE on the cable switch box"
+              width={1200}
+              height={400}
+              className="h-auto w-full"
+            />
+            <figcaption className="border-t border-[#e5e7eb] px-4 py-3 text-sm text-[#6b7280]">
+              Programming mode sequence on the cable switch box (same in the
+              app).
+            </figcaption>
+          </figure>
+
+          <h3 className="mt-10 text-base font-semibold text-[#1a1a1a]">
+            Backup and firmware file
+          </h3>
+          <p className="mt-3 text-base leading-relaxed text-[#374151]">
+            On the <strong>Backup</strong> step,{" "}
+            <strong>Save backup…</strong> reads the calculator immediately and
+            writes a <code className="font-mono text-sm">.bin</code> to the
+            folder you pick. Choose <strong>Skip backup</strong> only if you
+            already have a known-good copy to restore later.
+          </p>
+          <p className="mt-3 text-base leading-relaxed text-[#374151]">
+            On the <strong>Firmware</strong> step, use{" "}
+            <strong>Choose firmware…</strong> and select your 114,688-byte HP
+            firmware file (for example from{" "}
+            <a
+              href={FIRMWARE_URL}
+              className="font-medium text-[#1d4ed8] underline-offset-2 hover:underline"
+            >
+              hpcalcs.com
+            </a>
+            ). The app shows whether the file looks valid before you continue.
+            You must complete both steps before <strong>Flash</strong> unlocks.
+          </p>
+
+          <h3 className="mt-10 text-base font-semibold text-[#1a1a1a]">
+            Checksum — confirm on the calculator
+          </h3>
+          <p className="mt-3 text-base leading-relaxed text-[#374151]">
+            After restart, the wizard&apos;s last step walks you through the CE
+            test menu. Turn the calculator <strong>OFF</strong>, hold{" "}
+            <strong>g</strong> and <strong>ENTER</strong>, press{" "}
+            <strong>ON</strong>, then release <strong>ON</strong>, then release{" "}
+            <strong>g</strong> and <strong>ENTER</strong>. When you see{" "}
+            <strong>1.L 2.C 3.H</strong>, press <strong>2</strong>. Compare the
+            value on the display to the expected checksum shown in the app.
+          </p>
+          <figure className="mt-4 overflow-hidden rounded-lg border border-[#e5e7eb] bg-white">
+            <Image
+              src="/flasher/guide/wizard-checksum.png"
+              alt="Diagram: calculator keys for the checksum test menu"
+              width={1200}
+              height={400}
+              className="h-auto w-full"
+            />
+            <figcaption className="border-t border-[#e5e7eb] px-4 py-3 text-sm text-[#6b7280]">
+              Key sequence for the checksum test (same in the app).
+            </figcaption>
+          </figure>
         </section>
 
         <section className="mt-14">
@@ -395,8 +536,8 @@ export default function FlasherGuidePage() {
               <strong>ERASE</strong>.
             </li>
             <li>
-              On Windows, try <strong>Connection Probe</strong> first to confirm
-              the Atmel port before FLASH or BATCH.
+              Try <strong>Connection Probe</strong> first to confirm SAM-BA
+              detection before FLASH or BATCH.
             </li>
           </ul>
         </section>

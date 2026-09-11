@@ -40,17 +40,17 @@ export const metadata: Metadata = {
 const MAC_DOWNLOAD_HREF = downloadApiPath("flasher");
 const WIN_DOWNLOAD_HREF = downloadApiPath("winflasher");
 
-const MAC_VERSION = "1.2.1";
-const MAC_BUILD = "213";
+const MAC_VERSION = "1.3.0";
+const MAC_BUILD = "217";
 const MAC_SHA256 =
-  "6870d96105001aaef0a636760752da829616c9c3efb2224bb06ec5101bdea858";
-const MAC_FILENAME = "15CEFlasher-1.2.1-213.dmg";
+  "16b92b28b137fa773cd1b9f31e28e677dc99b982b835d78bf952aa90ffa39c30";
+const MAC_FILENAME = "15CEFlasher-1.3.0-217.dmg";
 
-const WIN_VERSION = "1.0.1";
-const WIN_BUILD = "109";
+const WIN_VERSION = "1.1.0";
+const WIN_BUILD = "110";
 const WIN_SHA256 =
-  "6e9d900f394f849f1c735f3a30ae2e6fea1af5b2b6bdce8339b85abc8607a03c";
-const WIN_FILENAME = "15CEFlasher-Win-1.0.1-109.exe";
+  "66108db0837e31e67b2a08d2eb3fd4fe235cc933730279d56fe312a2ec973dda";
+const WIN_FILENAME = "15CEFlasher-Win-1.1.0-110.exe";
 
 const softwareJsonLd = {
   "@context": "https://schema.org",
@@ -263,13 +263,12 @@ export default function FlasherPage() {
               <strong className="font-semibold text-[#1a1a1a]">FLASH</strong> is
               the full seven-step wizard for one CE.{" "}
               <strong className="font-semibold text-[#1a1a1a]">BATCH</strong>{" "}
-              flashes many calculators in sequence with the same firmware. On{" "}
-              <strong className="font-semibold text-[#1a1a1a]">Windows</strong>
-              , <strong className="font-semibold text-[#1a1a1a]">
+              flashes many calculators in sequence with the same firmware.{" "}
+              <strong className="font-semibold text-[#1a1a1a]">
                 Connection Probe
               </strong>{" "}
-              lets you confirm the cable and SAM-BA detection before flashing
-              firmware.
+              lets you confirm the cable and SAM-BA detection on real hardware
+              before flashing firmware.
             </p>
           </div>
           <div>
