@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { requireAdmin } from "@/lib/supabase/auth";
 import { loadDownloadSummary } from "@/lib/load-download-dashboard";
+import { LocalDateTime } from "./local-date-time";
 import { signOutAdmin } from "./actions";
 
 export const metadata: Metadata = {
@@ -85,17 +86,31 @@ export default async function AdminDashboardPage() {
 
       <Link
         href="/admin/downloads"
-        className="mt-10 block rounded-lg border border-white/10 bg-white/[0.03] px-5 py-5 transition hover:border-white/20 hover:bg-white/[0.05]"
+        className="mt-10 flex items-start justify-between gap-6 rounded-lg border border-white/10 bg-white/[0.03] px-5 py-5 transition hover:border-white/20 hover:bg-white/[0.05]"
       >
-        <p className="text-xs tracking-wide text-fog uppercase">Downloads</p>
-        <p className="mt-2 font-display text-3xl font-bold tracking-tight text-snow">
-          {summary
-            ? `${summary.lastHour} / ${summary.last24Hours} / ${summary.allTime}`
-            : "— / — / —"}
-        </p>
-        <p className="mt-2 text-sm text-fog">
-          Last hour / last 24 hours / all time
-        </p>
+        <div>
+          <p className="text-xs tracking-wide text-fog uppercase">Downloads</p>
+          <p className="mt-2 font-display text-3xl font-bold tracking-tight text-snow">
+            {summary
+              ? `${summary.lastHour} / ${summary.last24Hours} / ${summary.allTime}`
+              : "— / — / —"}
+          </p>
+          <p className="mt-2 text-sm text-fog">
+            Last hour / last 24 hours / all time
+          </p>
+        </div>
+        <div className="shrink-0 text-right">
+          <p className="text-xs tracking-wide text-fog uppercase">
+            Last downloaded date
+          </p>
+          <p className="mt-2 text-sm text-snow">
+            {summary?.lastDownloadedAt ? (
+              <LocalDateTime iso={summary.lastDownloadedAt} />
+            ) : (
+              "—"
+            )}
+          </p>
+        </div>
       </Link>
 
       <section className="mt-10">

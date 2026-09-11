@@ -44,6 +44,7 @@ export type DownloadSummary = {
   lastHour: number;
   last24Hours: number;
   allTime: number;
+  lastDownloadedAt: string | null;
 };
 
 export async function loadDownloadSummary(): Promise<DownloadSummary> {
@@ -60,7 +61,12 @@ export async function loadDownloadSummary(): Promise<DownloadSummary> {
     if (ts >= hourAgo) lastHour += 1;
   }
 
-  return { lastHour, last24Hours, allTime: events.length };
+  return {
+    lastHour,
+    last24Hours,
+    allTime: events.length,
+    lastDownloadedAt: events.at(-1)?.created_at ?? null,
+  };
 }
 
 export async function loadDownloadDashboard(
