@@ -3,6 +3,7 @@ import type { ReactNode } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { MachiiLogo } from "@/components/machii-logo";
+import { PogoCableLinks } from "@/components/pogo-cable-links";
 import { downloadApiPath } from "@/lib/downloads";
 
 export const metadata: Metadata = {
@@ -189,7 +190,10 @@ export default function FlasherGuidePage() {
             <li>
               A Mac (macOS 13+) or a PC (Windows 10/11, 64-bit)
             </li>
-            <li>HP 15c Collector&apos;s Edition and the official pogo cable</li>
+            <li>
+              HP 15c Collector&apos;s Edition and the official pogo cable. You
+              can get it at <PogoCableLinks />.
+            </li>
             <li>
               A 114,688-byte firmware{" "}
               <code className="font-mono text-sm">.bin</code> from HP —{" "}

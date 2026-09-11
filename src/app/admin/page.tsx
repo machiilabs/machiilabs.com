@@ -1,12 +1,15 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { requireAdmin } from "@/lib/supabase/auth";
+import { loadDownloadSummary } from "@/lib/load-download-dashboard";
 import { signOutAdmin } from "./actions";
 
 export const metadata: Metadata = {
   title: "Admin",
   robots: { index: false, follow: false },
 };
+
+export const dynamic = "force-dynamic";
 
 const PORTALS = [
   {
@@ -30,11 +33,6 @@ const PORTALS = [
     blurb: "Product announcement subscribers (Table Editor)",
   },
   {
-    name: "Download counts",
-    href: "https://supabase.com/dashboard/project/rddzasjcgrdlugeducsu/editor?schema=public",
-    blurb: "site_download_events — one row per Flasher/Skagway download click",
-  },
-  {
     name: "Cloudflare",
     href: "https://dash.cloudflare.com",
     blurb: "DNS for machiilabs.com",
@@ -53,6 +51,13 @@ const PORTALS = [
 
 export default async function AdminDashboardPage() {
   const user = await requireAdmin();
+
+  let summary: Awaited<ReturnType<typeof loadDownloadSummary>> | null = null;
+  try {
+    summary = await loadDownloadSummary();
+  } catch {
+    summary = null;
+  }
 
   return (
     <main className="mx-auto w-full max-w-3xl px-6 py-14">
@@ -77,6 +82,21 @@ export default async function AdminDashboardPage() {
           </button>
         </form>
       </header>
+
+      <Link
+        href="/admin/downloads"
+        className="mt-10 block rounded-lg border border-white/10 bg-white/[0.03] px-5 py-5 transition hover:border-white/20 hover:bg-white/[0.05]"
+      >
+        <p className="text-xs tracking-wide text-fog uppercase">Downloads</p>
+        <p className="mt-2 font-display text-3xl font-bold tracking-tight text-snow">
+          {summary
+            ? `${summary.lastHour} / ${summary.last24Hours} / ${summary.allTime}`
+            : "— / — / —"}
+        </p>
+        <p className="mt-2 text-sm text-fog">
+          Last hour / last 24 hours / all time
+        </p>
+      </Link>
 
       <section className="mt-10">
         <h2 className="font-display text-lg font-semibold text-snow">

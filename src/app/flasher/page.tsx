@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { MachiiLogo } from "@/components/machii-logo";
+import { PogoCableLinks } from "@/components/pogo-cable-links";
 import { downloadApiPath } from "@/lib/downloads";
 
 export const metadata: Metadata = {
@@ -307,7 +308,10 @@ export default function FlasherPage() {
                   your calculator.
                 </p>
               </li>
-              <li>Official USB-C (or USB-A) pogo programming cable</li>
+              <li>
+                Official USB-C (or USB-A) pogo programming cable. You can get it
+                at <PogoCableLinks />.
+              </li>
               <li>
                 A 114,688-byte (112 KB) firmware{" "}
                 <code className="font-mono text-sm text-[#1a1a1a]">.bin</code>{" "}
