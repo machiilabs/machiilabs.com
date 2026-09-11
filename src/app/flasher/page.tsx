@@ -133,7 +133,7 @@ export default function FlasherPage() {
             <p className="mt-4 text-base leading-relaxed text-[#374151] sm:text-lg">
               Guided app for the HP 15c Collector&apos;s Edition over the
               official pogo cable. Choose your platform below — the app walks you
-              through every step. No HP firmware included.
+              through every step.
             </p>
             <Link
               href="/flasher/guide"
@@ -300,15 +300,26 @@ export default function FlasherPage() {
                 A Mac (macOS 13+) or a PC (Windows 10/11, 64-bit)
               </li>
               <li>
-                HP 15c Collector&apos;s Edition (primary). Field reports suggest
-                the HP 16c CE and post-2015 HP 12c may work — same ATSAM4LC2C
-                chip; use at your own risk and confirm the firmware matches.
+                HP 15c Collector&apos;s Edition (primary).
+                <p className="mt-2 border-l-2 border-[#e5e7eb] pl-4 text-sm leading-relaxed text-[#6b7280]">
+                  Field reports suggest that the HP 16c CE and post-2015 HP 12c
+                  also work with this software — they have the same ATSAM4LC2C
+                  chip; use at your own risk and confirm the firmware matches
+                  your calculator.
+                </p>
               </li>
               <li>Official USB-C (or USB-A) pogo programming cable</li>
               <li>
                 A 114,688-byte (112 KB) firmware{" "}
                 <code className="font-mono text-sm text-[#1a1a1a]">.bin</code>{" "}
-                you already have
+                from HP — not included with this download (see the{" "}
+                <Link
+                  href="/flasher/guide"
+                  className="font-medium text-[#1d4ed8] underline-offset-2 hover:underline"
+                >
+                  users guide
+                </Link>
+                )
               </li>
             </ul>
           </div>

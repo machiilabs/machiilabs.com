@@ -118,9 +118,13 @@ export default function FlasherGuidePage() {
               (64-bit)
             </li>
             <li>
-              HP 15c Collector&apos;s Edition (primary). Field reports suggest
-              the HP 16c CE and post-2015 HP 12c may work — same ATSAM4LC2C chip;
-              use at your own risk and confirm the firmware matches.
+              HP 15c Collector&apos;s Edition (primary).
+              <p className="mt-2 border-l-2 border-[#e5e7eb] pl-4 text-sm leading-relaxed text-[#6b7280]">
+                Field reports suggest that the HP 16c CE and post-2015 HP 12c
+                also work with this software — they have the same ATSAM4LC2C
+                chip; use at your own risk and confirm the firmware matches your
+                calculator.
+              </p>
             </li>
             <li>Official USB-C or USB-A pogo programming cable</li>
             <li>
