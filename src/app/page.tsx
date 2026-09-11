@@ -173,8 +173,8 @@ export default function Home() {
                 15CE Flasher
               </Link>
               <p className="mt-3 text-base leading-relaxed text-fog sm:text-lg">
-                A Mac-only SAM-BA programmer for the HP 15c Collector&apos;s
-                Edition. Firmware updates without hassle,{" "}
+                SAM-BA programmer for the HP 15c Collector&apos;s Edition on Mac
+                and Windows. Firmware updates without hassle,{" "}
                 <span className="font-semibold text-snow">free forever</span>.
               </p>
               <div className="mt-5 flex flex-wrap items-center gap-x-6 gap-y-3">

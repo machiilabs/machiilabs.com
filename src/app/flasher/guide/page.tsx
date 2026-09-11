@@ -5,14 +5,14 @@ import { downloadApiPath } from "@/lib/downloads";
 
 export const metadata: Metadata = {
   title: {
-    absolute: "How to Flash HP 15c CE Firmware on a Mac — 15CE Flasher Guide",
+    absolute: "How to Flash HP 15c CE Firmware — 15CE Flasher Guide",
   },
   description:
-    "How to flash HP 15c Collector’s Edition firmware on a Mac with 15CE Flasher: install the free app, use the official pogo cable, and follow guided on-screen steps.",
+    "How to flash HP 15c Collector’s Edition firmware with 15CE Flasher on Mac or Windows: install the free app, use the pogo cable, and follow guided steps.",
   openGraph: {
-    title: "How to Flash HP 15c CE Firmware on a Mac — 15CE Flasher Guide",
+    title: "How to Flash HP 15c CE Firmware — 15CE Flasher Guide",
     description:
-      "Step-by-step: flash HP 15c Collector’s Edition firmware on Mac with 15CE Flasher over the official pogo cable.",
+      "Step-by-step guide to flash HP 15c Collector’s Edition firmware on Mac or Windows with 15CE Flasher.",
     url: "https://machiilabs.com/flasher/guide",
     siteName: "Mach II Labs",
     images: [
@@ -20,15 +20,15 @@ export const metadata: Metadata = {
         url: "/flasher/og.png",
         width: 1200,
         height: 630,
-        alt: "15CE Flasher — Flash HP 15c CE firmware on Mac",
+        alt: "15CE Flasher — Flash HP 15c CE firmware",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "How to Flash HP 15c CE Firmware on a Mac — 15CE Flasher Guide",
+    title: "How to Flash HP 15c CE Firmware — 15CE Flasher Guide",
     description:
-      "Flash HP 15c Collector’s Edition firmware on a Mac with 15CE Flasher. Guided steps over the pogo cable.",
+      "Flash HP 15c Collector’s Edition firmware on Mac or Windows with 15CE Flasher.",
     images: ["/flasher/og.png"],
   },
   alternates: {
@@ -36,12 +36,18 @@ export const metadata: Metadata = {
   },
 };
 
-const DOWNLOAD_HREF = downloadApiPath("flasher");
+const MAC_DOWNLOAD_HREF = downloadApiPath("flasher");
+const WIN_DOWNLOAD_HREF = downloadApiPath("winflasher");
 const FIRMWARE_URL =
   "https://hpcalcs.com/downloads/apps/HP_IAR_USB%20120ms.bin";
-const SHA256 =
+
+const MAC_SHA256 =
   "6870d96105001aaef0a636760752da829616c9c3efb2224bb06ec5101bdea858";
-const DMG_FILENAME = "15CEFlasher-1.2.1-213.dmg";
+const MAC_FILENAME = "15CEFlasher-1.2.1-213.dmg";
+
+const WIN_SHA256 =
+  "94b0cb7f9bfa764b49292639457027f185051639e2df3350afba7c241be5f554";
+const WIN_FILENAME = "15CEFlasher-Win-1.0.0-108.exe";
 
 export default function FlasherGuidePage() {
   return (
@@ -50,10 +56,7 @@ export default function FlasherGuidePage() {
         <div className="mx-auto flex w-full max-w-3xl items-center justify-between gap-6 px-6 py-4 sm:px-8">
           <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-sm">
             <MachiiLogo tone="light" />
-            <Link
-              href="/flasher"
-              className="font-semibold text-[#1a1a1a]"
-            >
+            <Link href="/flasher" className="font-semibold text-[#1a1a1a]">
               15CE Flasher
             </Link>
           </div>
@@ -71,38 +74,38 @@ export default function FlasherGuidePage() {
           15CE Flasher · Users guide
         </p>
         <h1 className="mt-3 text-3xl font-bold tracking-tight text-[#1a1a1a] sm:text-4xl">
-          How to flash HP 15c CE firmware on a Mac
+          How to flash HP 15c CE firmware
         </h1>
         <p className="mt-5 text-lg leading-relaxed text-[#374151]">
           Use{" "}
           <strong className="font-semibold text-[#1a1a1a]">15CE Flasher</strong>{" "}
-          to flash HP 15c Collector&apos;s Edition firmware on a Mac over the
-          official pogo cable. You do not need a separate procedure document:{" "}
+          on a Mac or Windows PC to flash HP 15c Collector&apos;s Edition
+          firmware over the official pogo cable.{" "}
           <strong className="font-semibold text-[#1a1a1a]">
-            the app guides you through every step
+            The app guides you through every step
           </strong>{" "}
           with diagrams, status messages, and Continue / Back.
         </p>
 
         <div className="mt-8 flex flex-wrap gap-4 text-sm">
-          <a
-            href={DOWNLOAD_HREF}
+          <Link
+            href="/flasher#mac"
             className="font-semibold text-[#1d4ed8] underline-offset-2 hover:underline"
           >
-            Download 15CE Flasher
-          </a>
+            Download for Mac
+          </Link>
+          <Link
+            href="/flasher#windows"
+            className="font-semibold text-[#1d4ed8] underline-offset-2 hover:underline"
+          >
+            Download for Windows
+          </Link>
           <a
             href={FIRMWARE_URL}
             className="font-semibold text-[#1d4ed8] underline-offset-2 hover:underline"
           >
             Latest HP firmware
           </a>
-          <Link
-            href="/flasher"
-            className="text-[#4b5563] underline-offset-2 hover:text-[#1a1a1a] hover:underline"
-          >
-            Product page
-          </Link>
         </div>
 
         <section className="mt-14">
@@ -111,21 +114,18 @@ export default function FlasherGuidePage() {
           </h2>
           <ul className="mt-4 list-disc space-y-2 pl-6 text-base leading-relaxed text-[#374151]">
             <li>
-              A Mac running macOS 13 or later (this software runs on Mac only —
-              you do not need Windows SAM-BA)
+              A Mac running macOS 13 or later, or a PC running Windows 10/11
+              (64-bit)
             </li>
             <li>
-              HP 15c Collector&apos;s Edition (primary). There are field reports
-              that Flasher also works with the HP 16c CE and post-2015 HP 12c.
-              These calculators use the same ATSAM4LC2C
-              chip as the HP 15c CE — use at your own risk and confirm the
-              firmware file matches the calculator.
+              HP 15c Collector&apos;s Edition (primary). Field reports suggest
+              the HP 16c CE and post-2015 HP 12c may work — same ATSAM4LC2C chip;
+              use at your own risk and confirm the firmware matches.
             </li>
             <li>Official USB-C or USB-A pogo programming cable</li>
             <li>
               A 114,688-byte firmware{" "}
-              <code className="font-mono text-sm">.bin</code> already on your
-              Mac — download the{" "}
+              <code className="font-mono text-sm">.bin</code> on your computer —{" "}
               <a
                 href={FIRMWARE_URL}
                 className="font-medium text-[#1d4ed8] underline-offset-2 hover:underline"
@@ -136,9 +136,9 @@ export default function FlasherGuidePage() {
             </li>
           </ul>
           <p className="mt-4 border-l-2 border-[#f59e0b] pl-4 text-sm leading-relaxed text-[#4b5563]">
-            <span className="font-bold text-[#1a1a1a]">Cable Warning.</span>{" "}
-            Do not use this cable on an HP 15c Limited Edition, a pre-2015 12C,
-            an HP 20b, or an HP 30b — it can permanently damage those machines.
+            <span className="font-bold text-[#1a1a1a]">Cable warning.</span> Do
+            not use this cable on an HP 15c Limited Edition, a pre-2015 12C, an
+            HP 20b, or an HP 30b — it can permanently damage those machines.
           </p>
           <p className="mt-4 border-l-2 border-[#9ca3af] pl-4 text-sm leading-relaxed text-[#4b5563]">
             <span className="font-semibold text-[#1a1a1a]">Disclaimer.</span>{" "}
@@ -156,34 +156,83 @@ export default function FlasherGuidePage() {
 
         <section className="mt-14">
           <h2 className="text-xl font-semibold tracking-tight text-[#1a1a1a]">
-            Install
+            Install on Mac
           </h2>
           <ol className="mt-4 list-decimal space-y-2.5 pl-6 text-base leading-relaxed text-[#374151]">
             <li>
               Download{" "}
               <a
-                href={DOWNLOAD_HREF}
+                href={MAC_DOWNLOAD_HREF}
                 className="font-medium text-[#1d4ed8] underline-offset-2 hover:underline"
               >
-                {DMG_FILENAME}
+                {MAC_FILENAME}
               </a>{" "}
-              from Mach II Labs.
+              from the{" "}
+              <Link
+                href="/flasher#mac"
+                className="font-medium text-[#1d4ed8] underline-offset-2 hover:underline"
+              >
+                product page
+              </Link>
+              .
             </li>
             <li>
               Optionally verify the SHA-256. In Terminal, run:
               <pre className="mt-2 overflow-x-auto rounded-md bg-[#eceae4] px-3 py-2 font-mono text-sm text-[#1a1a1a]">
-                {`shasum -a 256 /path/to/${DMG_FILENAME}`}
+                {`shasum -a 256 /path/to/${MAC_FILENAME}`}
               </pre>
               <span className="mt-2 block">
                 It should equal:{" "}
                 <code className="break-all font-mono text-sm text-[#1a1a1a]">
-                  {SHA256}
+                  {MAC_SHA256}
                 </code>
               </span>
             </li>
             <li>
               Open the disk image and drag <strong>15CE Flasher</strong> to
               Applications.
+            </li>
+          </ol>
+        </section>
+
+        <section className="mt-14">
+          <h2 className="text-xl font-semibold tracking-tight text-[#1a1a1a]">
+            Install on Windows
+          </h2>
+          <ol className="mt-4 list-decimal space-y-2.5 pl-6 text-base leading-relaxed text-[#374151]">
+            <li>
+              Download{" "}
+              <a
+                href={WIN_DOWNLOAD_HREF}
+                className="font-medium text-[#1d4ed8] underline-offset-2 hover:underline"
+              >
+                {WIN_FILENAME}
+              </a>{" "}
+              from the{" "}
+              <Link
+                href="/flasher#windows"
+                className="font-medium text-[#1d4ed8] underline-offset-2 hover:underline"
+              >
+                product page
+              </Link>
+              .
+            </li>
+            <li>
+              Optionally verify the SHA-256. In PowerShell, run:
+              <pre className="mt-2 overflow-x-auto rounded-md bg-[#eceae4] px-3 py-2 font-mono text-sm text-[#1a1a1a]">
+                {`Get-FileHash -Algorithm SHA256 "$env:USERPROFILE\\Downloads\\${WIN_FILENAME}"`}
+              </pre>
+              <span className="mt-2 block">
+                It should equal:{" "}
+                <code className="break-all font-mono text-sm text-[#1a1a1a]">
+                  {WIN_SHA256}
+                </code>
+              </span>
+            </li>
+            <li>
+              Run the <code className="font-mono text-sm">.exe</code>. If
+              SmartScreen warns about an unknown publisher, choose{" "}
+              <strong>More info</strong> → <strong>Run anyway</strong>.
             </li>
           </ol>
         </section>
@@ -198,8 +247,15 @@ export default function FlasherGuidePage() {
           <ul className="mt-4 list-disc space-y-2 pl-6 text-base leading-relaxed text-[#374151]">
             <li>
               <strong className="font-semibold text-[#1a1a1a]">DEMO</strong> —
-              simulated calculator and full wizard walkthrough. Use this first if
-              you have never flashed a CE.
+              simulated calculator and full wizard walkthrough. On Mac, this is
+              the recommended first run if you have never flashed a CE.
+            </li>
+            <li>
+              <strong className="font-semibold text-[#1a1a1a]">
+                Connection Probe
+              </strong>{" "}
+              (Windows only) — connect to real hardware and confirm SAM-BA
+              detection without choosing firmware or flashing. See below.
             </li>
             <li>
               <strong className="font-semibold text-[#1a1a1a]">FLASH</strong> —
@@ -216,49 +272,81 @@ export default function FlasherGuidePage() {
 
         <section className="mt-14">
           <h2 className="text-xl font-semibold tracking-tight text-[#1a1a1a]">
-            Flash your HP 15c Collector&apos;s Edition (FLASH mode)
+            Connection Probe (Windows)
           </h2>
           <p className="mt-4 text-base leading-relaxed text-[#374151]">
-            Run the <strong>15CE Flasher</strong> application, choose{" "}
-            <strong>FLASH</strong>, and follow the on-screen instructions.
+            After ERASE+RESET, Windows may list more than one COM port on the
+            programming cable. 15CE Flasher uses the Atmel SAM-BA port (
+            <code className="font-mono text-sm">03EB:6124</code>), not FTDI. If
+            you want to confirm the cable and calculator before choosing
+            firmware, pick <strong>Connection Probe</strong> on the welcome
+            screen.
+          </p>
+          <ol className="mt-4 list-decimal space-y-2.5 pl-6 text-base leading-relaxed text-[#374151]">
+            <li>
+              Hold <strong>ERASE</strong>, press <strong>RESET</strong>, then
+              release <strong>ERASE</strong>.
+            </li>
+            <li>
+              When the app shows <strong>Connected: ATSAM4LC2C</strong>, Windows
+              is talking to the calculator over the correct port.
+            </li>
+            <li>
+              Quit and choose <strong>FLASH</strong> or <strong>BATCH</strong>{" "}
+              when you are ready to proceed.
+            </li>
+          </ol>
+          <p className="mt-4 text-base leading-relaxed text-[#374151]">
+            On Mac, use <strong>DEMO</strong> to learn the wizard without
+            hardware, or go straight to <strong>FLASH</strong> — on the
+            Programming mode step the status bar shows{" "}
+            <strong>Connected: ATSAM4LC2C</strong> when the cable is ready.
           </p>
         </section>
 
         <section className="mt-14">
           <h2 className="text-xl font-semibold tracking-tight text-[#1a1a1a]">
-            Batch mode (quick path for experienced users)
+            Flash your HP 15c Collector&apos;s Edition (FLASH mode)
           </h2>
           <p className="mt-4 text-base leading-relaxed text-[#374151]">
-            Choose <strong>BATCH</strong>{" "}on the welcome screen when you already
-            know ERASE+RESET and want a shorter path than guided FLASH mode —
-            including when you flash more than one Collector&apos;s Edition with
-            the same firmware.
+            Choose <strong>FLASH</strong> and follow the on-screen instructions.
+            Hold <strong>ERASE</strong>, press <strong>RESET</strong>, then
+            release <strong>ERASE</strong> when the wizard reaches programming
+            mode. Continue once the app shows{" "}
+            <strong>Connected: ATSAM4LC2C</strong>.
+          </p>
+        </section>
+
+        <section className="mt-14">
+          <h2 className="text-xl font-semibold tracking-tight text-[#1a1a1a]">
+            Batch mode (experienced users)
+          </h2>
+          <p className="mt-4 text-base leading-relaxed text-[#374151]">
+            Choose <strong>BATCH</strong> when you already know ERASE+RESET and
+            want to flash more than one Collector&apos;s Edition with the same
+            firmware.
           </p>
           <ol className="mt-4 list-decimal space-y-2.5 pl-6 text-base leading-relaxed text-[#374151]">
             <li>
               Choose your firmware <code className="font-mono text-sm">.bin</code>{" "}
-              once. The app remembers it across launches; use{" "}
-              <strong>Choose Firmware…</strong> anytime to switch files.
+              once.
             </li>
             <li>
-              Pick backup policy: skip backup, or auto-save numbered backups
-              (for example{" "}
-              <code className="font-mono text-sm">hp15c-20260904-141530-001.bin</code>
-              ) to a folder you choose.
+              Pick backup policy: skip backup, or auto-save numbered backups to a
+              folder you choose.
             </li>
             <li>
-              Click <strong>Start batch</strong>, then for each calculator:
-              hold <strong>ERASE</strong>, press <strong>RESET</strong>, release{" "}
+              Click <strong>Start batch</strong>, then for each calculator: hold{" "}
+              <strong>ERASE</strong>, press <strong>RESET</strong>, release{" "}
               <strong>ERASE</strong>. The app connects and flashes automatically.
             </li>
             <li>
-              When a unit finishes, press <strong>RESET</strong> on the cable,
-              turn the calculator on, and confirm the checksum if you like. Click{" "}
-              <strong>Next unit</strong> and repeat ERASE+RESET for the next CE.
+              When a unit finishes, press <strong>RESET</strong>, turn the
+              calculator on, and confirm the checksum if you like. Click{" "}
+              <strong>Next unit</strong> and repeat for the next CE.
             </li>
             <li>
-              Click <strong>Stop batch</strong> when you are done — the app quits,
-              same as <strong>Done</strong> in FLASH mode.
+              Click <strong>Stop batch</strong> when you are done.
             </li>
           </ol>
         </section>
@@ -284,35 +372,27 @@ export default function FlasherGuidePage() {
             Pogo cable won&apos;t seat in the calculator
           </h3>
           <p className="mt-2 text-base leading-relaxed text-[#374151]">
-            You&apos;re in good company — the fit can take some getting used to
-            at first. The pogo head is
-            not symmetrical: it has a <strong>wide</strong> side and a{" "}
-            <strong>narrow</strong> side. Line those up with the port and
-            squeeze in the sides as you push. Even then, you may need to fidget
-            until it snaps in.
+            The pogo head is not symmetrical: it has a <strong>wide</strong> side
+            and a <strong>narrow</strong> side. Line those up with the port and
+            squeeze the sides as you push until it snaps in.
           </p>
 
           <h3 className="mt-6 text-base font-semibold text-[#1a1a1a]">
             App doesn&apos;t recognize the ATSAM4LC2C
           </h3>
-          <p className="mt-2 text-base leading-relaxed text-[#374151]">
-            If the app never sees the calculator&apos;s chip, try these:
-          </p>
           <ul className="mt-3 list-disc space-y-2 pl-6 text-base leading-relaxed text-[#374151]">
             <li>
-              USB hubs can be unreliable for this kind of data connection. Try a
-              different port or hub, or plug the cable directly into a USB port
-              on the Mac.
+              USB hubs can be unreliable. Plug the cable directly into the
+              computer when possible.
             </li>
             <li>
-              The buttons on the pogo controller are small and must be pressed
-              fully. Use your fingertips and push them all the way down.
+              Press the cable buttons fully: hold <strong>ERASE</strong>, press
+              and release <strong>RESET</strong>, then release{" "}
+              <strong>ERASE</strong>.
             </li>
             <li>
-              Follow the programming-mode sequence carefully: hold{" "}
-              <strong>ERASE</strong>, press and release <strong>RESET</strong>,
-              then release <strong>ERASE</strong>. Keep ERASE held the whole
-              time RESET is pressed.
+              On Windows, try <strong>Connection Probe</strong> first to confirm
+              the Atmel port before FLASH or BATCH.
             </li>
           </ul>
         </section>

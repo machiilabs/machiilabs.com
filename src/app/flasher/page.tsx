@@ -2,18 +2,18 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { MachiiLogo } from "@/components/machii-logo";
-import { PRODUCT_DOWNLOADS, downloadApiPath } from "@/lib/downloads";
+import { downloadApiPath } from "@/lib/downloads";
 
 export const metadata: Metadata = {
   title: {
-    absolute: "Flash HP 15c CE Firmware on Mac — 15CE Flasher",
+    absolute: "15CE Flasher — Flash HP 15c CE Firmware on Mac or Windows",
   },
   description:
-    "Flash HP 15c Collector’s Edition firmware on a Mac with 15CE Flasher. Free guided app over the official pogo cable — Mac only, free forever.",
+    "Flash HP 15c Collector’s Edition firmware with 15CE Flasher. Free guided app for Mac and Windows over the official pogo cable.",
   openGraph: {
-    title: "Flash HP 15c CE Firmware on Mac — 15CE Flasher",
+    title: "15CE Flasher — Flash HP 15c CE Firmware on Mac or Windows",
     description:
-      "Free Mac app to flash HP 15c Collector’s Edition firmware over the pogo cable. Guided steps. Free forever from Mach II Labs.",
+      "Free Mac and Windows apps to flash HP 15c Collector’s Edition firmware over the pogo cable.",
     url: "https://machiilabs.com/flasher",
     siteName: "Mach II Labs",
     images: [
@@ -21,15 +21,15 @@ export const metadata: Metadata = {
         url: "/flasher/og.png",
         width: 1200,
         height: 630,
-        alt: "15CE Flasher — Flash HP 15c CE firmware on Mac",
+        alt: "15CE Flasher — Flash HP 15c CE firmware",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Flash HP 15c CE Firmware on Mac — 15CE Flasher",
+    title: "15CE Flasher — Flash HP 15c CE Firmware on Mac or Windows",
     description:
-      "Free Mac app to flash HP 15c Collector’s Edition firmware over the pogo cable. Free forever.",
+      "Free Mac and Windows apps to flash HP 15c Collector’s Edition firmware over the pogo cable.",
     images: ["/flasher/og.png"],
   },
   alternates: {
@@ -37,35 +37,57 @@ export const metadata: Metadata = {
   },
 };
 
-const DOWNLOAD_URL = PRODUCT_DOWNLOADS.flasher;
-const DOWNLOAD_HREF = downloadApiPath("flasher");
-const VERSION = "1.2.1";
-const BUILD = "213";
-const SHA256 =
+const MAC_DOWNLOAD_HREF = downloadApiPath("flasher");
+const WIN_DOWNLOAD_HREF = downloadApiPath("winflasher");
+
+const MAC_VERSION = "1.2.1";
+const MAC_BUILD = "213";
+const MAC_SHA256 =
   "6870d96105001aaef0a636760752da829616c9c3efb2224bb06ec5101bdea858";
-const DMG_FILENAME = "15CEFlasher-1.2.1-213.dmg";
+const MAC_FILENAME = "15CEFlasher-1.2.1-213.dmg";
+
+const WIN_VERSION = "1.0.0";
+const WIN_BUILD = "108";
+const WIN_SHA256 =
+  "94b0cb7f9bfa764b49292639457027f185051639e2df3350afba7c241be5f554";
+const WIN_FILENAME = "15CEFlasher-Win-1.0.0-108.exe";
 
 const softwareJsonLd = {
   "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
-  name: "15CE Flasher",
-  applicationCategory: "UtilitiesApplication",
-  operatingSystem: "macOS",
-  description:
-    "Flash HP 15c Collector’s Edition firmware on a Mac over the official pogo cable. Guided native app from Mach II Labs.",
-  url: "https://machiilabs.com/flasher",
-  downloadUrl: DOWNLOAD_URL,
-  softwareVersion: VERSION,
-  offers: {
-    "@type": "Offer",
-    price: "0",
-    priceCurrency: "USD",
-  },
-  publisher: {
-    "@type": "Organization",
-    name: "Mach II Labs",
-    url: "https://machiilabs.com",
-  },
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      name: "15CE Flasher",
+      applicationCategory: "UtilitiesApplication",
+      operatingSystem: "macOS",
+      description:
+        "Flash HP 15c Collector’s Edition firmware on a Mac over the official pogo cable.",
+      url: "https://machiilabs.com/flasher",
+      softwareVersion: MAC_VERSION,
+      offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+      publisher: {
+        "@type": "Organization",
+        name: "Mach II Labs",
+        url: "https://machiilabs.com",
+      },
+    },
+    {
+      "@type": "SoftwareApplication",
+      name: "15CE Flasher for Windows",
+      applicationCategory: "UtilitiesApplication",
+      operatingSystem: "Windows",
+      description:
+        "Flash HP 15c Collector’s Edition firmware on Windows over the official pogo cable.",
+      url: "https://machiilabs.com/flasher#windows",
+      softwareVersion: WIN_VERSION,
+      offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+      publisher: {
+        "@type": "Organization",
+        name: "Mach II Labs",
+        url: "https://machiilabs.com",
+      },
+    },
+  ],
 };
 
 export default function FlasherPage() {
@@ -100,67 +122,25 @@ export default function FlasherPage() {
         <section className="grid items-start gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:gap-14 xl:gap-16">
           <div className="max-w-xl">
             <p className="text-xs font-semibold tracking-wide text-[#6b7280] uppercase">
-              Mac only · free forever · macOS 13+
+              Free · Mac &amp; Windows
             </p>
             <h1 className="mt-3 font-display text-[clamp(2.25rem,6vw,3.75rem)] leading-[1.05] font-bold tracking-tight text-[#1a1a1a]">
               15CE Flasher
             </h1>
             <p className="mt-4 text-xl font-semibold tracking-tight text-[#1a1a1a] sm:text-2xl">
-              Flash HP 15c CE firmware on a Mac.
+              Flash HP 15c CE firmware on Mac or Windows.
             </p>
             <p className="mt-4 text-base leading-relaxed text-[#374151] sm:text-lg">
-              Free guided app for the HP 15c Collector&apos;s Edition over the
-              official pogo cable. Mac only — the app walks you through every
-              step of the flashing process.
+              Guided app for the HP 15c Collector&apos;s Edition over the
+              official pogo cable. Choose your platform below — the app walks you
+              through every step. No HP firmware included.
             </p>
-
-            <div className="mt-8 flex flex-wrap items-center gap-4">
-              <a
-                href={DOWNLOAD_HREF}
-                className="inline-flex items-center gap-3 bg-[#1a1a1a] px-6 py-3.5 text-base font-semibold tracking-wide text-white transition-colors hover:bg-[#374151]"
-              >
-                Download free
-                <span className="text-sm font-medium text-white/70">
-                  v{VERSION} ({BUILD}) · macOS 13+
-                </span>
-              </a>
-              <Link
-                href="/flasher/guide"
-                className="inline-flex items-center text-sm font-semibold tracking-wide text-[#1d4ed8] underline-offset-2 hover:underline"
-              >
-                Read the users guide →
-              </Link>
-            </div>
-            <p className="mt-3 text-sm text-[#6b7280]">
-              Notarized DMG · Mac only · No HP firmware included
-            </p>
-            <p className="mt-2 text-sm text-[#6b7280]">
-              Built for Mac users who previously needed Windows SAM-BA — you
-              don&apos;t anymore.
-            </p>
-            <details className="mt-4 text-sm text-[#6b7280]">
-              <summary className="cursor-pointer text-[#4b5563] transition-colors hover:text-[#1a1a1a]">
-                How do I verify the download?
-              </summary>
-              <ol className="mt-3 list-decimal space-y-2 pl-5 text-xs leading-relaxed text-[#6b7280]">
-                <li>
-                  Check the filename is{" "}
-                  <span className="font-mono text-[#374151]">{DMG_FILENAME}</span>
-                </li>
-                <li>
-                  In Terminal, run{" "}
-                  <code className="break-all font-mono text-[#374151]">
-                    shasum -a 256 /path/to/{DMG_FILENAME}
-                  </code>
-                </li>
-                <li>
-                  Ensure the output value is{" "}
-                  <span className="break-all font-mono text-[#374151]">
-                    {SHA256}
-                  </span>
-                </li>
-              </ol>
-            </details>
+            <Link
+              href="/flasher/guide"
+              className="mt-6 inline-flex items-center text-sm font-semibold tracking-wide text-[#1d4ed8] underline-offset-2 hover:underline"
+            >
+              Read the users guide →
+            </Link>
           </div>
 
           <div className="min-w-0 w-full">
@@ -178,30 +158,127 @@ export default function FlasherPage() {
           </div>
         </section>
 
+        <section className="mt-16 grid gap-6 md:grid-cols-2">
+          <div
+            id="mac"
+            className="scroll-mt-24 rounded-lg border border-[#e5e7eb] bg-white p-6"
+          >
+            <p className="text-xs font-semibold tracking-wide text-[#6b7280] uppercase">
+              macOS 13+
+            </p>
+            <h2 className="mt-2 text-xl font-semibold text-[#1a1a1a]">Mac</h2>
+            <a
+              href={MAC_DOWNLOAD_HREF}
+              className="mt-5 inline-flex items-center gap-3 bg-[#1a1a1a] px-6 py-3.5 text-base font-semibold tracking-wide text-white transition-colors hover:bg-[#374151]"
+            >
+              Download free
+              <span className="text-sm font-medium text-white/70">
+                v{MAC_VERSION} ({MAC_BUILD})
+              </span>
+            </a>
+            <p className="mt-3 text-sm text-[#6b7280]">Notarized DMG</p>
+            <details className="mt-4 text-sm text-[#6b7280]">
+              <summary className="cursor-pointer text-[#4b5563] transition-colors hover:text-[#1a1a1a]">
+                Verify download (SHA-256)
+              </summary>
+              <ol className="mt-3 list-decimal space-y-2 pl-5 text-xs leading-relaxed">
+                <li>
+                  Filename:{" "}
+                  <span className="font-mono text-[#374151]">{MAC_FILENAME}</span>
+                </li>
+                <li>
+                  In Terminal:{" "}
+                  <code className="break-all font-mono text-[#374151]">
+                    shasum -a 256 /path/to/{MAC_FILENAME}
+                  </code>
+                </li>
+                <li>
+                  Expected:{" "}
+                  <span className="break-all font-mono text-[#374151]">
+                    {MAC_SHA256}
+                  </span>
+                </li>
+              </ol>
+            </details>
+          </div>
+
+          <div
+            id="windows"
+            className="scroll-mt-24 rounded-lg border border-[#e5e7eb] bg-white p-6"
+          >
+            <p className="text-xs font-semibold tracking-wide text-[#6b7280] uppercase">
+              Windows 10/11 · 64-bit
+            </p>
+            <h2 className="mt-2 text-xl font-semibold text-[#1a1a1a]">
+              Windows
+            </h2>
+            <a
+              href={WIN_DOWNLOAD_HREF}
+              className="mt-5 inline-flex items-center gap-3 bg-[#1a1a1a] px-6 py-3.5 text-base font-semibold tracking-wide text-white transition-colors hover:bg-[#374151]"
+            >
+              Download free
+              <span className="text-sm font-medium text-white/70">
+                v{WIN_VERSION} ({WIN_BUILD})
+              </span>
+            </a>
+            <p className="mt-3 text-sm text-[#6b7280]">
+              Self-contained app · unsigned (see SmartScreen note below)
+            </p>
+            <details className="mt-4 text-sm text-[#6b7280]">
+              <summary className="cursor-pointer text-[#4b5563] transition-colors hover:text-[#1a1a1a]">
+                Verify download (SHA-256)
+              </summary>
+              <ol className="mt-3 list-decimal space-y-2 pl-5 text-xs leading-relaxed">
+                <li>
+                  Filename:{" "}
+                  <span className="font-mono text-[#374151]">{WIN_FILENAME}</span>
+                </li>
+                <li>
+                  In PowerShell:{" "}
+                  <code className="break-all font-mono text-[#374151]">
+                    Get-FileHash -Algorithm SHA256
+                    &quot;$env:USERPROFILE\Downloads\{WIN_FILENAME}&quot;
+                  </code>
+                </li>
+                <li>
+                  Expected:{" "}
+                  <span className="break-all font-mono text-[#374151]">
+                    {WIN_SHA256}
+                  </span>
+                </li>
+              </ol>
+            </details>
+          </div>
+        </section>
+
         <section className="mt-20 grid gap-10 border-t border-[#e5e7eb] pt-14 sm:grid-cols-2 sm:gap-12">
           <div>
             <h2 className="text-lg font-semibold tracking-tight text-[#1a1a1a]">
-              Three modes
+              Modes
             </h2>
             <p className="mt-3 text-base leading-relaxed text-[#374151]">
               <strong className="font-semibold text-[#1a1a1a]">DEMO</strong>{" "}
               walks through the wizard with a simulated calculator — no hardware
-              required to learn the steps.{" "}
+              required.{" "}
               <strong className="font-semibold text-[#1a1a1a]">FLASH</strong> is
               the full seven-step wizard for one CE.{" "}
-              <strong className="font-semibold text-[#1a1a1a]">BATCH</strong> is
-              for experienced operators and those who want to flash multiple
-              calculators in sequence.
+              <strong className="font-semibold text-[#1a1a1a]">BATCH</strong>{" "}
+              flashes many calculators in sequence with the same firmware. On{" "}
+              <strong className="font-semibold text-[#1a1a1a]">Windows</strong>
+              , <strong className="font-semibold text-[#1a1a1a]">
+                Connection Probe
+              </strong>{" "}
+              lets you confirm the cable and SAM-BA detection before you choose
+              firmware.
             </p>
           </div>
           <div>
             <h2 className="text-lg font-semibold tracking-tight text-[#1a1a1a]">
-              Step by Step Workflow
+              Step-by-step workflow
             </h2>
             <p className="mt-3 text-base leading-relaxed text-[#374151]">
-              A seven-step wizard with diagrams and Continue / Back navigation.
-              Status feedback when the cable and SAM-BA connect. There is no
-              other software you need to install.
+              A seven-step wizard with diagrams and navigation. Status feedback
+              when the cable and SAM-BA connect. No other software to install.
             </p>
           </div>
           <div>
@@ -219,21 +296,30 @@ export default function FlasherPage() {
               What you need
             </h2>
             <ul className="mt-3 list-disc space-y-2 pl-5 text-base leading-relaxed text-[#374151]">
-              <li>A Mac running macOS 13 or later</li>
               <li>
-                HP 15c Collector&apos;s Edition (primary). There are field
-                reports that Flasher also works with the HP 16c CE and post-2015
-                HP 12c. These calculators use the same ATSAM4LC2C chip as the HP
-                15c CE — use at your own risk and confirm the firmware file
-                matches the calculator.
+                A Mac (macOS 13+) or a PC (Windows 10/11, 64-bit)
+              </li>
+              <li>
+                HP 15c Collector&apos;s Edition (primary). Field reports suggest
+                the HP 16c CE and post-2015 HP 12c may work — same ATSAM4LC2C
+                chip; use at your own risk and confirm the firmware matches.
               </li>
               <li>Official USB-C (or USB-A) pogo programming cable</li>
               <li>
                 A 114,688-byte (112 KB) firmware{" "}
                 <code className="font-mono text-sm text-[#1a1a1a]">.bin</code>{" "}
-                you already have — this download does not include HP firmware
+                you already have
               </li>
             </ul>
+          </div>
+          <div>
+            <h2 className="text-lg font-semibold tracking-tight text-[#1a1a1a]">
+              Windows SmartScreen
+            </h2>
+            <p className="mt-3 text-base leading-relaxed text-[#374151]">
+              The Windows build is unsigned. If SmartScreen blocks the app,
+              choose <strong>More info</strong> → <strong>Run anyway</strong>.
+            </p>
           </div>
           <div>
             <h2 className="text-lg font-semibold tracking-tight text-[#1a1a1a]">
