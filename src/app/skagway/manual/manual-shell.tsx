@@ -362,6 +362,11 @@ export function ManualSectionBlock({ section }: { section: ManualSection }) {
       <h2 className="scroll-mt-8 text-xl font-semibold tracking-tight text-[#1a1a1a]">
         {section.title}
       </h2>
+      {section.intro ? (
+        <p className="mt-3 text-base leading-relaxed text-[#374151]">
+          <ManualInline text={section.intro} />
+        </p>
+      ) : null}
       <ManualSteps steps={section.steps} />
       <ManualSectionScreenshots screenshots={section.screenshots} />
       {section.note ? (

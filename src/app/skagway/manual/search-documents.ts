@@ -22,6 +22,7 @@ export type ManualSearchDocument = {
 
 function sectionBody(section: ManualPage["sections"][number]): string {
   const parts = flattenManualSteps(section.steps);
+  if (section.intro) parts.unshift(section.intro);
   if (section.note) parts.push(section.note);
   return parts.join("\n");
 }

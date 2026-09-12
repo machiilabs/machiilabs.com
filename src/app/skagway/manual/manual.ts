@@ -50,6 +50,8 @@ export function flattenManualSteps(steps: ManualStep[]): string[] {
 
 export type ManualSection = {
   title: string;
+  /** Optional lead under the heading, before the numbered steps. */
+  intro?: string;
   steps: ManualStep[];
   note?: string;
   noteHref?: string;
@@ -210,22 +212,46 @@ export const MANUAL_PAGES: ManualPage[] = [
   {
     slug: "browse",
     title: "Browse",
-    blurb: "Grid and List views, sorting, Play All, search, and fast navigation.",
+    blurb: "Grid and List views, Review, sorting, Play All, search, and fast navigation.",
     summary:
-      "Browse the library as a thumbnail Grid or a column-based List, sort by any field, Play All through the current view, and search across titles, filenames, tags, and custom fields — built to stay fast at thousands of videos.",
+      "Browse the library as a thumbnail Grid or a column-based List, turn on Review to collect a set while you watch, sort by any field, Play All through the current view, and search across titles, filenames, tags, and custom fields — built to stay fast at thousands of videos.",
     screenshot: "browse.png",
     screenshotAlt:
-      "Skagway grid view with the toolbar: view switcher, sort menu, Play All, and Search videos field",
+      "Skagway grid view with the toolbar: view switcher, Review, sort menu, Play All, and Search videos field",
     screenshotHint:
-      "Populated Grid. Toolbar: Grid/List, Sort, Play All and Loop Play All, Search videos, and the video count. Optional: a search that matches a title or tag.",
+      "Populated Grid. Toolbar: Grid/List, Review (eye) next to the view switcher, Sort, Play All and Loop Play All, Search videos, and the video count. Optional: a search that matches a title or tag.",
     sections: [
       {
         title: "Grid and List",
         steps: [
-          "Switch views with the Grid / List control in the toolbar, or press ⌘1 for Grid and ⌘2 for List.",
+          "Switch views with the Grid / List control in the toolbar, or press ⌘1 for Grid and ⌘2 for List. The eye button next to it is Review (⌘3).",
           "Grid cards show the thumbnail, Title, duration, date, and rating. A captions badge and a watch-progress bar appear when relevant.",
           "Hold the pointer over a grid card for Live Preview — see the Playback page.",
           "Double-click a grid card to play it inside Skagway. Double-click a List row to open it in your external player.",
+        ],
+      },
+      {
+        title: "Review",
+        intro:
+          "Review lets you add videos to a selection while you keep clicking through and watching clips as usual.",
+        steps: [
+          "Review is off by default. Click and arrow keys replace the selection, the same as Finder.",
+          "Turn Review on with the eye button next to Grid / List, or press ⌘3 (View → Review).",
+          "While Review is on, click or use the arrow keys to watch the next clip without losing the videos you’ve already collected.",
+          "Add the clip you’re watching to the collected set by pressing A, or by clicking the circle on its grid card.",
+          "⌥-click a card to collect only that video. ⌘-click and ⇧-click still add to the set.",
+          "When you’re done, press Esc (or click the N selected link in the Inspector) to switch the Inspector to multi-selection view. As with any selection, you can then apply context menu actions, add tags, rating or custom data.",
+          "Turn Review off (⌘3 again) to go back to normal selection. Whatever you collected stays selected so you can keep working with the selection.",
+        ],
+        note: "Tags and ratings you apply while reviewing a single clip still apply to that clip only. Bulk edits wait until the Inspector shows N Videos Selected.",
+        noteHref: "/skagway/manual/organize",
+        noteLinkLabel: "Organize",
+        screenshots: [
+          {
+            filename: "review.png",
+            alt: "Skagway Grid in Review mode with the eye toggle on and checkmarks on collected cards",
+            hint: "Grid with Review on (filled eye next to Grid/List). One card focused for watching, two or more cards with checkmarks, Inspector showing the focused clip plus an N selected chip.",
+          },
         ],
       },
       {
@@ -269,7 +295,7 @@ export const MANUAL_PAGES: ManualPage[] = [
       {
         title: "Getting around quickly",
         steps: [
-          "Arrow keys move the selection through the grid; Home and End jump to the first and last video.",
+          "Arrow keys move the selection through the grid — or, with Review on, they move which clip you’re watching without clearing the collected set. Home and End jump to the first and last video.",
           "⌘J scrolls the current selection back into view.",
           "⌘-click adds or removes a single video from the selection; ⇧-click selects a range. ⌘A selects everything, ⇧⌘A deselects.",
         ],
@@ -427,9 +453,13 @@ export const MANUAL_PAGES: ManualPage[] = [
         title: "Edit many at once",
         steps: [
           "Select multiple videos (⌘-click, ⇧-click, or ⌘A) — the Inspector switches to “N Videos Selected”.",
+          "To decide which videos belong in the set by watching them, turn on Review (⌘3), collect keepers with A or the card circle, then press Esc — see Browse.",
           "Ratings, tags, and custom values you set apply to every selected video.",
           "When selected videos have different values for a field, the Inspector shows “Multiple values” until you overwrite it.",
         ],
+        note: "Review is the way to build a selection while you scan. Normal ⌘-click still works when Review is off.",
+        noteHref: "/skagway/manual/browse",
+        noteLinkLabel: "Browse",
       },
     ],
   },
@@ -739,11 +769,13 @@ export const MANUAL_PAGES: ManualPage[] = [
         title: "Views and navigation",
         steps: [
           "⌘1 / ⌘2 — Grid view / List view.",
-          "← → ↑ ↓ — move the selection through the grid.",
+          "⌘3 — turn Review on or off.",
+          "← → ↑ ↓ — move the selection through the grid (or, with Review on, move which clip you’re watching).",
           "Home / End — jump to the first / last video.",
           "⌘J — scroll the selection back into view.",
           "⌘A / ⇧⌘A — select all / deselect all.",
-          "Return — edit the selected video’s Title (display name). Esc — cancel editing (or stop playback).",
+          "A — (Review on) add or remove the clip you’re watching from the collected set.",
+          "Return — edit the selected video’s Title (display name). Esc — cancel editing, stop playback, or (Review on, player closed) show the collected set in the Inspector.",
           "⌥⌘T — toggle the Inspector between Still and Filmstrip.",
         ],
       },
