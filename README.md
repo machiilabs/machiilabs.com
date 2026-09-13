@@ -29,7 +29,7 @@ npm run dev
 
 ## Deploy
 
-- GitHub: `https://github.com/pkleim10/machii-labs` (`main`)
+- GitHub: `https://github.com/machiilabs/machiilabs.com` (`main`)
 - Vercel project: `machii-labs`
 - Production alias: `https://machii-labs.vercel.app`
 

@@ -20,8 +20,8 @@ const PORTALS = [
   },
   {
     name: "GitHub",
-    href: "https://github.com/pkleim10/machii-labs",
-    blurb: "machii-labs repository",
+    href: "https://github.com/machiilabs/machiilabs.com",
+    blurb: "machiilabs.com repository",
   },
   {
     name: "Supabase",
