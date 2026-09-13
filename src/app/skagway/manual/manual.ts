@@ -237,11 +237,11 @@ export const MANUAL_PAGES: ManualPage[] = [
         steps: [
           "Review is off by default. Click and arrow keys replace the selection, the same as Finder.",
           "Turn Review on with the eye button next to Grid / List, or press ⌘3 (View → Review).",
-          "While Review is on, click or use the arrow keys to watch the next clip without losing the videos you’ve already collected.",
+          "While Review is on, click or use the arrow keys to navigate and watch clips without losing the videos you’ve already collected.",
           "Add the clip you’re watching to the collected set by pressing A, or by clicking the circle on its grid card or List thumbnail.",
           "In List view, the table highlight follows the clip you’re watching; the collected set is separate. Use the circle on each row’s thumbnail the same way as on grid cards.",
           "⌥-click a card or row circle to collect only that video. ⌘-click and ⇧-click add to the set; ⇧-click on a circle range-collects from the last circle you clicked.",
-          "When you’re done, press Esc (or click the N selected link in the Inspector) to switch the Inspector to multi-selection view. As with any selection, you can then apply context menu actions, add tags, rating or custom data.",
+          "When you’re done, press Esc (or click the N selected link in the Inspector) to switch the Inspector to multi-selection view. As with any selection, you can then apply context menu actions, add tags, rating or custom data, or continue adding to the selection.",
           "Turn Review off (⌘3 again) to go back to normal selection. Whatever you collected stays selected so you can keep working with the selection.",
         ],
         note: "Tags and ratings you apply while reviewing a single clip still apply to that clip only. Bulk edits wait until the Inspector shows N Videos Selected.",
