@@ -286,6 +286,16 @@ export default function SkagwayPage() {
                     <p className="mt-3 text-sm leading-relaxed text-[#4b5563] sm:text-base">
                       {item.body}
                     </p>
+                    {item.learnMoreHref ? (
+                      <p className="mt-3 text-sm sm:text-base">
+                        <Link
+                          href={item.learnMoreHref}
+                          className="font-semibold text-[#9a5b14] transition-colors hover:text-[#7a490f]"
+                        >
+                          Learn more
+                        </Link>
+                      </p>
+                    ) : null}
                   </div>
                 ))}
               </div>

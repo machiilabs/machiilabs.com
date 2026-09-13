@@ -15,6 +15,8 @@ export type SkagwayReleaseHighlight = {
   body: string;
   /** One line on the home page. Defaults to title when omitted. */
   homeLine?: string;
+  /** Optional link to a manual section (shown on /skagway only). */
+  learnMoreHref?: string;
 };
 
 export type SkagwayReleaseItemKind = "feature" | "bug" | "polish";
@@ -42,6 +44,7 @@ export const SKAGWAY_RELEASES: SkagwayRelease[] = [
         body:
           "Play through clips and mark keepers as you go. The row or card you're watching and the set you've collected are separate — moving on doesn't clear picks you already made.",
         homeLine: "Review mode — collect a set while you watch clips.",
+        learnMoreHref: "/skagway/manual/browse#review",
       },
       {
         title: "List hover preview",
