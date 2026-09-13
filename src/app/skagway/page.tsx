@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { DownloadButton } from "@/components/download-button";
 import { MachiiLogo } from "@/components/machii-logo";
+import { SKAGWAY_FAQ } from "@/lib/skagway-faq";
 import {
   latestSkagwayRelease,
   SKAGWAY_RELEASES,
@@ -132,6 +133,25 @@ function exploreScreenshotSrc(filename: string): string {
   );
   const version = fs.statSync(filePath).mtimeMs;
   return `/skagway/explore/${filename}?v=${Math.floor(version)}`;
+}
+
+function AccordionChevron({ className }: { className?: string }) {
+  return (
+    <svg
+      aria-hidden
+      viewBox="0 0 20 20"
+      fill="none"
+      className={className}
+    >
+      <path
+        d="M5 7.5L10 12.5L15 7.5"
+        stroke="currentColor"
+        strokeWidth="1.75"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
 }
 
 function FeatureFigure({ feature }: { feature: Feature }) {
@@ -308,12 +328,7 @@ export default function SkagwayPage() {
             <summary className="cursor-pointer list-none py-3.5 font-display text-lg font-bold tracking-tight text-snow marker:content-none sm:py-4 sm:text-xl [&::-webkit-details-marker]:hidden">
               <span className="inline-flex items-center gap-2">
                 Previous releases
-                <span
-                  aria-hidden
-                  className="text-afterburn-soft transition-transform group-open:rotate-180"
-                >
-                  ▾
-                </span>
+                <AccordionChevron className="size-5 shrink-0 text-afterburn-soft transition-transform duration-200 group-open:rotate-180" />
               </span>
             </summary>
             <div className="space-y-10 border-t border-white/10 pb-8 pt-8">
@@ -370,6 +385,30 @@ export default function SkagwayPage() {
             </section>
           ))}
         </div>
+
+        <section className="mt-20 border-t border-white/10 pt-14 sm:mt-24">
+          <h2 className="font-display text-2xl font-extrabold tracking-tight text-snow sm:text-3xl">
+            FAQ
+          </h2>
+          <div className="mt-8 max-w-3xl space-y-3">
+            {SKAGWAY_FAQ.map((item) => (
+              <details
+                key={item.question}
+                className="group rounded-lg border border-white/10"
+              >
+                <summary className="cursor-pointer list-none px-4 py-3 text-base font-semibold text-snow marker:content-none sm:px-5 sm:py-3.5 [&::-webkit-details-marker]:hidden">
+                  <span className="flex items-center justify-between gap-3">
+                    {item.question}
+                    <AccordionChevron className="size-5 shrink-0 text-afterburn-soft transition-transform duration-200 group-open:rotate-180" />
+                  </span>
+                </summary>
+                <div className="border-t border-white/10 px-4 py-4 text-sm leading-relaxed text-fog sm:px-5 sm:text-base">
+                  {item.answer}
+                </div>
+              </details>
+            ))}
+          </div>
+        </section>
 
         <section className="mt-20 border-t border-white/10 pt-14 sm:mt-24">
           <h2 className="font-display text-2xl font-extrabold tracking-tight text-snow sm:text-3xl">
