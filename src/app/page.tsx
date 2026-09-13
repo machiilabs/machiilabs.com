@@ -14,14 +14,14 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "Mach II Labs",
   description:
-    "Independent Mac software lab. Skagway 1.0 — free video organizer for files already on your drives. Also: 15CE Flasher for HP 15c CE.",
+    "Independent Mac software lab. Skagway 1.1 — free video organizer for files already on your drives. Also: 15CE Flasher for HP 15c CE.",
   alternates: {
     canonical: "https://machiilabs.com",
   },
   openGraph: {
-    title: "Mach II Labs — Skagway 1.0",
+    title: "Mach II Labs — Skagway 1.1",
     description:
-      "Skagway 1.0 is out: a free Mac video organizer for the files already on your drives. Free forever.",
+      "Skagway 1.1 is out: Review mode in List view, List hover preview, and more. Free Mac video organizer for the files already on your drives.",
     url: "https://machiilabs.com",
     siteName: "Mach II Labs",
     images: [
@@ -35,9 +35,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Mach II Labs — Skagway 1.0",
+    title: "Mach II Labs — Skagway 1.1",
     description:
-      "Skagway 1.0 is out: a free Mac video organizer for the files already on your drives.",
+      "Skagway 1.1 is out: Review mode in List view, List hover preview, and more.",
     images: ["/skagway/product.png"],
   },
 };
@@ -110,7 +110,7 @@ export default function Home() {
           <div className="flex max-w-3xl flex-col items-start gap-8 sm:flex-row sm:items-center sm:gap-12">
             <div className="min-w-0 max-w-xl flex-1">
               <p className="text-sm font-semibold tracking-[0.18em] text-afterburn-soft uppercase">
-                Newest release · v1.0.0
+                Newest release · v1.1.0
               </p>
               <Link
                 href="/skagway"

@@ -26,7 +26,9 @@ export const metadata: Metadata = {
   },
 };
 
-const VERSION = "1.0.0";
+const VERSION = "1.1.0";
+const BUILD = "1045";
+const VERSION_LABEL = `v${VERSION} (${BUILD})`;
 
 type Feature = {
   title: string;
@@ -48,7 +50,7 @@ const features: Feature[] = [
   },
   {
     title: "See inside without opening",
-    body: "Hover for Live Preview, or open the filmstrip and jump to any frame. Scrub the collection without committing to a full play.",
+    body: "Hover grid cards or List thumbnails for Live Preview, or open the filmstrip and jump to any frame. Scrub the collection without committing to a full play.",
     screenshot: "explore-filmstrip.png",
     screenshotAlt:
       "Skagway Inspector showing a filmstrip grid of frames for the selected video",
@@ -206,7 +208,7 @@ export default function SkagwayPage() {
         <section className="grid items-start gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)] lg:gap-16 xl:gap-20">
           <div className="relative z-20 max-w-xl lg:pt-2">
             <p className="anim-rise font-display text-[0.7rem] font-semibold tracking-[0.28em] text-afterburn-soft uppercase sm:text-xs">
-              Free forever · v{VERSION}
+              Free forever · {VERSION_LABEL}
             </p>
 
             <h1 className="anim-rise anim-rise-delay-1 mt-5 font-display text-[clamp(2.75rem,8vw,4.75rem)] leading-[1.1] font-extrabold tracking-[-0.04em] text-snow">
@@ -226,7 +228,7 @@ export default function SkagwayPage() {
             <div className="anim-rise anim-rise-delay-3 mt-10 flex flex-wrap items-center gap-x-8 gap-y-4">
               <DownloadButton
                 product="skagway"
-                meta={`v${VERSION} · macOS 26+`}
+                meta={`${VERSION_LABEL} · macOS 26+`}
               />
               <Link
                 href="/skagway/manual"
@@ -295,7 +297,7 @@ export default function SkagwayPage() {
           <div className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-5">
             <DownloadButton
               product="skagway"
-              meta={`v${VERSION} · macOS 26+`}
+              meta={`${VERSION_LABEL} · macOS 26+`}
             />
             <Link
               href="/skagway/manual"

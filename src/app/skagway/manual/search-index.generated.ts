@@ -6,7 +6,7 @@
  * Regenerate: npm run manual:index
  * (also runs on predev / prebuild)
  *
- * Generated: 2026-09-12T08:41:24.877Z
+ * Generated: 2026-09-13T00:38:23.994Z
  * Documents: 77
  */
 import type { ManualSearchDocument } from "./search-documents";
@@ -127,7 +127,7 @@ export const MANUAL_SEARCH_INDEX: ManualSearchDocument[] = [
     "sectionTitle": "Grid and List",
     "href": "/skagway/manual/browse#grid-and-list",
     "title": "Browse » Grid and List",
-    "body": "Switch views with the Grid / List control in the toolbar, or press ⌘1 for Grid and ⌘2 for List. The eye button next to it is Review (⌘3).\nGrid cards show the thumbnail, Title, duration, date, and rating. A captions badge and a watch-progress bar appear when relevant.\nHold the pointer over a grid card for Live Preview — see the Playback page.\nDouble-click a grid card to play it inside Skagway. Double-click a List row to open it in your external player."
+    "body": "Switch views with the Grid / List control in the toolbar, or press ⌘1 for Grid and ⌘2 for List. The eye button next to it is Review (⌘3).\nGrid cards show the thumbnail, Title, duration, date, and rating. A captions badge and a watch-progress bar appear when relevant.\nHold the pointer over a grid card or List thumbnail for Live Preview — see the Playback page.\nDouble-click a grid card or List row to play it inside Skagway."
   },
   {
     "id": "browse__review",
@@ -136,7 +136,7 @@ export const MANUAL_SEARCH_INDEX: ManualSearchDocument[] = [
     "sectionTitle": "Review",
     "href": "/skagway/manual/browse#review",
     "title": "Browse » Review",
-    "body": "Review lets you add videos to a selection while you keep clicking through and watching clips as usual.\nReview is off by default. Click and arrow keys replace the selection, the same as Finder.\nTurn Review on with the eye button next to Grid / List, or press ⌘3 (View → Review).\nWhile Review is on, click or use the arrow keys to watch the next clip without losing the videos you’ve already collected.\nAdd the clip you’re watching to the collected set by pressing A, or by clicking the circle on its grid card.\n⌥-click a card to collect only that video. ⌘-click and ⇧-click still add to the set.\nWhen you’re done, press Esc (or click the N selected link in the Inspector) to switch the Inspector to multi-selection view. As with any selection, you can then apply context menu actions, add tags, rating or custom data.\nTurn Review off (⌘3 again) to go back to normal selection. Whatever you collected stays selected so you can keep working with the selection.\nTags and ratings you apply while reviewing a single clip still apply to that clip only. Bulk edits wait until the Inspector shows N Videos Selected."
+    "body": "Review lets you add videos to a selection while you keep clicking through and watching clips as usual.\nReview is off by default. Click and arrow keys replace the selection, the same as Finder.\nTurn Review on with the eye button next to Grid / List, or press ⌘3 (View → Review).\nWhile Review is on, click or use the arrow keys to watch the next clip without losing the videos you’ve already collected.\nAdd the clip you’re watching to the collected set by pressing A, or by clicking the circle on its grid card or List thumbnail.\nIn List view, the table highlight follows the clip you’re watching; the collected set is separate. Use the circle on each row’s thumbnail the same way as on grid cards.\n⌥-click a card or row circle to collect only that video. ⌘-click and ⇧-click add to the set; ⇧-click on a circle range-collects from the last circle you clicked.\nWhen you’re done, press Esc (or click the N selected link in the Inspector) to switch the Inspector to multi-selection view. As with any selection, you can then apply context menu actions, add tags, rating or custom data.\nTurn Review off (⌘3 again) to go back to normal selection. Whatever you collected stays selected so you can keep working with the selection.\nTags and ratings you apply while reviewing a single clip still apply to that clip only. Bulk edits wait until the Inspector shows N Videos Selected."
   },
   {
     "id": "browse__list-columns",
@@ -181,7 +181,7 @@ export const MANUAL_SEARCH_INDEX: ManualSearchDocument[] = [
     "sectionTitle": "Getting around quickly",
     "href": "/skagway/manual/browse#getting-around-quickly",
     "title": "Browse » Getting around quickly",
-    "body": "Arrow keys move the selection through the grid — or, with Review on, they move which clip you’re watching without clearing the collected set. Home and End jump to the first and last video.\n⌘J scrolls the current selection back into view.\n⌘-click adds or removes a single video from the selection; ⇧-click selects a range. ⌘A selects everything, ⇧⌘A deselects."
+    "body": "Arrow keys move the selection through the grid or list — or, with Review on, they move which clip you’re watching without clearing the collected set. Home and End jump to the first and last video.\n⌘J scrolls the current selection back into view.\n⌘-click adds or removes a single video from the selection; ⇧-click selects a range. ⌘A selects everything, ⇧⌘A deselects."
   },
   {
     "id": "filter__page",
@@ -406,7 +406,7 @@ export const MANUAL_SEARCH_INDEX: ManualSearchDocument[] = [
     "sectionTitle": "Live Preview",
     "href": "/skagway/manual/playback#live-preview",
     "title": "Playback » Live Preview",
-    "body": "Rest the pointer on a grid card for a silent preview through the video.\nIt pauses while the player is open. Toggle it under Settings → Video → Hover preview on Grid cards."
+    "body": "Rest the pointer on a grid card or List thumbnail for a silent preview through the video.\nIn List view, the enlarged preview opens beside the row. It pauses while the player is open.\nToggle it under Settings → Video → Hover preview on Grid and List."
   },
   {
     "id": "playback__subtitles",
@@ -577,7 +577,7 @@ export const MANUAL_SEARCH_INDEX: ManualSearchDocument[] = [
     "sectionTitle": "Views and navigation",
     "href": "/skagway/manual/keyboard#views-and-navigation",
     "title": "Keyboard » Views and navigation",
-    "body": "⌘1 / ⌘2 — Grid view / List view.\n⌘3 — turn Review on or off.\n← → ↑ ↓ — move the selection through the grid (or, with Review on, move which clip you’re watching).\nHome / End — jump to the first / last video.\n⌘J — scroll the selection back into view.\n⌘A / ⇧⌘A — select all / deselect all.\nA — (Review on) add or remove the clip you’re watching from the collected set.\nReturn — edit the selected video’s Title (display name). Esc — cancel editing, stop playback, or (Review on, player closed) show the collected set in the Inspector.\n⌥⌘T — toggle the Inspector between Still and Filmstrip."
+    "body": "⌘1 / ⌘2 — Grid view / List view.\n⌘3 — turn Review on or off.\n← → ↑ ↓ — move the selection through the grid or list (or, with Review on, move which clip you’re watching).\nHome / End — jump to the first / last video.\n⌘J — scroll the selection back into view.\n⌘A / ⇧⌘A — select all / deselect all.\nA — (Review on) add or remove the clip you’re watching from the collected set.\nReturn — edit the selected video’s Title (display name). Esc — cancel editing, stop playback, or (Review on, player closed) show the collected set in the Inspector.\n⌥⌘T — toggle the Inspector between Still and Filmstrip."
   },
   {
     "id": "keyboard__search-filters-and-play-all",
@@ -631,7 +631,7 @@ export const MANUAL_SEARCH_INDEX: ManualSearchDocument[] = [
     "sectionTitle": "Video",
     "href": "/skagway/manual/settings#video",
     "title": "Settings » Video",
-    "body": "Default Filmstrip Size — rows and columns for filmstrip previews, with a Regenerate filmstrips button.\nSurprise Me! auto-plays selected video — jump and play, or just jump.\nLoop Play All — during Play All, finishing the last video starts the first again.\nHover preview on Grid cards — the silent moving preview on hover.\nTag blind default state / Filter drawer height — how the Inspector tags list and Quick Filter drawer remember size.\nPlayer opens at — Compact, Full screen, or Last used size.\nFade resume banner after delay — whether and when the “Resumed at…” banner fades out."
+    "body": "Default Filmstrip Size — rows and columns for filmstrip previews, with a Regenerate filmstrips button.\nSurprise Me! auto-plays selected video — jump and play, or just jump.\nLoop Play All — during Play All, finishing the last video starts the first again.\nHover preview on Grid and List — the silent moving preview on hover.\nTag blind default state / Filter drawer height — how the Inspector tags list and Quick Filter drawer remember size.\nPlayer opens at — Compact, Full screen, or Last used size.\nFade resume banner after delay — whether and when the “Resumed at…” banner fades out."
   },
   {
     "id": "settings__data-sources",

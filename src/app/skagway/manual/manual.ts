@@ -226,8 +226,8 @@ export const MANUAL_PAGES: ManualPage[] = [
         steps: [
           "Switch views with the Grid / List control in the toolbar, or press ⌘1 for Grid and ⌘2 for List. The eye button next to it is Review (⌘3).",
           "Grid cards show the thumbnail, Title, duration, date, and rating. A captions badge and a watch-progress bar appear when relevant.",
-          "Hold the pointer over a grid card for Live Preview — see the Playback page.",
-          "Double-click a grid card to play it inside Skagway. Double-click a List row to open it in your external player.",
+          "Hold the pointer over a grid card or List thumbnail for Live Preview — see the Playback page.",
+          "Double-click a grid card or List row to play it inside Skagway.",
         ],
       },
       {
@@ -238,8 +238,9 @@ export const MANUAL_PAGES: ManualPage[] = [
           "Review is off by default. Click and arrow keys replace the selection, the same as Finder.",
           "Turn Review on with the eye button next to Grid / List, or press ⌘3 (View → Review).",
           "While Review is on, click or use the arrow keys to watch the next clip without losing the videos you’ve already collected.",
-          "Add the clip you’re watching to the collected set by pressing A, or by clicking the circle on its grid card.",
-          "⌥-click a card to collect only that video. ⌘-click and ⇧-click still add to the set.",
+          "Add the clip you’re watching to the collected set by pressing A, or by clicking the circle on its grid card or List thumbnail.",
+          "In List view, the table highlight follows the clip you’re watching; the collected set is separate. Use the circle on each row’s thumbnail the same way as on grid cards.",
+          "⌥-click a card or row circle to collect only that video. ⌘-click and ⇧-click add to the set; ⇧-click on a circle range-collects from the last circle you clicked.",
           "When you’re done, press Esc (or click the N selected link in the Inspector) to switch the Inspector to multi-selection view. As with any selection, you can then apply context menu actions, add tags, rating or custom data.",
           "Turn Review off (⌘3 again) to go back to normal selection. Whatever you collected stays selected so you can keep working with the selection.",
         ],
@@ -295,7 +296,7 @@ export const MANUAL_PAGES: ManualPage[] = [
       {
         title: "Getting around quickly",
         steps: [
-          "Arrow keys move the selection through the grid — or, with Review on, they move which clip you’re watching without clearing the collected set. Home and End jump to the first and last video.",
+          "Arrow keys move the selection through the grid or list — or, with Review on, they move which clip you’re watching without clearing the collected set. Home and End jump to the first and last video.",
           "⌘J scrolls the current selection back into view.",
           "⌘-click adds or removes a single video from the selection; ⇧-click selects a range. ⌘A selects everything, ⇧⌘A deselects.",
         ],
@@ -538,8 +539,9 @@ export const MANUAL_PAGES: ManualPage[] = [
       {
         title: "Live Preview",
         steps: [
-          "Rest the pointer on a grid card for a silent preview through the video.",
-          "It pauses while the player is open. Toggle it under Settings → Video → Hover preview on Grid cards.",
+          "Rest the pointer on a grid card or List thumbnail for a silent preview through the video.",
+          "In List view, the enlarged preview opens beside the row. It pauses while the player is open.",
+          "Toggle it under Settings → Video → Hover preview on Grid and List.",
         ],
       },
       {
@@ -770,7 +772,7 @@ export const MANUAL_PAGES: ManualPage[] = [
         steps: [
           "⌘1 / ⌘2 — Grid view / List view.",
           "⌘3 — turn Review on or off.",
-          "← → ↑ ↓ — move the selection through the grid (or, with Review on, move which clip you’re watching).",
+          "← → ↑ ↓ — move the selection through the grid or list (or, with Review on, move which clip you’re watching).",
           "Home / End — jump to the first / last video.",
           "⌘J — scroll the selection back into view.",
           "⌘A / ⇧⌘A — select all / deselect all.",
@@ -845,7 +847,7 @@ export const MANUAL_PAGES: ManualPage[] = [
           "Default Filmstrip Size — rows and columns for filmstrip previews, with a Regenerate filmstrips button.",
           "Surprise Me! auto-plays selected video — jump and play, or just jump.",
           "Loop Play All — during Play All, finishing the last video starts the first again.",
-          "Hover preview on Grid cards — the silent moving preview on hover.",
+          "Hover preview on Grid and List — the silent moving preview on hover.",
           "Tag blind default state / Filter drawer height — how the Inspector tags list and Quick Filter drawer remember size.",
           "Player opens at — Compact, Full screen, or Last used size.",
           "Fade resume banner after delay — whether and when the “Resumed at…” banner fades out.",
