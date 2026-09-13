@@ -4,6 +4,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { AnnouncementSignup } from "@/components/announcement-signup";
 import { MachiiLogo } from "@/components/machii-logo";
+import {
+  latestSkagwayRelease,
+  skagwayHomeReleaseLines,
+  skagwayVersionLabel,
+} from "@/lib/skagway-releases";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -43,6 +48,10 @@ export const metadata: Metadata = {
 };
 
 export default function Home() {
+  const latestSkagway = latestSkagwayRelease();
+  const skagwayReleaseLines = skagwayHomeReleaseLines(latestSkagway);
+  const skagwayMinorVersion = latestSkagway.version.replace(/\.0$/, "");
+
   return (
     <div
       className={`${inter.className} relative min-h-dvh overflow-hidden bg-ink text-snow`}
@@ -110,7 +119,7 @@ export default function Home() {
           <div className="flex max-w-3xl flex-col items-start gap-8 sm:flex-row sm:items-center sm:gap-12">
             <div className="min-w-0 max-w-xl flex-1">
               <p className="text-sm font-semibold tracking-[0.18em] text-afterburn-soft uppercase">
-                Newest release · v1.1.0
+                Newest release · {skagwayVersionLabel(latestSkagway.version)}
               </p>
               <Link
                 href="/skagway"
@@ -125,6 +134,18 @@ export default function Home() {
                 videos in the library — serious software. And it&apos;s{" "}
                 <span className="font-semibold text-snow">free forever</span>.
               </p>
+              {skagwayReleaseLines.length > 0 ? (
+                <div className="mt-5">
+                  <p className="text-xs font-semibold tracking-[0.16em] text-afterburn-soft uppercase">
+                    New in {skagwayMinorVersion}
+                  </p>
+                  <ul className="mt-2 space-y-2 text-sm leading-relaxed text-fog sm:text-base">
+                    {skagwayReleaseLines.map((line) => (
+                      <li key={line}>{line}</li>
+                    ))}
+                  </ul>
+                </div>
+              ) : null}
               <div className="mt-5 flex flex-wrap items-center gap-x-6 gap-y-3">
                 <Link
                   href="/skagway"

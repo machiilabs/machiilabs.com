@@ -1,0 +1,16 @@
+# Skagway site versioning (machii-labs)
+
+**Single source:** `src/lib/skagway-releases.ts` (newest entry first).
+
+On each Skagway release:
+
+1. Add a new top entry with `highlights` (paragraph blocks for `/skagway`).
+2. Convert the previous top entry to `items` (Feature / Bug / Polish bullets) and remove its `highlights`.
+3. Home page and `/skagway` read `latestSkagwayRelease()` — no separate `VERSION` constant.
+4. Update metadata in `src/app/page.tsx` / `src/app/layout.tsx` if the marketing story changed.
+
+Rules:
+
+- **Marketing version only** — `vX.Y.Z`, not build numbers on the site or download buttons.
+- **Home page** — only the latest release (`highlights` → `homeLine` bullets).
+- **`/skagway`** — latest in the contrasting band (paragraphs); older versions below as lists (`Feature:` / `Bug:` / `Polish:`).

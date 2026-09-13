@@ -5,6 +5,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { DownloadButton } from "@/components/download-button";
 import { MachiiLogo } from "@/components/machii-logo";
+import {
+  latestSkagwayRelease,
+  SKAGWAY_RELEASES,
+  skagwayReleaseItemLabel,
+  skagwayVersionLabel,
+} from "@/lib/skagway-releases";
 
 export const metadata: Metadata = {
   title: "Mac Video Organizer & Library — Skagway",
@@ -26,9 +32,9 @@ export const metadata: Metadata = {
   },
 };
 
-const VERSION = "1.1.0";
-const BUILD = "1045";
-const VERSION_LABEL = `v${VERSION} (${BUILD})`;
+const latestRelease = latestSkagwayRelease();
+const VERSION_LABEL = skagwayVersionLabel(latestRelease.version);
+const olderReleases = SKAGWAY_RELEASES.slice(1);
 
 type Feature = {
   title: string;
@@ -77,7 +83,7 @@ const features: Feature[] = [
   },
   {
     title: "A player that stays out of the way",
-    body: "Floating player in three sizes, including full screen — resume where you left off, Play All through the current view, and bookmarks with stills for any moment worth returning to.",
+    body: "Floating player in three sizes: compact, full screen and custom — resume where you left off, Play All through the current view, and bookmarks with stills for any moment worth returning to.",
     screenshot: "explore-player.png",
     screenshotAlt:
       "Skagway floating player with traffic lights and custom transport controls over the library grid",
@@ -259,7 +265,76 @@ export default function SkagwayPage() {
           </div>
         </section>
 
-        <div className="mt-16 grid gap-10 border-t border-white/10 pt-12 sm:mt-20 sm:grid-cols-3 sm:gap-8 sm:pt-14">
+        <section
+          aria-labelledby="skagway-new-in-version"
+          className="relative left-1/2 mt-16 w-screen max-w-[100vw] -translate-x-1/2 sm:mt-20"
+        >
+          <div className="border-y border-[#dccfb8] bg-[#f3efe6] px-6 py-12 sm:px-10 sm:py-14">
+            <div className="mx-auto max-w-6xl">
+              <p
+                id="skagway-new-in-version"
+                className="text-xs font-semibold tracking-[0.16em] text-[#9a5b14] uppercase"
+              >
+                New in version {latestRelease.version}
+              </p>
+              <div className="mt-8 grid gap-10 sm:grid-cols-2 lg:gap-8">
+                {latestRelease.highlights?.map((item) => (
+                  <div key={item.title}>
+                    <h2 className="font-display text-lg font-bold tracking-tight text-[#1a1a1a] sm:text-xl">
+                      {item.title}
+                    </h2>
+                    <p className="mt-3 text-sm leading-relaxed text-[#4b5563] sm:text-base">
+                      {item.body}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {olderReleases.length > 0 ? (
+          <details className="group mt-8 border-y border-white/10 sm:mt-10">
+            <summary className="cursor-pointer list-none py-3.5 font-display text-lg font-bold tracking-tight text-snow marker:content-none sm:py-4 sm:text-xl [&::-webkit-details-marker]:hidden">
+              <span className="inline-flex items-center gap-2">
+                Previous releases
+                <span
+                  aria-hidden
+                  className="text-afterburn-soft transition-transform group-open:rotate-180"
+                >
+                  ▾
+                </span>
+              </span>
+            </summary>
+            <div className="space-y-10 border-t border-white/10 pb-8 pt-8">
+              {olderReleases.map((release) => (
+                <div key={release.version}>
+                  <p className="font-mono text-sm font-semibold tracking-wide text-afterburn-soft">
+                    {release.version}
+                  </p>
+                  <ul className="mt-3 space-y-2 text-sm leading-relaxed text-fog sm:text-base">
+                    {release.items?.map((item) => (
+                      <li key={`${release.version}-${item.kind}-${item.text}`}>
+                        <span className="font-semibold text-snow">
+                          {skagwayReleaseItemLabel(item.kind)}:
+                        </span>{" "}
+                        {item.text}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </details>
+        ) : null}
+
+        <div
+          className={`mt-12 grid gap-10 sm:mt-16 sm:grid-cols-3 sm:gap-8 ${
+            olderReleases.length === 0
+              ? "border-t border-white/10 pt-12 sm:pt-14"
+              : ""
+          }`}
+        >
           {quickPoints.map((point) => (
             <section key={point.title}>
               <h2 className="font-display text-lg font-bold tracking-tight text-snow">
