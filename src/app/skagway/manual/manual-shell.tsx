@@ -357,14 +357,14 @@ export function ManualSectionBlock({ section }: { section: ManualSection }) {
             {section.noteHref && section.noteLinkLabel ? (
               <>
                 {" "}
-                See the{" "}
+                See{" "}
                 <Link
                   href={section.noteHref}
                   className="font-medium text-[#1d4ed8] underline-offset-2 hover:underline"
                 >
-                  <ManualInline text={section.noteLinkLabel} />
-                </Link>{" "}
-                page.
+                  {section.noteLinkLabel}
+                </Link>
+                .
               </>
             ) : null}
           </span>

@@ -230,7 +230,7 @@ export const MANUAL_PAGES: ManualPage[] = [
           "⌘-click and ⇧-click add clips to the collected set, the same Finder-style multi-select you already know. Collected clips show a blue checkmark. Press A to add or remove the focused clip.",
           "With two or more collected, the Inspector edits the whole set (orange title bar). Click a collected clip once to batch-edit the set; click it again to inspect just that clip (light blue title bar). Repeat clicks toggle between the two.",
           "A pill above the grid or list shows how many clips are collected. Click ✕ or press ⇧⌘A to clear the set.",
-          "Hold the pointer over a grid card or List thumbnail for Live Preview — see the Playback page.",
+          "Hold the pointer over a grid card or List thumbnail for Live Preview — see Playback.",
           "Double-click a grid card or List row to play it inside Skagway.",
         ],
         note: "Tags and ratings apply to the Inspector’s current target — one focused clip, or every collected clip when the orange batch bar is showing.",
@@ -416,7 +416,7 @@ export const MANUAL_PAGES: ManualPage[] = [
         title: "Subtitles",
         steps: [
           "Set Subtitles in the Inspector so the badge and filters match how the video is captioned.",
-          "Sidecar .srt files next to the video are detected automatically — see the Playback page.",
+          "Sidecar .srt files next to the video are detected automatically — see Playback.",
         ],
       },
       {
@@ -486,9 +486,7 @@ export const MANUAL_PAGES: ManualPage[] = [
           "Play All (⇧⌘P) plays the current view and advances when each video finishes.",
           "Loop Play All repeats the list. Stopping or playing a single video ends the session.",
         ],
-        note: "Album Order is the sequence Play All uses when you are in an album. Search and sort are on the Browse page.",
-        noteHref: "/skagway/manual/browse",
-        noteLinkLabel: "Browse",
+        note: "Album Order is the sequence Play All uses when you are in an album. For search and sort, see Browse.",
       },
       {
         title: "Transport controls",

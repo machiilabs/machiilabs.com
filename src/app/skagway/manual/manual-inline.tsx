@@ -1,6 +1,14 @@
+import Link from "next/link";
 import type { ReactNode } from "react";
+import {
+  getManualNavPages,
+  manualPageHref,
+  manualSectionId,
+} from "./manual";
 
 const KEY_CLASS = "font-mono font-bold text-[#1a1a1a]";
+const SEE_LINK_CLASS =
+  "font-medium text-[#1d4ed8] underline-offset-2 hover:underline";
 
 /** Top-level menus / contexts that can start a “Foo → Bar” path. */
 const MENU_ROOT = String.raw`(?:File|Edit|View|Window|Help|Settings|Skagway|right-click|Right-click)`;
@@ -90,8 +98,48 @@ const ACTION_LABELS = [
   "Play",
 ].sort((a, b) => b.length - a.length);
 
+const SETTINGS_SECTIONS = [
+  "Library",
+  "Video",
+  "Data Sources",
+  "Extensions",
+  "Tools",
+  "Custom Metadata",
+] as const;
+
 function escapeRegExp(value: string): string {
   return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+function buildSeeTargets(): string[] {
+  const pageTitles = getManualNavPages().map((page) => page.title);
+  const settingsPaths = SETTINGS_SECTIONS.map(
+    (section) => `Settings → ${section}`,
+  );
+  return [...new Set([...pageTitles, ...settingsPaths])].sort(
+    (a, b) => b.length - a.length,
+  );
+}
+
+function resolveSeeHref(label: string): string | null {
+  const trimmed = label.trim();
+  const settingsMatch = trimmed.match(/^Settings → (.+)$/);
+  if (settingsMatch) {
+    return `${manualPageHref("settings")}#${manualSectionId(settingsMatch[1])}`;
+  }
+
+  const page = getManualNavPages().find((entry) => entry.title === trimmed);
+  if (page) return manualPageHref(page.slug);
+
+  return null;
+}
+
+function buildSeeLinkPattern(): RegExp {
+  const targets = buildSeeTargets().map(escapeRegExp).join("|");
+  return new RegExp(
+    String.raw`\bsee (?:the )?(?<label>${targets})(?: page)?(?=[.,;]|$| — )`,
+    "g",
+  );
 }
 
 /**
@@ -100,31 +148,50 @@ function escapeRegExp(value: string): string {
  */
 const MANUAL_UI_PATTERN = new RegExp(
   [
-    // e.g. File → Add Folder…, Settings → Video → Playback, right-click → Add to Album
     String.raw`${MENU_ROOT}(?:\s*→\s*${MENU_ITEM})+`,
-    // Title-ish labels that end with an ellipsis (menu items / sheets)
     ELLIPSIS_LABEL,
-    // Bulk-rename apply button: Rename 3 Files / Rename N Files
     String.raw`Rename (?:N|\d+) Files?`,
-    // Curated buttons / menu items / links (no ellipsis, or already listed)
     ACTION_LABELS.map(escapeRegExp).join("|"),
-    // Short dialog buttons only when clearly clicked/chosen
     String.raw`(?:(?<=\bclick )|(?<=\bClick )|(?<=\bthen )|(?<=\bThen ))(?:Add|Scan|Create)\b`,
-    // Bulk-rename / field tokens: {Inc 015}, {Date Created MMM-yyyy}, {Title lower}
     String.raw`\{[^{}]+\}`,
-    // Modifier-click
     String.raw`[⌘⌥⇧⌃]-click`,
-    // Chords: one or more modifiers + key
     String.raw`[⌘⌥⇧⌃]+(?:Space|[A-Za-z0-9]|⌫|↩|←|→|↑|↓|,)`,
-    // Named keys
     String.raw`\b(?:Space|Esc|Return|Home|End)\b`,
   ].join("|"),
   "g",
 );
 
-export function ManualInline({ text }: { text: string }): ReactNode {
-  if (!text) return text;
+type InlineSegment =
+  | { kind: "text"; value: string }
+  | { kind: "see-link"; label: string; href: string };
 
+function splitSeeLinks(text: string): InlineSegment[] {
+  const segments: InlineSegment[] = [];
+  const pattern = buildSeeLinkPattern();
+  let last = 0;
+  let match: RegExpExecArray | null;
+
+  while ((match = pattern.exec(text)) !== null) {
+    const label = match.groups?.label;
+    if (!label) continue;
+    const href = resolveSeeHref(label);
+    if (!href) continue;
+
+    if (match.index > last) {
+      segments.push({ kind: "text", value: text.slice(last, match.index) });
+    }
+    segments.push({ kind: "see-link", label, href });
+    last = match.index + match[0].length;
+  }
+
+  if (last < text.length) {
+    segments.push({ kind: "text", value: text.slice(last) });
+  }
+
+  return segments.length > 0 ? segments : [{ kind: "text", value: text }];
+}
+
+function formatUiText(text: string, keyPrefix: string): ReactNode[] {
   const nodes: ReactNode[] = [];
   let last = 0;
   let match: RegExpExecArray | null;
@@ -135,7 +202,7 @@ export function ManualInline({ text }: { text: string }): ReactNode {
       nodes.push(text.slice(last, match.index));
     }
     nodes.push(
-      <kbd key={`${match.index}-${match[0]}`} className={KEY_CLASS}>
+      <kbd key={`${keyPrefix}-${match.index}-${match[0]}`} className={KEY_CLASS}>
         {match[0]}
       </kbd>,
     );
@@ -145,6 +212,33 @@ export function ManualInline({ text }: { text: string }): ReactNode {
   if (last < text.length) {
     nodes.push(text.slice(last));
   }
+
+  return nodes.length > 0 ? nodes : [text];
+}
+
+export function ManualInline({ text }: { text: string }): ReactNode {
+  if (!text) return text;
+
+  const segments = splitSeeLinks(text);
+  const nodes: ReactNode[] = [];
+
+  segments.forEach((segment, index) => {
+    if (segment.kind === "text") {
+      nodes.push(...formatUiText(segment.value, `text-${index}`));
+      return;
+    }
+
+    nodes.push("see ");
+    nodes.push(
+      <Link
+        key={`see-${index}-${segment.href}`}
+        href={segment.href}
+        className={SEE_LINK_CLASS}
+      >
+        {segment.label}
+      </Link>,
+    );
+  });
 
   return nodes.length === 1 ? nodes[0] : nodes;
 }
