@@ -5,6 +5,7 @@
  * 1. Add a new entry at the top with `highlights` (paragraph blocks).
  * 2. Move the previous top entry to `items` (Feature / Bug / Polish bullets).
  * 3. Bump home page + /skagway via `latestSkagwayRelease()`.
+ * 4. Update `src/lib/skagway-download.ts` (version, build, SHA-256).
  *
  * See `.cursor/rules/skagway-site-versioning.mdc`.
  */
@@ -37,20 +38,70 @@ export type SkagwayRelease = {
 /** Newest first. Only `[0]` uses `highlights`; older entries use `items`. */
 export const SKAGWAY_RELEASES: SkagwayRelease[] = [
   {
-    version: "1.1.0",
+    version: "1.2.0",
     highlights: [
       {
-        title: "Collect while browsing",
+        title: "Always-on collection",
         body:
-          "⌘-click and ⇧-click build a collected set while you arrow through clips. Focus and collection are separate — moving on doesn't clear checkmarks you already made.",
-        homeLine: "Collect clips with ordinary multi-select while you browse.",
+          "No Review mode toggle — collect clips with ordinary ⌘-click, ⇧-click, and A while you browse. Focus and collection stay separate, so moving on does not clear checkmarks you already made.",
+        homeLine:
+          "Always-on collection with Finder-style multi-select while you browse.",
         learnMoreHref: "/skagway/manual/browse#grid-and-list",
       },
       {
-        title: "List hover preview",
+        title: "Batch and single inspect",
         body:
-          "List thumbnails get the same silent hover scrub Grid cards have. Handy when the still frame isn't enough to recognize a clip.",
-        homeLine: "List hover preview — hover scrub on List thumbnails, like Grid.",
+          "Orange Inspector bar when you are batch-editing the collected set; light blue when you drill into one clip. Click a collected clip to toggle between the two modes.",
+        homeLine:
+          "Orange batch Inspector and light blue single-clip mode.",
+      },
+      {
+        title: "Collected-set pill",
+        body:
+          "When two or more clips are collected, a pill shows the count with ✕ to clear. ⇧⌘A or Inspector Clear drops the whole set without moving focus.",
+        homeLine: "Collected-set pill and Clear Collection (⇧⌘A).",
+      },
+    ],
+  },
+  {
+    version: "1.1.1",
+    items: [
+      {
+        kind: "bug",
+        text: "Browser keyboard after text input — selecting a clip defocuses search and Inspector text fields so Space plays and arrow keys navigate again.",
+      },
+      {
+        kind: "bug",
+        text: "Review mode tag targets — tag add/remove snapshots the active target so focus changes cannot retarget onto the collected set.",
+      },
+      {
+        kind: "feature",
+        text: "Membership filter — Advanced Filter and Smart Collections support is member of / is not member of for smart libraries and albums.",
+      },
+      {
+        kind: "feature",
+        text: "Unified Filter drawer — Quick and Advanced are tabs in one drawer (⌘⇧F); collection rule synopsis in the header pill.",
+      },
+      {
+        kind: "polish",
+        text: "Sparkle publish checklist and DMG/appcast verify script to prevent stale CDN downloads.",
+      },
+    ],
+  },
+  {
+    version: "1.1.0",
+    items: [
+      {
+        kind: "feature",
+        text: "Collect while browsing — ⌘/⇧ multi-select with separate focus and collected set.",
+      },
+      {
+        kind: "feature",
+        text: "List hover preview — silent scrub on List thumbnails, like Grid.",
+      },
+      {
+        kind: "feature",
+        text: "Review mode in Grid and List with collect circles and Inspector batch editing.",
       },
     ],
   },

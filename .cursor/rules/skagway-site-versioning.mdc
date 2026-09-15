@@ -1,13 +1,16 @@
 # Skagway site versioning (machii-labs)
 
-**Single source:** `src/lib/skagway-releases.ts` (newest entry first).
+**Release notes:** `src/lib/skagway-releases.ts` (newest entry first).
+
+**Download verify:** `src/lib/skagway-download.ts` (version, build, SHA-256 of `dist/Skagway.dmg`).
 
 On each Skagway release:
 
 1. Add a new top entry with `highlights` (paragraph blocks for `/skagway`).
 2. Convert the previous top entry to `items` (Feature / Bug / Polish bullets) and remove its `highlights`.
 3. Home page and `/skagway` read `latestSkagwayRelease()` — no separate `VERSION` constant.
-4. Update metadata in `src/app/page.tsx` / `src/app/layout.tsx` if the marketing story changed.
+4. Update `skagway-download.ts` from the notarized `Skagway.dmg` (`shasum -a 256`).
+5. Update metadata in `src/app/page.tsx` / `src/app/layout.tsx` if the marketing story changed.
 
 Rules:
 

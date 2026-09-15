@@ -5,6 +5,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { DownloadButton } from "@/components/download-button";
 import { SiteHeader } from "@/components/site-header";
+import {
+  SKAGWAY_DOWNLOAD_BUILD,
+  SKAGWAY_DOWNLOAD_FILENAME,
+  SKAGWAY_DOWNLOAD_SHA256,
+  SKAGWAY_DOWNLOAD_VERSION,
+} from "@/lib/skagway-download";
 import { SKAGWAY_FAQ } from "@/lib/skagway-faq";
 import {
   latestSkagwayRelease,
@@ -241,20 +247,48 @@ export default function SkagwayPage() {
               thousands of videos.
             </p>
 
-            <div className="anim-rise anim-rise-delay-3 mt-10 flex flex-wrap items-center gap-x-8 gap-y-4">
-              <DownloadButton
-                product="skagway"
-                meta={`${VERSION_LABEL} · macOS 26+`}
-              />
-              <Link
-                href="/skagway/manual"
-                className="font-display text-base font-semibold tracking-wide text-fog transition-colors hover:text-snow"
-              >
-                Manual
-              </Link>
-              <span className="w-full text-sm text-fog/80 sm:w-auto">
-                macOS 26+ · notarized DMG
-              </span>
+            <div className="anim-rise anim-rise-delay-3 mt-10">
+              <div className="flex flex-wrap items-center gap-x-8 gap-y-4">
+                <DownloadButton
+                  product="skagway"
+                  meta={`${VERSION_LABEL} (${SKAGWAY_DOWNLOAD_BUILD}) · macOS 26+`}
+                />
+                <Link
+                  href="/skagway/manual"
+                  className="font-display text-base font-semibold tracking-wide text-fog transition-colors hover:text-snow"
+                >
+                  Manual
+                </Link>
+                <span className="w-full text-sm text-fog/80 sm:w-auto">
+                  macOS 26+ · notarized DMG
+                </span>
+              </div>
+              <details className="mt-4 text-sm text-fog/80">
+                <summary className="cursor-pointer text-fog transition-colors hover:text-snow">
+                  Verify download (SHA-256)
+                </summary>
+                <ol className="mt-3 list-decimal space-y-2 pl-5 text-xs leading-relaxed">
+                  <li>
+                    Filename:{" "}
+                    <span className="font-mono text-fog">
+                      {SKAGWAY_DOWNLOAD_FILENAME}
+                    </span>{" "}
+                    (v{SKAGWAY_DOWNLOAD_VERSION}, build {SKAGWAY_DOWNLOAD_BUILD})
+                  </li>
+                  <li>
+                    In Terminal:{" "}
+                    <code className="break-all font-mono text-fog">
+                      shasum -a 256 ~/Downloads/{SKAGWAY_DOWNLOAD_FILENAME}
+                    </code>
+                  </li>
+                  <li>
+                    Expected:{" "}
+                    <span className="break-all font-mono text-fog">
+                      {SKAGWAY_DOWNLOAD_SHA256}
+                    </span>
+                  </li>
+                </ol>
+              </details>
             </div>
           </div>
 
