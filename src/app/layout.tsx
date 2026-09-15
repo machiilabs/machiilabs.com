@@ -26,7 +26,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Mach II Labs — Skagway 1.1",
     description:
-      "Skagway 1.1 is out: Review mode in List view, List hover preview, and more. Free Mac video organizer for the files already on your drives.",
+      "Skagway 1.1 is out: collect clips while you browse, List hover preview, and more. Free Mac video organizer for the files already on your drives.",
     url: "https://machiilabs.com",
     siteName: "Mach II Labs",
     locale: "en_US",
@@ -44,7 +44,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Mach II Labs — Skagway 1.1",
     description:
-      "Skagway 1.1 is out: Review mode in List view, List hover preview, and more.",
+      "Skagway 1.1 is out: collect clips while you browse, List hover preview, and more.",
     images: ["/skagway/product.png"],
   },
   robots: {

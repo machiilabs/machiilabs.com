@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { SiteHeader } from "@/components/site-header";
 import { UnsubscribeForm } from "./unsubscribe-form";
 
 export const metadata: Metadata = {
@@ -16,11 +17,10 @@ export default async function UnsubscribePage({
   const hasToken = Boolean(token && token.length > 0);
 
   return (
-    <main className="mx-auto flex min-h-dvh w-full max-w-lg flex-col justify-center bg-ink px-6 py-16 text-snow">
-      <p className="font-display text-xs font-semibold tracking-[0.2em] text-afterburn uppercase">
-        Mach II Labs
-      </p>
-      <h1 className="mt-3 font-display text-3xl font-bold tracking-tight">
+    <div className="min-h-dvh bg-ink text-snow">
+      <SiteHeader />
+      <main className="mx-auto flex w-full max-w-lg flex-col justify-center px-6 py-16">
+      <h1 className="font-display text-3xl font-bold tracking-tight">
         Unsubscribe
       </h1>
       {!hasToken ? (
@@ -51,6 +51,7 @@ export default async function UnsubscribePage({
           ← Back to site
         </Link>
       </p>
-    </main>
+      </main>
+    </div>
   );
 }

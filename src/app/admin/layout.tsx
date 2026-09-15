@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { SiteHeader } from "@/components/site-header";
 
 export const metadata: Metadata = {
   title: "Admin",
@@ -11,7 +12,7 @@ export default function AdminLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="min-h-dvh bg-ink text-snow">
+    <div className="flex min-h-dvh flex-col bg-ink text-snow">
       <div
         aria-hidden
         className="pointer-events-none fixed inset-0 -z-10"
@@ -23,7 +24,8 @@ export default function AdminLayout({
           `,
         }}
       />
-      {children}
+      <SiteHeader />
+      <div className="flex flex-1 flex-col">{children}</div>
     </div>
   );
 }

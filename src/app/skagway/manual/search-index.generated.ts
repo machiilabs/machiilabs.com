@@ -6,8 +6,8 @@
  * Regenerate: npm run manual:index
  * (also runs on predev / prebuild)
  *
- * Generated: 2026-09-13T01:34:58.249Z
- * Documents: 77
+ * Generated: 2026-09-15T08:21:53.887Z
+ * Documents: 76
  */
 import type { ManualSearchDocument } from "./search-documents";
 
@@ -118,7 +118,7 @@ export const MANUAL_SEARCH_INDEX: ManualSearchDocument[] = [
     "sectionTitle": null,
     "href": "/skagway/manual/browse",
     "title": "Browse",
-    "body": "Grid and List views, Review, sorting, Play All, search, and fast navigation.\nBrowse the library as a thumbnail Grid or a column-based List, turn on Review to collect a set while you watch, sort by any field, Play All through the current view, and search across titles, filenames, tags, and custom fields — built to stay fast at thousands of videos."
+    "body": "Grid and List views, selection, sorting, Play All, search, and fast navigation.\nBrowse the library as a thumbnail Grid or a column-based List, collect clips with ordinary multi-select gestures, sort by any field, Play All through the current view, and search across titles, filenames, tags, and custom fields — built to stay fast at thousands of videos."
   },
   {
     "id": "browse__grid-and-list",
@@ -127,16 +127,7 @@ export const MANUAL_SEARCH_INDEX: ManualSearchDocument[] = [
     "sectionTitle": "Grid and List",
     "href": "/skagway/manual/browse#grid-and-list",
     "title": "Browse » Grid and List",
-    "body": "Switch views with the Grid / List control in the toolbar, or press ⌘1 for Grid and ⌘2 for List. The eye button next to it is Review (⌘3).\nGrid cards show the thumbnail, Title, duration, date, and rating. A captions badge and a watch-progress bar appear when relevant.\nHold the pointer over a grid card or List thumbnail for Live Preview — see the Playback page.\nDouble-click a grid card or List row to play it inside Skagway."
-  },
-  {
-    "id": "browse__review",
-    "pageSlug": "browse",
-    "pageTitle": "Browse",
-    "sectionTitle": "Review",
-    "href": "/skagway/manual/browse#review",
-    "title": "Browse » Review",
-    "body": "Review lets you add videos to a selection while you keep clicking through and watching clips as usual.\nReview is off by default. Click and arrow keys replace the selection, the same as Finder.\nTurn Review on with the eye button next to Grid / List, or press ⌘3 (View → Review).\nWhile Review is on, click or use the arrow keys to navigate and watch clips without losing the videos you’ve already collected.\nAdd the clip you’re watching to the collected set by pressing A, or by clicking the circle on its grid card or List thumbnail.\nIn List view, the table highlight follows the clip you’re watching; the collected set is separate. Use the circle on each row’s thumbnail the same way as on grid cards.\n⌥-click a card or row circle to collect only that video. ⌘-click and ⇧-click add to the set; ⇧-click on a circle range-collects from the last circle you clicked.\nWhen you’re done, press Esc (or click the N selected link in the Inspector) to switch the Inspector to multi-selection view. As with any selection, you can then apply context menu actions, add tags, rating or custom data, or continue adding to the selection.\nTurn Review off (⌘3 again) to go back to normal selection. Whatever you collected stays selected so you can keep working with the selection.\nTags and ratings you apply while reviewing a single clip still apply to that clip only. Bulk edits wait until the Inspector shows N Videos Selected."
+    "body": "Switch views with the Grid / List control in the toolbar, or press ⌘1 for Grid and ⌘2 for List.\nGrid cards show the thumbnail, Title, duration, date, and rating. A captions badge and a watch-progress bar appear when relevant.\nPlain click focuses a clip — a dashed ring on Grid, the table highlight in List. That is the clip the Inspector shows when you are not batch-editing a collected set.\n⌘-click and ⇧-click add clips to the collected set, the same Finder-style multi-select you already know. Collected clips show a blue checkmark. Press A to add or remove the focused clip.\nWith two or more collected, the Inspector edits the whole set (orange title bar). Click a collected clip once to batch-edit the set; click it again to inspect just that clip (light blue title bar). Repeat clicks toggle between the two.\nA pill above the grid or list shows how many clips are collected. Click ✕ or press ⇧⌘A to clear the set.\nHold the pointer over a grid card or List thumbnail for Live Preview — see the Playback page.\nDouble-click a grid card or List row to play it inside Skagway.\nTags and ratings apply to the Inspector’s current target — one focused clip, or every collected clip when the orange batch bar is showing."
   },
   {
     "id": "browse__list-columns",
@@ -181,7 +172,7 @@ export const MANUAL_SEARCH_INDEX: ManualSearchDocument[] = [
     "sectionTitle": "Getting around quickly",
     "href": "/skagway/manual/browse#getting-around-quickly",
     "title": "Browse » Getting around quickly",
-    "body": "Arrow keys move the selection through the grid or list — or, with Review on, they move which clip you’re watching without clearing the collected set. Home and End jump to the first and last video.\n⌘J scrolls the current selection back into view.\n⌘-click adds or removes a single video from the selection; ⇧-click selects a range. ⌘A selects everything, ⇧⌘A deselects."
+    "body": "Arrow keys move focus through the grid or list without clearing collected checkmarks. Home and End jump to the first and last video.\n⌘J scrolls the focused clip back into view.\n⌘-click toggles a clip in the collected set; ⇧-click adds a range from the last click. ⌘A selects every video in the current view. ⇧⌘A clears the collected set."
   },
   {
     "id": "filter__page",
@@ -325,7 +316,7 @@ export const MANUAL_SEARCH_INDEX: ManualSearchDocument[] = [
     "sectionTitle": "Edit many at once",
     "href": "/skagway/manual/organize#edit-many-at-once",
     "title": "Organize » Edit many at once",
-    "body": "Select multiple videos (⌘-click, ⇧-click, or ⌘A) — the Inspector switches to “N Videos Selected”.\nTo decide which videos belong in the set by watching them, turn on Review (⌘3), collect keepers with A or the card circle, then press Esc — see Browse.\nRatings, tags, and custom values you set apply to every selected video.\nWhen selected videos have different values for a field, the Inspector shows “Multiple values” until you overwrite it.\nReview is the way to build a selection while you scan. Normal ⌘-click still works when Review is off."
+    "body": "Collect two or more clips (⌘-click, ⇧-click, A, or ⌘A) — the Inspector shows an orange “N Videos Selected” bar and edits apply to the whole set.\nWhile scanning, arrow through clips and collect keepers without losing earlier picks — see Browse.\nRatings, tags, and custom values you set apply to every collected video in batch mode.\nWhen collected videos have different values for a field, the Inspector shows “Multiple values” until you overwrite it.\nClick a collected clip once for batch mode; click it again to edit that clip alone."
   },
   {
     "id": "playback__page",
@@ -577,7 +568,7 @@ export const MANUAL_SEARCH_INDEX: ManualSearchDocument[] = [
     "sectionTitle": "Views and navigation",
     "href": "/skagway/manual/keyboard#views-and-navigation",
     "title": "Keyboard » Views and navigation",
-    "body": "⌘1 / ⌘2 — Grid view / List view.\n⌘3 — turn Review on or off.\n← → ↑ ↓ — move the selection through the grid or list (or, with Review on, move which clip you’re watching).\nHome / End — jump to the first / last video.\n⌘J — scroll the selection back into view.\n⌘A / ⇧⌘A — select all / deselect all.\nA — (Review on) add or remove the clip you’re watching from the collected set.\nReturn — edit the selected video’s Title (display name). Esc — cancel editing, stop playback, or (Review on, player closed) show the collected set in the Inspector.\n⌥⌘T — toggle the Inspector between Still and Filmstrip."
+    "body": "⌘1 / ⌘2 — Grid view / List view.\n← → ↑ ↓ — move focus through the grid or list.\nHome / End — jump to the first / last video.\n⌘J — scroll the focused clip back into view.\n⌘-click / ⇧-click — add clips to the collected set (⇧-click ranges from the last click).\nA — add or remove the focused clip from the collected set.\n⌘A / ⇧⌘A — select all in the view / clear the collected set.\nReturn — edit the focused video’s Title (display name). Esc — cancel editing or stop playback.\n⌥⌘T — toggle the Inspector between Still and Filmstrip."
   },
   {
     "id": "keyboard__search-filters-and-play-all",

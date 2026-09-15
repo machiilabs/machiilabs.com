@@ -40,11 +40,11 @@ export const SKAGWAY_RELEASES: SkagwayRelease[] = [
     version: "1.1.0",
     highlights: [
       {
-        title: "Review mode",
+        title: "Collect while browsing",
         body:
-          "Play through clips and mark keepers as you go. The row or card you're watching and the set you've collected are separate — moving on doesn't clear picks you already made.",
-        homeLine: "Review mode — collect a set while you watch clips.",
-        learnMoreHref: "/skagway/manual/browse#review",
+          "⌘-click and ⇧-click build a collected set while you arrow through clips. Focus and collection are separate — moving on doesn't clear checkmarks you already made.",
+        homeLine: "Collect clips with ordinary multi-select while you browse.",
+        learnMoreHref: "/skagway/manual/browse#grid-and-list",
       },
       {
         title: "List hover preview",

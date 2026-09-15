@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { DownloadButton } from "@/components/download-button";
-import { MachiiLogo } from "@/components/machii-logo";
+import { SiteHeader } from "@/components/site-header";
 import { SKAGWAY_FAQ } from "@/lib/skagway-faq";
 import {
   latestSkagwayRelease,
@@ -212,23 +212,13 @@ export default function SkagwayPage() {
         />
       </div>
 
-      <header className="relative z-10 mx-auto flex w-full max-w-6xl items-center justify-between px-6 pt-8 sm:px-10">
-        <MachiiLogo />
-        <div className="flex items-center gap-6">
-          <Link
-            href="/skagway/manual"
-            className="text-sm text-fog/80 transition-colors hover:text-snow"
-          >
-            Manual
-          </Link>
-          <a
-            href="mailto:support@machiilabs.com"
-            className="text-sm text-fog/80 transition-colors hover:text-snow"
-          >
-            Support
-          </a>
-        </div>
-      </header>
+      <SiteHeader
+        product="skagway"
+        active="skagway"
+        bordered={false}
+        hero
+        className="relative z-10"
+      />
 
       <main className="relative z-10 mx-auto w-full max-w-6xl px-6 pb-24 pt-6 sm:px-10 sm:pt-8">
         <section className="grid items-start gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)] lg:gap-16 xl:gap-20">

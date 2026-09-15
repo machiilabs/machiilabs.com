@@ -6,7 +6,7 @@ import {
   Space_Grotesk,
   Special_Elite,
 } from "next/font/google";
-import Link from "next/link";
+import { SiteHeader } from "@/components/site-header";
 
 export const metadata: Metadata = {
   title: "Font sample",
@@ -68,15 +68,10 @@ const samples = [
 
 export default function FontSamplePage() {
   return (
-    <div className="min-h-dvh bg-ink px-6 py-12 text-snow sm:px-10">
-      <div className="mx-auto w-full max-w-4xl">
-        <Link
-          href="/"
-          className="text-sm text-fog transition-colors hover:text-snow"
-        >
-          ← Mach II Labs
-        </Link>
-        <h1 className="mt-6 text-2xl font-semibold tracking-tight">
+    <div className="min-h-dvh bg-ink text-snow">
+      <SiteHeader />
+      <div className="mx-auto w-full max-w-4xl px-6 py-12 sm:px-10">
+        <h1 className="text-2xl font-semibold tracking-tight">
           Display font samples
         </h1>
         <p className="mt-2 text-fog">

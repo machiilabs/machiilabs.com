@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { AnnouncementSignup } from "@/components/announcement-signup";
 import { MachiiLogo } from "@/components/machii-logo";
+import { SiteHeader } from "@/components/site-header";
 import {
   latestSkagwayRelease,
   skagwayHomeReleaseLines,
@@ -26,7 +27,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Mach II Labs — Skagway 1.1",
     description:
-      "Skagway 1.1 is out: Review mode in List view, List hover preview, and more. Free Mac video organizer for the files already on your drives.",
+      "Skagway 1.1 is out: collect clips while you browse, List hover preview, and more. Free Mac video organizer for the files already on your drives.",
     url: "https://machiilabs.com",
     siteName: "Mach II Labs",
     images: [
@@ -42,7 +43,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Mach II Labs — Skagway 1.1",
     description:
-      "Skagway 1.1 is out: Review mode in List view, List hover preview, and more.",
+      "Skagway 1.1 is out: collect clips while you browse, List hover preview, and more.",
     images: ["/skagway/product.png"],
   },
 };
@@ -94,9 +95,7 @@ export default function Home() {
         </g>
       </svg>
 
-      <header className="relative z-10 mx-auto flex w-full max-w-6xl items-center px-6 pt-8 sm:px-10">
-        <MachiiLogo wordmarkClassName="text-sm font-semibold tracking-wide text-fog transition-colors group-hover:text-snow" />
-      </header>
+      <SiteHeader active="home" bordered={false} hero className="relative z-10" />
 
       <main className="relative z-10 mx-auto flex min-h-[calc(100dvh-5rem)] w-full max-w-6xl flex-col justify-start px-6 pb-16 pt-5 sm:px-10 sm:pb-20 lg:pb-24 lg:pt-6">
         <p className="anim-rise text-[0.7rem] font-semibold tracking-[0.28em] text-fog uppercase sm:text-xs">
@@ -213,7 +212,7 @@ export default function Home() {
                   href="/flasher/guide"
                   className="text-base text-fog transition-colors hover:text-afterburn-soft"
                 >
-                  Users guide →
+                  Install Guide →
                 </Link>
               </div>
             </div>

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { MachiiLogo } from "@/components/machii-logo";
+import { SiteHeader } from "@/components/site-header";
 import { PogoCableLinks } from "@/components/pogo-cable-links";
 import { downloadApiPath } from "@/lib/downloads";
 
@@ -82,22 +82,13 @@ function StuckDetails({
 export default function FlasherGuidePage() {
   return (
     <div className="min-h-dvh bg-[#f7f6f3] text-[#1a1a1a]">
-      <header className="border-b border-[#e5e7eb] bg-white">
-        <div className="mx-auto flex w-full max-w-3xl items-center justify-between gap-6 px-6 py-4 sm:px-8">
-          <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-sm">
-            <MachiiLogo tone="light" />
-            <Link href="/flasher" className="font-semibold text-[#1a1a1a]">
-              15CE Flasher
-            </Link>
-          </div>
-          <a
-            href="mailto:support@machiilabs.com"
-            className="text-sm text-[#4b5563] hover:text-[#1a1a1a]"
-          >
-            Support
-          </a>
-        </div>
-      </header>
+      <SiteHeader
+        product="flasher"
+        tone="light"
+        active="flasher-guide"
+        maxWidth="3xl"
+        contentClassName="sm:px-8"
+      />
 
       <main className="mx-auto w-full max-w-3xl px-6 pb-24 pt-12 sm:px-8">
         <p className="text-xs font-semibold tracking-wide text-[#6b7280] uppercase">

@@ -12,6 +12,8 @@ import {
   type ManualStep,
   type ManualTable,
 } from "./manual";
+import { SiteHeader } from "@/components/site-header";
+import { ManualExpandableImage } from "./manual-expandable-image";
 import { ManualInline } from "./manual-inline";
 import { ManualSearch } from "./manual-search";
 import { ManualSidebar } from "./manual-sidebar";
@@ -128,33 +130,15 @@ export function ManualShell({
 }) {
   return (
     <div className="manual-docs relative min-h-dvh bg-[#fafafa] text-[#1a1a1a]">
-      <header className="relative z-20 border-b border-[#e5e7eb] bg-white">
-        <div className="mx-auto flex w-full max-w-7xl items-center justify-between gap-6 px-6 py-3.5 sm:px-8 lg:px-10">
-          <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
-            <Link
-              href="/skagway"
-              className="text-sm font-medium text-[#4b5563] hover:text-[#1a1a1a]"
-            >
-              Skagway
-            </Link>
-            <Link
-              href="/skagway/manual"
-              className="text-sm font-semibold text-[#1a1a1a]"
-            >
-              Manual
-            </Link>
-          </div>
-          <div className="flex items-center gap-5">
-            <ManualSearch />
-            <a
-              href="mailto:support@machiilabs.com"
-              className="text-sm text-[#4b5563] hover:text-[#1a1a1a]"
-            >
-              Support
-            </a>
-          </div>
-        </div>
-      </header>
+      <SiteHeader
+        product="skagway"
+        tone="light"
+        active="manual"
+        maxWidth="7xl"
+        className="relative z-20"
+        contentClassName="px-6 sm:px-8 lg:px-10"
+        trailing={<ManualSearch />}
+      />
 
       <div className="relative z-10 mx-auto flex w-full max-w-7xl px-6 sm:px-8 lg:px-10">
         <details className="group w-full border-b border-[#e5e7eb] py-3 lg:hidden">
@@ -286,14 +270,10 @@ export function ManualFigure({
             <p className="mb-2 text-xs font-medium tracking-wide text-[#9ca3af] uppercase">
               Current capture (outdated)
             </p>
-            <Image
+            <ManualExpandableImage
               src={manualScreenshotSrc(screenshot)}
               alt={alt ?? screenshot}
-              width={2400}
-              height={1500}
-              className="h-auto w-full opacity-80"
-              sizes="(max-width: 768px) 100vw, 48rem"
-              unoptimized
+              dimmed
             />
           </div>
         ) : null}
@@ -306,14 +286,9 @@ export function ManualFigure({
       className={`${className} border border-[#e5e7eb] bg-white p-2 sm:p-3`}
       style={figureStyle}
     >
-      <Image
+      <ManualExpandableImage
         src={manualScreenshotSrc(screenshot)}
         alt={alt ?? screenshot}
-        width={2400}
-        height={1500}
-        className="h-auto w-full"
-        sizes="(max-width: 768px) 100vw, 48rem"
-        unoptimized
       />
       {alt ? <figcaption className="sr-only">{alt}</figcaption> : null}
     </figure>

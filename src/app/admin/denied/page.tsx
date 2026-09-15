@@ -9,11 +9,8 @@ export const metadata: Metadata = {
 
 export default function AdminDeniedPage() {
   return (
-    <main className="mx-auto flex min-h-dvh w-full max-w-lg flex-col justify-center px-6 py-16">
-      <p className="font-display text-xs font-semibold tracking-[0.2em] text-afterburn uppercase">
-        Mach II Labs
-      </p>
-      <h1 className="mt-3 font-display text-3xl font-bold tracking-tight text-snow">
+    <main className="mx-auto flex w-full max-w-lg flex-1 flex-col justify-center px-6 py-16">
+      <h1 className="font-display text-3xl font-bold tracking-tight text-snow">
         Access denied
       </h1>
       <p className="mt-3 text-sm leading-relaxed text-fog">

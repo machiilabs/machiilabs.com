@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { MachiiLogo } from "@/components/machii-logo";
+import { SiteHeader } from "@/components/site-header";
 import { PogoCableLinks } from "@/components/pogo-cable-links";
 import { downloadApiPath } from "@/lib/downloads";
 
@@ -99,25 +99,7 @@ export default function FlasherPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareJsonLd) }}
       />
 
-      <header className="border-b border-[#e5e7eb] bg-white">
-        <div className="mx-auto flex w-full max-w-6xl items-center justify-between gap-6 px-6 py-4 sm:px-10">
-          <MachiiLogo tone="light" />
-          <nav className="flex items-center gap-5 text-sm">
-            <Link
-              href="/flasher/guide"
-              className="text-[#4b5563] transition-colors hover:text-[#1a1a1a]"
-            >
-              Install help
-            </Link>
-            <a
-              href="mailto:support@machiilabs.com"
-              className="text-[#4b5563] transition-colors hover:text-[#1a1a1a]"
-            >
-              Support
-            </a>
-          </nav>
-        </div>
-      </header>
+      <SiteHeader product="flasher" tone="light" active="flasher" />
 
       <main className="mx-auto w-full max-w-6xl px-6 pb-24 pt-12 sm:px-10 sm:pt-16">
         <section className="grid items-start gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:gap-14 xl:gap-16">
