@@ -242,7 +242,7 @@ export const MANUAL_PAGES: ManualPage[] = [
           "Grid cards show the thumbnail, Title, duration, date, and rating. A captions badge and a watch-progress bar appear when relevant.",
           "Plain click focuses a clip — a dashed ring on Grid, the table highlight in List. That is the clip the Inspector shows when you are not batch-editing a collected set.",
           "⌘-click and ⇧-click add clips to the collected set, the same Finder-style multi-select you already know. Collected clips show a blue checkmark. Press A to add or remove the focused clip.",
-          "With two or more collected, the Inspector edits the whole set (orange title bar). Click a collected clip’s chrome once to batch-edit the set; click it again to inspect just that clip (light blue title bar). Or choose **N Videos** on the light blue bar / the “N clips collected” pill.",
+          "With two or more collected, the Inspector edits the whole set (orange title bar). Click a collected clip to inspect just that clip (light blue); click the same focused clip again to return to batch. Or choose **N Videos** on the light blue bar / the “N clips collected” pill.",
           "A pill above the grid or list shows how many clips are collected. Click ✕ or press ⇧⌘A to clear the set.",
           "Hold the pointer over a grid card or List thumbnail for Live Preview — see Playback.",
           "Double-click a grid card or List row to play it inside Skagway.",
