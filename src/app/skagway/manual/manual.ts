@@ -150,11 +150,12 @@ export const MANUAL_PAGES: ManualPage[] = [
     title: "Library",
     blurb: "Add folders, keep the catalog current, manage .machii files.",
     summary:
-      "The File menu holds everything about the library itself: which folders Skagway watches, scanning for new files, and creating, opening, copying, or deleting .machii library files.",
+      "The File menu holds everything about the library itself: which folders Skagway watches, scanning for new files, reconnecting missing paths, and creating, opening, copying, or deleting .machii library files.",
     screenshot: "library-file-menu.png",
     screenshotAlt: "Skagway with the File menu open",
     screenshotHint:
-      "Full File menu with shortcuts readable: Bulk Rename…, Change Library Location…, Change Thumbnail Cache Location…, Add Folder…, Scan for New Videos, Scan for Subtitles, and create/open/recent library items.",
+      "Full File menu with shortcuts readable: Reconnect…, Bulk Rename…, Change Library Location…, Change Thumbnail Cache Location…, Add Folder…, Scan for New Videos, Scan for Subtitles, and create/open/recent library items.",
+    screenshotNeedsUpdate: true,
     screenshotScale: 0.75,
     sections: [
       {
@@ -191,6 +192,18 @@ export const MANUAL_PAGES: ManualPage[] = [
         note: "Switching libraries does not delete the one you left. Skagway restarts briefly.",
       },
       {
+        title: "Reconnect missing files",
+        steps: [
+          "When clips can’t be found on disk, a banner appears (also when you focus a Missing clip). Click Reconnect… — same sheet as File → Reconnect….",
+          "Add destination… for each folder that now holds the missing clips. Those folders are Evidence Destinations — Skagway matches by filename (and soft size) only under folders you choose.",
+          "The preview groups Ready, Needs attention, and Unmatched. Confirm reconnect updates library paths only; ratings, tags, and collections stay put. Unmatched clips remain Missing.",
+          "Edit → Undo Reconnect reverses the last reconnect session.",
+        ],
+        note: "An unplugged drive shows as Missing without forcing reconnect — open Reconnect when the volume is back.",
+        noteHref: "/skagway/manual/filter#smart-libraries",
+        noteLinkLabel: "Smart Libraries",
+      },
+      {
         title: "Copy or delete the library file",
         steps: [
           "Save Copy… — writes a timestamped duplicate wherever you choose. The original stays open; open the copy later with Open Library….",
@@ -212,19 +225,20 @@ export const MANUAL_PAGES: ManualPage[] = [
   {
     slug: "browse",
     title: "Browse",
-    blurb: "Grid and List views, selection, sorting, Play All, search, and fast navigation.",
+    blurb: "Grid, List, and Storyboard views, selection, sorting, Play All, search, and fast navigation.",
     summary:
-      "Browse the library as a thumbnail Grid or a column-based List, collect clips with ordinary multi-select gestures, sort by any field, Play All through the current view, and search across titles, filenames, tags, and custom fields — built to stay fast at thousands of videos.",
+      "Browse the library as a thumbnail Grid, a column-based List, or a Storyboard collage wall, collect clips with ordinary multi-select gestures, sort by any field, Play All through the current view, and search across titles, filenames, tags, and custom fields — built to stay fast at thousands of videos.",
     screenshot: "browse.png",
     screenshotAlt:
       "Skagway grid view with the toolbar: view switcher, sort menu, Play All, and Search videos field",
     screenshotHint:
-      "Populated Grid. Toolbar: Grid/List, Sort, Play All and Loop Play All, Search videos, and the video count. Optional: a collection pill (“N clips collected”) when two or more checkmarked cards are visible.",
+      "Populated Grid. Toolbar: Grid / List / Storyboard, Sort, Play All and Loop Play All, Search videos, and the video count. Optional: a collection pill (“N clips collected”) when two or more checkmarked cards are visible.",
+    screenshotNeedsUpdate: true,
     sections: [
       {
         title: "Grid and List",
         steps: [
-          "Switch views with the Grid / List control in the toolbar, or press ⌘1 for Grid and ⌘2 for List.",
+          "Switch views with the Grid / List / Storyboard control in the toolbar, or press ⌘1 for Grid and ⌘2 for List.",
           "Grid cards show the thumbnail, Title, duration, date, and rating. A captions badge and a watch-progress bar appear when relevant.",
           "Plain click focuses a clip — a dashed ring on Grid, the table highlight in List. That is the clip the Inspector shows when you are not batch-editing a collected set.",
           "⌘-click and ⇧-click add clips to the collected set, the same Finder-style multi-select you already know. Collected clips show a blue checkmark. Press A to add or remove the focused clip.",
@@ -248,6 +262,18 @@ export const MANUAL_PAGES: ManualPage[] = [
             hint: "Single-clip inspect: one collected card focused (dashed ring), Inspector light blue title bar with that clip’s name.",
           },
         ],
+      },
+      {
+        title: "Storyboard view",
+        steps: [
+          "Press ⌘3 (or choose Storyboard in the toolbar) for a six-frame collage of each clip — useful when a single poster isn’t enough to tell clips apart.",
+          "Compact packs more columns; Normal (the default) uses fewer columns with more space. The density control appears in the toolbar while Storyboard is active.",
+          "Click a frame in the collage to seek and play from that sample time. Click the title or footer chrome to select the clip without starting playback.",
+          "Collection and focus work the same as Grid — ⌘-click, ⇧-click, and A. Hover preview is off in Storyboard; use the collage frames instead.",
+        ],
+        note: "Inspector Filmstrip (⌥⌘T) is a separate single-clip preview — not Storyboard view.",
+        noteHref: "/skagway/manual/playback#play-from-the-filmstrip",
+        noteLinkLabel: "Play from the filmstrip",
       },
       {
         title: "List columns",
@@ -290,7 +316,7 @@ export const MANUAL_PAGES: ManualPage[] = [
       {
         title: "Getting around quickly",
         steps: [
-          "Arrow keys move focus through the grid or list without clearing collected checkmarks. Home and End jump to the first and last video.",
+          "Arrow keys move focus through the grid, list, or storyboard without clearing collected checkmarks. Home and End jump to the first and last video.",
           "⌘J scrolls the focused clip back into view.",
           "⌘-click toggles a clip in the collected set; ⇧-click adds a range from the last click. ⌘A selects every video in the current view. ⇧⌘A clears the collected set.",
         ],
@@ -327,7 +353,7 @@ export const MANUAL_PAGES: ManualPage[] = [
           "Top Rated — videos at or above your chosen star threshold.",
           "Duplicates — videos whose file content matches another video, grouped by fingerprint.",
           "Corrupt — files Skagway couldn’t read metadata or a thumbnail from.",
-          "Missing — files whose path no longer exists (unmounted drive, moved file). Click the refresh arrow to rescan.",
+          "Missing — files whose path no longer exists (unmounted drive, moved file). Click the refresh arrow to rescan. Reconnect… (banner or File menu) points Skagway at new locations.",
           "Last Added — videos found by the most recent Scan for New Videos.",
           "Recently Converted and Last Metadata Import appear after you use re-encoding or metadata import.",
         ],
@@ -404,6 +430,15 @@ export const MANUAL_PAGES: ManualPage[] = [
     screenshotHint:
       "Selected video with the Inspector open: display Title, Subtitles picker, filled rating stars, at least one assigned tag, and a custom field if defined.",
     sections: [
+      {
+        title: "Hide / Show Inspector",
+        steps: [
+          "Press ⌘I, choose View → Inspector, or click the Inspector button in the toolbar to hide or show the right-hand pane.",
+          "Hiding gives the Grid, List, or Storyboard the full window width. Showing restores the Inspector at the last width you dragged.",
+          "While the Inspector is hidden, Compact playback is unavailable — the player stays Windowed until you show the Inspector again.",
+          "With two or more clips collected, click the “N clips collected” pill to show the Inspector in batch-edit mode.",
+        ],
+      },
       {
         title: "Title (display name)",
         steps: [
@@ -510,12 +545,14 @@ export const MANUAL_PAGES: ManualPage[] = [
           "Switch the Inspector preview to Filmstrip (⌥⌘T) to see frames sampled across the video.",
           "Click a frame to start playback there.",
         ],
-        note: "Clicking the Still preview starts playback too, from the beginning or the saved resume position.",
+        note: "Clicking the Still preview starts playback too, from the beginning or the saved resume position. Filmstrip is the Inspector preview for one focused clip — Storyboard view (⌘3) is the library collage wall.",
+        noteHref: "/skagway/manual/browse#storyboard-view",
+        noteLinkLabel: "Storyboard view",
       },
       {
         title: "Three sizes, one player",
         steps: [
-          "Compact (⌃⌘C) — docks into the Inspector preview.",
+          "Compact (⌃⌘C) — docks into the Inspector preview. Requires the Inspector to be visible; if it is hidden, Compact is unavailable until you show it (⌘I).",
           "Windowed (⌃⌘W) — a floating panel; size and position are remembered.",
           "Full screen (⌃⌘F) — edge to edge without restarting. Esc stops; ⌃⌘F or the traffic lights leave full screen without stopping.",
           "Choose the opening size under Settings → Video → Player opens at.",
@@ -762,14 +799,15 @@ export const MANUAL_PAGES: ManualPage[] = [
       {
         title: "Views and navigation",
         steps: [
-          "⌘1 / ⌘2 — Grid view / List view.",
-          "← → ↑ ↓ — move focus through the grid or list.",
+          "⌘1 / ⌘2 / ⌘3 — Grid view / List view / Storyboard view.",
+          "← → ↑ ↓ — move focus through the grid, list, or storyboard.",
           "Home / End — jump to the first / last video.",
           "⌘J — scroll the focused clip back into view.",
           "⌘-click / ⇧-click — add clips to the collected set (⇧-click ranges from the last click).",
           "A — add or remove the focused clip from the collected set.",
           "⌘A / ⇧⌘A — select all in the view / clear the collected set.",
           "Return — edit the focused video’s Title (display name). Esc — cancel editing or stop playback.",
+          "⌘I — show / hide the Inspector.",
           "⌥⌘T — toggle the Inspector between Still and Filmstrip.",
         ],
       },
@@ -888,7 +926,7 @@ export const MANUAL_PAGES: ManualPage[] = [
         title: "Where your data lives",
         steps: [
           "The library catalog: the .machii file you created (by default in ~/Library/Application Support/Skagway/).",
-          "Thumbnails and filmstrips: each library’s own cache (system Caches, a Skagway-cache folder next to the library, or a folder you chose).",
+          "Thumbnails, filmstrips, and storyboards: each library’s own cache (system Caches, a Skagway-cache folder next to the library, or a folder you chose).",
           "Settings: standard macOS preferences on this Mac.",
           "Your video files: exactly where you put them. Skagway never relocates or uploads them.",
         ],

@@ -38,28 +38,45 @@ export type SkagwayRelease = {
 /** Newest first. Only `[0]` uses `highlights`; older entries use `items`. */
 export const SKAGWAY_RELEASES: SkagwayRelease[] = [
   {
-    version: "1.2.0",
+    version: "1.3.0",
     highlights: [
       {
-        title: "Always-on collection",
+        title: "Storyboard view",
         body:
-          "No Review mode toggle — collect clips with ordinary ⌘-click, ⇧-click, and A while you browse. Focus and collection stay separate, so moving on does not clear checkmarks you already made.",
-        homeLine:
-          "Always-on collection with Finder-style multi-select while you browse.",
-        learnMoreHref: "/skagway/manual/browse#grid-and-list",
+          "Press ⌘3 for a six-frame collage of each clip. Normal packing is the default; Compact fits more columns. Click a frame to seek and play from there.",
+        homeLine: "Storyboard view (⌘3) — Normal or Compact packing.",
+        learnMoreHref: "/skagway/manual/browse#storyboard-view",
       },
       {
-        title: "Batch and single inspect",
+        title: "Hide the Inspector",
         body:
-          "Orange Inspector bar when you are batch-editing the collected set; light blue when you drill into one clip. Click a collected clip to toggle between the two modes.",
-        homeLine:
-          "Orange batch Inspector and light blue single-clip mode.",
+          "Hide the Inspector (⌘I or the toolbar button) when you want the wall full-width. Show it again at your last width. Compact playback only applies while the Inspector is visible.",
+        homeLine: "Hide/Show Inspector (⌘I) for a wider wall.",
+        learnMoreHref: "/skagway/manual/organize#hide-show-inspector",
       },
       {
-        title: "Collected-set pill",
+        title: "Reconnect missing files",
         body:
-          "When two or more clips are collected, a pill shows the count with ✕ to clear. ⇧⌘A or Inspector Clear drops the whole set without moving focus.",
-        homeLine: "Collected-set pill and Clear Collection (⇧⌘A).",
+          "Point Skagway at new destination folders to rematch moved or remounted files. Ratings, tags, and collections stay put.",
+        homeLine: "Reconnect for missing or moved files.",
+        learnMoreHref: "/skagway/manual/library#reconnect-missing-files",
+      },
+    ],
+  },
+  {
+    version: "1.2.0",
+    items: [
+      {
+        kind: "feature",
+        text: "Always-on collection — collect with ⌘-click, ⇧-click, and A while you browse; focus and collection stay separate.",
+      },
+      {
+        kind: "feature",
+        text: "Batch and single inspect — orange Inspector for the collected set; light blue for one clip.",
+      },
+      {
+        kind: "feature",
+        text: "Collected-set pill — count with ✕ to clear; ⇧⌘A clears the set.",
       },
     ],
   },
