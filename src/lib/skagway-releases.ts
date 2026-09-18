@@ -43,7 +43,7 @@ export const SKAGWAY_RELEASES: SkagwayRelease[] = [
       {
         title: "Always-on collection",
         body:
-          "No Review mode toggle — collect clips with ordinary ⌘-click, ⇧-click, and A while you browse. Focus and collection stay separate, so moving on does not clear checkmarks you already made.",
+          "Collect clips with ordinary ⌘-click, ⇧-click, and A while you browse. Focus and collection stay separate, so moving on does not clear checkmarks you already made.",
         homeLine:
           "Always-on collection with Finder-style multi-select while you browse.",
         learnMoreHref: "/skagway/manual/browse#grid-and-list",
