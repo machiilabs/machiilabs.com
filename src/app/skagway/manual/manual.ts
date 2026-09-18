@@ -196,7 +196,8 @@ export const MANUAL_PAGES: ManualPage[] = [
         steps: [
           "When clips can’t be found on disk, a banner appears (also when you focus a Missing clip). Click Reconnect… — same sheet as File → Reconnect….",
           "Add destination… for each folder that now holds the missing clips. Those folders are Evidence Destinations — Skagway matches by filename (and soft size) only under folders you choose.",
-          "The preview groups Ready, Needs attention, and Unmatched. Confirm reconnect updates library paths only; ratings, tags, and collections stay put. Unmatched clips remain Missing.",
+          "The preview groups Ready, Needs attention, and Unmatched. The Ready summary turns green when every missing clip in the session has a match.",
+          "Confirm reconnect updates library paths only; ratings, tags, and collections stay put. Unmatched clips remain Missing.",
           "Edit → Undo Reconnect reverses the last reconnect session.",
         ],
         note: "An unplugged drive shows as Missing without forcing reconnect — open Reconnect when the volume is back.",
@@ -268,7 +269,8 @@ export const MANUAL_PAGES: ManualPage[] = [
         steps: [
           "Press ⌘3 (or choose Storyboard in the toolbar) for a six-frame collage of each clip — useful when a single poster isn’t enough to tell clips apart.",
           "Compact packs more columns; Normal (the default) uses fewer columns with more space. The density control appears in the toolbar while Storyboard is active.",
-          "Click a frame once to focus the clip (even if it is already collected); click the same focused collage again to seek and play from that sample time. Click the title or footer chrome for normal selection / batch-inspect toggle without starting playback.",
+          "Click a frame once to focus the clip (even if it is already collected); click the same focused collage again to seek and play from that sample time. Playing from a frame does not clear your collected set.",
+          "Click the title or footer chrome for normal selection / batch-inspect toggle without starting playback. Collage clicks never toggle batch inspect on their own.",
           "Collection and focus work the same as Grid — ⌘-click, ⇧-click, and A. Hover preview is off in Storyboard; use the collage frames instead.",
         ],
         note: "Inspector Filmstrip (⌥⌘T) is a separate single-clip preview — not Storyboard view.",
@@ -338,11 +340,11 @@ export const MANUAL_PAGES: ManualPage[] = [
       {
         title: "Quick Filter (⇧⌘F)",
         steps: [
-          "Click the filter button in the toolbar or press ⇧⌘F to open the Quick Filter drawer above the grid.",
-          "Combine a Smart Library, collection, or album with rating, duration, quality, and tags.",
+          "Click the filter button in the toolbar or press ⇧⌘F to open the Filter drawer above the grid. Quick and Advanced are tabs in the same drawer.",
+          "On the Quick tab, combine a Smart Library, collection, or album with rating, duration, quality, and tags.",
           "Click No Stars or a star rating. Or Higher includes that rating and every higher one.",
           "Tags can match Any or All of the selected tags.",
-          "Everything you pick applies together. Search still works on top.",
+          "Everything you pick applies together. Search still works on top. ⌘⌥Q and ⌘⌥A switch tabs; ⌘⌥C clears all filters.",
         ],
       },
       {
@@ -360,21 +362,21 @@ export const MANUAL_PAGES: ManualPage[] = [
         note: "Choose which Smart Libraries appear under Settings → Library → Smart Libraries.",
       },
       {
-        title: "Advanced Filter (⇧⌘V)",
+        title: "Advanced Filter (⌘⌥A)",
         steps: [
-          "Press ⇧⌘V to switch the drawer to the Advanced Filter rule editor.",
+          "Press ⌘⌥A (or open the Filter drawer with ⇧⌘F and choose the Advanced tab) to edit the boolean rule tree.",
           "Build rules on any video attribute or custom field. Operators change to match the attribute.",
           "Group rules with ALL or ANY — for example (Tag is Vacation AND Rating ≥ 4) OR Tag is Favorite.",
           "Click Save as Collection… to keep the rule set permanently.",
         ],
-        note: "Quick Filter and Advanced Filter are exclusive — opening one clears the other, so they never combine unexpectedly.",
+        note: "Only the active tab’s filters apply to the library. Switching tabs does not wipe the other tab’s in-memory state — Clear (⌘⌥C) resets both.",
       },
       {
         title: "Clearing filters",
         steps: [
-          "With the drawer closed, active filters appear as removable pills above the grid — click a pill’s × to drop just that condition.",
+          "With the drawer closed, active filters appear as removable pills above the grid — click a pill’s × to drop just that condition. Closed-drawer pills follow the active tab only.",
           "Click Clear all in the pill row or the drawer header to reset everything.",
-          "View → Clear Filters (⌥⌘C) does the same from the keyboard.",
+          "View → Clear Filters (⌘⌥C) does the same from the keyboard.",
         ],
       },
     ],
@@ -435,6 +437,7 @@ export const MANUAL_PAGES: ManualPage[] = [
         steps: [
           "Press ⌘I, choose View → Inspector, or click the Inspector button in the toolbar to hide or show the right-hand pane.",
           "Hiding gives the Grid, List, or Storyboard the full window width. Showing restores the Inspector at the last width you dragged.",
+          "The focused clip stays in the same on-screen position when the pane opens or closes — the wall does not jump.",
           "While the Inspector is hidden, Compact playback is unavailable — the player stays Windowed until you show the Inspector again.",
           "With two or more clips collected, click the “N clips collected” pill to show the Inspector in batch-edit mode.",
         ],
@@ -817,9 +820,9 @@ export const MANUAL_PAGES: ManualPage[] = [
         title: "Search, filters, and Play All",
         steps: [
           "⌘F — focus Search videos.",
-          "⇧⌘F — open / close Quick Filter.",
-          "⇧⌘V — open / close Advanced Filter.",
-          "⌥⌘C — clear filters.",
+          "⇧⌘F — open / close the Filter drawer (Quick and Advanced are tabs inside).",
+          "⌘⌥Q / ⌘⌥A — switch to the Quick or Advanced filter tab (opens the drawer if it is closed).",
+          "⌘⌥C — clear all filters.",
           "⇧⌘P — Play All (current filtered view).",
           "⇧⌘S — Surprise Me! (jump to a random video).",
           "⇧⌘R — Shuffle the view order (toolbar).",
