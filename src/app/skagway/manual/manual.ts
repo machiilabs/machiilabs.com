@@ -500,9 +500,9 @@ export const MANUAL_PAGES: ManualPage[] = [
   {
     slug: "playback",
     title: "Playback",
-    blurb: "The floating player, bookmarks, resume, and subtitles.",
+    blurb: "The floating player, in-player filmstrip, bookmarks, resume, and subtitles.",
     summary:
-      "Skagway plays videos in a single floating player — compact, windowed, or full screen — plus Play All through the current view, bookmarks, resume positions, and sidecar subtitles.",
+      "Skagway plays videos in a single floating player — compact, windowed, or full screen — with a filmstrip above the scrubber, plus Play All through the current view, bookmarks, resume positions, and sidecar subtitles.",
     screenshot: "playback.png",
     screenshotAlt:
       "Skagway floating player with custom transport controls and bookmark ticks on the timeline",
@@ -536,6 +536,17 @@ export const MANUAL_PAGES: ManualPage[] = [
         ],
       },
       {
+        title: "Filmstrip in the player",
+        steps: [
+          "A horizontal row of frames sits above the scrubber in Compact, Windowed, and Full screen. It fades with the transport controls.",
+          "Click a frame to seek there. The playhead highlight follows playback time.",
+          "Turn it off under Settings → Video → Show filmstrip in player (on by default). Compact uses a thinner strip.",
+        ],
+        note: "Inspector Filmstrip (⌥⌘T) is a separate grid preview for the focused clip — not this strip.",
+        noteHref: "/skagway/manual/playback#play-from-the-filmstrip",
+        noteLinkLabel: "Play from the filmstrip",
+      },
+      {
         title: "Bookmarks",
         steps: [
           "While playing, press ⌥⌘B or double-click the scrubber.",
@@ -549,9 +560,9 @@ export const MANUAL_PAGES: ManualPage[] = [
           "Switch the Inspector preview to Filmstrip (⌥⌘T) to see frames sampled across the video.",
           "Click a frame to start playback there.",
         ],
-        note: "Clicking the Still preview starts playback too, from the beginning or the saved resume position. Filmstrip is the Inspector preview for one focused clip — Storyboard view (⌘3) is the library collage wall.",
-        noteHref: "/skagway/manual/browse#storyboard-view",
-        noteLinkLabel: "Storyboard view",
+        note: "Clicking the Still preview starts playback too, from the beginning or the saved resume position. Inspector Filmstrip is the preview for one focused clip — not the strip above the player scrubber, and not Storyboard view (⌘3).",
+        noteHref: "/skagway/manual/playback#filmstrip-in-the-player",
+        noteLinkLabel: "Filmstrip in the player",
       },
       {
         title: "Three sizes, one player",
@@ -878,12 +889,13 @@ export const MANUAL_PAGES: ManualPage[] = [
       {
         title: "Video",
         steps: [
-          "Default Filmstrip Size — rows and columns for filmstrip previews, with a Regenerate filmstrips button.",
+          "Default Filmstrip Size — rows and columns for Inspector filmstrip previews, with a Regenerate filmstrips button.",
           "Surprise Me! auto-plays selected video — jump and play, or just jump.",
           "Loop Play All — during Play All, finishing the last video starts the first again.",
           "Hover preview on Grid and List — the silent moving preview on hover.",
           "Tag blind default state / Filter drawer height — how the Inspector tags list and Quick Filter drawer remember size.",
           "Player opens at — Compact, Full screen, or Last used size.",
+          "Show filmstrip in player — a row of frames above the scrubber (on by default; thinner in Compact).",
           "Fade resume banner after delay — whether and when the “Resumed at…” banner fades out.",
         ],
       },

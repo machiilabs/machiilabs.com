@@ -6,8 +6,8 @@
  * Regenerate: npm run manual:index
  * (also runs on predev / prebuild)
  *
- * Generated: 2026-09-18T05:32:16.833Z
- * Documents: 79
+ * Generated: 2026-09-18T16:46:14.912Z
+ * Documents: 80
  */
 import type { ManualSearchDocument } from "./search-documents";
 
@@ -352,7 +352,7 @@ export const MANUAL_SEARCH_INDEX: ManualSearchDocument[] = [
     "sectionTitle": null,
     "href": "/skagway/manual/playback",
     "title": "Playback",
-    "body": "The floating player, bookmarks, resume, and subtitles.\nSkagway plays videos in a single floating player — compact, windowed, or full screen — plus Play All through the current view, bookmarks, resume positions, and sidecar subtitles."
+    "body": "The floating player, in-player filmstrip, bookmarks, resume, and subtitles.\nSkagway plays videos in a single floating player — compact, windowed, or full screen — with a filmstrip above the scrubber, plus Play All through the current view, bookmarks, resume positions, and sidecar subtitles."
   },
   {
     "id": "playback__start-and-stop",
@@ -382,6 +382,15 @@ export const MANUAL_SEARCH_INDEX: ManualSearchDocument[] = [
     "body": "Hover the scrubber for a frame preview; click to seek.\nSkip back / forward 15 seconds with ⌥← / ⌥→.\nPlayback speed cycles from 0.5× to 2×."
   },
   {
+    "id": "playback__filmstrip-in-the-player",
+    "pageSlug": "playback",
+    "pageTitle": "Playback",
+    "sectionTitle": "Filmstrip in the player",
+    "href": "/skagway/manual/playback#filmstrip-in-the-player",
+    "title": "Playback » Filmstrip in the player",
+    "body": "A horizontal row of frames sits above the scrubber in Compact, Windowed, and Full screen. It fades with the transport controls.\nClick a frame to seek there. The playhead highlight follows playback time.\nTurn it off under Settings → Video → Show filmstrip in player (on by default). Compact uses a thinner strip.\nInspector Filmstrip (⌥⌘T) is a separate grid preview for the focused clip — not this strip."
+  },
+  {
     "id": "playback__bookmarks",
     "pageSlug": "playback",
     "pageTitle": "Playback",
@@ -397,7 +406,7 @@ export const MANUAL_SEARCH_INDEX: ManualSearchDocument[] = [
     "sectionTitle": "Play from the filmstrip",
     "href": "/skagway/manual/playback#play-from-the-filmstrip",
     "title": "Playback » Play from the filmstrip",
-    "body": "Switch the Inspector preview to Filmstrip (⌥⌘T) to see frames sampled across the video.\nClick a frame to start playback there.\nClicking the Still preview starts playback too, from the beginning or the saved resume position. Filmstrip is the Inspector preview for one focused clip — Storyboard view (⌘3) is the library collage wall."
+    "body": "Switch the Inspector preview to Filmstrip (⌥⌘T) to see frames sampled across the video.\nClick a frame to start playback there.\nClicking the Still preview starts playback too, from the beginning or the saved resume position. Inspector Filmstrip is the preview for one focused clip — not the strip above the player scrubber, and not Storyboard view (⌘3)."
   },
   {
     "id": "playback__three-sizes-one-player",
@@ -649,7 +658,7 @@ export const MANUAL_SEARCH_INDEX: ManualSearchDocument[] = [
     "sectionTitle": "Video",
     "href": "/skagway/manual/settings#video",
     "title": "Settings » Video",
-    "body": "Default Filmstrip Size — rows and columns for filmstrip previews, with a Regenerate filmstrips button.\nSurprise Me! auto-plays selected video — jump and play, or just jump.\nLoop Play All — during Play All, finishing the last video starts the first again.\nHover preview on Grid and List — the silent moving preview on hover.\nTag blind default state / Filter drawer height — how the Inspector tags list and Quick Filter drawer remember size.\nPlayer opens at — Compact, Full screen, or Last used size.\nFade resume banner after delay — whether and when the “Resumed at…” banner fades out."
+    "body": "Default Filmstrip Size — rows and columns for Inspector filmstrip previews, with a Regenerate filmstrips button.\nSurprise Me! auto-plays selected video — jump and play, or just jump.\nLoop Play All — during Play All, finishing the last video starts the first again.\nHover preview on Grid and List — the silent moving preview on hover.\nTag blind default state / Filter drawer height — how the Inspector tags list and Quick Filter drawer remember size.\nPlayer opens at — Compact, Full screen, or Last used size.\nShow filmstrip in player — a row of frames above the scrubber (on by default; thinner in Compact).\nFade resume banner after delay — whether and when the “Resumed at…” banner fades out."
   },
   {
     "id": "settings__data-sources",
