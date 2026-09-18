@@ -6,7 +6,7 @@
  * Regenerate: npm run manual:index
  * (also runs on predev / prebuild)
  *
- * Generated: 2026-09-18T02:36:39.327Z
+ * Generated: 2026-09-18T02:44:11.850Z
  * Documents: 79
  */
 import type { ManualSearchDocument } from "./search-documents";
@@ -136,7 +136,7 @@ export const MANUAL_SEARCH_INDEX: ManualSearchDocument[] = [
     "sectionTitle": "Grid and List",
     "href": "/skagway/manual/browse#grid-and-list",
     "title": "Browse » Grid and List",
-    "body": "Switch views with the Grid / List / Storyboard control in the toolbar, or press ⌘1 for Grid and ⌘2 for List.\nGrid cards show the thumbnail, Title, duration, date, and rating. A captions badge and a watch-progress bar appear when relevant.\nPlain click focuses a clip — a dashed ring on Grid, the table highlight in List. That is the clip the Inspector shows when you are not batch-editing a collected set.\n⌘-click and ⇧-click add clips to the collected set, the same Finder-style multi-select you already know. Collected clips show a blue checkmark. Press A to add or remove the focused clip.\nWith two or more collected, the Inspector edits the whole set (orange title bar). Click a collected clip’s chrome once to batch-edit the set; click it again to inspect just that clip (light blue title bar). Or choose **Batch** on the light blue bar / the “N clips collected” pill.\nA pill above the grid or list shows how many clips are collected. Click ✕ or press ⇧⌘A to clear the set.\nHold the pointer over a grid card or List thumbnail for Live Preview — see Playback.\nDouble-click a grid card or List row to play it inside Skagway.\nTags and ratings apply to the Inspector’s current target — one focused clip, or every collected clip when the orange batch bar is showing."
+    "body": "Switch views with the Grid / List / Storyboard control in the toolbar, or press ⌘1 for Grid and ⌘2 for List.\nGrid cards show the thumbnail, Title, duration, date, and rating. A captions badge and a watch-progress bar appear when relevant.\nPlain click focuses a clip — a dashed ring on Grid, the table highlight in List. That is the clip the Inspector shows when you are not batch-editing a collected set.\n⌘-click and ⇧-click add clips to the collected set, the same Finder-style multi-select you already know. Collected clips show a blue checkmark. Press A to add or remove the focused clip.\nWith two or more collected, the Inspector edits the whole set (orange title bar). Click a collected clip’s chrome once to batch-edit the set; click it again to inspect just that clip (light blue title bar). Or choose **N Videos** on the light blue bar / the “N clips collected” pill.\nA pill above the grid or list shows how many clips are collected. Click ✕ or press ⇧⌘A to clear the set.\nHold the pointer over a grid card or List thumbnail for Live Preview — see Playback.\nDouble-click a grid card or List row to play it inside Skagway.\nTags and ratings apply to the Inspector’s current target — one focused clip, or every collected clip when the orange batch bar is showing."
   },
   {
     "id": "browse__storyboard-view",
@@ -343,7 +343,7 @@ export const MANUAL_SEARCH_INDEX: ManualSearchDocument[] = [
     "sectionTitle": "Edit many at once",
     "href": "/skagway/manual/organize#edit-many-at-once",
     "title": "Organize » Edit many at once",
-    "body": "Collect two or more clips (⌘-click, ⇧-click, A, or ⌘A) — the Inspector shows an orange “N Videos Selected” bar and edits apply to the whole set.\nWhile scanning, arrow through clips and collect keepers without losing earlier picks — see Browse.\nFrom a single focused collected clip (light blue bar), click **Batch** on that bar — or the “N clips collected” pill — to switch to set inspect.\nRatings, tags, and custom values you set apply to every collected video in batch mode.\nWhen collected videos have different values for a field, the Inspector shows “Multiple values” until you overwrite it.\nOrange bar **Clear** empties the collection (⌘⇧A).\nOn Storyboard, collage clicks focus or play; use title/footer chrome or Inspector **Batch** for batch inspect."
+    "body": "Collect two or more clips (⌘-click, ⇧-click, A, or ⌘A) — the Inspector shows an orange “N Videos Selected” bar and edits apply to the whole set.\nWhile scanning, arrow through clips and collect keepers without losing earlier picks — see Browse.\nFrom a single focused collected clip (light blue bar), click **N Videos** on that bar — or the “N clips collected” pill — to switch to set inspect.\nRatings, tags, and custom values you set apply to every collected video in batch mode.\nWhen collected videos have different values for a field, the Inspector shows “Multiple values” until you overwrite it.\nOrange bar **Clear** empties the collection (⌘⇧A).\nOn Storyboard, collage clicks focus or play; use title/footer chrome or Inspector **N Videos** for batch inspect."
   },
   {
     "id": "playback__page",
