@@ -53,7 +53,7 @@ export const SKAGWAY_RELEASES: SkagwayRelease[] = [
         body:
           "Orange Inspector bar when you are batch-editing the collected set; light blue when you drill into one clip. Click a collected clip to toggle between the two modes.",
         homeLine:
-          "Orange batch Inspector and light blue single-clip mode.",
+          "Batch or single file Inspector modes.",
       }
     ],
   },
