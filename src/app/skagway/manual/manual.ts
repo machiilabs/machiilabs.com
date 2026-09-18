@@ -484,10 +484,12 @@ export const MANUAL_PAGES: ManualPage[] = [
         steps: [
           "Collect two or more clips (⌘-click, ⇧-click, A, or ⌘A) — the Inspector shows an orange “N Videos Selected” bar and edits apply to the whole set.",
           "While scanning, arrow through clips and collect keepers without losing earlier picks — see Browse.",
+          "From a single focused collected clip (light blue bar), click **Batch** on that bar — or the “N clips collected” pill — to switch to set inspect.",
           "Ratings, tags, and custom values you set apply to every collected video in batch mode.",
           "When collected videos have different values for a field, the Inspector shows “Multiple values” until you overwrite it.",
+          "Orange bar **Clear** empties the collection (⌘⇧A).",
         ],
-        note: "Click a collected clip once for batch mode; click it again to edit that clip alone.",
+        note: "On Storyboard, collage clicks focus or play; use title/footer chrome or Inspector **Batch** for batch inspect.",
         noteHref: "/skagway/manual/browse#grid-and-list",
         noteLinkLabel: "Browse",
       },
