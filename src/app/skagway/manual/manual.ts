@@ -155,7 +155,6 @@ export const MANUAL_PAGES: ManualPage[] = [
     screenshotAlt: "Skagway with the File menu open",
     screenshotHint:
       "Full File menu with shortcuts readable: Reconnect…, Bulk Rename…, Change Library Location…, Change Thumbnail Cache Location…, Add Folder…, Scan for New Videos, Scan for Subtitles, and create/open/recent library items.",
-    screenshotNeedsUpdate: true,
     screenshotScale: 0.75,
     sections: [
       {
