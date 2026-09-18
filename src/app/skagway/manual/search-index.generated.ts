@@ -6,7 +6,7 @@
  * Regenerate: npm run manual:index
  * (also runs on predev / prebuild)
  *
- * Generated: 2026-09-18T02:36:29.015Z
+ * Generated: 2026-09-18T02:36:39.327Z
  * Documents: 79
  */
 import type { ManualSearchDocument } from "./search-documents";
@@ -343,7 +343,7 @@ export const MANUAL_SEARCH_INDEX: ManualSearchDocument[] = [
     "sectionTitle": "Edit many at once",
     "href": "/skagway/manual/organize#edit-many-at-once",
     "title": "Organize » Edit many at once",
-    "body": "Collect two or more clips (⌘-click, ⇧-click, A, or ⌘A) — the Inspector shows an orange “N Videos Selected” bar and edits apply to the whole set.\nWhile scanning, arrow through clips and collect keepers without losing earlier picks — see Browse.\nRatings, tags, and custom values you set apply to every collected video in batch mode.\nWhen collected videos have different values for a field, the Inspector shows “Multiple values” until you overwrite it.\nClick a collected clip once for batch mode; click it again to edit that clip alone."
+    "body": "Collect two or more clips (⌘-click, ⇧-click, A, or ⌘A) — the Inspector shows an orange “N Videos Selected” bar and edits apply to the whole set.\nWhile scanning, arrow through clips and collect keepers without losing earlier picks — see Browse.\nFrom a single focused collected clip (light blue bar), click **Batch** on that bar — or the “N clips collected” pill — to switch to set inspect.\nRatings, tags, and custom values you set apply to every collected video in batch mode.\nWhen collected videos have different values for a field, the Inspector shows “Multiple values” until you overwrite it.\nOrange bar **Clear** empties the collection (⌘⇧A).\nOn Storyboard, collage clicks focus or play; use title/footer chrome or Inspector **Batch** for batch inspect."
   },
   {
     "id": "playback__page",
