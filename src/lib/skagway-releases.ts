@@ -54,13 +54,7 @@ export const SKAGWAY_RELEASES: SkagwayRelease[] = [
           "Orange Inspector bar when you are batch-editing the collected set; light blue when you drill into one clip. Click a collected clip to toggle between the two modes.",
         homeLine:
           "Orange batch Inspector and light blue single-clip mode.",
-      },
-      {
-        title: "Collected-set pill",
-        body:
-          "When two or more clips are collected, a pill shows the count with ✕ to clear. ⇧⌘A or Inspector Clear drops the whole set without moving focus.",
-        homeLine: "Collected-set pill and Clear Collection (⇧⌘A).",
-      },
+      }
     ],
   },
   {
