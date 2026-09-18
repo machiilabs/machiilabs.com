@@ -268,7 +268,7 @@ export const MANUAL_PAGES: ManualPage[] = [
         steps: [
           "Press ⌘3 (or choose Storyboard in the toolbar) for a six-frame collage of each clip — useful when a single poster isn’t enough to tell clips apart.",
           "Compact packs more columns; Normal (the default) uses fewer columns with more space. The density control appears in the toolbar while Storyboard is active.",
-          "Click a frame in the collage to seek and play from that sample time. Click the title or footer chrome to select the clip without starting playback.",
+          "Click a frame once to focus the clip; click the same focused collage again to seek and play from that sample time. Click the title or footer chrome anytime to select without starting playback.",
           "Collection and focus work the same as Grid — ⌘-click, ⇧-click, and A. Hover preview is off in Storyboard; use the collage frames instead.",
         ],
         note: "Inspector Filmstrip (⌥⌘T) is a separate single-clip preview — not Storyboard view.",

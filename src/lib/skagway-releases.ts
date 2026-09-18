@@ -43,7 +43,7 @@ export const SKAGWAY_RELEASES: SkagwayRelease[] = [
       {
         title: "Storyboard view",
         body:
-          "Press ⌘3 for a six-frame collage of each clip. Normal packing is the default; Compact fits more columns. Click a frame to seek and play from there.",
+          "Press ⌘3 for a six-frame collage of each clip. Normal packing is the default; Compact fits more columns. Click once to focus; click the focused collage again to seek and play from that frame.",
         homeLine: "Storyboard view (⌘3) — Normal or Compact packing.",
         learnMoreHref: "/skagway/manual/browse#storyboard-view",
       },
