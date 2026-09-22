@@ -6,6 +6,7 @@
  * 2. Move the previous top entry to `items` (Feature / Bug / Polish bullets).
  * 3. Bump home page + /skagway via `latestSkagwayRelease()`.
  * 4. Update `src/lib/skagway-download.ts` (version, build, SHA-256).
+ * 5. If a coming-soon promo was live, set `SKAGWAY_UPCOMING` to `null`.
  *
  * See `.cursor/rules/skagway-site-versioning.mdc`.
  */
@@ -121,6 +122,62 @@ export const SKAGWAY_RELEASES: SkagwayRelease[] = [
     ],
   },
 ];
+
+export type SkagwayUpcoming = {
+  version: string;
+  eyebrow: string;
+  lede: string;
+  closer: string;
+  highlights: readonly {
+    title: string;
+    body: string;
+    homeLine: string;
+  }[];
+};
+
+/**
+ * Pre-release promo. Set to `null` when the version ships — move the
+ * highlights into `SKAGWAY_RELEASES[0]` and follow the usual release steps.
+ */
+export const SKAGWAY_UPCOMING: SkagwayUpcoming | null = {
+  version: "1.3.0",
+  eyebrow: "Coming soon",
+  lede: "Release 1.3.0 is packed with useful new features.",
+  closer:
+    "Check back in the next few days. Already using Skagway? Turn on Automatically check for updates in Settings → Library — the release will arrive on its own.",
+  highlights: [
+    {
+      title: "Storyboard view",
+      body: "A six-frame collage for every video (⌘3). Scan the library by eye; click a frame to play from there.",
+      homeLine: "Storyboard view — six frames per video (⌘3).",
+    },
+    {
+      title: "Hide and show the Inspector",
+      body: "⌘I hides the Inspector so the library can fill the window. Show it again at the width you left it.",
+      homeLine: "Hide and show the Inspector (⌘I).",
+    },
+    {
+      title: "Collected set",
+      body: "Gather videos as you browse — ⌘-click, Shift-click, or A — then rate, tag, and inspect them as a batch. Replaces Review mode.",
+      homeLine: "Collected set — gather videos as you go, then act on them together.",
+    },
+    {
+      title: "Scroll index",
+      body: "A rolodex-style chip beside the scrollbar as you scroll, labeled by whatever you sorted by.",
+      homeLine: "Rolodex-style scroll index beside the scrollbar.",
+    },
+    {
+      title: "Reconnect",
+      body: "When a folder moves, point Skagway at the new location. Preview the matches, apply, undo if you need to.",
+      homeLine: "Reconnect when files have moved.",
+    },
+    {
+      title: "Filmstrip in the player",
+      body: "A strip of frames above the scrubber — seek by picture.",
+      homeLine: "Filmstrip above the player scrubber.",
+    },
+  ],
+};
 
 export function latestSkagwayRelease(): SkagwayRelease {
   return SKAGWAY_RELEASES[0];

@@ -15,5 +15,6 @@ On each Skagway release:
 Rules:
 
 - **Marketing version only** — `vX.Y.Z`, not build numbers on the site or download buttons.
-- **Home page** — only the latest release (`highlights` → `homeLine` bullets).
-- **`/skagway`** — latest in the contrasting band (paragraphs); older versions below as lists (`Feature:` / `Bug:` / `Polish:`).
+- **Home page** — latest shipped release (`highlights` → `homeLine` bullets). When `SKAGWAY_UPCOMING` is set, show that promo instead of the shipped bullets.
+- **`/skagway`** — latest shipped release in the contrasting cream band (paragraphs); older versions below as lists (`Feature:` / `Bug:` / `Polish:`). When `SKAGWAY_UPCOMING` is set, the cream band is the promo; shipped latest sits below as “Now shipping.” Do not change the download button.
+- **Coming soon** — keep `SKAGWAY_UPCOMING` until the version actually ships. Then set it to `null` and follow the release steps above. Do not list an unreleased version as `SKAGWAY_RELEASES[0]` or in `skagway-download.ts`.

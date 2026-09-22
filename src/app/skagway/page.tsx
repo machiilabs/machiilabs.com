@@ -15,6 +15,7 @@ import { SKAGWAY_FAQ } from "@/lib/skagway-faq";
 import {
   latestSkagwayRelease,
   SKAGWAY_RELEASES,
+  SKAGWAY_UPCOMING,
   skagwayReleaseItemLabel,
   skagwayVersionLabel,
 } from "@/lib/skagway-releases";
@@ -22,17 +23,17 @@ import {
 export const metadata: Metadata = {
   title: "Mac Video Organizer & Library — Skagway",
   description:
-    "Skagway is a fast Mac video organizer and library for the files already on your drives — built for large collections. Free forever from Mach II Labs.",
+    "Skagway 1.3 is coming soon. A fast Mac video organizer and library for the files already on your drives — built for large collections. Free forever from Mach II Labs.",
   openGraph: {
     title: "Mac Video Organizer & Library — Skagway",
     description:
-      "Organize and play the video files already on your Mac. Fast with large libraries. Free forever.",
+      "Skagway 1.3 is coming soon: Storyboard view, hide the Inspector, collected sets, and a rolodex-style scroll index. Free forever.",
     url: "https://machiilabs.com/skagway",
   },
   twitter: {
     title: "Mac Video Organizer & Library — Skagway",
     description:
-      "Organize and play the video files already on your Mac. Fast with large libraries. Free forever.",
+      "Skagway 1.3 is coming soon: Storyboard view, hide the Inspector, collected sets, and a rolodex-style scroll index.",
   },
   alternates: {
     canonical: "https://machiilabs.com/skagway",
@@ -309,32 +310,106 @@ export default function SkagwayPage() {
           </div>
         </section>
 
-        <section
-          aria-labelledby="skagway-new-in-version"
-          className="relative left-1/2 mt-16 w-screen max-w-[100vw] -translate-x-1/2 sm:mt-20"
-        >
-          <div className="border-y border-[#dccfb8] bg-[#f3efe6] px-6 py-12 sm:px-10 sm:py-14">
+        {SKAGWAY_UPCOMING ? (
+          <section
+            aria-labelledby="skagway-coming-soon"
+            className="relative left-1/2 mt-16 w-screen max-w-[100vw] -translate-x-1/2 sm:mt-20"
+          >
+            <div className="border-y border-[#dccfb8] bg-[#f3efe6] px-6 py-12 sm:px-10 sm:py-14">
+              <div className="mx-auto max-w-6xl">
+                <p
+                  id="skagway-coming-soon"
+                  className="text-xs font-semibold tracking-[0.16em] text-[#9a5b14] uppercase"
+                >
+                  {SKAGWAY_UPCOMING.eyebrow} · {SKAGWAY_UPCOMING.version}
+                </p>
+                <p className="mt-4 max-w-2xl font-display text-xl font-bold tracking-tight text-[#1a1a1a] sm:text-2xl">
+                  {SKAGWAY_UPCOMING.lede}
+                </p>
+                <div className="mt-8 grid gap-10 sm:grid-cols-2 lg:gap-8">
+                  {SKAGWAY_UPCOMING.highlights.map((item) => (
+                    <div key={item.title}>
+                      <h2 className="font-display text-lg font-bold tracking-tight text-[#1a1a1a] sm:text-xl">
+                        {item.title}
+                      </h2>
+                      <p className="mt-3 text-sm leading-relaxed text-[#4b5563] sm:text-base">
+                        {item.body}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+                <p className="mt-10 max-w-2xl text-sm leading-relaxed text-[#4b5563] sm:text-base">
+                  {SKAGWAY_UPCOMING.closer}
+                </p>
+              </div>
+            </div>
+          </section>
+        ) : (
+          <section
+            aria-labelledby="skagway-new-in-version"
+            className="relative left-1/2 mt-16 w-screen max-w-[100vw] -translate-x-1/2 sm:mt-20"
+          >
+            <div className="border-y border-[#dccfb8] bg-[#f3efe6] px-6 py-12 sm:px-10 sm:py-14">
+              <div className="mx-auto max-w-6xl">
+                <p
+                  id="skagway-new-in-version"
+                  className="text-xs font-semibold tracking-[0.16em] text-[#9a5b14] uppercase"
+                >
+                  New in version {latestRelease.version}
+                </p>
+                <div className="mt-8 grid gap-10 sm:grid-cols-2 lg:gap-8">
+                  {latestRelease.highlights?.map((item) => (
+                    <div key={item.title}>
+                      <h2 className="font-display text-lg font-bold tracking-tight text-[#1a1a1a] sm:text-xl">
+                        {item.title}
+                      </h2>
+                      <p className="mt-3 text-sm leading-relaxed text-[#4b5563] sm:text-base">
+                        {item.body}
+                      </p>
+                      {item.learnMoreHref ? (
+                        <p className="mt-3 text-sm sm:text-base">
+                          <Link
+                            href={item.learnMoreHref}
+                            className="font-semibold text-[#9a5b14] transition-colors hover:text-[#7a490f]"
+                          >
+                            Learn more
+                          </Link>
+                        </p>
+                      ) : null}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </section>
+        )}
+
+        {SKAGWAY_UPCOMING && latestRelease.highlights?.length ? (
+          <section
+            aria-labelledby="skagway-now-shipping"
+            className="mt-16 sm:mt-20"
+          >
             <div className="mx-auto max-w-6xl">
               <p
-                id="skagway-new-in-version"
-                className="text-xs font-semibold tracking-[0.16em] text-[#9a5b14] uppercase"
+                id="skagway-now-shipping"
+                className="text-xs font-semibold tracking-[0.16em] text-afterburn-soft uppercase"
               >
-                New in version {latestRelease.version}
+                Now shipping · {latestRelease.version}
               </p>
               <div className="mt-8 grid gap-10 sm:grid-cols-2 lg:gap-8">
-                {latestRelease.highlights?.map((item) => (
+                {latestRelease.highlights.map((item) => (
                   <div key={item.title}>
-                    <h2 className="font-display text-lg font-bold tracking-tight text-[#1a1a1a] sm:text-xl">
+                    <h2 className="font-display text-lg font-bold tracking-tight text-snow sm:text-xl">
                       {item.title}
                     </h2>
-                    <p className="mt-3 text-sm leading-relaxed text-[#4b5563] sm:text-base">
+                    <p className="mt-3 text-sm leading-relaxed text-fog sm:text-base">
                       {item.body}
                     </p>
                     {item.learnMoreHref ? (
                       <p className="mt-3 text-sm sm:text-base">
                         <Link
                           href={item.learnMoreHref}
-                          className="font-semibold text-[#9a5b14] transition-colors hover:text-[#7a490f]"
+                          className="font-semibold text-afterburn-soft transition-colors hover:text-snow"
                         >
                           Learn more
                         </Link>
@@ -344,8 +419,8 @@ export default function SkagwayPage() {
                 ))}
               </div>
             </div>
-          </div>
-        </section>
+          </section>
+        ) : null}
 
         {olderReleases.length > 0 ? (
           <details className="group mt-8 border-y border-white/10 sm:mt-10">

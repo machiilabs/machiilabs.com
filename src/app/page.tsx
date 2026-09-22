@@ -7,6 +7,7 @@ import { MachiiLogo } from "@/components/machii-logo";
 import { SiteHeader } from "@/components/site-header";
 import {
   latestSkagwayRelease,
+  SKAGWAY_UPCOMING,
   skagwayHomeReleaseLines,
   skagwayVersionLabel,
 } from "@/lib/skagway-releases";
@@ -20,14 +21,14 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "Mach II Labs",
   description:
-    "Independent Mac software lab. Skagway 1.2 — free video organizer for files already on your drives. Also: 15CE Flasher for HP 15c CE.",
+    "Independent Mac software lab. Skagway 1.3 is coming soon. Free video organizer for files already on your drives. Also: 15CE Flasher for HP 15c CE.",
   alternates: {
     canonical: "https://machiilabs.com",
   },
   openGraph: {
-    title: "Mach II Labs — Skagway 1.2",
+    title: "Mach II Labs — Skagway 1.3 coming soon",
     description:
-      "Skagway 1.2 is out: always-on collection, batch and single inspect, and more. Free Mac video organizer for the files already on your drives.",
+      "Skagway 1.3 is coming soon: Storyboard view, hide the Inspector, collected sets, and a rolodex-style scroll index. Free Mac video organizer for the files already on your drives.",
     url: "https://machiilabs.com",
     siteName: "Mach II Labs",
     images: [
@@ -41,9 +42,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Mach II Labs — Skagway 1.2",
+    title: "Mach II Labs — Skagway 1.3 coming soon",
     description:
-      "Skagway 1.2 is out: always-on collection, batch and single inspect, and more.",
+      "Skagway 1.3 is coming soon: Storyboard view, hide the Inspector, collected sets, and a rolodex-style scroll index.",
     images: ["/skagway/product.png"],
   },
 };
@@ -133,7 +134,24 @@ export default function Home() {
                 videos in the library — serious software. And it&apos;s{" "}
                 <span className="font-semibold text-snow">free forever</span>.
               </p>
-              {skagwayReleaseLines.length > 0 ? (
+              {SKAGWAY_UPCOMING ? (
+                <div className="mt-5">
+                  <p className="text-xs font-semibold tracking-[0.16em] text-afterburn-soft uppercase">
+                    {SKAGWAY_UPCOMING.eyebrow} · {skagwayVersionLabel(SKAGWAY_UPCOMING.version)}
+                  </p>
+                  <p className="mt-2 text-sm leading-relaxed text-snow sm:text-base">
+                    {SKAGWAY_UPCOMING.lede}
+                  </p>
+                  <ul className="mt-2 space-y-2 text-sm leading-relaxed text-fog sm:text-base">
+                    {SKAGWAY_UPCOMING.highlights.map((item) => (
+                      <li key={item.title}>{item.homeLine}</li>
+                    ))}
+                  </ul>
+                  <p className="mt-3 text-sm leading-relaxed text-fog sm:text-base">
+                    {SKAGWAY_UPCOMING.closer}
+                  </p>
+                </div>
+              ) : skagwayReleaseLines.length > 0 ? (
                 <div className="mt-5">
                   <p className="text-xs font-semibold tracking-[0.16em] text-afterburn-soft uppercase">
                     New in {skagwayMinorVersion}
