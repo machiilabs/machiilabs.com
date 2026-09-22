@@ -9,6 +9,20 @@ const inter = Inter({
   weight: ["700"],
 });
 
+const UPDATE_SETTING = "Automatically check for updates";
+
+function CloserText({ text }: { text: string }) {
+  const index = text.indexOf(UPDATE_SETTING);
+  if (index < 0) return text;
+  return (
+    <>
+      {text.slice(0, index)}
+      <strong className="font-bold text-[#1a140c]">{UPDATE_SETTING}</strong>
+      {text.slice(index + UPDATE_SETTING.length)}
+    </>
+  );
+}
+
 function ComingSoonInner({
   headingId,
   variant,
@@ -62,7 +76,7 @@ function ComingSoonInner({
         </ul>
       )}
       <p className="mt-8 max-w-2xl text-sm leading-relaxed text-[#4a4033] sm:text-base">
-        {SKAGWAY_UPCOMING.closer}
+        <CloserText text={SKAGWAY_UPCOMING.closer} />
       </p>
     </>
   );
