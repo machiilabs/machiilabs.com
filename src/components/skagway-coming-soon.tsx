@@ -78,6 +78,11 @@ function ComingSoonInner({
       <p className="mt-8 max-w-2xl text-sm leading-relaxed text-[#4a4033] sm:text-base">
         <CloserText text={SKAGWAY_UPCOMING.closer} />
       </p>
+      {SKAGWAY_UPCOMING.signupLine ? (
+        <p className="mt-4 max-w-2xl text-sm leading-relaxed text-[#4a4033] sm:text-base">
+          {SKAGWAY_UPCOMING.signupLine}
+        </p>
+      ) : null}
     </>
   );
 }

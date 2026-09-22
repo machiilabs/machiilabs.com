@@ -128,6 +128,7 @@ export type SkagwayUpcoming = {
   eyebrow: string;
   lede: string;
   closer: string;
+  signupLine?: string;
   highlights: readonly {
     title: string;
     body: string;
@@ -145,6 +146,8 @@ export const SKAGWAY_UPCOMING: SkagwayUpcoming | null = {
   lede: "Release 1.3.0 is packed with useful new features.",
   closer:
     "Check back in the next few days. Already using Skagway? Turn on Automatically check for updates in Settings → Library — the release will arrive on its own.",
+  signupLine:
+    "Or sign up for our Product announcements list below, and we’ll let you know when version 1.3.0 arrives.",
   highlights: [
     {
       title: "Storyboard view",

@@ -3,6 +3,7 @@ import path from "node:path";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { AnnouncementSignup } from "@/components/announcement-signup";
 import { DownloadButton } from "@/components/download-button";
 import { SiteHeader } from "@/components/site-header";
 import { SkagwayComingSoon } from "@/components/skagway-coming-soon";
@@ -312,7 +313,12 @@ export default function SkagwayPage() {
         </section>
 
         {SKAGWAY_UPCOMING ? (
-          <SkagwayComingSoon variant="product" />
+          <>
+            <SkagwayComingSoon variant="product" />
+            <div className="mt-12 sm:mt-14">
+              <AnnouncementSignup />
+            </div>
+          </>
         ) : (
           <section
             aria-labelledby="skagway-new-in-version"

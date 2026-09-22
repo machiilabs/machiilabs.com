@@ -47,7 +47,7 @@ export default function PrivacyPage() {
           </h2>
           <ul className="mt-4 list-disc space-y-2 pl-5 text-sm leading-relaxed text-fog">
             <li>
-              If you opt in on the home page, we store your{" "}
+              If you opt in, we store your{" "}
               <strong className="font-medium text-snow">email address</strong>{" "}
               so we can send occasional product announcements (new releases,
               important updates).

@@ -35,7 +35,10 @@ export function AnnouncementSignup() {
   }
 
   return (
-    <div className="w-full max-w-xl border-t border-white/10 pt-10">
+    <div
+      id="product-announcements"
+      className="w-full max-w-xl border-t border-white/10 pt-10"
+    >
       <p className="text-sm font-semibold tracking-[0.18em] text-afterburn-soft uppercase">
         Product announcements
       </p>
