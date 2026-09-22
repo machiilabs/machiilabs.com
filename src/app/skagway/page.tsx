@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { DownloadButton } from "@/components/download-button";
 import { SiteHeader } from "@/components/site-header";
+import { SkagwayComingSoon } from "@/components/skagway-coming-soon";
 import {
   SKAGWAY_DOWNLOAD_BUILD,
   SKAGWAY_DOWNLOAD_FILENAME,
@@ -311,39 +312,7 @@ export default function SkagwayPage() {
         </section>
 
         {SKAGWAY_UPCOMING ? (
-          <section
-            aria-labelledby="skagway-coming-soon"
-            className="relative left-1/2 mt-16 w-screen max-w-[100vw] -translate-x-1/2 sm:mt-20"
-          >
-            <div className="border-y border-[#dccfb8] bg-[#f3efe6] px-6 py-12 sm:px-10 sm:py-14">
-              <div className="mx-auto max-w-6xl">
-                <p
-                  id="skagway-coming-soon"
-                  className="text-xs font-semibold tracking-[0.16em] text-[#9a5b14] uppercase"
-                >
-                  {SKAGWAY_UPCOMING.eyebrow} · {SKAGWAY_UPCOMING.version}
-                </p>
-                <p className="mt-4 max-w-2xl font-display text-xl font-bold tracking-tight text-[#1a1a1a] sm:text-2xl">
-                  {SKAGWAY_UPCOMING.lede}
-                </p>
-                <div className="mt-8 grid gap-10 sm:grid-cols-2 lg:gap-8">
-                  {SKAGWAY_UPCOMING.highlights.map((item) => (
-                    <div key={item.title}>
-                      <h2 className="font-display text-lg font-bold tracking-tight text-[#1a1a1a] sm:text-xl">
-                        {item.title}
-                      </h2>
-                      <p className="mt-3 text-sm leading-relaxed text-[#4b5563] sm:text-base">
-                        {item.body}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-                <p className="mt-10 max-w-2xl text-sm leading-relaxed text-[#4b5563] sm:text-base">
-                  {SKAGWAY_UPCOMING.closer}
-                </p>
-              </div>
-            </div>
-          </section>
+          <SkagwayComingSoon variant="product" />
         ) : (
           <section
             aria-labelledby="skagway-new-in-version"

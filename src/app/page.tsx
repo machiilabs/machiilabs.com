@@ -5,6 +5,7 @@ import Link from "next/link";
 import { AnnouncementSignup } from "@/components/announcement-signup";
 import { MachiiLogo } from "@/components/machii-logo";
 import { SiteHeader } from "@/components/site-header";
+import { SkagwayComingSoon } from "@/components/skagway-coming-soon";
 import {
   latestSkagwayRelease,
   SKAGWAY_UPCOMING,
@@ -56,7 +57,7 @@ export default function Home() {
 
   return (
     <div
-      className={`${inter.className} relative min-h-dvh overflow-hidden bg-ink text-snow`}
+      className={`${inter.className} relative min-h-dvh overflow-x-hidden bg-ink text-snow`}
     >
       <div
         aria-hidden
@@ -134,24 +135,7 @@ export default function Home() {
                 videos in the library — serious software. And it&apos;s{" "}
                 <span className="font-semibold text-snow">free forever</span>.
               </p>
-              {SKAGWAY_UPCOMING ? (
-                <div className="mt-5">
-                  <p className="text-xs font-semibold tracking-[0.16em] text-afterburn-soft uppercase">
-                    {SKAGWAY_UPCOMING.eyebrow} · {skagwayVersionLabel(SKAGWAY_UPCOMING.version)}
-                  </p>
-                  <p className="mt-2 text-sm leading-relaxed text-snow sm:text-base">
-                    {SKAGWAY_UPCOMING.lede}
-                  </p>
-                  <ul className="mt-2 space-y-2 text-sm leading-relaxed text-fog sm:text-base">
-                    {SKAGWAY_UPCOMING.highlights.map((item) => (
-                      <li key={item.title}>{item.homeLine}</li>
-                    ))}
-                  </ul>
-                  <p className="mt-3 text-sm leading-relaxed text-fog sm:text-base">
-                    {SKAGWAY_UPCOMING.closer}
-                  </p>
-                </div>
-              ) : skagwayReleaseLines.length > 0 ? (
+              {SKAGWAY_UPCOMING ? null : skagwayReleaseLines.length > 0 ? (
                 <div className="mt-5">
                   <p className="text-xs font-semibold tracking-[0.16em] text-afterburn-soft uppercase">
                     New in {skagwayMinorVersion}
@@ -198,6 +182,8 @@ export default function Home() {
               />
             </Link>
           </div>
+
+          {SKAGWAY_UPCOMING ? <SkagwayComingSoon variant="home" /> : null}
 
           <div className="flex max-w-3xl flex-col items-start gap-8 border-t border-white/10 pt-10 sm:flex-row sm:items-center sm:gap-12">
             <div className="min-w-0 max-w-xl flex-1">
