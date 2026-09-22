@@ -104,7 +104,7 @@ export function SkagwayComingSoon({
         aria-labelledby="skagway-coming-soon"
         className="relative left-1/2 mt-16 w-screen max-w-[100vw] -translate-x-1/2 sm:mt-20"
       >
-        <div className="border-y-2 border-afterburn bg-[#f6ead4] px-6 py-14 sm:px-10 sm:py-16">
+        <div className="border-y-2 border-afterburn bg-[#e4d6b8] px-6 py-14 sm:px-10 sm:py-16">
           <div className="mx-auto max-w-6xl">
             <ComingSoonInner
               headingId="skagway-coming-soon"
@@ -119,7 +119,7 @@ export function SkagwayComingSoon({
   return (
     <section
       aria-labelledby="home-coming-soon"
-      className="max-w-3xl rounded-xl border-2 border-afterburn bg-[#f6ead4] px-5 py-6 shadow-[0_0_48px_rgba(232,160,69,0.2)] sm:px-7 sm:py-8"
+      className="max-w-3xl rounded-xl border-2 border-afterburn bg-[#e4d6b8] px-5 py-6 shadow-[0_0_48px_rgba(232,160,69,0.2)] sm:px-7 sm:py-8"
     >
       <ComingSoonInner headingId="home-coming-soon" variant="home" />
     </section>
