@@ -1,7 +1,13 @@
+import { Inter } from "next/font/google";
 import {
   SKAGWAY_UPCOMING,
   skagwayVersionLabel,
 } from "@/lib/skagway-releases";
+
+const inter = Inter({
+  subsets: ["latin"],
+  weight: ["700"],
+});
 
 function ComingSoonInner({
   headingId,
@@ -21,7 +27,9 @@ function ComingSoonInner({
         {SKAGWAY_UPCOMING.eyebrow} ·{" "}
         {skagwayVersionLabel(SKAGWAY_UPCOMING.version)}
       </p>
-      <p className="mt-5 max-w-2xl font-display text-xl font-extrabold tracking-tight text-[#1a140c] sm:text-2xl">
+      <p
+        className={`${inter.className} mt-5 max-w-2xl text-xl font-bold tracking-tight text-[#1a140c] sm:text-2xl`}
+      >
         {SKAGWAY_UPCOMING.lede}
       </p>
       {variant === "product" ? (
