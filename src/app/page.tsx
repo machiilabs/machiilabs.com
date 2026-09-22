@@ -116,8 +116,33 @@ export default function Home() {
           Focused Mac tools for people who notice the small stuff.
         </p>
 
+        <nav
+          aria-label="Jump to products"
+          className="anim-rise anim-rise-delay-2 mt-5 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm sm:text-base"
+        >
+          <span className="text-fog">Jump to</span>
+          <span className="text-fog/50" aria-hidden>
+            →
+          </span>
+          <a
+            href="#skagway"
+            className="font-semibold text-snow transition-colors hover:text-afterburn-soft"
+          >
+            Skagway
+          </a>
+          <a
+            href="#flasher"
+            className="font-semibold text-snow transition-colors hover:text-afterburn-soft"
+          >
+            15CE Flasher
+          </a>
+        </nav>
+
         <div className="anim-rise anim-rise-delay-3 mt-10 flex flex-col gap-12">
-          <div className="flex max-w-3xl flex-col items-start gap-8 sm:flex-row sm:items-center sm:gap-12">
+          <div
+            id="skagway"
+            className="flex max-w-3xl scroll-mt-8 flex-col items-start gap-8 sm:flex-row sm:items-center sm:gap-12"
+          >
             <div className="min-w-0 max-w-xl flex-1">
               <p className="text-sm font-semibold tracking-[0.18em] text-afterburn-soft uppercase">
                 Newest release · {skagwayVersionLabel(latestSkagway.version)}
@@ -185,7 +210,10 @@ export default function Home() {
 
           {SKAGWAY_UPCOMING ? <SkagwayComingSoon variant="home" /> : null}
 
-          <div className="flex max-w-3xl flex-col items-start gap-8 border-t border-white/10 pt-10 sm:flex-row sm:items-center sm:gap-12">
+          <div
+            id="flasher"
+            className="flex max-w-3xl scroll-mt-8 flex-col items-start gap-8 border-t border-white/10 pt-10 sm:flex-row sm:items-center sm:gap-12"
+          >
             <div className="min-w-0 max-w-xl flex-1">
               <p className="text-sm font-semibold tracking-[0.18em] text-fog/80 uppercase">
                 Also from the lab
