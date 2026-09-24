@@ -113,7 +113,10 @@ export default function Home() {
         </h1>
 
         <p className="anim-rise anim-rise-delay-2 mt-8 max-w-2xl font-display text-2xl leading-snug font-semibold tracking-tight text-snow sm:text-3xl">
-          Focused Mac tools for people who notice the small stuff.
+          Mac software you keep.
+        </p>
+        <p className="anim-rise anim-rise-delay-2 mt-3 max-w-2xl text-base leading-relaxed text-fog sm:text-lg">
+          No subscriptions. No ads. No telemetry.
         </p>
 
         <nav
