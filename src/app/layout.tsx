@@ -22,11 +22,11 @@ export const metadata: Metadata = {
     template: "%s · Mach II Labs",
   },
   description:
-    "Independent Mac software lab. Skagway 1.3 is coming soon. Free Mac video organizer. Also: 15CE Flasher for HP 15c Collector’s Edition.",
+    "Independent Mac software lab. Skagway 1.3 — free Mac video organizer. Also: 15CE Flasher for HP 15c Collector’s Edition.",
   openGraph: {
-    title: "Mach II Labs — Skagway 1.3 coming soon",
+    title: "Mach II Labs — Skagway 1.3",
     description:
-      "Skagway 1.3 is coming soon: Storyboard view, hide the Inspector, collected sets, and a rolodex-style scroll index. Free Mac video organizer for the files already on your drives.",
+      "Skagway 1.3 is out: Storyboard view, hide the Inspector, a rolodex-style scroll index, and Reconnect. Free Mac video organizer for the files already on your drives.",
     url: "https://machiilabs.com",
     siteName: "Mach II Labs",
     locale: "en_US",
@@ -42,9 +42,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Mach II Labs — Skagway 1.3 coming soon",
+    title: "Mach II Labs — Skagway 1.3",
     description:
-      "Skagway 1.3 is coming soon: Storyboard view, hide the Inspector, collected sets, and a rolodex-style scroll index.",
+      "Skagway 1.3 is out: Storyboard view, hide the Inspector, a rolodex-style scroll index, and Reconnect.",
     images: ["/skagway/product.png"],
   },
   robots: {

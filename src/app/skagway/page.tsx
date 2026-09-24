@@ -25,17 +25,17 @@ import {
 export const metadata: Metadata = {
   title: "Mac Video Organizer & Library — Skagway",
   description:
-    "Skagway 1.3 is coming soon. A fast Mac video organizer and library for the files already on your drives — built for large collections. Free forever from Mach II Labs.",
+    "Skagway 1.3 is out. A fast Mac video organizer and library for the files already on your drives — built for large collections. Free forever from Mach II Labs.",
   openGraph: {
     title: "Mac Video Organizer & Library — Skagway",
     description:
-      "Skagway 1.3 is coming soon: Storyboard view, hide the Inspector, collected sets, and a rolodex-style scroll index. Free forever.",
+      "Skagway 1.3 is out: Storyboard view, hide the Inspector, a rolodex-style scroll index, and Reconnect. Free forever.",
     url: "https://machiilabs.com/skagway",
   },
   twitter: {
     title: "Mac Video Organizer & Library — Skagway",
     description:
-      "Skagway 1.3 is coming soon: Storyboard view, hide the Inspector, collected sets, and a rolodex-style scroll index.",
+      "Skagway 1.3 is out: Storyboard view, hide the Inspector, a rolodex-style scroll index, and Reconnect.",
   },
   alternates: {
     canonical: "https://machiilabs.com/skagway",

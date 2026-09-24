@@ -39,23 +39,58 @@ export type SkagwayRelease = {
 /** Newest first. Only `[0]` uses `highlights`; older entries use `items`. */
 export const SKAGWAY_RELEASES: SkagwayRelease[] = [
   {
-    version: "1.2.0",
+    version: "1.3.0",
     highlights: [
       {
-        title: "Always-on collection",
+        title: "Storyboard view",
         body:
-          "Collect clips with ordinary ⌘-click, ⇧-click, and A while you browse. Focus and collection stay separate, so moving on does not clear checkmarks you already made.",
-        homeLine:
-          "Always-on collection with Finder-style multi-select while you browse.",
-        learnMoreHref: "/skagway/manual/browse#grid-and-list",
+          "A six-frame collage for every video (⌘3). Scan the library by eye; click a frame to play from there. Normal packing is the default; Compact fits more columns.",
+        homeLine: "Storyboard view — six frames per video (⌘3).",
+        learnMoreHref: "/skagway/manual/browse#storyboard-view",
       },
       {
-        title: "Batch and single inspect",
+        title: "Hide and show the Inspector",
         body:
-          "Orange Inspector bar when you are batch-editing the collected set; light blue when you drill into one clip. Click a collected clip to toggle between the two modes.",
-        homeLine:
-          "Batch or single file Inspector modes.",
-      }
+          "⌘I hides the Inspector so the library can fill the window. Show it again at the width you left it.",
+        homeLine: "Hide and show the Inspector (⌘I).",
+        learnMoreHref: "/skagway/manual/organize#hide-show-inspector",
+      },
+      {
+        title: "Scroll index",
+        body:
+          "A rolodex-style chip beside the scrollbar as you scroll, labeled by whatever you sorted by.",
+        homeLine: "Rolodex-style scroll index beside the scrollbar.",
+      },
+      {
+        title: "Reconnect",
+        body:
+          "When a folder moves, point Skagway at the new location. Preview the matches, apply, undo if you need to.",
+        homeLine: "Reconnect when files have moved.",
+        learnMoreHref: "/skagway/manual/library#reconnect-missing-files",
+      },
+      {
+        title: "Filmstrip in the player",
+        body: "A strip of frames above the scrubber — seek by picture.",
+        homeLine: "Filmstrip above the player scrubber.",
+        learnMoreHref: "/skagway/manual/playback#filmstrip-in-the-player",
+      },
+    ],
+  },
+  {
+    version: "1.2.0",
+    items: [
+      {
+        kind: "feature",
+        text: "Always-on collection — collect with ⌘-click, ⇧-click, and A while you browse; focus and collection stay separate.",
+      },
+      {
+        kind: "feature",
+        text: "Batch and single inspect — orange Inspector for the collected set; light blue for one clip.",
+      },
+      {
+        kind: "feature",
+        text: "Collected-set pill — count with ✕ to clear; ⇧⌘A clears the set.",
+      },
     ],
   },
   {
@@ -137,50 +172,10 @@ export type SkagwayUpcoming = {
 };
 
 /**
- * Pre-release promo. Set to `null` when the version ships — move the
- * highlights into `SKAGWAY_RELEASES[0]` and follow the usual release steps.
+ * Pre-release promo. Null on this branch so localhost previews the shipped
+ * 1.3.0 site. Production `main` still has the coming-soon object until 1.3 ships.
  */
-export const SKAGWAY_UPCOMING: SkagwayUpcoming | null = {
-  version: "1.3.0",
-  eyebrow: "Coming soon",
-  lede: "Release 1.3.0 is packed with useful new features.",
-  closer:
-    "Check back in the next few days. Already using Skagway? Turn on Automatically check for updates in Settings → Library — the release will arrive on its own.",
-  signupLine:
-    "Or sign up for our Product announcements list below, and we’ll let you know when version 1.3.0 arrives.",
-  highlights: [
-    {
-      title: "Storyboard view",
-      body: "A six-frame collage for every video (⌘3). Scan the library by eye; click a frame to play from there.",
-      homeLine: "Storyboard view — six frames per video (⌘3).",
-    },
-    {
-      title: "Hide and show the Inspector",
-      body: "⌘I hides the Inspector so the library can fill the window. Show it again at the width you left it.",
-      homeLine: "Hide and show the Inspector (⌘I).",
-    },
-    {
-      title: "Collected set",
-      body: "Gather videos as you browse — ⌘-click, Shift-click, or A — then rate, tag, and inspect them as a batch. Replaces Review mode.",
-      homeLine: "Collected set — gather videos as you go, then act on them together.",
-    },
-    {
-      title: "Scroll index",
-      body: "A rolodex-style chip beside the scrollbar as you scroll, labeled by whatever you sorted by.",
-      homeLine: "Rolodex-style scroll index beside the scrollbar.",
-    },
-    {
-      title: "Reconnect",
-      body: "When a folder moves, point Skagway at the new location. Preview the matches, apply, undo if you need to.",
-      homeLine: "Reconnect when files have moved.",
-    },
-    {
-      title: "Filmstrip in the player",
-      body: "A strip of frames above the scrubber — seek by picture.",
-      homeLine: "Filmstrip above the player scrubber.",
-    },
-  ],
-};
+export const SKAGWAY_UPCOMING: SkagwayUpcoming | null = null;
 
 export function latestSkagwayRelease(): SkagwayRelease {
   return SKAGWAY_RELEASES[0];
