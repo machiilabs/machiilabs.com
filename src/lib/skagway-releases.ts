@@ -71,7 +71,7 @@ export const SKAGWAY_RELEASES: SkagwayRelease[] = [
       {
         title: "Filmstrip in the player",
         body: "A strip of frames above the scrubber — seek by picture.",
-        homeLine: "Filmstrip above the player scrubber.",
+        homeLine: "Scrubber now includes a filmstrip.",
         learnMoreHref: "/skagway/manual/playback#filmstrip-in-the-player",
       },
     ],
