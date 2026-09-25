@@ -175,24 +175,8 @@ export default function PrivacyStatementDraftPage() {
             Service providers
           </h2>
           <p className="mt-3 text-sm leading-relaxed text-fog">
-            Mach II Labs writes and controls this site. We rent hosting,
-            delivery, and storage so the pages and downloads stay online.
-            Those companies see only what they need to provide that
-            infrastructure:
-          </p>
-          <ul className="mt-4 list-disc space-y-2 pl-5 text-sm leading-relaxed text-fog">
-            <li>Vercel — website hosting and visit analytics</li>
-            <li>
-              Cloudflare — DNS, content delivery, download hosting, and visit
-              analytics
-            </li>
-            <li>
-              Supabase — storage for announcement emails and download counts
-            </li>
-          </ul>
-          <p className="mt-3 text-sm leading-relaxed text-fog">
-            We do not sell personal information, and we do not share it for
-            advertising.
+            We use third parties for hosting. We do not sell personal
+            information, and we do not share it for advertising.
           </p>
         </section>
 
