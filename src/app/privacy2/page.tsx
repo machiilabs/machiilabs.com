@@ -106,8 +106,8 @@ export default function PrivacyStatementDraftPage() {
           <p className="mt-3 text-sm leading-relaxed text-fog">
             If you opt in, we store your email address so we can send
             occasional product announcements (new releases and important
-            updates). We keep that address only for that purpose. We do not
-            sell it. You can leave anytime via the unsubscribe link in an
+            updates).             We keep that address only for that purpose. We do not
+            sell or distribute it. You can leave anytime via the unsubscribe link in an
             announcement; that removes your address from the list.
           </p>
 
