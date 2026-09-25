@@ -40,7 +40,7 @@ export default function PrivacyStatementDraftPage() {
         </p>
 
         <section className="mt-12">
-          <h2 className="font-display text-lg font-semibold text-snow">
+          <h2 className="font-display text-lg font-semibold text-afterburn-soft">
             Scope
           </h2>
           <p className="mt-3 text-sm leading-relaxed text-fog">
@@ -51,7 +51,7 @@ export default function PrivacyStatementDraftPage() {
         </section>
 
         <section className="mt-10">
-          <h2 className="font-display text-lg font-semibold text-snow">
+          <h2 className="font-display text-lg font-semibold text-afterburn-soft">
             What we promise about the software
           </h2>
           <ul className="mt-4 list-disc space-y-2 pl-5 text-sm leading-relaxed text-fog">
@@ -71,7 +71,7 @@ export default function PrivacyStatementDraftPage() {
         </section>
 
         <section className="mt-10">
-          <h2 className="font-display text-lg font-semibold text-snow">
+          <h2 className="font-display text-lg font-semibold text-afterburn-soft">
             Information we collect
           </h2>
 
@@ -149,7 +149,7 @@ export default function PrivacyStatementDraftPage() {
         </section>
 
         <section className="mt-10">
-          <h2 className="font-display text-lg font-semibold text-snow">
+          <h2 className="font-display text-lg font-semibold text-afterburn-soft">
             How we use information
           </h2>
           <ul className="mt-4 list-disc space-y-2 pl-5 text-sm leading-relaxed text-fog">
@@ -161,7 +161,7 @@ export default function PrivacyStatementDraftPage() {
         </section>
 
         <section className="mt-10">
-          <h2 className="font-display text-lg font-semibold text-snow">
+          <h2 className="font-display text-lg font-semibold text-afterburn-soft">
             Cookies
           </h2>
           <p className="mt-3 text-sm leading-relaxed text-fog">
@@ -173,7 +173,7 @@ export default function PrivacyStatementDraftPage() {
         </section>
 
         <section className="mt-10">
-          <h2 className="font-display text-lg font-semibold text-snow">
+          <h2 className="font-display text-lg font-semibold text-afterburn-soft">
             Service providers
           </h2>
           <p className="mt-3 text-sm leading-relaxed text-fog">
@@ -197,7 +197,7 @@ export default function PrivacyStatementDraftPage() {
         </section>
 
         <section className="mt-10">
-          <h2 className="font-display text-lg font-semibold text-snow">
+          <h2 className="font-display text-lg font-semibold text-afterburn-soft">
             How long we keep it
           </h2>
           <p className="mt-3 text-sm leading-relaxed text-fog">
@@ -209,7 +209,7 @@ export default function PrivacyStatementDraftPage() {
         </section>
 
         <section className="mt-10">
-          <h2 className="font-display text-lg font-semibold text-snow">
+          <h2 className="font-display text-lg font-semibold text-afterburn-soft">
             Your choices
           </h2>
           <ul className="mt-4 list-disc space-y-2 pl-5 text-sm leading-relaxed text-fog">
@@ -240,7 +240,7 @@ export default function PrivacyStatementDraftPage() {
         </section>
 
         <section className="mt-10">
-          <h2 className="font-display text-lg font-semibold text-snow">
+          <h2 className="font-display text-lg font-semibold text-afterburn-soft">
             Children
           </h2>
           <p className="mt-3 text-sm leading-relaxed text-fog">
@@ -250,7 +250,7 @@ export default function PrivacyStatementDraftPage() {
         </section>
 
         <section className="mt-10">
-          <h2 className="font-display text-lg font-semibold text-snow">
+          <h2 className="font-display text-lg font-semibold text-afterburn-soft">
             Changes
           </h2>
           <p className="mt-3 text-sm leading-relaxed text-fog">
@@ -261,7 +261,7 @@ export default function PrivacyStatementDraftPage() {
         </section>
 
         <section className="mt-10">
-          <h2 className="font-display text-lg font-semibold text-snow">
+          <h2 className="font-display text-lg font-semibold text-afterburn-soft">
             Contact
           </h2>
           <p className="mt-3 text-sm leading-relaxed text-fog">
