@@ -104,17 +104,14 @@ export default function Home() {
           Independent software lab
         </p>
 
-        <h1 className="anim-rise anim-rise-delay-1 mt-5">
-          <MachiiLogo
-            href={null}
-            wordmarkLayout="stacked"
-            className="text-[clamp(2.75rem,9vw,5.5rem)]"
-          />
-        </h1>
-
-        <p className="anim-rise anim-rise-delay-2 mt-4 max-w-2xl font-display text-xl leading-snug font-semibold tracking-tight text-snow sm:text-2xl">
-          Mac software you keep.
-        </p>
+        <div className="anim-rise anim-rise-delay-1 mt-5 text-[clamp(2.75rem,9vw,5.5rem)]">
+          <h1>
+            <MachiiLogo href={null} wordmarkLayout="stacked" />
+          </h1>
+          <p className="mt-[0.22em] pl-[2.47em] font-display text-[0.34em] leading-snug font-semibold tracking-tight text-fog">
+            Mac software you keep.
+          </p>
+        </div>
 
         <nav
           aria-label="Jump to products"
