@@ -16,8 +16,9 @@ export function StudioPromises() {
         <li>No ads. Ever.</li>
         <li>No subscriptions.</li>
         <li>
-          No invisible reports. Usage, logs, and crashes stay with you unless
-          you send them.
+          No invisible reports. Usage, logs, crashes, or any other telemetry
+          that could identify who you are or how you use an app — unless you
+          send it.
         </li>
         <li>No kill switch. Nothing we can unplug.</li>
         <li>Skagway and 15CE Flasher are free forever.</li>
