@@ -14,7 +14,7 @@ export function StudioPromises() {
 
       <ul className="mt-6 space-y-3 font-display text-lg font-semibold tracking-tight text-snow sm:text-xl">
         <li>No ads. Ever.</li>
-        <li>No subscriptions.</li>
+        <li>No subscriptions. Ever.</li>
         <li>
           No invisible reports. Usage, logs, crashes, or any other telemetry
           that could identify who you are or how you use an app — unless you
