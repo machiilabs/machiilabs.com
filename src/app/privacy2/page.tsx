@@ -225,27 +225,6 @@ export default function PrivacyStatementDraftPage() {
 
         <section className="mt-10">
           <h2 className="font-display text-lg font-semibold text-afterburn-soft">
-            Children
-          </h2>
-          <p className="mt-3 text-sm leading-relaxed text-fog">
-            Our website and software are not directed at children under 13. We
-            do not knowingly collect personal information from children.
-          </p>
-        </section>
-
-        <section className="mt-10">
-          <h2 className="font-display text-lg font-semibold text-afterburn-soft">
-            Changes
-          </h2>
-          <p className="mt-3 text-sm leading-relaxed text-fog">
-            If this statement changes, we will update this page and the date
-            above. We will not use a quiet policy edit to start tracking how
-            you use the apps.
-          </p>
-        </section>
-
-        <section className="mt-10">
-          <h2 className="font-display text-lg font-semibold text-afterburn-soft">
             Contact
           </h2>
           <p className="mt-3 text-sm leading-relaxed text-fog">
