@@ -462,7 +462,9 @@ export default function FlasherGuidePage() {
       <footer className="border-t border-[#e5e7eb] bg-white px-6 py-5 sm:px-8">
         <div className="mx-auto flex max-w-3xl flex-col gap-1 text-sm text-[#6b7280] sm:flex-row sm:items-center sm:justify-between">
           <span>© {new Date().getFullYear()} Mach II Labs · 15CE Flasher</span>
-          <span>No ads · No subscriptions · No tracking</span>
+          <a href="/#promises" className="hover:text-[#1a1a1a]">
+            No ads · No subscriptions · No tracking
+          </a>
           <Link href="/flasher" className="hover:text-[#1a1a1a]">
             ← Back to product
           </Link>

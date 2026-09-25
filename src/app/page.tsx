@@ -6,6 +6,7 @@ import { AnnouncementSignup } from "@/components/announcement-signup";
 import { MachiiLogo } from "@/components/machii-logo";
 import { SiteHeader } from "@/components/site-header";
 import { SkagwayComingSoon } from "@/components/skagway-coming-soon";
+import { StudioPromises } from "@/components/studio-promises";
 import {
   latestSkagwayRelease,
   SKAGWAY_UPCOMING,
@@ -132,6 +133,12 @@ export default function Home() {
             className="font-semibold text-snow transition-colors hover:text-afterburn-soft"
           >
             15CE Flasher
+          </a>
+          <a
+            href="#promises"
+            className="font-semibold text-snow transition-colors hover:text-afterburn-soft"
+          >
+            Promises
           </a>
         </nav>
 
@@ -261,6 +268,8 @@ export default function Home() {
             </Link>
           </div>
 
+          <StudioPromises />
+
           <AnnouncementSignup />
         </div>
       </main>
@@ -268,7 +277,12 @@ export default function Home() {
       <footer className="relative z-10 border-t border-white/5 px-6 py-5 sm:px-10">
         <div className="mx-auto flex max-w-6xl flex-col gap-1 text-sm text-fog/70 sm:flex-row sm:items-center sm:justify-between">
           <span>© {new Date().getFullYear()} Mach II Labs</span>
-          <span>No ads · No subscriptions · No tracking</span>
+          <a
+            href="#promises"
+            className="transition-colors hover:text-snow"
+          >
+            No ads · No subscriptions · No tracking
+          </a>
           <div className="flex flex-wrap gap-x-5 gap-y-1">
             <Link
               href="/privacy"

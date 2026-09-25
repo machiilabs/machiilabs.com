@@ -175,7 +175,9 @@ export function ManualShell({
       <footer className="relative z-10 border-t border-[#e5e7eb] bg-white px-6 py-5 sm:px-8 lg:px-10">
         <div className="mx-auto flex max-w-7xl flex-col gap-1 text-sm text-[#6b7280] sm:flex-row sm:items-center sm:justify-between">
           <span>© {new Date().getFullYear()} Mach II Labs · Skagway Manual</span>
-          <span>No ads · No subscriptions · No tracking</span>
+          <a href="/#promises" className="hover:text-[#1a1a1a]">
+            No ads · No subscriptions · No tracking
+          </a>
           <a
             href="mailto:support@machiilabs.com"
             className="hover:text-[#1a1a1a]"

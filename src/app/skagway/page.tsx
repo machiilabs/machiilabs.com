@@ -489,8 +489,9 @@ export default function SkagwayPage() {
             Free forever. Really.
           </h2>
           <p className="mt-4 max-w-xl text-base leading-relaxed text-fog sm:text-lg">
-            The full app — every feature above. No trial, no paywall, no limits.
-            No phone-home telemetry by default. Serious software, yours forever.
+            The full app — every feature above. No trial, no paywall, no ads, no
+            subscriptions. No tracking. It runs on your Mac — there&apos;s
+            nothing we can unplug. Serious software, yours forever.
           </p>
           <div className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-5">
             <DownloadButton
@@ -510,7 +511,12 @@ export default function SkagwayPage() {
       <footer className="relative z-10 border-t border-white/5 px-6 py-5 sm:px-10">
         <div className="mx-auto flex max-w-6xl flex-col gap-1 text-sm text-fog/70 sm:flex-row sm:items-center sm:justify-between">
           <span>© {new Date().getFullYear()} Mach II Labs · Skagway</span>
-          <span>No ads · No subscriptions · No tracking</span>
+          <a
+            href="/#promises"
+            className="transition-colors hover:text-snow"
+          >
+            No ads · No subscriptions · No tracking
+          </a>
           <a
             href="mailto:support@machiilabs.com"
             className="transition-colors hover:text-snow"
