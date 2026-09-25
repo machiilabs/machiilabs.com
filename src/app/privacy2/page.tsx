@@ -166,9 +166,7 @@ export default function PrivacyStatementDraftPage() {
           </h2>
           <p className="mt-3 text-sm leading-relaxed text-fog">
             We do not use advertising or tracking cookies on the public site.
-            The visit metrics described above are cookieless. If you use the
-            studio admin area (not part of the public site), a sign-in cookie
-            is required to keep you logged in.
+            The visit metrics described above are cookieless.
           </p>
         </section>
 
