@@ -35,8 +35,9 @@ export default function PrivacyStatementDraftPage() {
         <p className="mt-3 text-sm text-fog">Last updated {lastUpdated}</p>
         <p className="mt-6 text-base leading-relaxed text-snow sm:text-lg">
           Mach II Labs operates machiilabs.com and the software we publish from
-          it. We do not sell your data. We do not use it for advertising. Our
-          apps do not report how you use them unless you choose to write to us.
+          it. We do not collect, sell, or otherwise distribute your data. We
+          do not have a profile of you to hand to anyone. Our apps do not
+          report how you use them unless you choose to write to us.
         </p>
 
         <section className="mt-12">
