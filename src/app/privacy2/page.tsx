@@ -175,8 +175,8 @@ export default function PrivacyStatementDraftPage() {
             Service providers
           </h2>
           <p className="mt-3 text-sm leading-relaxed text-fog">
-            We use third parties for hosting the site. The providers do not
-            collect your personal information.
+            We use third parties for hosting the site. They see only what is
+            needed to deliver the pages and downloads.
           </p>
         </section>
 
