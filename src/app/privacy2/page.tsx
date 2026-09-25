@@ -106,9 +106,9 @@ export default function PrivacyStatementDraftPage() {
           <p className="mt-3 text-sm leading-relaxed text-fog">
             If you opt in, we store your email address so we can send
             occasional product announcements (new releases and important
-            updates).             We keep that address only for that purpose. We do not
-            sell or distribute it. You can leave anytime via the unsubscribe link in an
-            announcement; that removes your address from the list.
+            updates). We keep that address only for that purpose. We do not
+            sell or distribute it. You can leave anytime via the unsubscribe
+            link in an announcement; that removes your address from the list.
           </p>
 
           <h3 className="mt-6 text-base font-semibold text-snow">
@@ -229,8 +229,7 @@ export default function PrivacyStatementDraftPage() {
           </h2>
           <p className="mt-3 text-sm leading-relaxed text-fog">
             Our website and software are not directed at children under 13. We
-            do not knowingly collect personal information from children or
-            anyone else.
+            do not knowingly collect personal information from children.
           </p>
         </section>
 
