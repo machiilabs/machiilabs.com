@@ -112,13 +112,13 @@ export default function Home() {
           />
         </h1>
 
-        <p className="anim-rise anim-rise-delay-2 mt-8 max-w-2xl font-display text-2xl leading-snug font-semibold tracking-tight text-snow sm:text-3xl">
+        <p className="anim-rise anim-rise-delay-2 mt-4 max-w-2xl font-display text-xl leading-snug font-semibold tracking-tight text-snow sm:text-2xl">
           Mac software you keep.
         </p>
 
         <nav
           aria-label="Jump to products"
-          className="anim-rise anim-rise-delay-2 mt-5 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm sm:text-base"
+          className="anim-rise anim-rise-delay-2 mt-10 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm sm:text-base"
         >
           <span className="text-fog">Jump to</span>
           <span className="text-fog/50" aria-hidden>
