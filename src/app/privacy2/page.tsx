@@ -175,8 +175,10 @@ export default function PrivacyStatementDraftPage() {
             Service providers
           </h2>
           <p className="mt-3 text-sm leading-relaxed text-fog">
-            We use other companies to host and operate the site. They process
-            data only as needed to provide those services:
+            Mach II Labs writes and controls this site. We rent hosting,
+            delivery, and storage so the pages and downloads stay online.
+            Those companies see only what they need to provide that
+            infrastructure:
           </p>
           <ul className="mt-4 list-disc space-y-2 pl-5 text-sm leading-relaxed text-fog">
             <li>Vercel — website hosting and visit analytics</li>
