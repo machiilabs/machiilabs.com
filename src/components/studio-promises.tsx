@@ -7,7 +7,7 @@ export function StudioPromises() {
     >
       <h2
         id="studio-promises-heading"
-        className="font-display text-2xl font-bold tracking-tight text-snow sm:text-3xl"
+        className="font-display text-2xl font-bold tracking-tight text-afterburn-soft sm:text-3xl"
       >
         What you can count on from us
       </h2>
