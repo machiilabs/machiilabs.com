@@ -142,18 +142,32 @@ export default function Home() {
           </a>
         </nav>
 
-        <div className="anim-rise anim-rise-delay-3 mt-10 flex flex-col gap-12">
-          <div
-            id="skagway"
-            className="flex max-w-3xl scroll-mt-8 flex-col items-start gap-8 sm:flex-row sm:items-center sm:gap-12"
-          >
-            <div className="min-w-0 max-w-xl flex-1">
+        <div className="anim-rise anim-rise-delay-3 mt-14 flex flex-col gap-14">
+          <div className="grid items-stretch gap-6 lg:grid-cols-2 lg:gap-8">
+            <article
+              id="skagway"
+              className="flex scroll-mt-8 flex-col rounded-2xl border border-white/12 bg-ink-elevated/70 p-6 sm:p-8"
+            >
+              <Link
+                href="/skagway"
+                className="mb-6 block overflow-hidden rounded-xl border border-white/10 bg-black/40 transition-opacity hover:opacity-90"
+                aria-label="Skagway"
+              >
+                <Image
+                  src="/skagway/product.png"
+                  alt=""
+                  width={4704}
+                  height={2504}
+                  priority
+                  className="h-auto w-full"
+                />
+              </Link>
               <p className="text-sm font-semibold tracking-[0.18em] text-afterburn-soft uppercase">
                 Newest release · {skagwayVersionLabel(latestSkagway.version)}
               </p>
               <Link
                 href="/skagway"
-                className="mt-3 block text-2xl font-bold tracking-tight text-snow transition-colors hover:text-afterburn-soft sm:text-3xl"
+                className="mt-3 block font-display text-3xl font-bold tracking-tight text-snow transition-colors hover:text-afterburn-soft sm:text-4xl"
               >
                 Skagway
               </Link>
@@ -176,7 +190,7 @@ export default function Home() {
                   </ul>
                 </div>
               ) : null}
-              <div className="mt-5 flex flex-wrap items-center gap-x-6 gap-y-3">
+              <div className="mt-auto flex flex-wrap items-center gap-x-6 gap-y-3 pt-6">
                 <Link
                   href="/skagway"
                   className="group relative inline-flex w-fit items-center text-base font-semibold tracking-wide text-snow transition-colors hover:text-afterburn-soft"
@@ -194,46 +208,40 @@ export default function Home() {
                   Manual →
                 </Link>
               </div>
-            </div>
+            </article>
 
-            <Link
-              href="/skagway"
-              className="shrink-0 overflow-hidden rounded-xl border border-white/10 bg-black/40 transition-opacity hover:opacity-90"
-              aria-label="Skagway"
+            <article
+              id="flasher"
+              className="flex scroll-mt-8 flex-col rounded-2xl border border-white/12 bg-ink-elevated/70 p-6 sm:p-8"
             >
-              <Image
-                src="/skagway/product.png"
-                alt=""
-                width={4704}
-                height={2504}
-                priority
-                className="h-auto w-44 sm:w-52 lg:w-60"
-              />
-            </Link>
-          </div>
-
-          {SKAGWAY_UPCOMING ? <SkagwayComingSoon variant="home" /> : null}
-
-          <div
-            id="flasher"
-            className="flex max-w-3xl scroll-mt-8 flex-col items-start gap-8 border-t border-white/10 pt-10 sm:flex-row sm:items-center sm:gap-12"
-          >
-            <div className="min-w-0 max-w-xl flex-1">
-              <p className="text-sm font-semibold tracking-[0.18em] text-fog/80 uppercase">
-                Also from the lab
+              <Link
+                href="/flasher"
+                className="mb-6 flex justify-center overflow-hidden rounded-xl border border-white/10 bg-black/25 py-8 transition-opacity hover:opacity-90 sm:py-10"
+                aria-label="15CE Flasher"
+              >
+                <Image
+                  src="/flasher/app-icon.png"
+                  alt=""
+                  width={1024}
+                  height={1024}
+                  className="h-28 w-28 sm:h-32 sm:w-32 lg:h-36 lg:w-36"
+                />
+              </Link>
+              <p className="text-sm font-semibold tracking-[0.18em] text-afterburn-soft uppercase">
+                Mac &amp; Windows
               </p>
               <Link
                 href="/flasher"
-                className="mt-3 block text-2xl font-bold tracking-tight text-snow transition-colors hover:text-afterburn-soft sm:text-3xl"
+                className="mt-3 block font-display text-3xl font-bold tracking-tight text-snow transition-colors hover:text-afterburn-soft sm:text-4xl"
               >
                 15CE Flasher
               </Link>
               <p className="mt-3 text-base leading-relaxed text-fog sm:text-lg">
-                SAM-BA programmer for the HP 15c Collector&apos;s Edition on Mac
-                and Windows. Firmware updates without hassle,{" "}
+                SAM-BA programmer for the HP 15c Collector&apos;s Edition.
+                Firmware updates without hassle,{" "}
                 <span className="font-semibold text-snow">free forever</span>.
               </p>
-              <div className="mt-5 flex flex-wrap items-center gap-x-6 gap-y-3">
+              <div className="mt-auto flex flex-wrap items-center gap-x-6 gap-y-3 pt-6">
                 <Link
                   href="/flasher"
                   className="group relative inline-flex w-fit items-center text-base font-semibold tracking-wide text-snow transition-colors hover:text-afterburn-soft"
@@ -251,22 +259,10 @@ export default function Home() {
                   Install Guide →
                 </Link>
               </div>
-            </div>
-
-            <Link
-              href="/flasher"
-              className="shrink-0 overflow-hidden rounded-[22%] transition-opacity hover:opacity-90"
-              aria-label="15CE Flasher"
-            >
-              <Image
-                src="/flasher/app-icon.png"
-                alt=""
-                width={1024}
-                height={1024}
-                className="h-28 w-28 sm:h-32 sm:w-32 lg:h-36 lg:w-36"
-              />
-            </Link>
+            </article>
           </div>
+
+          {SKAGWAY_UPCOMING ? <SkagwayComingSoon variant="home" /> : null}
 
           <StudioPromises />
 
