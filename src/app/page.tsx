@@ -115,9 +115,6 @@ export default function Home() {
         <p className="anim-rise anim-rise-delay-2 mt-8 max-w-2xl font-display text-2xl leading-snug font-semibold tracking-tight text-snow sm:text-3xl">
           Mac software you keep.
         </p>
-        <p className="anim-rise anim-rise-delay-2 mt-3 max-w-2xl text-base leading-relaxed text-fog sm:text-lg">
-          No subscriptions. No ads. No telemetry.
-        </p>
 
         <nav
           aria-label="Jump to products"
