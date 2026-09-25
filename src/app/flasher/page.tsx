@@ -366,6 +366,7 @@ export default function FlasherPage() {
             © {new Date().getFullYear()} Mach II Labs · 15CE Flasher · free
             forever
           </span>
+          <span>No ads · No subscriptions · No tracking</span>
           <a
             href="mailto:support@machiilabs.com"
             className="transition-colors hover:text-[#1a1a1a]"

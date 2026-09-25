@@ -510,6 +510,7 @@ export default function SkagwayPage() {
       <footer className="relative z-10 border-t border-white/5 px-6 py-5 sm:px-10">
         <div className="mx-auto flex max-w-6xl flex-col gap-1 text-sm text-fog/70 sm:flex-row sm:items-center sm:justify-between">
           <span>© {new Date().getFullYear()} Mach II Labs · Skagway</span>
+          <span>No ads · No subscriptions · No tracking</span>
           <a
             href="mailto:support@machiilabs.com"
             className="transition-colors hover:text-snow"
