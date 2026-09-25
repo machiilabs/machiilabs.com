@@ -229,7 +229,8 @@ export default function PrivacyStatementDraftPage() {
           </h2>
           <p className="mt-3 text-sm leading-relaxed text-fog">
             Our website and software are not directed at children under 13. We
-            do not knowingly collect personal information from children.
+            do not knowingly collect personal information from children or
+            anyone else.
           </p>
         </section>
 
