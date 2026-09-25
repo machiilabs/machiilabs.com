@@ -109,7 +109,7 @@ export default function Home() {
             <MachiiLogo href={null} wordmarkLayout="stacked" />
           </h1>
           <p className="mt-[0.22em] pl-[2.47em] font-display text-[0.34em] leading-snug font-semibold tracking-tight text-fog">
-            Mac software you keep.
+            Software you keep.
           </p>
         </div>
 
