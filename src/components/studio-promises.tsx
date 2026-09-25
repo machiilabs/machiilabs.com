@@ -9,7 +9,7 @@ export function StudioPromises() {
         id="studio-promises-heading"
         className="font-display text-2xl font-bold tracking-tight text-snow sm:text-3xl"
       >
-        What you can count on
+        What you can count on from us
       </h2>
 
       <ul className="mt-6 space-y-3 font-display text-lg font-semibold tracking-tight text-snow sm:text-xl">
