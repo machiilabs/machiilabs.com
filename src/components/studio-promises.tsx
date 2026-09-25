@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export function StudioPromises() {
   return (
     <section
@@ -26,6 +28,14 @@ export function StudioPromises() {
       <p className="mt-8 text-base leading-relaxed text-fog sm:text-lg">
         The software lives on your computer. There is no account and no backend
         we can turn off. We&apos;ll keep shipping updates as long as we can.
+      </p>
+      <p className="mt-4 text-base leading-relaxed sm:text-lg">
+        <Link
+          href="/privacy"
+          className="font-semibold text-snow transition-colors hover:text-afterburn-soft"
+        >
+          View our Privacy Statement
+        </Link>
       </p>
     </section>
   );
