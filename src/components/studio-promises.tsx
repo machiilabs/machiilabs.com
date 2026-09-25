@@ -23,8 +23,6 @@ export function StudioPromises() {
       <p className="mt-8 text-base leading-relaxed text-fog sm:text-lg">
         The software lives on your computer. There is no account and no backend
         we can turn off. We&apos;ll keep shipping updates as long as we can.
-        Someday that ends. What you already have will still run — until the
-        operating system itself moves on.
       </p>
     </section>
   );
