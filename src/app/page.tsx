@@ -20,6 +20,9 @@ const inter = Inter({
   style: ["normal", "italic"],
 });
 
+/** Home jump links — off while the product cards sit in view. Flip to show. */
+const SHOW_HOME_JUMP_LINKS = false;
+
 export const metadata: Metadata = {
   title: "Mach II Labs",
   description:
@@ -114,33 +117,35 @@ export default function Home() {
           </p>
         </div>
 
-        <nav
-          aria-label="Jump to products"
-          className="anim-rise anim-rise-delay-2 mt-10 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm sm:text-base"
-        >
-          <span className="text-fog">Jump to</span>
-          <span className="text-fog/50" aria-hidden>
-            →
-          </span>
-          <a
-            href="#skagway"
-            className="font-semibold text-snow transition-colors hover:text-afterburn-soft"
+        {SHOW_HOME_JUMP_LINKS ? (
+          <nav
+            aria-label="Jump to products"
+            className="anim-rise anim-rise-delay-2 mt-10 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm sm:text-base"
           >
-            Skagway
-          </a>
-          <a
-            href="#flasher"
-            className="font-semibold text-snow transition-colors hover:text-afterburn-soft"
-          >
-            15CE Flasher
-          </a>
-          <a
-            href="#promises"
-            className="font-semibold text-snow transition-colors hover:text-afterburn-soft"
-          >
-            Promises
-          </a>
-        </nav>
+            <span className="text-fog">Jump to</span>
+            <span className="text-fog/50" aria-hidden>
+              →
+            </span>
+            <a
+              href="#skagway"
+              className="font-semibold text-snow transition-colors hover:text-afterburn-soft"
+            >
+              Skagway
+            </a>
+            <a
+              href="#flasher"
+              className="font-semibold text-snow transition-colors hover:text-afterburn-soft"
+            >
+              15CE Flasher
+            </a>
+            <a
+              href="#promises"
+              className="font-semibold text-snow transition-colors hover:text-afterburn-soft"
+            >
+              Promises
+            </a>
+          </nav>
+        ) : null}
 
         <div className="anim-rise anim-rise-delay-3 mt-14 flex flex-col gap-14">
           <div className="grid items-stretch gap-6 lg:grid-cols-2 lg:gap-8">
