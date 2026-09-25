@@ -20,7 +20,6 @@ export function StudioPromises() {
           that could identify who you are or how you use an app — unless you
           send it.
         </li>
-        <li>No kill switch. Nothing we can unplug.</li>
         <li>Skagway and 15CE Flasher are free forever.</li>
       </ul>
 
