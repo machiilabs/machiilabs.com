@@ -35,9 +35,8 @@ export default function PrivacyStatementDraftPage() {
         <p className="mt-3 text-sm text-fog">Last updated {lastUpdated}</p>
         <p className="mt-6 text-base leading-relaxed text-snow sm:text-lg">
           Mach II Labs operates machiilabs.com and the software we publish from
-          it. We do not collect, sell, or otherwise distribute your data. We
-          do not have a profile of you to hand to anyone. Our apps do not
-          report how you use them unless you choose to write to us.
+          it. We do not collect, sell, or otherwise distribute your data. Our
+          apps do not send reports unless you choose to write to us.
         </p>
 
         <section className="mt-12">
@@ -57,9 +56,8 @@ export default function PrivacyStatementDraftPage() {
           </h2>
           <ul className="mt-4 list-disc space-y-2 pl-5 text-sm leading-relaxed text-fog">
             <li>
-              No invisible reports from the apps. No usage logs, crash reports,
-              or other telemetry that could identify who you are or how you use
-              an app — unless you send it.
+              No invisible reports from the apps. Usage logs, crash reports,
+              and other telemetry stay on your computer unless you send them.
             </li>
             <li>
               The software lives on your computer. There is no account and no
@@ -83,15 +81,13 @@ export default function PrivacyStatementDraftPage() {
           <p className="mt-3 text-sm leading-relaxed text-fog">
             We use Vercel Analytics and Cloudflare to see aggregate traffic:
             which pages are viewed, roughly how often, and similar visit
-            counts. We use this to run the site, not to identify you or build
-            a profile of how you browse. These tools are cookieless and are
-            not used for advertising.
+            counts. We use this to run the site. These tools are cookieless
+            and are not used for advertising.
           </p>
           <p className="mt-3 text-sm leading-relaxed text-fog">
-            Hosting and CDN providers necessarily see ordinary request data
-            (such as IP address, browser type, and the page requested) in
-            order to deliver the site. We do not use those logs to track
-            individuals.
+            Hosting and CDN providers see ordinary request data (such as IP
+            address, browser type, and the page requested) in order to
+            deliver the site. We do not use those logs as a visitor list.
           </p>
 
           <h3 className="mt-6 text-base font-semibold text-snow">
@@ -99,8 +95,8 @@ export default function PrivacyStatementDraftPage() {
           </h3>
           <p className="mt-3 text-sm leading-relaxed text-fog">
             Download buttons go through a short redirect on our site so we can
-            count how often each application is downloaded. That count records
-            the product name, not who you are. The file itself is served from
+            count how often each application is downloaded. That count is the
+            product name only. The file itself is served from
             downloads.machiilabs.com.
           </p>
 
@@ -142,15 +138,13 @@ export default function PrivacyStatementDraftPage() {
           </h3>
           <p className="mt-3 text-sm leading-relaxed text-fog">
             Mach II Labs apps do not send usage analytics or silent
-            diagnostics. Your library, files, play history, and browsing
-            inside the app stay on your computer unless you move them
-            yourself.
+            diagnostics. Your library and files stay on your computer.
           </p>
           <p className="mt-3 text-sm leading-relaxed text-fog">
             Some apps offer optional update checks that are off by default. If
             you turn them on, or choose Check for Updates, the app only asks
             whether a newer build exists. That request goes to our download
-            host. It does not include how you use the app.
+            host.
           </p>
         </section>
 
