@@ -489,9 +489,10 @@ export default function SkagwayPage() {
             Free forever. Really.
           </h2>
           <p className="mt-4 max-w-xl text-base leading-relaxed text-fog sm:text-lg">
-            The full app — every feature above. No trial, no paywall, no ads, no
-            subscriptions. No tracking. It runs on your Mac — there&apos;s
-            nothing we can unplug. Serious software, yours forever.
+            The full app — every feature above, as well as all future versions.
+            No trial, no paywall, no ads, no subscriptions. No tracking. It
+            runs on your Mac — there&apos;s nothing we can unplug. Serious
+            software, yours forever.
           </p>
           <div className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-5">
             <DownloadButton
