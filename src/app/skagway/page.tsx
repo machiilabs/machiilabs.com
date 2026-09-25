@@ -56,8 +56,8 @@ type Feature = {
 
 const features: Feature[] = [
   {
-    title: "Your folders, indexed — your files untouched",
-    body: "Point Skagway at the folders you already keep. It builds a fast catalog and thumbnails in the background — nothing moves into a proprietary container.",
+    title: "Your folders. Your files.",
+    body: "Point Skagway at the folders you already keep. It builds a fast catalog and thumbnails — nothing moves into a proprietary container.",
     screenshot: "explore-grid.png",
     screenshotAlt:
       "Skagway grid view showing a large video library with thumbnails, durations, and ratings",
@@ -65,49 +65,13 @@ const features: Feature[] = [
       "Full window in Grid view with a well-populated library — rich thumbnails, a few rated videos, toolbar with Grid/List, Sort, Play All, and Search videos.",
   },
   {
-    title: "See inside without opening",
-    body: "Hover grid cards or List thumbnails for Live Preview, or open the filmstrip and jump to any frame. Scrub the collection without committing to a full play.",
-    screenshot: "explore-filmstrip.png",
-    screenshotAlt:
-      "Skagway Inspector showing a filmstrip grid of frames for the selected video",
-    screenshotHint:
-      "Inspector with the Filmstrip view selected — a clear grid of frames for one video.",
-  },
-  {
-    title: "Find anything in seconds",
-    body: "Search titles, names, tags, and custom fields. Quick Filter and Advanced Filter narrow by rating, duration, quality, and rules you can save as smart collections.",
-    screenshot: "explore-filter.png",
-    screenshotAlt:
-      "Skagway Quick Filter drawer with Smart Libraries, Rating, Duration, Quality, and Tags",
-    screenshotHint:
-      "Quick Filter drawer open over the grid, showing Smart Libraries, Rating, Duration, Quality, and Tags.",
-  },
-  {
-    title: "Rate, tag, collect",
-    body: "Inspector metadata for one video or fifty. Smart collections stay current on their own; albums are hand-picked playlists with Album Order and Play All.",
-    screenshot: "explore-inspector.png",
-    screenshotAlt:
-      "Skagway Inspector with rating stars, tag chips, subtitles picker, and custom metadata fields",
-    screenshotHint:
-      "Inspector for a selected video: rating stars, tag chips, and at least one custom field.",
-  },
-  {
-    title: "A player that stays out of the way",
-    body: "Floating player in three sizes: compact, full screen and custom — resume where you left off, Play All through the current view, and bookmarks with stills for any moment worth returning to.",
+    title: "See inside. Play without leaving.",
+    body: "Live preview, filmstrip, and a floating player that stays out of the way. Resume, Play All, bookmarks — the library stays on screen.",
     screenshot: "explore-player.png",
     screenshotAlt:
       "Skagway floating player with traffic lights and custom transport controls over the library grid",
     screenshotHint:
       "Floating player over the grid with scrubber, transport controls, and bookmark ticks visible.",
-  },
-  {
-    title: "Real file tools, portable data",
-    body: "Bulk rename, cross-volume moves, Fix for Built-in Player…, and metadata export/import. Queues survive quitting. Your library is one file you can copy anytime.",
-    screenshot: "explore-file-ops.png",
-    screenshotAlt:
-      "Skagway context menu with Bulk Rename…, Move Files…, Fix for Built-in Player…, and Set Poster from Image…",
-    screenshotHint:
-      "Right-click context menu showing Bulk Rename…, Move Files…, Fix for Built-in Player…, and related file tools.",
   },
 ];
 
@@ -458,6 +422,16 @@ export default function SkagwayPage() {
               <FeatureFigure feature={feature} />
             </section>
           ))}
+          <p className="text-base leading-relaxed text-fog sm:text-lg">
+            Filters, tags, collections, and file tools live in the{" "}
+            <Link
+              href="/skagway/manual"
+              className="font-semibold text-snow transition-colors hover:text-afterburn-soft"
+            >
+              manual
+            </Link>
+            .
+          </p>
         </div>
 
         <section className="mt-20 border-t border-white/10 pt-14 sm:mt-24">
