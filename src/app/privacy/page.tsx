@@ -219,10 +219,10 @@ export default function PrivacyPage() {
             Mach II Labs
             <br />
             <a
-              href="mailto:support@machiilabs.com"
+              href="mailto:contact@machiilabs.com"
               className="text-snow underline-offset-4 hover:underline"
             >
-              support@machiilabs.com
+              contact@machiilabs.com
             </a>
           </p>
         </section>
