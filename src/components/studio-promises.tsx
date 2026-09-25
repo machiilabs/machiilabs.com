@@ -15,7 +15,10 @@ export function StudioPromises() {
       <ul className="mt-6 space-y-3 font-display text-lg font-semibold tracking-tight text-snow sm:text-xl">
         <li>No ads. Ever.</li>
         <li>No subscriptions.</li>
-        <li>No tracking. Your data stays with you.</li>
+        <li>
+          No invisible reports. Usage, logs, and crashes stay with you unless
+          you send them.
+        </li>
         <li>No kill switch. Nothing we can unplug.</li>
         <li>Skagway and 15CE Flasher are free forever.</li>
       </ul>
