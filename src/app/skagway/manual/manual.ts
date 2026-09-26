@@ -267,7 +267,7 @@ export const MANUAL_PAGES: ManualPage[] = [
         title: "Storyboard view",
         steps: [
           "Press ⌘3 (or choose Storyboard in the toolbar) for a six-frame collage of each clip — useful when a single poster isn’t enough to tell clips apart.",
-          "Compact packs more columns; Normal (the default) uses fewer columns with more space. The density control appears in the toolbar while Storyboard is active.",
+          "Compact fits more columns — up to four. Normal, the default, stops at three. Pick either from the arrow on the Storyboard button. At some browser widths both densities use three columns, so they look the same.",
           "Click a frame once to focus the clip (even if it is already collected); click the same focused collage again to seek and play from that sample time. Playing from a frame does not clear your collected set.",
           "Click the title or footer chrome for normal selection / batch-inspect toggle without starting playback. Collage clicks never toggle batch inspect on their own.",
           "Collection and focus work the same as Grid — ⌘-click, ⇧-click, and A. Hover preview is off in Storyboard; use the collage frames instead.",
