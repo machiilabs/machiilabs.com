@@ -85,6 +85,14 @@ Also set the same vars in the Vercel project. Auth redirect allow-list already i
 
 Dashboard: `https://supabase.com/dashboard/project/rddzasjcgrdlugeducsu`
 
+## Pond guide (`/pond`)
+
+Unlisted. It is not in the site nav, sitemap, or public robots allow list.
+
+Set `POND_PASSPHRASE` on the server (local `.env.local`, and the host when you deploy). The page compares it and sets an httpOnly cookie. Do not put the passphrase in client code. Pond rows and photos use the service role only: row level security is on, and the anon key has no policies.
+
+Apply the pond migration with `supabase db push` from this repo.
+
 ## Stack
 
 - Next.js (App Router)

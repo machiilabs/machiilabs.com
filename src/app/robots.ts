@@ -6,7 +6,7 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: "*",
         allow: "/",
-        disallow: ["/admin", "/admin/", "/font-sample"],
+        disallow: ["/admin", "/admin/", "/font-sample", "/pond", "/pond/"],
       },
     ],
     sitemap: "https://machiilabs.com/sitemap.xml",

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Instrument_Sans, Inter } from "next/font/google";
-import { Analytics } from "@vercel/analytics/next";
+import { SiteAnalytics } from "@/components/site-analytics";
 import "./globals.css";
 
 const inter = Inter({
@@ -68,7 +68,7 @@ export default function RootLayout({
     >
       <body className="min-h-full">
         {children}
-        <Analytics />
+        <SiteAnalytics />
       </body>
     </html>
   );

@@ -1,6 +1,16 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  async headers() {
+    const hidden = [
+      { key: "X-Robots-Tag", value: "noindex, nofollow" },
+      { key: "Cache-Control", value: "private, no-store" },
+    ];
+    return [
+      { source: "/pond", headers: hidden },
+      { source: "/pond/:path*", headers: hidden },
+    ];
+  },
   async redirects() {
     return [
       {
