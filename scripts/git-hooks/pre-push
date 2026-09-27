@@ -2,18 +2,14 @@
 # main is production: Vercel deploys every push to machiilabs.com.
 # Install with: bash scripts/install-git-hooks.sh
 #
-# Blocks a push to main unless:
-#   MACHII_MAIN_PUSH=yes          the user explicitly approved this push to main
-# and additionally requires:
-#   MACHII_SHIP_SKAGWAY=X.Y.Z     when the push carries commits from an unreleased
-#                                 skagway-X.Y.Z branch, or changes the public
-#                                 Skagway download version / coming-soon promo
-#   MACHII_FORCE_MAIN=yes         when the push rewrites main (not a fast-forward)
+# Blocks a push to main unless MACHII_MAIN_PUSH=yes (the user explicitly approved
+# this push to main). A history rewrite also needs MACHII_FORCE_MAIN=yes. Then runs
+# scripts/check-production-release.sh from origin/main, which needs
+# MACHII_SHIP="<product>-<version>" for any release this push ships.
 set -euo pipefail
 
 zero=0000000000000000000000000000000000000000
-download_file=src/lib/skagway-download.ts
-releases_file=src/lib/skagway-releases.ts
+check=scripts/check-production-release.sh
 
 block() {
   {
@@ -22,11 +18,6 @@ block() {
     printf '\nSee .cursor/rules/production-main.mdc.\n\n'
   } >&2
   exit 1
-}
-
-field() {
-  # field <commit> <file> <regex>: first match of the regex in that file, or empty.
-  git show "$1:$2" 2>/dev/null | grep -Eo "$3" | head -n 1 || true
 }
 
 while read -r local_ref local_sha remote_ref remote_sha; do
@@ -47,48 +38,12 @@ while read -r local_ref local_sha remote_ref remote_sha; do
       "This push rewrites main's history (not a fast-forward)." \
       "Only with explicit user approval: MACHII_FORCE_MAIN=yes"
   fi
+  [ -n "$base" ] || block "Cannot find origin/main to compare against. Run: git fetch origin main"
 
-  # Commits from an unreleased release branch (the pond-guide incident: a branch
-  # cut from skagway-1.3.0 was fast-forwarded onto main and shipped 1.3.0 early).
-  for ref in $(git for-each-ref --format='%(refname)' \
-      'refs/heads/skagway-[0-9]*' 'refs/remotes/*/skagway-[0-9]*'); do
-    version="${ref##*/skagway-}"
-    [ "${MACHII_SHIP_SKAGWAY:-}" = "$version" ] && continue
-    for mb in $(git merge-base --all "$local_sha" "$ref" 2>/dev/null); do
-      if [ -n "$base" ]; then
-        count="$(git rev-list --count "$mb" "^$base")"
-      else
-        count="$(git rev-list --count "$mb")"
-      fi
-      [ "$count" = "0" ] || block \
-        "This push carries $count commit(s) from the unreleased branch ${ref#refs/}." \
-        "Unrelated work must start from origin/main:  git switch -c <name> origin/main" \
-        "Only when the user ships Skagway $version: MACHII_SHIP_SKAGWAY=$version"
-    done
-  done
-
-  [ -n "$base" ] || continue
-
-  old_version="$(field "$base" "$download_file" 'SKAGWAY_DOWNLOAD_VERSION = "[^"]*"')"
-  new_version="$(field "$local_sha" "$download_file" 'SKAGWAY_DOWNLOAD_VERSION = "[^"]*"')"
-  new_version_number="$(printf '%s' "$new_version" | grep -Eo '[0-9]+(\.[0-9]+)*' || true)"
-  if [ "$old_version" != "$new_version" ] && [ "${MACHII_SHIP_SKAGWAY:-}" != "$new_version_number" ]; then
-    block \
-      "This push changes the public Skagway download: ${old_version:-none} -> ${new_version:-none}." \
-      "Only when the user ships that release: MACHII_SHIP_SKAGWAY=$new_version_number"
-  fi
-
-  new_build="$(field "$local_sha" "$download_file" 'SKAGWAY_DOWNLOAD_BUILD = "[^"]*"')"
-  case "$new_build" in
-    *'"'[0-9]*'"') ;;
-    *) block "Skagway download build is not a build number: ${new_build:-missing}." ;;
-  esac
-
-  old_upcoming="$(field "$base" "$releases_file" 'SKAGWAY_UPCOMING: SkagwayUpcoming \| null = [^{]*')"
-  new_upcoming="$(field "$local_sha" "$releases_file" 'SKAGWAY_UPCOMING: SkagwayUpcoming \| null = [^{]*')"
-  if [ "$old_upcoming" != "$new_upcoming" ] && [ -z "${MACHII_SHIP_SKAGWAY:-}" ]; then
-    block "This push turns the Skagway coming-soon promo on or off." \
-      "Only when the user ships or announces a release: MACHII_SHIP_SKAGWAY=X.Y.Z"
+  if git cat-file -e "refs/remotes/origin/main:$check" 2>/dev/null; then
+    git show "refs/remotes/origin/main:$check" | bash -s -- "$base" "$local_sha" || exit 1
+  else
+    bash "$(git rev-parse --show-toplevel)/$check" "$base" "$local_sha" || exit 1
   fi
 done
 

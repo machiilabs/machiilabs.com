@@ -11,7 +11,7 @@ On each Skagway release:
 3. Home page and `/skagway` read `latestSkagwayRelease()` — no separate `VERSION` constant.
 4. Update `skagway-download.ts` from the notarized `Skagway.dmg` (`shasum -a 256`).
 5. Update metadata in `src/app/page.tsx` / `src/app/layout.tsx` if the marketing story changed.
-6. Only after the user says to ship the site: merge `skagway-X.Y.Z` into `main` with `MACHII_MAIN_PUSH=yes MACHII_SHIP_SKAGWAY=X.Y.Z git push origin main` (see `production-main.mdc`).
+6. Only after the user says to ship the site: open a pull request from `skagway-X.Y.Z` into `main` with the label `ship:skagway-X.Y.Z`. The user merges it (see `production-main.mdc`).
 
 Rules:
 
