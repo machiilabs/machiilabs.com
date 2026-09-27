@@ -40,3 +40,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Pond kit reference photos. Local only; this repo is public.
+/reference/pond-kits/

@@ -216,6 +216,43 @@ export function phosphateComplete(
   return Boolean(day.phosphate?.trim()) && day.phosphate_band != null;
 }
 
+/** First number in a phosphate reading, such as "5.0" or "5.0 ppm". */
+export function phosphatePpm(value: string | null | undefined): number | null {
+  if (!value) return null;
+  const match = value.trim().match(/-?\d+(?:\.\d+)?/);
+  if (!match) return null;
+  const ppm = Number(match[0]);
+  return Number.isFinite(ppm) ? ppm : null;
+}
+
+/**
+ * The freshwater phosphate card’s low swatch is 0.0 ppm.
+ * Any higher swatch on that card is above it.
+ */
+export function phosphateBandFor(value: string | null | undefined): PhosphateBand | null {
+  const ppm = phosphatePpm(value);
+  if (ppm == null) return null;
+  return ppm <= 0 ? "low" : "above";
+}
+
+export function phosphateKnown(
+  day: Pick<PondDay, "phosphate" | "phosphate_band">,
+): boolean {
+  if (phosphateBandFor(day.phosphate)) return true;
+  return (
+    Boolean(day.phosphate?.trim()) &&
+    (day.phosphate_band === "low" || day.phosphate_band === "above")
+  );
+}
+
+export function phosphateIsAbove(
+  day: Pick<PondDay, "phosphate" | "phosphate_band">,
+): boolean {
+  const band = phosphateBandFor(day.phosphate);
+  if (band) return band === "above";
+  return day.phosphate_band === "above" && Boolean(day.phosphate?.trim());
+}
+
 export function waterComplete(
   day: Pick<PondDay, "clarity" | "color" | "string_algae" | "debris">,
 ): boolean {

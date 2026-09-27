@@ -3,6 +3,10 @@ import { Instrument_Sans, Inter } from "next/font/google";
 import { SiteAnalytics } from "@/components/site-analytics";
 import "./globals.css";
 
+// iOS wallet browsers inject this and throw before the page. The dev overlay
+// would otherwise treat it as an app crash. Real errors still surface.
+const IGNORE_INJECTED_WALLET_ERROR = `(function(){window.addEventListener("error",function(event){var message=String((event&&event.message)||(event.error&&event.error.message)||"");if(message.indexOf("ethereum")===-1&&message.indexOf("selectedAddress")===-1)return;event.preventDefault();event.stopImmediatePropagation();},true);})();`;
+
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
@@ -66,6 +70,13 @@ export default function RootLayout({
       lang="en"
       className={`${inter.variable} ${instrument.variable} h-full`}
     >
+      {process.env.NODE_ENV === "development" ? (
+        <head>
+          <script
+            dangerouslySetInnerHTML={{ __html: IGNORE_INJECTED_WALLET_ERROR }}
+          />
+        </head>
+      ) : null}
       <body className="min-h-full">
         {children}
         <SiteAnalytics />

@@ -25,6 +25,8 @@ Standalone Next.js app on its own GitHub repo and Vercel project. Not related to
 ```bash
 npm install
 npm run dev
+# Mac:  http://localhost:3000
+# iPad (same Wi‑Fi): the LAN URL printed when the dev server starts
 ```
 
 ## Deploy

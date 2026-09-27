@@ -67,8 +67,8 @@ assert.equal(water.checklist, null);
 assert.ok(water.questions.some((question) => question.kind === "water"));
 
 const first = check(seen());
-assert.deepEqual(ids(first), ["backwash", "water_replaced", "dechlorinator"]);
-assert.equal(first.checklist?.find((step) => step.id === "dechlorinator")?.amount, undefined);
+assert.deepEqual(ids(first), ["leave"]);
+assert.ok(!ids(first).includes("backwash"));
 assert.ok(!ids(first).includes("green_clean"));
 
 const recentWash = day({
@@ -77,6 +77,8 @@ const recentWash = day({
 });
 const quiet = check(seen(), [recentWash]);
 assert.deepEqual(ids(quiet), ["leave"]);
+assert.equal(quiet.ask.strip, null);
+assert.equal(quiet.ask.phosphate, null);
 
 const dueWash = day({
   phoenix_date: "2026-09-19",
@@ -87,15 +89,19 @@ assert.ok(ids(check(seen(), [dueWash])).includes("dechlorinator"));
 
 const algae = check(seen({ string_algae: "some" }));
 assert.ok(ids(algae).includes("scrub"));
-assert.ok(ids(algae).includes("test_7in1"));
+assert.ok(!ids(algae).includes("test_7in1"));
+assert.ok(!ids(algae).includes("test_phosphate"));
 assert.ok(!ids(algae).includes("green_clean"));
+assert.ok(algae.ask.strip);
+assert.ok(algae.ask.phosphate);
 
 const algaeTested = check(seen({ string_algae: "some", ...filled }));
 const green = algaeTested.checklist?.find((step) => step.id === "green_clean");
 assert.ok(green);
 assert.equal(green?.amount, undefined);
-assert.ok(ids(algaeTested).indexOf("test_7in1") < ids(algaeTested).indexOf("green_clean"));
-assert.ok(ids(algaeTested).indexOf("dechlorinator") < ids(algaeTested).indexOf("green_clean"));
+assert.ok(!ids(algaeTested).includes("test_7in1"));
+assert.ok(!ids(algaeTested).includes("backwash"));
+assert.equal(algaeTested.ask.strip, null);
 
 const remembered = check(seen({ string_algae: "some", ...filled }), [], [
   { product: "green_clean", amount: "the scoop he saved", interval_days: null },
@@ -133,12 +139,15 @@ assert.ok(inside.recap.some((line) => line.text.includes("7-day interval")));
 const elapsed = check(seen({ string_algae: "some", ...filled }), [dose("2026-09-18", "green_clean", "the scoop he saved")], intervalMemory);
 assert.ok(ids(elapsed).includes("green_clean"));
 
-const phosphate = check(seen({ phosphate: "dark", phosphate_band: "above" }));
+const phosphate = check(seen({ phosphate: "5.0" }));
 assert.ok(ids(phosphate).includes("phosphate_remover"));
 assert.equal(phosphate.checklist?.find((step) => step.id === "phosphate_remover")?.amount, undefined);
+assert.equal(phosphate.ask.phosphate, null);
+assert.ok(!ids(phosphate).includes("test_phosphate"));
 
-const low = check(seen({ phosphate: "pale", phosphate_band: "low" }));
+const low = check(seen({ phosphate: "0.0" }));
 assert.ok(!ids(low).includes("phosphate_remover"));
+assert.equal(low.ask.phosphate, null);
 
 const cloudy = check(seen({ clarity: "cloudy", ...filled }));
 assert.ok(ids(cloudy).includes("clarity_max"));
@@ -146,7 +155,54 @@ assert.equal(cloudy.checklist?.find((step) => step.id === "clarity_max")?.amount
 
 const hazy = check(seen({ clarity: "slightly_hazy", ...filled }));
 assert.ok(!ids(hazy).includes("clarity_max"));
-assert.ok(ids(hazy).includes("test_7in1"));
+assert.ok(!ids(hazy).includes("test_7in1"));
+assert.equal(hazy.ask.strip, null);
+assert.equal(hazy.ask.phosphate, null);
+
+const wash = day({
+  phoenix_date: "2026-09-20",
+  steps_taken: { ...emptySteps(), backwash: true },
+});
+const earlierTest = day({
+  phoenix_date: "2026-09-25",
+  ...filled,
+  phosphate: "5.0",
+});
+const reused = check(seen({ string_algae: "some" }), [earlierTest, wash]);
+assert.ok(ids(reused).includes("green_clean"));
+assert.ok(ids(reused).includes("phosphate_remover"));
+assert.equal(reused.ask.strip, null);
+assert.equal(reused.ask.phosphate, null);
+assert.ok(reused.checklist?.find((step) => step.id === "green_clean")?.detail?.includes("Sep"));
+
+const used = day({
+  phoenix_date: "2026-09-25",
+  ...filled,
+  phosphate: "5.0",
+  steps_taken: {
+    ...emptySteps(),
+    products: [
+      { product: "green_clean", amount: "scoop" },
+      { product: "phosphate_remover", amount: "scoop" },
+    ],
+  },
+});
+const again = check(
+  seen({
+    string_algae: "some",
+    product_status: { green_clean: "finished", phosphate_remover: "finished" },
+  }),
+  [used, wash],
+);
+assert.ok(!ids(again).includes("green_clean"));
+assert.ok(!ids(again).includes("phosphate_remover"));
+assert.ok(again.ask.strip);
+assert.ok(again.ask.phosphate);
+
+const quietHigh = check(seen(), [earlierTest, wash]);
+assert.ok(ids(quietHigh).includes("phosphate_remover"));
+assert.equal(quietHigh.ask.strip, null);
+assert.equal(quietHigh.ask.phosphate, null);
 
 const debris = check(seen({ debris: "light" }), [recentWash]);
 assert.deepEqual(ids(debris), ["skim", "skimmer"]);

@@ -1,6 +1,9 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // Phone and iPad on the same Wi-Fi load the dev server by LAN IP.
+  // Next blocks /_next from any host other than localhost unless listed here.
+  allowedDevOrigins: ["*.local", "192.168.*.*", "10.*.*.*", "172.*.*.*"],
   async headers() {
     const hidden = [
       { key: "X-Robots-Tag", value: "noindex, nofollow" },

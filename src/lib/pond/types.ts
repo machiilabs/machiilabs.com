@@ -126,10 +126,18 @@ export type PondQuestion =
 
 export type RecapLine = { label: string; text: string };
 
+export type TestAsk = {
+  /** Set when a dose needs a 7-in-1 reading that is not already on record. */
+  strip: string | null;
+  /** Set when a dose needs a phosphate reading that is not already on record. */
+  phosphate: string | null;
+};
+
 export type Advice = {
   recap: RecapLine[];
   questions: PondQuestion[];
   checklist: AdvisedStep[] | null;
+  ask: TestAsk;
 };
 
 export type SaveResult =

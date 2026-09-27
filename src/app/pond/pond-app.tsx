@@ -14,12 +14,20 @@ import {
 } from "@/app/pond/offline";
 import { advise } from "@/lib/pond/advise";
 import { formatPhoenixDate, formatShortDate, phoenixToday } from "@/lib/pond/dates";
-import { blankDay, productTaken, stepDone, toSaveInput } from "@/lib/pond/day";
+import {
+  blankDay,
+  phosphateBandFor,
+  phosphatePpm,
+  productTaken,
+  stepDone,
+  toSaveInput,
+} from "@/lib/pond/day";
+import { readPhosphate, readStrip, type Raster } from "@/lib/pond/read-kit";
+import { readWater } from "@/lib/pond/read-water";
 import {
   ALGAE_OPTIONS,
   CLARITY_OPTIONS,
   DEBRIS_OPTIONS,
-  PHOSPHATE_BANDS,
   PRODUCT_LABEL,
   TEST_FIELDS,
   type AdvisedStep,
@@ -43,7 +51,33 @@ const FIELD =
 const CHOICE_ON =
   "min-h-11 rounded-full border border-afterburn bg-white/10 px-3 text-sm font-medium text-snow";
 const CHOICE_OFF = "min-h-11 rounded-full border border-white/15 px-3 text-sm text-fog";
+const SECTION = "mt-6 rounded-xl border border-white/10 bg-white/[0.03] px-4 py-5";
+const SECTION_TITLE = "font-display text-lg font-semibold tracking-tight";
 const TREATMENTS = new Set<ProductId>(["green_clean", "clarity_max", "phosphate_remover"]);
+const RECORD_OPTIONS = [
+  { id: "values", label: "Enter values" },
+  { id: "photo", label: "Read a photo" },
+] as const;
+
+async function rasterFromFile(file: File): Promise<Raster> {
+  const bitmap = await createImageBitmap(file, { imageOrientation: "from-image" });
+  try {
+    const maxEdge = 900;
+    const scale = Math.min(1, maxEdge / Math.max(bitmap.width, bitmap.height));
+    const width = Math.max(1, Math.round(bitmap.width * scale));
+    const height = Math.max(1, Math.round(bitmap.height * scale));
+    const canvas = document.createElement("canvas");
+    canvas.width = width;
+    canvas.height = height;
+    const context = canvas.getContext("2d", { willReadFrequently: true });
+    if (!context) throw new Error("canvas");
+    context.drawImage(bitmap, 0, 0, width, height);
+    const image = context.getImageData(0, 0, width, height);
+    return { width, height, data: image.data };
+  } finally {
+    bitmap.close();
+  }
+}
 
 function seed(initial: InitialLog): Record<string, PondDay> {
   const drafts: Record<string, PondDay> = {};
@@ -151,6 +185,13 @@ export function PondApp({ initial }: { initial: InitialLog }) {
   const [error, setError] = useState<string | null>(null);
   const [rowError, setRowError] = useState<ProductId | null>(null);
   const [photoError, setPhotoError] = useState<string | null>(null);
+  const [photoNote, setPhotoNote] = useState<string | null>(null);
+  const [stripMode, setStripMode] = useState<"values" | "photo">("values");
+  const [phosphateMode, setPhosphateMode] = useState<"values" | "photo">("values");
+  const [stripNote, setStripNote] = useState<string | null>(null);
+  const [phosphateNote, setPhosphateNote] = useState<string | null>(null);
+  const [stripPreview, setStripPreview] = useState<string | null>(null);
+  const [phosphatePreview, setPhosphatePreview] = useState<string | null>(null);
   const draftsRef = useRef(drafts);
   const tail = useRef<Promise<void>>(Promise.resolve());
 
@@ -328,6 +369,65 @@ export function PondApp({ initial }: { initial: InitialLog }) {
     void persist(next, []);
   }
 
+  function rememberPreview(kind: "strip" | "phosphate", file: File) {
+    const url = URL.createObjectURL(file);
+    const setPreview = kind === "strip" ? setStripPreview : setPhosphatePreview;
+    setPreview((current) => {
+      if (current) URL.revokeObjectURL(current);
+      return url;
+    });
+  }
+
+  async function onStripPhoto(file: File | null) {
+    if (!file) return;
+    setStripNote(null);
+    rememberPreview("strip", file);
+    try {
+      const reading = readStrip(await rasterFromFile(file));
+      if (!reading) {
+        setStripNote(
+          "Couldn’t line up the card and the strip. Keep the strip on the left of the card and try again.",
+        );
+        return;
+      }
+      commit({
+        nitrate: reading.nitrate,
+        nitrite: reading.nitrite,
+        chlorine: reading.chlorine,
+        alkalinity: reading.alkalinity,
+        ph: reading.ph,
+      });
+      setStripNote(
+        `Read nitrate ${reading.nitrate}, nitrite ${reading.nitrite}, chlorine ${reading.chlorine}, alkalinity ${reading.alkalinity}, pH ${reading.ph}. Hardness ${reading.hardness} and carbonate ${reading.carbonate} are on the strip and stay off this card. Change any box that looks wrong.`,
+      );
+    } catch {
+      setStripNote("Couldn’t read that photo.");
+    }
+  }
+
+  async function onPhosphatePhoto(file: File | null) {
+    if (!file) return;
+    setPhosphateNote(null);
+    rememberPreview("phosphate", file);
+    try {
+      const reading = readPhosphate(await rasterFromFile(file));
+      if (!reading) {
+        setPhosphateNote(
+          "Couldn’t line up the card and the tube. Keep the tube beside the card and try again.",
+        );
+        return;
+      }
+      commit({ phosphate: reading.ppm, phosphate_band: phosphateBandFor(reading.ppm) });
+      setPhosphateNote(
+        phosphateBandFor(reading.ppm) === "low"
+          ? `Read ${reading.ppm} ppm, the low reading on this card. Change the number if it looks wrong.`
+          : `Read ${reading.ppm} ppm, above 0.0 on this card. Change the number if it looks wrong.`,
+      );
+    } catch {
+      setPhosphateNote("Couldn’t read that photo.");
+    }
+  }
+
   function saveAmount(product: ProductId) {
     const current = draftsRef.current[view] ?? blankDay(view);
     const value = amountFor(current.phoenix_date, product).trim();
@@ -368,7 +468,27 @@ export function PondApp({ initial }: { initial: InitialLog }) {
   async function onPhoto(file: File | null) {
     if (!file) return;
     setPhotoError(null);
+    setPhotoNote(null);
     const current = draftsRef.current[view] ?? blankDay(view);
+    let judged: ReturnType<typeof readWater> = null;
+    try {
+      judged = readWater(await rasterFromFile(file));
+    } catch {
+      judged = null;
+    }
+    setPhotoNote(
+      judged?.note ?? "Saved the photo. Set clarity, color, string algae, and debris by hand.",
+    );
+    const withJudgement = (day: PondDay): PondDay =>
+      judged
+        ? {
+            ...day,
+            clarity: judged.clarity,
+            color: judged.color,
+            string_algae: judged.string_algae,
+            debris: judged.debris,
+          }
+        : day;
     let blob: Blob;
     try {
       blob = await compressPhoto(file);
@@ -391,13 +511,14 @@ export function PondApp({ initial }: { initial: InitialLog }) {
     } catch {
       // The preview still works for this visit.
     }
+    putDraft(withJudgement(current));
     if (!navigator.onLine) {
-      void persist(current, []);
+      void persist(withJudgement(current), []);
       return;
     }
     const uploaded = await postPhoto(current.phoenix_date, blob);
     if (!uploaded) {
-      void persist(current, []);
+      void persist(withJudgement(current), []);
       return;
     }
     try {
@@ -406,7 +527,7 @@ export function PondApp({ initial }: { initial: InitialLog }) {
       // The server already has the file.
     }
     const latest = draftsRef.current[current.phoenix_date] ?? current;
-    const next = { ...latest, photo_path: `${current.phoenix_date}.jpg` };
+    const next = withJudgement({ ...latest, photo_path: `${current.phoenix_date}.jpg` });
     putDraft(next);
     void persist(next, []);
   }
@@ -460,7 +581,20 @@ export function PondApp({ initial }: { initial: InitialLog }) {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
-  const checklist = isToday ? (advice?.checklist ?? null) : draft.steps_advised;
+  const rawChecklist = isToday ? (advice?.checklist ?? null) : draft.steps_advised;
+  const checklist =
+    rawChecklist?.filter((step) => step.id !== "test_7in1" && step.id !== "test_phosphate") ??
+    null;
+  const askStrip = isToday ? (advice?.ask.strip ?? null) : null;
+  const askPhosphate = isToday ? (advice?.ask.phosphate ?? null) : null;
+  const showStrip =
+    Boolean(askStrip) || TEST_FIELDS.some(([key]) => Boolean(draft[key]?.trim()));
+  const showPhosphate = Boolean(askPhosphate) || Boolean(draft.phosphate?.trim());
+  const phosphatePpmNow = phosphatePpm(draft.phosphate);
+  const questions = isToday && advice ? advice.questions : [];
+  const photoQuestion = questions.find((question) => question.kind === "photo");
+  const waterQuestion = questions.find((question) => question.kind === "water");
+  const productQuestions = questions.filter((question) => question.kind === "product_active");
   const photoSrc =
     previews[view] || (draft.photo_path ? `/pond/photo/${draft.phoenix_date}` : null);
   const earlier = Object.values(drafts)
@@ -519,10 +653,10 @@ export function PondApp({ initial }: { initial: InitialLog }) {
         </p>
       )}
 
-      {isToday && advice ? (
-        <section className="mt-8" aria-label="Since last time">
-          <h2 className="font-display text-lg font-semibold">Since last time</h2>
-          <dl className="mt-3 space-y-3">
+      <section className={SECTION} aria-label="Recap">
+        <h2 className={SECTION_TITLE}>Recap</h2>
+        {isToday && advice ? (
+          <dl className="mt-4 space-y-3">
             {advice.recap.map((line) => (
               <div key={line.label}>
                 <dt className="text-xs font-semibold tracking-wide text-fog uppercase">
@@ -532,55 +666,36 @@ export function PondApp({ initial }: { initial: InitialLog }) {
               </div>
             ))}
           </dl>
-        </section>
-      ) : null}
-
-      {isToday && advice && advice.questions.length > 0 ? (
-        <section className="mt-8" aria-label="Still needed">
-          <h2 className="font-display text-lg font-semibold">Still needed</h2>
-          <ul className="mt-3 space-y-4">
-            {advice.questions.map((question) =>
-              question.kind === "product_active" ? (
-                <li key={question.product}>
-                  <p className="text-sm leading-6">{question.prompt}</p>
-                  <div className="mt-2 flex flex-wrap gap-2">
-                    <button
-                      type="button"
-                      className={CHOICE_OFF}
-                      onClick={() => setProductStatus(question.product, "still_active")}
-                    >
-                      Still active
-                    </button>
-                    <button
-                      type="button"
-                      className={CHOICE_OFF}
-                      onClick={() => setProductStatus(question.product, "finished")}
-                    >
-                      Finished
-                    </button>
-                  </div>
-                  <IntervalField
-                    product={question.product}
-                    value={intervals[question.product] ?? ""}
-                    onChange={(value) =>
-                      setIntervals((existing) => ({ ...existing, [question.product]: value }))
-                    }
-                    onBlur={(value) => saveInterval(question.product, value)}
-                  />
-                </li>
-              ) : (
-                <li key={question.kind} className="text-sm leading-6 text-snow">
-                  {question.prompt}
-                </li>
-              ),
-            )}
+        ) : (
+          <p className="mt-3 text-sm leading-6 text-fog">
+            This is an earlier day. Recap stays on today’s card.
+          </p>
+        )}
+        <h3 className="mt-6 text-sm font-semibold text-snow">Recent</h3>
+        {earlier.length === 0 ? (
+          <p className="mt-2 text-sm text-fog">No earlier days yet.</p>
+        ) : (
+          <ul className="mt-1 border-t border-white/10">
+            {earlier.map((day) => (
+              <li key={day.phoenix_date} className="border-b border-white/10">
+                <button
+                  type="button"
+                  onClick={() => openDay(day.phoenix_date)}
+                  className="flex w-full flex-col items-start py-3 text-left"
+                  aria-current={view === day.phoenix_date ? "true" : undefined}
+                >
+                  <span className="font-medium">{formatShortDate(day.phoenix_date)}</span>
+                  <span className="text-sm text-fog">{daySummary(day)}</span>
+                </button>
+              </li>
+            ))}
           </ul>
-        </section>
-      ) : null}
+        )}
+      </section>
 
-      <section className="mt-8" aria-label="What you see">
-        <h2 className="font-display text-lg font-semibold">What you see</h2>
-        <div className="mt-3">
+      <section className={SECTION} aria-label="Photo">
+        <h2 className={SECTION_TITLE}>Photo</h2>
+        <div className="mt-4">
           {photoSrc ? (
             // The photo is a private route. The image optimizer would fetch it without this cookie.
             // eslint-disable-next-line @next/next/no-img-element
@@ -607,8 +722,19 @@ export function PondApp({ initial }: { initial: InitialLog }) {
               void onPhoto(file);
             }}
           />
+          {photoQuestion ? (
+            <p className="mt-2 text-sm leading-6 text-fog">{photoQuestion.prompt}</p>
+          ) : null}
+          {photoNote ? <p className="mt-2 text-sm leading-6 text-fog">{photoNote}</p> : null}
           {photoError ? <p className="mt-2 text-sm text-afterburn-soft">{photoError}</p> : null}
         </div>
+      </section>
+
+      <section className={SECTION} aria-label="Inputs">
+        <h2 className={SECTION_TITLE}>Inputs</h2>
+        {waterQuestion ? (
+          <p className="mt-3 text-sm leading-6 text-fog">{waterQuestion.prompt}</p>
+        ) : null}
 
         <ChoiceGroup
           label="Clarity"
@@ -640,12 +766,46 @@ export function PondApp({ initial }: { initial: InitialLog }) {
           onChange={(debris) => commit({ debris })}
         />
 
+        {showStrip ? (
         <div id="pond-tests" className="mt-6">
           <h3 className="text-sm font-semibold text-snow">7-in-1 kit</h3>
-          <p className="mt-1 text-sm leading-6 text-fog">
-            Optional. Chlorine, nitrate, nitrite, alkalinity, and pH. A treatment waits until
-            this test is filled in.
-          </p>
+          {askStrip ? <p className="mt-1 text-sm leading-6 text-fog">{askStrip}</p> : null}
+          <ChoiceGroup
+            label="How to record the 7-in-1"
+            value={stripMode}
+            options={RECORD_OPTIONS}
+            onChange={setStripMode}
+          />
+          {stripMode === "photo" ? (
+            <div className="mt-3">
+              <p className="text-sm leading-6 text-fog">
+                Photograph the card with today’s strip on its left.
+              </p>
+              {stripPreview ? (
+                // A local preview of the kit photo. It is not the pond photo.
+                // eslint-disable-next-line @next/next/no-img-element
+                <img src={stripPreview} alt="7-in-1 card and strip" className="mt-3 w-full rounded-md" />
+              ) : null}
+              <label
+                htmlFor="pond-strip-photo"
+                className="mt-3 inline-flex min-h-11 items-center text-sm text-afterburn-soft"
+              >
+                {stripPreview ? "Replace kit photo" : "Add kit photo"}
+              </label>
+              <input
+                id="pond-strip-photo"
+                type="file"
+                accept="image/*"
+                className="sr-only"
+                onChange={(event) => {
+                  const file = event.target.files?.[0] ?? null;
+                  event.target.value = "";
+                  void onStripPhoto(file);
+                }}
+              />
+              {stripNote ? <p className="mt-2 text-sm leading-6 text-fog">{stripNote}</p> : null}
+            </div>
+          ) : null}
           <div className="mt-3 grid grid-cols-2 gap-3">
             {TEST_FIELDS.map(([key, label]) => (
               <div key={key}>
@@ -665,9 +825,55 @@ export function PondApp({ initial }: { initial: InitialLog }) {
             ))}
           </div>
         </div>
+        ) : null}
 
+        {showPhosphate ? (
         <div id="pond-phosphate" className="mt-6">
           <h3 className="text-sm font-semibold text-snow">Phosphate kit</h3>
+          {askPhosphate ? (
+            <p className="mt-1 text-sm leading-6 text-fog">{askPhosphate}</p>
+          ) : null}
+          <ChoiceGroup
+            label="How to record phosphate"
+            value={phosphateMode}
+            options={RECORD_OPTIONS}
+            onChange={setPhosphateMode}
+          />
+          {phosphateMode === "photo" ? (
+            <div className="mt-3">
+              <p className="text-sm leading-6 text-fog">
+                Photograph the card with the test tube beside it.
+              </p>
+              {phosphatePreview ? (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                  src={phosphatePreview}
+                  alt="Phosphate card and test tube"
+                  className="mt-3 w-full rounded-md"
+                />
+              ) : null}
+              <label
+                htmlFor="pond-phosphate-photo"
+                className="mt-3 inline-flex min-h-11 items-center text-sm text-afterburn-soft"
+              >
+                {phosphatePreview ? "Replace kit photo" : "Add kit photo"}
+              </label>
+              <input
+                id="pond-phosphate-photo"
+                type="file"
+                accept="image/*"
+                className="sr-only"
+                onChange={(event) => {
+                  const file = event.target.files?.[0] ?? null;
+                  event.target.value = "";
+                  void onPhosphatePhoto(file);
+                }}
+              />
+              {phosphateNote ? (
+                <p className="mt-2 text-sm leading-6 text-fog">{phosphateNote}</p>
+              ) : null}
+            </div>
+          ) : null}
           <label htmlFor="pond-phosphate-reading" className="mt-3 block text-sm text-fog">
             Reading
           </label>
@@ -676,32 +882,69 @@ export function PondApp({ initial }: { initial: InitialLog }) {
             value={draft.phosphate ?? ""}
             maxLength={40}
             autoComplete="off"
-            onChange={(event) => edit({ phosphate: event.target.value })}
-            onBlur={(event) => commit({ phosphate: event.target.value })}
+            onChange={(event) =>
+              edit({
+                phosphate: event.target.value,
+                phosphate_band: phosphateBandFor(event.target.value),
+              })
+            }
+            onBlur={(event) =>
+              commit({
+                phosphate: event.target.value,
+                phosphate_band: phosphateBandFor(event.target.value),
+              })
+            }
             className={FIELD}
           />
-          <p className="mt-4 text-sm text-fog">Compared with this kit’s low range</p>
-          <div className="mt-2 grid gap-2">
-            {PHOSPHATE_BANDS.map((band) => (
-              <button
-                key={band.id}
-                type="button"
-                aria-pressed={draft.phosphate_band === band.id}
-                onClick={() => commit({ phosphate_band: band.id })}
-                className={draft.phosphate_band === band.id ? CHOICE_ON : CHOICE_OFF}
-              >
-                {band.label}
-              </button>
-            ))}
-          </div>
+          <p className="mt-2 text-sm leading-6 text-fog">
+            {phosphatePpmNow == null
+              ? "This card’s low reading is 0.0 ppm."
+              : phosphatePpmNow <= 0
+                ? "At 0.0 ppm, the low reading on this card."
+                : "Above 0.0 ppm on this card."}
+          </p>
         </div>
-
-        <StatusNotes day={draft} />
+        ) : null}
       </section>
 
-      {checklist && checklist.length > 0 ? (
-        <section className="mt-8" aria-label="In this order">
-          <h2 className="font-display text-lg font-semibold">In this order</h2>
+      <section className={SECTION} aria-label={isToday ? "Today" : "That day"}>
+        <h2 className={SECTION_TITLE}>{isToday ? "Today" : "That day"}</h2>
+
+        <h3 className="mt-4 text-sm font-semibold text-snow">Actions</h3>
+        {productQuestions.length > 0 ? (
+          <ul className="mt-3 space-y-4">
+            {productQuestions.map((question) => (
+              <li key={question.product}>
+                <p className="text-sm leading-6">{question.prompt}</p>
+                <div className="mt-2 flex flex-wrap gap-2">
+                  <button
+                    type="button"
+                    className={CHOICE_OFF}
+                    onClick={() => setProductStatus(question.product, "still_active")}
+                  >
+                    Still active
+                  </button>
+                  <button
+                    type="button"
+                    className={CHOICE_OFF}
+                    onClick={() => setProductStatus(question.product, "finished")}
+                  >
+                    Finished
+                  </button>
+                </div>
+                <IntervalField
+                  product={question.product}
+                  value={intervals[question.product] ?? ""}
+                  onChange={(value) =>
+                    setIntervals((existing) => ({ ...existing, [question.product]: value }))
+                  }
+                  onBlur={(value) => saveInterval(question.product, value)}
+                />
+              </li>
+            ))}
+          </ul>
+        ) : null}
+        {checklist && checklist.length > 0 ? (
           <ol className="mt-2">
             {checklist.map((step) => (
               <ChecklistRow
@@ -709,9 +952,7 @@ export function PondApp({ initial }: { initial: InitialLog }) {
                 step={step}
                 done={stepDone(step, draft)}
                 amount={
-                  step.product
-                    ? amountFor(draft.phoenix_date, step.product, step.amount)
-                    : ""
+                  step.product ? amountFor(draft.phoenix_date, step.product, step.amount) : ""
                 }
                 interval={step.product ? (intervals[step.product] ?? "") : ""}
                 rowError={rowError}
@@ -732,67 +973,52 @@ export function PondApp({ initial }: { initial: InitialLog }) {
               />
             ))}
           </ol>
-        </section>
-      ) : isToday ? null : (
-        <p className="mt-8 text-sm text-fog">Nothing was advised on this card.</p>
-      )}
-
-      <label htmlFor="pond-other" className="mt-8 block text-sm text-fog">
-        Anything else you did
-      </label>
-      <input
-        id="pond-other"
-        value={draft.steps_taken.other}
-        maxLength={500}
-        onChange={(event) => {
-          const current = draftsRef.current[view] ?? draft;
-          edit({ steps_taken: { ...current.steps_taken, other: event.target.value } });
-        }}
-        onBlur={(event) => {
-          const current = draftsRef.current[view] ?? draft;
-          commit({ steps_taken: { ...current.steps_taken, other: event.target.value } });
-        }}
-        className={FIELD}
-      />
-
-      <label htmlFor="pond-note" className="mt-4 block text-sm text-fog">
-        Note
-      </label>
-      <textarea
-        id="pond-note"
-        value={draft.note ?? ""}
-        maxLength={2000}
-        rows={3}
-        onChange={(event) => edit({ note: event.target.value })}
-        onBlur={(event) => commit({ note: event.target.value })}
-        className={FIELD}
-      />
-
-      <p className="mt-4 min-h-6 text-sm text-fog" aria-live="polite">
-        {statusText}
-      </p>
-
-      <section className="mt-10" aria-label="Earlier days">
-        <h2 className="font-display text-lg font-semibold">Earlier days</h2>
-        {earlier.length === 0 ? (
-          <p className="mt-3 text-sm text-fog">No earlier days yet.</p>
         ) : (
-          <ul className="mt-2 border-t border-white/10">
-            {earlier.map((day) => (
-              <li key={day.phoenix_date} className="border-b border-white/10">
-                <button
-                  type="button"
-                  onClick={() => openDay(day.phoenix_date)}
-                  className="flex w-full flex-col items-start py-3 text-left"
-                  aria-current={view === day.phoenix_date ? "true" : undefined}
-                >
-                  <span className="font-medium">{formatShortDate(day.phoenix_date)}</span>
-                  <span className="text-sm text-fog">{daySummary(day)}</span>
-                </button>
-              </li>
-            ))}
-          </ul>
+          <p className="mt-2 text-sm leading-6 text-fog">
+            {askStrip || askPhosphate
+              ? "A dose waits on the test in Inputs."
+              : isToday
+                ? "Actions show up after the photo and inputs are filled in."
+                : "Nothing was advised on this card."}
+          </p>
         )}
+
+        <h3 className="mt-6 text-sm font-semibold text-snow">Results</h3>
+        <StatusNotes day={draft} />
+        <label htmlFor="pond-other" className="mt-4 block text-sm text-fog">
+          Anything else you did
+        </label>
+        <input
+          id="pond-other"
+          value={draft.steps_taken.other}
+          maxLength={500}
+          onChange={(event) => {
+            const current = draftsRef.current[view] ?? draft;
+            edit({ steps_taken: { ...current.steps_taken, other: event.target.value } });
+          }}
+          onBlur={(event) => {
+            const current = draftsRef.current[view] ?? draft;
+            commit({ steps_taken: { ...current.steps_taken, other: event.target.value } });
+          }}
+          className={FIELD}
+        />
+
+        <label htmlFor="pond-note" className="mt-4 block text-sm text-fog">
+          Note
+        </label>
+        <textarea
+          id="pond-note"
+          value={draft.note ?? ""}
+          maxLength={2000}
+          rows={3}
+          onChange={(event) => edit({ note: event.target.value })}
+          onBlur={(event) => commit({ note: event.target.value })}
+          className={FIELD}
+        />
+
+        <p className="mt-4 min-h-6 text-sm text-fog" aria-live="polite">
+          {statusText}
+        </p>
       </section>
     </main>
   );
@@ -901,45 +1127,23 @@ function ChecklistRow({
   onInterval: (product: ProductId, value: string) => void;
   onIntervalBlur: (product: ProductId, value: string) => void;
 }) {
-  const test = step.id === "test_7in1" || step.id === "test_phosphate";
   return (
     <li className="border-b border-white/10 py-3">
       <div className="flex items-start gap-3">
-        {test ? (
-          <button
-            type="button"
-            onClick={() => {
-              const target = step.id === "test_7in1" ? "pond-tests" : "pond-phosphate";
-              document.getElementById(target)?.scrollIntoView({ behavior: "smooth", block: "center" });
-              document.getElementById(target)?.querySelector("input")?.focus();
-            }}
-            className="mt-0.5 text-left"
-            aria-pressed={done}
-          >
-            <span className="text-afterburn" aria-hidden>
-              {done ? "✓" : "○"}
-            </span>
-          </button>
-        ) : (
-          <input
-            id={`step-${step.id}`}
-            type="checkbox"
-            checked={done}
-            onChange={(event) => {
-              if (step.product) onToggleProduct(step.product, event.target.checked, step.amount);
-              else onToggleTask(step.id, event.target.checked);
-            }}
-            className="mt-1 size-5 accent-[var(--afterburn)]"
-          />
-        )}
+        <input
+          id={`step-${step.id}`}
+          type="checkbox"
+          checked={done}
+          onChange={(event) => {
+            if (step.product) onToggleProduct(step.product, event.target.checked, step.amount);
+            else onToggleTask(step.id, event.target.checked);
+          }}
+          className="mt-1 size-5 accent-[var(--afterburn)]"
+        />
         <div className="min-w-0 flex-1">
-          {test ? (
-            <p className="font-medium">{step.label}</p>
-          ) : (
-            <label htmlFor={`step-${step.id}`} className="font-medium">
-              {step.label}
-            </label>
-          )}
+          <label htmlFor={`step-${step.id}`} className="font-medium">
+            {step.label}
+          </label>
           {step.detail ? <p className="mt-1 text-sm leading-6 text-fog">{step.detail}</p> : null}
           {step.product ? (
             <>
