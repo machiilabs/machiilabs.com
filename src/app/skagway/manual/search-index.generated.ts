@@ -6,7 +6,7 @@
  * Regenerate: npm run manual:index
  * (also runs on predev / prebuild)
  *
- * Generated: 2026-09-26T08:34:39.917Z
+ * Generated: 2026-09-27T08:40:32.844Z
  * Documents: 80
  */
 import type { ManualSearchDocument } from "./search-documents";
@@ -145,7 +145,7 @@ export const MANUAL_SEARCH_INDEX: ManualSearchDocument[] = [
     "sectionTitle": "Storyboard view",
     "href": "/skagway/manual/browse#storyboard-view",
     "title": "Browse » Storyboard view",
-    "body": "Press ⌘3 (or choose Storyboard in the toolbar) for a six-frame collage of each clip — useful when a single poster isn’t enough to tell clips apart.\nCompact fits more columns — up to four. Normal, the default, stops at three. Pick either from the arrow on the Storyboard button. At some browser widths both densities use three columns, so they look the same.\nClick a frame once to focus the clip (even if it is already collected); click the same focused collage again to seek and play from that sample time. Playing from a frame does not clear your collected set.\nClick the title or footer chrome for normal selection / batch-inspect toggle without starting playback. Collage clicks never toggle batch inspect on their own.\nCollection and focus work the same as Grid — ⌘-click, ⇧-click, and A. Hover preview is off in Storyboard; use the collage frames instead.\nInspector Filmstrip (⌥⌘T) is a separate single-clip preview — not Storyboard view."
+    "body": "Press ⌘3 (or choose Storyboard in the toolbar) for a six-frame collage of each clip — useful when a single poster isn’t enough to tell clips apart.\nCompact fits more columns — up to four. Normal, the default, stops at three. Pick either from the arrow on the Storyboard button. At some browser widths both densities use three columns, so they look the same.\nCollages appear as you scroll. While Skagway is idle, it also makes the missing ones for the current view, starting near what is on screen, so scrolling far down finds them ready (Settings → Video → Prepare previews while idle).\nClick a frame once to focus the clip (even if it is already collected); click the same focused collage again to seek and play from that sample time. Playing from a frame does not clear your collected set.\nClick the title or footer chrome for normal selection / batch-inspect toggle without starting playback. Collage clicks never toggle batch inspect on their own.\nCollection and focus work the same as Grid — ⌘-click, ⇧-click, and A. Hover preview is off in Storyboard; use the collage frames instead.\nInspector Filmstrip (⌥⌘T) is a separate single-clip preview — not Storyboard view."
   },
   {
     "id": "browse__list-columns",
@@ -658,7 +658,7 @@ export const MANUAL_SEARCH_INDEX: ManualSearchDocument[] = [
     "sectionTitle": "Video",
     "href": "/skagway/manual/settings#video",
     "title": "Settings » Video",
-    "body": "Default Filmstrip Size — rows and columns for Inspector filmstrip previews, with a Regenerate filmstrips button.\nSurprise Me! auto-plays selected video — jump and play, or just jump.\nLoop Play All — during Play All, finishing the last video starts the first again.\nHover preview on Grid and List — the silent moving preview on hover.\nTag blind default state / Filter drawer height — how the Inspector tags list and Quick Filter drawer remember size.\nPlayer opens at — Compact, Full screen, or Last used size.\nShow filmstrip in player — a row of frames above the scrubber (on by default; thinner in Compact).\nFade resume banner after delay — whether and when the “Resumed at…” banner fades out."
+    "body": "Default Filmstrip Size — rows and columns for Inspector filmstrip previews, with a Regenerate filmstrips button.\nSurprise Me! auto-plays selected video — jump and play, or just jump.\nLoop Play All — during Play All, finishing the last video starts the first again.\nHover preview on Grid and List — the silent moving preview on hover.\nPrepare previews while idle — when nothing is playing, scanning, or scrolling, make the missing Grid, List, or Storyboard images for the current view, then the rest of the library (on by default).\nTag blind default state / Filter drawer height — how the Inspector tags list and Quick Filter drawer remember size.\nPlayer opens at — Compact, Full screen, or Last used size.\nShow filmstrip in player — a row of frames above the scrubber (on by default; thinner in Compact).\nFade resume banner after delay — whether and when the “Resumed at…” banner fades out."
   },
   {
     "id": "settings__data-sources",

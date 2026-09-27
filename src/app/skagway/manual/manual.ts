@@ -268,6 +268,7 @@ export const MANUAL_PAGES: ManualPage[] = [
         steps: [
           "Press ⌘3 (or choose Storyboard in the toolbar) for a six-frame collage of each clip — useful when a single poster isn’t enough to tell clips apart.",
           "Compact fits more columns — up to four. Normal, the default, stops at three. Pick either from the arrow on the Storyboard button. At some browser widths both densities use three columns, so they look the same.",
+          "Collages appear as you scroll. While Skagway is idle, it also makes the missing ones for the current view, starting near what is on screen, so scrolling far down finds them ready (Settings → Video → Prepare previews while idle).",
           "Click a frame once to focus the clip (even if it is already collected); click the same focused collage again to seek and play from that sample time. Playing from a frame does not clear your collected set.",
           "Click the title or footer chrome for normal selection / batch-inspect toggle without starting playback. Collage clicks never toggle batch inspect on their own.",
           "Collection and focus work the same as Grid — ⌘-click, ⇧-click, and A. Hover preview is off in Storyboard; use the collage frames instead.",
@@ -893,6 +894,7 @@ export const MANUAL_PAGES: ManualPage[] = [
           "Surprise Me! auto-plays selected video — jump and play, or just jump.",
           "Loop Play All — during Play All, finishing the last video starts the first again.",
           "Hover preview on Grid and List — the silent moving preview on hover.",
+          "Prepare previews while idle — when nothing is playing, scanning, or scrolling, make the missing Grid, List, or Storyboard images for the current view, then the rest of the library (on by default).",
           "Tag blind default state / Filter drawer height — how the Inspector tags list and Quick Filter drawer remember size.",
           "Player opens at — Compact, Full screen, or Last used size.",
           "Show filmstrip in player — a row of frames above the scrubber (on by default; thinner in Compact).",
