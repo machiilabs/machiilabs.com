@@ -366,20 +366,12 @@ export default function FlasherPage() {
             © {new Date().getFullYear()} Mach II Labs · 15CE Flasher · free
             forever
           </span>
-          <div className="flex flex-wrap gap-x-5 gap-y-1">
-            <Link
-              href="/privacy"
-              className="transition-colors hover:text-[#1a1a1a]"
-            >
-              Privacy
-            </Link>
-            <a
-              href="mailto:support@machiilabs.com"
-              className="transition-colors hover:text-[#1a1a1a]"
-            >
-              support@machiilabs.com
-            </a>
-          </div>
+          <a
+            href="mailto:support@machiilabs.com"
+            className="transition-colors hover:text-[#1a1a1a]"
+          >
+            support@machiilabs.com
+          </a>
         </div>
       </footer>
     </div>

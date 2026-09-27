@@ -21,11 +21,6 @@ const nextConfig: NextConfig = {
         destination: "/skagway",
         permanent: true,
       },
-      {
-        source: "/privacy2",
-        destination: "/privacy",
-        permanent: true,
-      },
     ];
   },
 };

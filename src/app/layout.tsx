@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Instrument_Sans, Inter } from "next/font/google";
+import { Instrument_Sans, Syne } from "next/font/google";
 import { SiteAnalytics } from "@/components/site-analytics";
 import "./globals.css";
 
@@ -7,10 +7,10 @@ import "./globals.css";
 // would otherwise treat it as an app crash. Real errors still surface.
 const IGNORE_INJECTED_WALLET_ERROR = `(function(){window.addEventListener("error",function(event){var message=String((event&&event.message)||(event.error&&event.error.message)||"");if(message.indexOf("ethereum")===-1&&message.indexOf("selectedAddress")===-1)return;event.preventDefault();event.stopImmediatePropagation();},true);})();`;
 
-const inter = Inter({
-  variable: "--font-inter",
+const syne = Syne({
+  variable: "--font-syne",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
+  weight: ["600", "700", "800"],
 });
 
 const instrument = Instrument_Sans({
@@ -68,7 +68,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${instrument.variable} h-full`}
+      className={`${syne.variable} ${instrument.variable} h-full`}
     >
       {process.env.NODE_ENV === "development" ? (
         <head>
