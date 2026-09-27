@@ -1,0 +1,43 @@
+name: Production release check
+
+# main is the live site. Fails a pull request into main that carries unreleased
+# release-branch commits or changes a public download without a
+# ship:<product>-<version> label. See .cursor/rules/production-main.mdc.
+
+on:
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize, reopened, labeled, unlabeled, edited]
+
+permissions:
+  contents: read
+
+jobs:
+  release-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Check against main
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          LABELS: ${{ join(github.event.pull_request.labels.*.name, ' ') }}
+        run: |
+          set -euo pipefail
+          git fetch --no-tags origin '+refs/heads/*:refs/remotes/origin/*'
+          ship=""
+          for label in $LABELS; do
+            case "$label" in ship:*) ship="$ship ${label#ship:}" ;; esac
+          done
+          export MACHII_SHIP="$ship"
+          echo "Approved releases:${MACHII_SHIP:- none}"
+          check=scripts/check-production-release.sh
+          if git cat-file -e "$BASE_SHA:$check" 2>/dev/null; then
+            git show "$BASE_SHA:$check" > /tmp/check.sh
+          else
+            git show "$HEAD_SHA:$check" > /tmp/check.sh
+          fi
+          bash /tmp/check.sh "$BASE_SHA" "$HEAD_SHA"
