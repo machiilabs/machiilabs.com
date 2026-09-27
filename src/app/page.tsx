@@ -6,6 +6,7 @@ import { AnnouncementSignup } from "@/components/announcement-signup";
 import { MachiiLogo } from "@/components/machii-logo";
 import { SiteHeader } from "@/components/site-header";
 import { SkagwayComingSoon } from "@/components/skagway-coming-soon";
+import { StudioPromises } from "@/components/studio-promises";
 import {
   latestSkagwayRelease,
   SKAGWAY_UPCOMING,
@@ -19,17 +20,20 @@ const inter = Inter({
   style: ["normal", "italic"],
 });
 
+/** Home jump links — off while the product cards sit in view. Flip to show. */
+const SHOW_HOME_JUMP_LINKS = false;
+
 export const metadata: Metadata = {
   title: "Mach II Labs",
   description:
-    "Independent Mac software lab. Skagway 1.3 is coming soon. Free video organizer for files already on your drives. Also: 15CE Flasher for HP 15c CE.",
+    "Independent Mac software lab. Skagway 1.3 — free video organizer for files already on your drives. Also: 15CE Flasher for HP 15c CE.",
   alternates: {
     canonical: "https://machiilabs.com",
   },
   openGraph: {
-    title: "Mach II Labs — Skagway 1.3 coming soon",
+    title: "Mach II Labs — Skagway 1.3",
     description:
-      "Skagway 1.3 is coming soon: Storyboard view, hide the Inspector, collected sets, and a rolodex-style scroll index. Free Mac video organizer for the files already on your drives.",
+      "Skagway 1.3 is out: Storyboard view, hide the Inspector, a rolodex-style scroll index, and Reconnect. Free Mac video organizer for the files already on your drives.",
     url: "https://machiilabs.com",
     siteName: "Mach II Labs",
     images: [
@@ -43,9 +47,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Mach II Labs — Skagway 1.3 coming soon",
+    title: "Mach II Labs — Skagway 1.3",
     description:
-      "Skagway 1.3 is coming soon: Storyboard view, hide the Inspector, collected sets, and a rolodex-style scroll index.",
+      "Skagway 1.3 is out: Storyboard view, hide the Inspector, a rolodex-style scroll index, and Reconnect.",
     images: ["/skagway/product.png"],
   },
 };
@@ -104,52 +108,71 @@ export default function Home() {
           Independent software lab
         </p>
 
-        <h1 className="anim-rise anim-rise-delay-1 mt-5">
-          <MachiiLogo
-            href={null}
-            wordmarkLayout="stacked"
-            className="text-[clamp(2.75rem,9vw,5.5rem)]"
-          />
-        </h1>
+        <div className="anim-rise anim-rise-delay-1 mt-5 w-fit text-[clamp(2.75rem,9vw,5.5rem)]">
+          <h1>
+            <MachiiLogo href={null} wordmarkLayout="stacked" />
+          </h1>
+          <p className="mt-[0.22em] text-center font-display text-[0.34em] leading-snug font-semibold tracking-tight text-fog">
+            Software you keep
+          </p>
+        </div>
 
-        <p className="anim-rise anim-rise-delay-2 mt-8 max-w-2xl font-display text-2xl leading-snug font-semibold tracking-tight text-snow sm:text-3xl">
-          Focused Mac tools for people who notice the small stuff.
-        </p>
+        {SHOW_HOME_JUMP_LINKS ? (
+          <nav
+            aria-label="Jump to products"
+            className="anim-rise anim-rise-delay-2 mt-10 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm sm:text-base"
+          >
+            <span className="text-fog">Jump to</span>
+            <span className="text-fog/50" aria-hidden>
+              →
+            </span>
+            <a
+              href="#skagway"
+              className="font-semibold text-snow transition-colors hover:text-afterburn-soft"
+            >
+              Skagway
+            </a>
+            <a
+              href="#flasher"
+              className="font-semibold text-snow transition-colors hover:text-afterburn-soft"
+            >
+              15CE Flasher
+            </a>
+            <a
+              href="#promises"
+              className="font-semibold text-snow transition-colors hover:text-afterburn-soft"
+            >
+              Promises
+            </a>
+          </nav>
+        ) : null}
 
-        <nav
-          aria-label="Jump to products"
-          className="anim-rise anim-rise-delay-2 mt-5 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm sm:text-base"
-        >
-          <span className="text-fog">Jump to</span>
-          <span className="text-fog/50" aria-hidden>
-            →
-          </span>
-          <a
-            href="#skagway"
-            className="font-semibold text-snow transition-colors hover:text-afterburn-soft"
-          >
-            Skagway
-          </a>
-          <a
-            href="#flasher"
-            className="font-semibold text-snow transition-colors hover:text-afterburn-soft"
-          >
-            15CE Flasher
-          </a>
-        </nav>
-
-        <div className="anim-rise anim-rise-delay-3 mt-10 flex flex-col gap-12">
-          <div
-            id="skagway"
-            className="flex max-w-3xl scroll-mt-8 flex-col items-start gap-8 sm:flex-row sm:items-center sm:gap-12"
-          >
-            <div className="min-w-0 max-w-xl flex-1">
+        <div className="anim-rise anim-rise-delay-3 mt-14 flex flex-col gap-14">
+          <div className="grid items-stretch gap-6 lg:grid-cols-2 lg:gap-8">
+            <article
+              id="skagway"
+              className="flex scroll-mt-8 flex-col rounded-2xl border border-white/12 bg-ink-elevated/70 p-6 sm:p-8"
+            >
+              <Link
+                href="/skagway"
+                className="mb-6 block overflow-hidden rounded-xl border border-white/10 bg-black/40 transition-opacity hover:opacity-90"
+                aria-label="Skagway"
+              >
+                <Image
+                  src="/skagway/product.png"
+                  alt=""
+                  width={4704}
+                  height={2504}
+                  priority
+                  className="h-auto w-full"
+                />
+              </Link>
               <p className="text-sm font-semibold tracking-[0.18em] text-afterburn-soft uppercase">
                 Newest release · {skagwayVersionLabel(latestSkagway.version)}
               </p>
               <Link
                 href="/skagway"
-                className="mt-3 block text-2xl font-bold tracking-tight text-snow transition-colors hover:text-afterburn-soft sm:text-3xl"
+                className="mt-3 block font-display text-3xl font-bold tracking-tight text-snow transition-colors hover:text-afterburn-soft sm:text-4xl"
               >
                 Skagway
               </Link>
@@ -172,7 +195,7 @@ export default function Home() {
                   </ul>
                 </div>
               ) : null}
-              <div className="mt-5 flex flex-wrap items-center gap-x-6 gap-y-3">
+              <div className="mt-auto flex flex-wrap items-center gap-x-6 gap-y-3 pt-6">
                 <Link
                   href="/skagway"
                   className="group relative inline-flex w-fit items-center text-base font-semibold tracking-wide text-snow transition-colors hover:text-afterburn-soft"
@@ -190,46 +213,40 @@ export default function Home() {
                   Manual →
                 </Link>
               </div>
-            </div>
+            </article>
 
-            <Link
-              href="/skagway"
-              className="shrink-0 overflow-hidden rounded-xl border border-white/10 bg-black/40 transition-opacity hover:opacity-90"
-              aria-label="Skagway"
+            <article
+              id="flasher"
+              className="flex scroll-mt-8 flex-col rounded-2xl border border-white/12 bg-ink-elevated/70 p-6 sm:p-8"
             >
-              <Image
-                src="/skagway/product.png"
-                alt=""
-                width={4704}
-                height={2504}
-                priority
-                className="h-auto w-44 sm:w-52 lg:w-60"
-              />
-            </Link>
-          </div>
-
-          {SKAGWAY_UPCOMING ? <SkagwayComingSoon variant="home" /> : null}
-
-          <div
-            id="flasher"
-            className="flex max-w-3xl scroll-mt-8 flex-col items-start gap-8 border-t border-white/10 pt-10 sm:flex-row sm:items-center sm:gap-12"
-          >
-            <div className="min-w-0 max-w-xl flex-1">
-              <p className="text-sm font-semibold tracking-[0.18em] text-fog/80 uppercase">
-                Also from the lab
+              <Link
+                href="/flasher"
+                className="mb-6 flex justify-center overflow-hidden rounded-xl border border-white/10 bg-black/25 py-8 transition-opacity hover:opacity-90 sm:py-10"
+                aria-label="15CE Flasher"
+              >
+                <Image
+                  src="/flasher/app-icon.png"
+                  alt=""
+                  width={1024}
+                  height={1024}
+                  className="h-28 w-28 sm:h-32 sm:w-32 lg:h-36 lg:w-36"
+                />
+              </Link>
+              <p className="text-sm font-semibold tracking-[0.18em] text-afterburn-soft uppercase">
+                Mac &amp; Windows
               </p>
               <Link
                 href="/flasher"
-                className="mt-3 block text-2xl font-bold tracking-tight text-snow transition-colors hover:text-afterburn-soft sm:text-3xl"
+                className="mt-3 block font-display text-3xl font-bold tracking-tight text-snow transition-colors hover:text-afterburn-soft sm:text-4xl"
               >
                 15CE Flasher
               </Link>
               <p className="mt-3 text-base leading-relaxed text-fog sm:text-lg">
-                SAM-BA programmer for the HP 15c Collector&apos;s Edition on Mac
-                and Windows. Firmware updates without hassle,{" "}
+                SAM-BA programmer for the HP 15c Collector&apos;s Edition.
+                Firmware updates without hassle,{" "}
                 <span className="font-semibold text-snow">free forever</span>.
               </p>
-              <div className="mt-5 flex flex-wrap items-center gap-x-6 gap-y-3">
+              <div className="mt-auto flex flex-wrap items-center gap-x-6 gap-y-3 pt-6">
                 <Link
                   href="/flasher"
                   className="group relative inline-flex w-fit items-center text-base font-semibold tracking-wide text-snow transition-colors hover:text-afterburn-soft"
@@ -247,22 +264,12 @@ export default function Home() {
                   Install Guide →
                 </Link>
               </div>
-            </div>
-
-            <Link
-              href="/flasher"
-              className="shrink-0 overflow-hidden rounded-[22%] transition-opacity hover:opacity-90"
-              aria-label="15CE Flasher"
-            >
-              <Image
-                src="/flasher/app-icon.png"
-                alt=""
-                width={1024}
-                height={1024}
-                className="h-28 w-28 sm:h-32 sm:w-32 lg:h-36 lg:w-36"
-              />
-            </Link>
+            </article>
           </div>
+
+          {SKAGWAY_UPCOMING ? <SkagwayComingSoon variant="home" /> : null}
+
+          <StudioPromises />
 
           <AnnouncementSignup />
         </div>

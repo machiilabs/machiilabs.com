@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Instrument_Sans, Syne } from "next/font/google";
+import { Instrument_Sans, Inter } from "next/font/google";
 import { SiteAnalytics } from "@/components/site-analytics";
 import "./globals.css";
 
@@ -7,10 +7,10 @@ import "./globals.css";
 // would otherwise treat it as an app crash. Real errors still surface.
 const IGNORE_INJECTED_WALLET_ERROR = `(function(){window.addEventListener("error",function(event){var message=String((event&&event.message)||(event.error&&event.error.message)||"");if(message.indexOf("ethereum")===-1&&message.indexOf("selectedAddress")===-1)return;event.preventDefault();event.stopImmediatePropagation();},true);})();`;
 
-const syne = Syne({
-  variable: "--font-syne",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
-  weight: ["600", "700", "800"],
+  weight: ["400", "500", "600", "700", "800"],
 });
 
 const instrument = Instrument_Sans({
@@ -26,11 +26,11 @@ export const metadata: Metadata = {
     template: "%s · Mach II Labs",
   },
   description:
-    "Independent Mac software lab. Skagway 1.3 is coming soon. Free Mac video organizer. Also: 15CE Flasher for HP 15c Collector’s Edition.",
+    "Independent Mac software lab. Skagway 1.3 — free Mac video organizer. Also: 15CE Flasher for HP 15c Collector’s Edition.",
   openGraph: {
-    title: "Mach II Labs — Skagway 1.3 coming soon",
+    title: "Mach II Labs — Skagway 1.3",
     description:
-      "Skagway 1.3 is coming soon: Storyboard view, hide the Inspector, collected sets, and a rolodex-style scroll index. Free Mac video organizer for the files already on your drives.",
+      "Skagway 1.3 is out: Storyboard view, hide the Inspector, a rolodex-style scroll index, and Reconnect. Free Mac video organizer for the files already on your drives.",
     url: "https://machiilabs.com",
     siteName: "Mach II Labs",
     locale: "en_US",
@@ -46,9 +46,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Mach II Labs — Skagway 1.3 coming soon",
+    title: "Mach II Labs — Skagway 1.3",
     description:
-      "Skagway 1.3 is coming soon: Storyboard view, hide the Inspector, collected sets, and a rolodex-style scroll index.",
+      "Skagway 1.3 is out: Storyboard view, hide the Inspector, a rolodex-style scroll index, and Reconnect.",
     images: ["/skagway/product.png"],
   },
   robots: {
@@ -68,7 +68,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${syne.variable} ${instrument.variable} h-full`}
+      className={`${inter.variable} ${instrument.variable} h-full`}
     >
       {process.env.NODE_ENV === "development" ? (
         <head>

@@ -75,7 +75,7 @@ export default function FontSamplePage() {
           Display font samples
         </h1>
         <p className="mt-2 text-fog">
-          Same string in each candidate. Syne is still live on the site.
+          Same string in each candidate. Inter is the live display face.
         </p>
 
         <ul className="mt-12 space-y-14">

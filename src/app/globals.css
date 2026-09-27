@@ -9,7 +9,7 @@
   --afterburn-soft: #f0c078;
   --horizon: #3d6f9a;
   --vapor: rgba(120, 170, 210, 0.35);
-  --font-display: var(--font-syne);
+  --font-display: var(--font-inter);
   --font-body: var(--font-instrument);
 }
 
