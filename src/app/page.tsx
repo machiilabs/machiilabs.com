@@ -226,7 +226,8 @@ export default function Home() {
               </Link>
               <p className="mt-3 text-base leading-relaxed text-fog sm:text-lg">
                 SAM-BA programmer for the HP 15c Collector&apos;s Edition on Mac
-                and Windows. Firmware updates without hassle,{" "}
+                and Windows, and for the HP 16C CE and post-2015 HP 12c too.
+                Firmware updates without hassle,{" "}
                 <span className="font-semibold text-snow">free forever</span>.
               </p>
               <div className="mt-5 flex flex-wrap items-center gap-x-6 gap-y-3">
