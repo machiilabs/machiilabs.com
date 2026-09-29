@@ -11,11 +11,11 @@ export const metadata: Metadata = {
     absolute: "15CE Flasher — Install Help & Troubleshooting",
   },
   description:
-    "Install 15CE Flasher on Mac or Windows, verify downloads, and fix common connection issues. The app guides you through flashing — you do not need to memorize steps here.",
+    "Install 15CE Flasher on Mac or Windows for the HP 15c CE, HP 16c CE, or post-2015 HP 12c, verify downloads, and fix common connection issues. The app guides you through flashing — you do not need to memorize steps here.",
   openGraph: {
     title: "15CE Flasher — Install Help & Troubleshooting",
     description:
-      "Install help and troubleshooting for 15CE Flasher on Mac and Windows.",
+      "Install help and troubleshooting for 15CE Flasher on Mac and Windows. Works with the HP 15c CE, HP 16c CE, and post-2015 HP 12c.",
     url: "https://machiilabs.com/flasher/guide",
     siteName: "Mach II Labs",
     images: [
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "15CE Flasher — Install Help & Troubleshooting",
     description:
-      "Install help and troubleshooting for 15CE Flasher on Mac and Windows.",
+      "Install help and troubleshooting for 15CE Flasher on Mac and Windows. Works with the HP 15c CE, HP 16c CE, and post-2015 HP 12c.",
     images: ["/flasher/og.png"],
   },
   alternates: {
@@ -44,9 +44,28 @@ const WIN_DOWNLOAD_HREF = downloadApiPath("winflasher");
 const FIRMWARE_URL =
   "https://hpcalcs.com/downloads/apps/HP_IAR_USB%20120ms.bin";
 
+/** Shown first in Frequently Asked Questions and marked up for search. */
+const MODEL_FAQ = [
+  {
+    question: "Does 15CE Flasher work with the HP 16c CE or HP 12c?",
+    answer:
+      "Yes, with the HP 16c Collector’s Edition and HP 12c models made since 2015. They use the same ATSAM4LC2C chip as the HP 15c CE, and 15CE Flasher flashes them the same way over the same pogo cable. Flash only firmware made for your model. Do not connect the pogo cable to a 12c made before 2015; it can permanently damage it.",
+  },
+];
+
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: MODEL_FAQ.map(({ question, answer }) => ({
+    "@type": "Question",
+    name: question,
+    acceptedAnswer: { "@type": "Answer", text: answer },
+  })),
+};
+
 const MAC_SHA256 =
-  "16b92b28b137fa773cd1b9f31e28e677dc99b982b835d78bf952aa90ffa39c30";
-const MAC_FILENAME = "15CEFlasher-1.3.0-217.dmg";
+  "3026a00b9bbe36c5b54368da7951ebdb7684c9166045d4a6ae21983731d2c1ae";
+const MAC_FILENAME = "15CEFlasher-1.4.0-242.dmg";
 
 const WIN_SHA256 =
   "66108db0837e31e67b2a08d2eb3fd4fe235cc933730279d56fe312a2ec973dda";
@@ -82,6 +101,10 @@ function StuckDetails({
 export default function FlasherGuidePage() {
   return (
     <div className="min-h-dvh bg-[#f7f6f3] text-[#1a1a1a]">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
       <SiteHeader
         product="flasher"
         tone="light"
@@ -121,7 +144,7 @@ export default function FlasherGuidePage() {
             href={FIRMWARE_URL}
             className="font-semibold text-[#1d4ed8] underline-offset-2 hover:underline"
           >
-            Latest HP firmware
+            Latest HP 15c CE firmware
           </a>
         </div>
 
@@ -182,25 +205,26 @@ export default function FlasherGuidePage() {
               A Mac (macOS 13+) or a PC (Windows 10/11, 64-bit)
             </li>
             <li>
-              HP 15c Collector&apos;s Edition and the official pogo cable. You
-              can get it at <PogoCableLinks />.
+              HP 15c Collector&apos;s Edition, HP 16c Collector&apos;s Edition,
+              or post-2015 HP 12c, and the official pogo cable. You can get the
+              cable at <PogoCableLinks />.
             </li>
             <li>
               A 114,688-byte firmware{" "}
-              <code className="font-mono text-sm">.bin</code> from HP —{" "}
+              <code className="font-mono text-sm">.bin</code> for your model —{" "}
               <a
                 href={FIRMWARE_URL}
                 className="font-medium text-[#1d4ed8] underline-offset-2 hover:underline"
               >
-                download here
+                15c CE firmware here
               </a>{" "}
               (not included with 15CE Flasher)
             </li>
           </ul>
           <p className="mt-4 border-l-2 border-[#f59e0b] pl-4 text-sm leading-relaxed text-[#4b5563]">
             <span className="font-bold text-[#1a1a1a]">Cable warning.</span> Use
-            this cable only on the HP 15c Collector&apos;s Edition. It can
-            permanently damage other calculators.
+            this cable only on the calculators listed above. It can permanently
+            damage other calculators.
           </p>
         </section>
 
@@ -309,14 +333,20 @@ export default function FlasherGuidePage() {
 
         <section className="mt-14">
           <h2 className="text-xl font-semibold tracking-tight text-[#1a1a1a]">
-            If you get stuck
+            Frequently Asked Questions
           </h2>
           <p className="mt-3 text-base leading-relaxed text-[#374151]">
-            Expand a topic below. The in-app wizard still has the full diagrams
-            and instructions — these notes are for when something does not match
-            what you expected.
+            Expand a question below. The in-app wizard has the full diagrams
+            and instructions; we hope these answers cover any other questions
+            you may have.
           </p>
           <div className="mt-5 space-y-3">
+            {MODEL_FAQ.map(({ question, answer }) => (
+              <StuckDetails key={question} title={question}>
+                <p>{answer}</p>
+              </StuckDetails>
+            ))}
+
             <StuckDetails title="Calculator not connecting">
               <p>
                 On the cable switch box: hold <strong>ERASE</strong>, press{" "}
@@ -376,7 +406,7 @@ export default function FlasherGuidePage() {
                 already have a known-good copy.
               </p>
               <p className="mt-3">
-                On the <strong>Firmware</strong> step, pick your 114,688-byte HP{" "}
+                On the <strong>Firmware</strong> step, pick your 114,688-byte{" "}
                 <code className="font-mono text-sm">.bin</code>. The app checks
                 the file before flash unlocks.
               </p>
@@ -419,7 +449,7 @@ export default function FlasherGuidePage() {
             <StuckDetails title="Batch mode (many calculators)">
               <p>
                 Choose <strong>BATCH</strong> on the welcome screen when you
-                already know ERASE+RESET and want to flash several CE units with
+                already know ERASE+RESET and want to flash several calculators with
                 the same firmware. Pick your{" "}
                 <code className="font-mono text-sm">.bin</code> once, set backup
                 policy, click <strong>Start batch</strong>, then ERASE+RESET each

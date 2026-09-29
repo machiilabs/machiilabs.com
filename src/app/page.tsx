@@ -242,7 +242,8 @@ export default function Home() {
                 15CE Flasher
               </Link>
               <p className="mt-3 text-base leading-relaxed text-fog sm:text-lg">
-                SAM-BA programmer for the HP 15c Collector&apos;s Edition.
+                SAM-BA programmer for the HP 15c Collector&apos;s Edition, and
+                for the HP 16c CE and post-2015 HP 12c too.
                 Firmware updates without hassle,{" "}
                 <span className="font-semibold text-snow">free forever</span>.
               </p>
