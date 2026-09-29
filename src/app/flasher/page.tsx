@@ -41,11 +41,11 @@ export const metadata: Metadata = {
 const MAC_DOWNLOAD_HREF = downloadApiPath("flasher");
 const WIN_DOWNLOAD_HREF = downloadApiPath("winflasher");
 
-const MAC_VERSION = "1.3.0";
-const MAC_BUILD = "217";
+const MAC_VERSION = "1.4.0";
+const MAC_BUILD = "242";
 const MAC_SHA256 =
-  "16b92b28b137fa773cd1b9f31e28e677dc99b982b835d78bf952aa90ffa39c30";
-const MAC_FILENAME = "15CEFlasher-1.3.0-217.dmg";
+  "3026a00b9bbe36c5b54368da7951ebdb7684c9166045d4a6ae21983731d2c1ae";
+const MAC_FILENAME = "15CEFlasher-1.4.0-242.dmg";
 
 const WIN_VERSION = "1.1.0";
 const WIN_BUILD = "110";
