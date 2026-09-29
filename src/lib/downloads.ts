@@ -1,5 +1,5 @@
 export const PRODUCT_DOWNLOADS = {
-  flasher: "https://downloads.machiilabs.com/15CEFlasher-1.3.0-217.dmg",
+  flasher: "https://downloads.machiilabs.com/15CEFlasher-1.4.0-242.dmg",
   winflasher: "https://downloads.machiilabs.com/15CEFlasher-Win-1.1.0-110.exe",
   // Query busts Safari's sticky cache of /Skagway.dmg; object key is still Skagway.dmg.
   // Bump ?v= on each release. Sparkle appcast keeps the bare Skagway.dmg URL.
