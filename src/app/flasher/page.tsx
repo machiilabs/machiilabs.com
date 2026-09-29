@@ -10,11 +10,11 @@ export const metadata: Metadata = {
     absolute: "15CE Flasher — Flash HP 15c CE Firmware on Mac or Windows",
   },
   description:
-    "Flash HP 15c Collector’s Edition firmware with 15CE Flasher. Free guided app for Mac and Windows over the official pogo cable.",
+    "Flash HP 15c Collector’s Edition firmware with 15CE Flasher. Also works with the HP 16C CE and post-2015 HP 12c. Free guided app for Mac and Windows over the official pogo cable.",
   openGraph: {
     title: "15CE Flasher — Flash HP 15c CE Firmware on Mac or Windows",
     description:
-      "Free Mac and Windows apps to flash HP 15c Collector’s Edition firmware over the pogo cable.",
+      "Free Mac and Windows apps to flash HP 15c Collector’s Edition firmware over the pogo cable. Also works with the HP 16C CE and post-2015 HP 12c.",
     url: "https://machiilabs.com/flasher",
     siteName: "Mach II Labs",
     images: [
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "15CE Flasher — Flash HP 15c CE Firmware on Mac or Windows",
     description:
-      "Free Mac and Windows apps to flash HP 15c Collector’s Edition firmware over the pogo cable.",
+      "Free Mac and Windows apps to flash HP 15c Collector’s Edition firmware over the pogo cable. Also works with the HP 16C CE and post-2015 HP 12c.",
     images: ["/flasher/og.png"],
   },
   alternates: {
@@ -62,7 +62,7 @@ const softwareJsonLd = {
       applicationCategory: "UtilitiesApplication",
       operatingSystem: "macOS",
       description:
-        "Flash HP 15c Collector’s Edition firmware on a Mac over the official pogo cable.",
+        "Flash HP 15c Collector’s Edition firmware on a Mac over the official pogo cable. Also works with the HP 16C CE and post-2015 HP 12c.",
       url: "https://machiilabs.com/flasher",
       softwareVersion: MAC_VERSION,
       offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
@@ -78,7 +78,7 @@ const softwareJsonLd = {
       applicationCategory: "UtilitiesApplication",
       operatingSystem: "Windows",
       description:
-        "Flash HP 15c Collector’s Edition firmware on Windows over the official pogo cable.",
+        "Flash HP 15c Collector’s Edition firmware on Windows over the official pogo cable. Also works with the HP 16C CE and post-2015 HP 12c.",
       url: "https://machiilabs.com/flasher#windows",
       softwareVersion: WIN_VERSION,
       offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
@@ -115,8 +115,9 @@ export default function FlasherPage() {
             </p>
             <p className="mt-4 text-base leading-relaxed text-[#374151] sm:text-lg">
               Guided app for the HP 15c Collector&apos;s Edition over the
-              official pogo cable. Choose your platform below — the app walks you
-              through every step.
+              official pogo cable. Also works with the HP 16C CE and post-2015
+              HP 12c. Choose your platform below — the app walks you through
+              every step.
             </p>
             <Link
               href="/flasher/guide"
@@ -244,7 +245,7 @@ export default function FlasherPage() {
               walks through the wizard with a simulated calculator — no hardware
               required.{" "}
               <strong className="font-semibold text-[#1a1a1a]">FLASH</strong> is
-              the full seven-step wizard for one CE.{" "}
+              the full seven-step wizard for one calculator.{" "}
               <strong className="font-semibold text-[#1a1a1a]">BATCH</strong>{" "}
               flashes many calculators in sequence with the same firmware.{" "}
               <strong className="font-semibold text-[#1a1a1a]">
@@ -282,12 +283,11 @@ export default function FlasherPage() {
                 A Mac (macOS 13+) or a PC (Windows 10/11, 64-bit)
               </li>
               <li>
-                HP 15c Collector&apos;s Edition (primary).
+                HP 15c Collector&apos;s Edition, HP 16C Collector&apos;s
+                Edition, or a post-2015 HP 12c.
                 <p className="mt-2 border-l-2 border-[#e5e7eb] pl-4 text-sm leading-relaxed text-[#6b7280]">
-                  Field reports suggest that the HP 16c CE and post-2015 HP 12c
-                  also work with this software — they have the same ATSAM4LC2C
-                  chip; use at your own risk and confirm the firmware matches
-                  your calculator.
+                  All three use the same ATSAM4LC2C chip. Flash only firmware
+                  made for your model.
                 </p>
               </li>
               <li>
@@ -297,7 +297,7 @@ export default function FlasherPage() {
               <li>
                 A 114,688-byte (112 KB) firmware{" "}
                 <code className="font-mono text-sm text-[#1a1a1a]">.bin</code>{" "}
-                from HP — not included with this download (see the{" "}
+                — not included with this download (see the{" "}
                 <Link
                   href="/flasher/guide"
                   className="font-medium text-[#1d4ed8] underline-offset-2 hover:underline"
@@ -330,9 +330,9 @@ export default function FlasherPage() {
         <aside className="mt-14 max-w-3xl border-l-2 border-[#f59e0b] pl-5">
           <p className="text-base leading-relaxed text-[#374151]">
             <span className="font-semibold text-[#1a1a1a]">Cable warning.</span>{" "}
-            Use the pogo cable only on calculators designed for it (HP 15c
-            Collector&apos;s Edition and the same post-2015 USB-pogo family). Do
-            not use it on an HP 15c Limited Edition, a pre-2015 12C, an HP 20b,
+            Use the pogo cable only on calculators designed for it: the HP 15c
+            Collector&apos;s Edition, the HP 16C Collector&apos;s Edition, and
+            post-2015 HP 12c models. Do not use it on an HP 15c Limited Edition, a pre-2015 12C, an HP 20b,
             or an HP 30b — different protocol and voltage; the cable can
             permanently damage those calculators.
           </p>

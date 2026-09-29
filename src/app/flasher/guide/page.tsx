@@ -121,7 +121,7 @@ export default function FlasherGuidePage() {
             href={FIRMWARE_URL}
             className="font-semibold text-[#1d4ed8] underline-offset-2 hover:underline"
           >
-            Latest HP firmware
+            Latest HP 15c CE firmware
           </a>
         </div>
 
@@ -182,25 +182,27 @@ export default function FlasherGuidePage() {
               A Mac (macOS 13+) or a PC (Windows 10/11, 64-bit)
             </li>
             <li>
-              HP 15c Collector&apos;s Edition and the official pogo cable. You
-              can get it at <PogoCableLinks />.
+              HP 15c Collector&apos;s Edition, HP 16C Collector&apos;s Edition,
+              or post-2015 HP 12c, and the official pogo cable. You can get the
+              cable at <PogoCableLinks />.
             </li>
             <li>
               A 114,688-byte firmware{" "}
-              <code className="font-mono text-sm">.bin</code> from HP —{" "}
+              <code className="font-mono text-sm">.bin</code> for your model —{" "}
               <a
                 href={FIRMWARE_URL}
                 className="font-medium text-[#1d4ed8] underline-offset-2 hover:underline"
               >
-                download here
+                15c CE firmware here
               </a>{" "}
               (not included with 15CE Flasher)
             </li>
           </ul>
           <p className="mt-4 border-l-2 border-[#f59e0b] pl-4 text-sm leading-relaxed text-[#4b5563]">
             <span className="font-bold text-[#1a1a1a]">Cable warning.</span> Use
-            this cable only on the HP 15c Collector&apos;s Edition. It can
-            permanently damage other calculators.
+            this cable only on the HP 15c Collector&apos;s Edition, the HP 16C
+            Collector&apos;s Edition, or a post-2015 HP 12c. It can permanently
+            damage other calculators.
           </p>
         </section>
 
@@ -376,7 +378,7 @@ export default function FlasherGuidePage() {
                 already have a known-good copy.
               </p>
               <p className="mt-3">
-                On the <strong>Firmware</strong> step, pick your 114,688-byte HP{" "}
+                On the <strong>Firmware</strong> step, pick your 114,688-byte{" "}
                 <code className="font-mono text-sm">.bin</code>. The app checks
                 the file before flash unlocks.
               </p>
