@@ -64,8 +64,8 @@ const faqJsonLd = {
 };
 
 const MAC_SHA256 =
-  "3026a00b9bbe36c5b54368da7951ebdb7684c9166045d4a6ae21983731d2c1ae";
-const MAC_FILENAME = "15CEFlasher-1.4.0-242.dmg";
+  "bcc7e69336cdaaf0028a8aa253d8ecee33ab033440841ca425ee80ef5ed03df0";
+const MAC_FILENAME = "15CEFlasher-1.4.1-245.dmg";
 
 const WIN_SHA256 =
   "66108db0837e31e67b2a08d2eb3fd4fe235cc933730279d56fe312a2ec973dda";
