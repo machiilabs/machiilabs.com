@@ -68,8 +68,8 @@ const MAC_SHA256 =
 const MAC_FILENAME = "15CEFlasher-1.4.1-245.dmg";
 
 const WIN_SHA256 =
-  "66108db0837e31e67b2a08d2eb3fd4fe235cc933730279d56fe312a2ec973dda";
-const WIN_FILENAME = "15CEFlasher-Win-1.1.0-110.exe";
+  "33cfc9db188879df637190a31fe9e313ac557c388564ee61358a9ae6fdd218ed";
+const WIN_FILENAME = "15CEFlasher-Win-1.2.0-113.exe";
 
 function StuckDetails({
   title,
