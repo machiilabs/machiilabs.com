@@ -47,11 +47,11 @@ const MAC_SHA256 =
   "bcc7e69336cdaaf0028a8aa253d8ecee33ab033440841ca425ee80ef5ed03df0";
 const MAC_FILENAME = "15CEFlasher-1.4.1-245.dmg";
 
-const WIN_VERSION = "1.1.0";
-const WIN_BUILD = "110";
+const WIN_VERSION = "1.2.0";
+const WIN_BUILD = "113";
 const WIN_SHA256 =
-  "66108db0837e31e67b2a08d2eb3fd4fe235cc933730279d56fe312a2ec973dda";
-const WIN_FILENAME = "15CEFlasher-Win-1.1.0-110.exe";
+  "33cfc9db188879df637190a31fe9e313ac557c388564ee61358a9ae6fdd218ed";
+const WIN_FILENAME = "15CEFlasher-Win-1.2.0-113.exe";
 
 const softwareJsonLd = {
   "@context": "https://schema.org",
