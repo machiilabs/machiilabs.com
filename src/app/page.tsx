@@ -38,10 +38,10 @@ export const metadata: Metadata = {
     siteName: "Mach II Labs",
     images: [
       {
-        url: "/skagway/product.png",
+        url: "/skagway/og.jpg",
         width: 1200,
         height: 630,
-        alt: "Skagway — Mac video organizer and library",
+        alt: "Skagway — Free Mac video organizer",
       },
     ],
   },
@@ -50,7 +50,7 @@ export const metadata: Metadata = {
     title: "Mach II Labs — Skagway 1.3",
     description:
       "Skagway 1.3 is out: Storyboard view, hide the Inspector, a rolodex-style scroll index, and Reconnect.",
-    images: ["/skagway/product.png"],
+    images: ["/skagway/og.jpg"],
   },
 };
 
