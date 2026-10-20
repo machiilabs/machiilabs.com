@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import {
+  MANUAL_TASKS_OVERVIEW_SLUG,
   getManualNeighbors,
   getManualPage,
-  MANUAL_PAGES,
+  getManualTopicPages,
+  manualPartLabel,
+  manualPlainText,
 } from "../manual";
 import { ManualInline } from "../manual-inline";
 import {
@@ -11,6 +14,7 @@ import {
   ManualPager,
   ManualSectionBlock,
   ManualShell,
+  ManualTaskCards,
 } from "../manual-shell";
 
 type Props = {
@@ -18,7 +22,7 @@ type Props = {
 };
 
 export function generateStaticParams() {
-  return MANUAL_PAGES.map((page) => ({ slug: page.slug }));
+  return getManualTopicPages().map((page) => ({ slug: page.slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -27,17 +31,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!page) return {};
 
   const url = `https://machiilabs.com/skagway/manual/${page.slug}`;
+  const description = manualPlainText(page.summary);
   return {
     title: `${page.title} — Skagway Manual`,
-    description: page.summary,
+    description,
     openGraph: {
       title: `${page.title} — Skagway Manual`,
-      description: page.summary,
+      description,
       url,
     },
     twitter: {
       title: `${page.title} — Skagway Manual`,
-      description: page.summary,
+      description,
     },
     alternates: { canonical: url },
   };
@@ -54,7 +59,7 @@ export default async function SkagwayManualTopicPage({ params }: Props) {
   return (
     <ManualShell currentSlug={page.slug}>
       <p className="text-xs font-semibold tracking-wide text-[#6b7280] uppercase">
-        Manual
+        {manualPartLabel(page)}
       </p>
       <h1 className="mt-3 text-3xl font-bold tracking-tight text-[#1a1a1a] sm:text-4xl">
         {page.title}
@@ -64,6 +69,8 @@ export default async function SkagwayManualTopicPage({ params }: Props) {
       </p>
 
       <ManualPageFigure page={page} />
+
+      {page.slug === MANUAL_TASKS_OVERVIEW_SLUG ? <ManualTaskCards /> : null}
 
       <div className="mt-10 space-y-10">
         {page.sections.map((section) => (
