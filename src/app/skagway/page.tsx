@@ -25,11 +25,11 @@ import {
 export const metadata: Metadata = {
   title: "Mac Video Organizer & Library — Skagway",
   description:
-    "Skagway 1.3 is out. A fast Mac video organizer and library for the files already on your drives — built for large collections. Free forever from Mach II Labs.",
+    "A Mac video organizer for the files already on your drives. See every clip, find any moment by eye, and keep it private. Free forever from Mach II Labs.",
   openGraph: {
     title: "Mac Video Organizer & Library — Skagway",
     description:
-      "Skagway 1.3 is out: Storyboard view, hide the Inspector, a rolodex-style scroll index, and Reconnect. Free forever.",
+      "See every clip on every drive. Find any moment by eye. Free forever, private by default.",
     url: "https://machiilabs.com/skagway",
     images: [
       {
@@ -44,7 +44,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Mac Video Organizer & Library — Skagway",
     description:
-      "Skagway 1.3 is out: Storyboard view, hide the Inspector, a rolodex-style scroll index, and Reconnect.",
+      "See every clip on every drive. Find any moment by eye. Free forever, private by default.",
     images: ["/skagway/og.jpg"],
   },
   alternates: {
@@ -85,7 +85,22 @@ const features: Feature[] = [
   },
 ];
 
-const quickPoints = [
+const benefits = [
+  {
+    title: "See every clip on every drive",
+    body: "Point Skagway at the folders you already keep, on this Mac or another drive. It catalogs and thumbnails them. The files stay where they are.",
+  },
+  {
+    title: "Find any moment by eye",
+    body: "Rest on a thumbnail and a silent preview plays through the clip. Storyboard shows six frames of each video, so similar files stop looking the same.",
+  },
+  {
+    title: "Free forever, private by default",
+    body: "No account, no ads, no subscription. No telemetry. Optional update checks stay off until you turn them on. None of your data leaves your Mac.",
+  },
+];
+
+const supportingPoints = [
   {
     title: "Tuned for scale",
     body: "Built to stay smooth with thousands of videos — long, short, tiny, and enormous files alike.",
@@ -93,10 +108,6 @@ const quickPoints = [
   {
     title: "Keyboard-driven",
     body: "Arrows, Space, Play All, and one consistent modifier scheme — triage without reaching for the mouse.",
-  },
-  {
-    title: "Private by default",
-    body: "No telemetry, no analytics, no account. Optional update checks stay off until you turn them on. None of your data ever leaves your computer.",
   },
 ];
 
@@ -286,6 +297,24 @@ export default function SkagwayPage() {
           </div>
         </section>
 
+        <section aria-labelledby="skagway-benefits" className="mt-16 sm:mt-20">
+          <h2 id="skagway-benefits" className="sr-only">
+            What Skagway does
+          </h2>
+          <div className="grid gap-10 sm:grid-cols-3 sm:gap-8">
+            {benefits.map((benefit) => (
+              <div key={benefit.title}>
+                <h3 className="font-display text-xl font-bold tracking-tight text-snow sm:text-2xl">
+                  {benefit.title}
+                </h3>
+                <p className="mt-3 text-base leading-relaxed text-fog">
+                  {benefit.body}
+                </p>
+              </div>
+            ))}
+          </div>
+        </section>
+
         {SKAGWAY_UPCOMING ? (
           <>
             <SkagwayComingSoon variant="product" />
@@ -401,25 +430,6 @@ export default function SkagwayPage() {
           </details>
         ) : null}
 
-        <div
-          className={`mt-12 grid gap-10 sm:mt-16 sm:grid-cols-3 sm:gap-8 ${
-            olderReleases.length === 0
-              ? "border-t border-white/10 pt-12 sm:pt-14"
-              : ""
-          }`}
-        >
-          {quickPoints.map((point) => (
-            <section key={point.title}>
-              <h2 className="font-display text-lg font-bold tracking-tight text-snow">
-                {point.title}
-              </h2>
-              <p className="mt-3 text-sm leading-relaxed text-fog sm:text-base">
-                {point.body}
-              </p>
-            </section>
-          ))}
-        </div>
-
         <div className="mt-16 max-w-3xl space-y-16 border-t border-white/10 pt-14 sm:mt-20 sm:space-y-20 sm:pt-16">
           {features.map((feature) => (
             <section key={feature.title}>
@@ -442,6 +452,19 @@ export default function SkagwayPage() {
             </Link>
             .
           </p>
+        </div>
+
+        <div className="mt-16 grid gap-10 border-t border-white/10 pt-14 sm:mt-20 sm:grid-cols-2 sm:gap-8 sm:pt-16">
+          {supportingPoints.map((point) => (
+            <section key={point.title}>
+              <h2 className="font-display text-lg font-bold tracking-tight text-snow">
+                {point.title}
+              </h2>
+              <p className="mt-3 text-sm leading-relaxed text-fog sm:text-base">
+                {point.body}
+              </p>
+            </section>
+          ))}
         </div>
 
         <section className="mt-20 border-t border-white/10 pt-14 sm:mt-24">
