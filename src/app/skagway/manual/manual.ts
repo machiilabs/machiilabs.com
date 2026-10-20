@@ -427,7 +427,6 @@ export const MANUAL_PAGES: ManualPage[] = [
       "Narrow the library from the filter drawer. Quick Filter is a set of cards you combine. Advanced Filter is a rule tree. Search and sort keep working on whatever the active tab leaves in the view.",
     screenshot: "quick-filter.png",
     screenshotCaption: "The filter drawer, Quick tab",
-    screenshotNeedsUpdate: true,
     screenshotAlt:
       "Skagway Quick Filter drawer showing Smart Libraries, Collections, Rating, Duration, Quality, and Tags cards",
     screenshotHint:
@@ -499,7 +498,6 @@ export const MANUAL_PAGES: ManualPage[] = [
       "Smart collections are saved rule sets. They update as the library changes. Albums are lists you build video by video, with a saved Album Order. Both live in the Collections card of the Quick Filter drawer.",
     screenshot: "collections.png",
     screenshotCaption: "An album open, sorted by Album Order",
-    screenshotNeedsUpdate: true,
     screenshotAlt:
       "Skagway album open with Sort set to Album Order and smart collections listed in Quick Filter",
     screenshotHint:

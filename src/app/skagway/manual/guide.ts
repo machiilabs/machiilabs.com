@@ -99,7 +99,6 @@ export const GUIDE_PAGES: ManualPage[] = [
       "Once you have tagged, rated, or added custom fields to your videos, filters can narrow the view to just the clips you want: everything rated four stars or higher, say, or every clip with a certain tag. Filtering also protects bulk actions. They work on whatever is in front of you, so if the window still shows the whole library, you could rename or tag the wrong files. Filter first, until the list is the set you mean.",
     screenshot: "quick-filter.png",
     screenshotCaption: "The filter drawer, Quick tab",
-    screenshotNeedsUpdate: true,
     screenshotAlt: "Skagway Quick Filter drawer over the library",
     sections: [
       {
@@ -194,7 +193,6 @@ export const GUIDE_PAGES: ManualPage[] = [
       "Checkmarks disappear when you clear them. A group you will come back to needs a saved place. An album is the hand-picked list, such as a shoot or a reel. A smart collection is a rule, such as “4 stars and longer than 10 minutes,” that refills itself as you tag and rate.",
     screenshot: "collections.png",
     screenshotCaption: "An album open, sorted by Album Order",
-    screenshotNeedsUpdate: true,
     screenshotAlt: "Skagway album open with Album Order",
     sections: [
       {
