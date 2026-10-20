@@ -31,11 +31,21 @@ export const metadata: Metadata = {
     description:
       "Skagway 1.3 is out: Storyboard view, hide the Inspector, a rolodex-style scroll index, and Reconnect. Free forever.",
     url: "https://machiilabs.com/skagway",
+    images: [
+      {
+        url: "/skagway/og.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Skagway — Free Mac video organizer",
+      },
+    ],
   },
   twitter: {
+    card: "summary_large_image",
     title: "Mac Video Organizer & Library — Skagway",
     description:
       "Skagway 1.3 is out: Storyboard view, hide the Inspector, a rolodex-style scroll index, and Reconnect.",
+    images: ["/skagway/og.jpg"],
   },
   alternates: {
     canonical: "https://machiilabs.com/skagway",
