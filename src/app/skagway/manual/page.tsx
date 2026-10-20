@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { MANUAL_HOME, MANUAL_PAGES } from "./manual";
+import { MANUAL_HOME, getManualNeighbors, manualPartLabel } from "./manual";
 import { ManualInline } from "./manual-inline";
 import {
   ManualPageFigure,
+  ManualPager,
   ManualSectionBlock,
   ManualShell,
 } from "./manual-shell";
@@ -26,18 +27,28 @@ export const metadata: Metadata = {
 };
 
 export default function SkagwayManualIndexPage() {
-  const next = MANUAL_PAGES[0];
+  const { prev, next } = getManualNeighbors(MANUAL_HOME.slug);
 
   return (
     <ManualShell currentSlug="first-launch">
       <p className="text-xs font-semibold tracking-wide text-[#6b7280] uppercase">
-        Manual
+        {manualPartLabel(MANUAL_HOME)}
       </p>
       <h1 className="mt-3 text-3xl font-bold tracking-tight text-[#1a1a1a] sm:text-4xl">
         {MANUAL_HOME.title}
       </h1>
       <p className="mt-4 text-base leading-relaxed text-[#4b5563] sm:text-lg">
         <ManualInline text={MANUAL_HOME.summary} />
+      </p>
+      <p className="mt-4 text-base leading-relaxed text-[#4b5563]">
+        After the library is open, see{" "}
+        <Link
+          href="/skagway/manual/how-do-i"
+          className="font-medium text-[#1d4ed8] underline-offset-2 hover:underline"
+        >
+          How do I…?
+        </Link>{" "}
+        for some of the powerful tasks you can perform on your videos.
       </p>
 
       <ManualPageFigure page={MANUAL_HOME} />
@@ -48,19 +59,7 @@ export default function SkagwayManualIndexPage() {
         ))}
       </div>
 
-      <div className="mt-14 flex flex-wrap items-center justify-between gap-4 border-t border-[#e5e7eb] pt-6 text-sm">
-        <Link href="/skagway" className="text-[#4b5563] hover:text-[#1a1a1a]">
-          ← Skagway
-        </Link>
-        {next ? (
-          <Link
-            href={`/skagway/manual/${next.slug}`}
-            className="text-[#4b5563] hover:text-[#1a1a1a]"
-          >
-            {next.title} →
-          </Link>
-        ) : null}
-      </div>
+      <ManualPager prev={prev} next={next} />
     </ManualShell>
   );
 }

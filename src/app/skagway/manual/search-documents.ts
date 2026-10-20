@@ -2,6 +2,7 @@ import {
   flattenManualSteps,
   getManualNavPages,
   manualPageHref,
+  manualPlainText,
   manualSectionId,
   type ManualPage,
 } from "./manual";
@@ -24,7 +25,7 @@ function sectionBody(section: ManualPage["sections"][number]): string {
   const parts = flattenManualSteps(section.steps);
   if (section.intro) parts.unshift(section.intro);
   if (section.note) parts.push(section.note);
-  return parts.join("\n");
+  return manualPlainText(parts.join("\n"));
 }
 
 /** Build the search corpus from the live manual source (`manual.ts`). */
@@ -41,7 +42,9 @@ export function buildManualSearchDocuments(): ManualSearchDocument[] {
       sectionTitle: null,
       href: pageHref,
       title: page.title,
-      body: [page.blurb, page.summary].filter(Boolean).join("\n"),
+      body: manualPlainText(
+        [page.question, page.blurb, page.summary].filter(Boolean).join("\n"),
+      ),
     });
 
     for (const section of page.sections) {

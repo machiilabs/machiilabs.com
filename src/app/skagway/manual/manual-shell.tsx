@@ -4,6 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
 import {
+  MANUAL_TASK_GROUPS,
+  getManualNavPages,
   manualPageHref,
   manualSectionId,
   type ManualPage,
@@ -89,6 +91,7 @@ export function ManualSteps({ steps }: { steps: ManualStep[] }) {
             {screenshot ? (
               <ManualFigure
                 screenshot={screenshot.filename}
+                caption={screenshot.caption}
                 alt={screenshot.alt}
                 hint={screenshot.hint}
                 scale={screenshot.scale}
@@ -243,8 +246,18 @@ function ManualShotBrief({
   );
 }
 
+function ManualFigureCaption({ caption }: { caption?: string }) {
+  if (!caption) return null;
+  return (
+    <figcaption className="mt-2 px-1 text-sm font-medium text-[#4b5563]">
+      <ManualInline text={caption} />
+    </figcaption>
+  );
+}
+
 export function ManualFigure({
   screenshot,
+  caption,
   alt,
   hint,
   scale = 1,
@@ -252,6 +265,7 @@ export function ManualFigure({
   needsUpdate = false,
 }: {
   screenshot: string;
+  caption?: string;
   alt?: string;
   hint?: string;
   scale?: number;
@@ -277,11 +291,12 @@ export function ManualFigure({
             </p>
             <ManualExpandableImage
               src={manualScreenshotSrc(screenshot)}
-              alt={alt ?? screenshot}
+              alt={alt ?? caption ?? screenshot}
               dimmed
             />
           </div>
         ) : null}
+        <ManualFigureCaption caption={caption} />
       </figure>
     );
   }
@@ -293,9 +308,9 @@ export function ManualFigure({
     >
       <ManualExpandableImage
         src={manualScreenshotSrc(screenshot)}
-        alt={alt ?? screenshot}
+        alt={alt ?? caption ?? screenshot}
       />
-      {alt ? <figcaption className="sr-only">{alt}</figcaption> : null}
+      <ManualFigureCaption caption={caption} />
     </figure>
   );
 }
@@ -305,11 +320,77 @@ export function ManualPageFigure({ page }: { page: ManualPage }) {
   return (
     <ManualFigure
       screenshot={page.screenshot}
+      caption={page.screenshotCaption}
       alt={page.screenshotAlt ?? page.title}
       hint={page.screenshotHint}
       scale={page.screenshotScale}
       needsUpdate={page.screenshotNeedsUpdate}
     />
+  );
+}
+
+function ManualTaskThumb({ page }: { page: ManualPage }) {
+  const filename = page.screenshot;
+  const exists = filename ? manualScreenshotExists(filename) : false;
+  return (
+    <div className="relative aspect-[16/9] w-full overflow-hidden border-b border-[#e5e7eb] bg-[#f3f4f6]">
+      {filename && exists ? (
+        <Image
+          src={manualScreenshotSrc(filename)}
+          alt=""
+          fill
+          sizes="(min-width: 1024px) 15rem, (min-width: 640px) 50vw, 100vw"
+          className="object-cover object-top transition-transform duration-300 group-hover:scale-[1.03]"
+          unoptimized
+        />
+      ) : null}
+    </div>
+  );
+}
+
+/** Every task with a question and a group, as cards under their group headings. */
+export function ManualTaskCards() {
+  const tasks = getManualNavPages().filter(
+    (page) => page.question && page.taskGroup,
+  );
+
+  return (
+    <div className="mt-10 space-y-10">
+      {MANUAL_TASK_GROUPS.map((group) => {
+        const items = tasks.filter((page) => page.taskGroup === group);
+        if (items.length === 0) return null;
+        return (
+          <section key={group} aria-labelledby={manualSectionId(group)}>
+            <h2
+              id={manualSectionId(group)}
+              className="text-xs font-semibold tracking-wide text-[#6b7280] uppercase"
+            >
+              {group}
+            </h2>
+            <ul className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {items.map((page) => (
+                <li key={page.slug}>
+                  <Link
+                    href={manualPageHref(page.slug)}
+                    className="group flex h-full flex-col overflow-hidden rounded-lg border border-[#e5e7eb] bg-white transition-colors hover:border-[#1d4ed8]"
+                  >
+                    <ManualTaskThumb page={page} />
+                    <div className="flex flex-1 flex-col p-4">
+                      <p className="leading-snug font-semibold text-[#1d4ed8] underline-offset-2 group-hover:underline">
+                        {page.question}
+                      </p>
+                      <p className="mt-2 text-sm leading-relaxed text-[#4b5563]">
+                        {page.blurb}
+                      </p>
+                    </div>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </section>
+        );
+      })}
+    </div>
   );
 }
 
@@ -325,6 +406,7 @@ export function ManualSectionScreenshots({
         <ManualFigure
           key={shot.filename}
           screenshot={shot.filename}
+          caption={shot.caption}
           alt={shot.alt}
           hint={shot.hint}
           scale={shot.scale}

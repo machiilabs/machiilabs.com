@@ -14,6 +14,12 @@ How-to docs for Skagway. Content lives in TypeScript so the site and the search 
 
 Write UI labels with the same capitalization as the app so they match. Section headings stay in the normal heading font (not mono).
 
+## Links between pages
+
+- `see Page Title` (or `see the Page Title page`) links automatically when followed by `.`, `,`, `;`, `)`, an em dash, or the end of the text. Topic names (`How do I…?`) and `Settings → <tab>` work too.
+- `[[Page Title]]` links a page title mid-sentence, with no “see”. Search and meta descriptions get the plain title.
+- Titles must match exactly. An unknown `[[title]]` renders as plain text.
+
 ## Update workflow
 
 1. **Edit content** in [`manual.ts`](./manual.ts) (pages, sections, steps).
@@ -32,6 +38,7 @@ PNG files live in `public/skagway/manual/`. Each page (and some inline steps) na
 - If the PNG is **missing**, the page shows a dashed “Screenshot needed” box with the filename and brief.
 - If the PNG exists but is **stale**, set `screenshotNeedsUpdate: true` (or `needsUpdate: true` on an inline shot). The page shows a “Screenshot needs update” brief **above** the current capture, labeled outdated.
 - Figures with a PNG are **clickable** — opens a full-size lightbox (Esc or click outside to close).
+- Every image needs a visible **caption** that says what it highlights: `screenshotCaption` on a page, `caption` on a section or step image (the type requires it). Write the caption for the page it sits on; the same PNG can carry different captions on different pages.
 
 Clear the flag after you drop in a current PNG. Do not leave a stale shot unmarked — readers will treat it as current.
 

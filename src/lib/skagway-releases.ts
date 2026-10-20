@@ -46,7 +46,7 @@ export const SKAGWAY_RELEASES: SkagwayRelease[] = [
         body:
           "A six-frame collage for every video (⌘3). Scan the library by eye; click a frame to play from there. Normal packing is the default; Compact fits more columns.",
         homeLine: "Storyboard view — six frames per video (⌘3).",
-        learnMoreHref: "/skagway/manual/browse#storyboard-view",
+        learnMoreHref: "/skagway/manual/browse#storyboard-layout",
       },
       {
         title: "Hide and show the Inspector",

@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { MANUAL_PAGES } from "@/app/skagway/manual/manual";
+import { getManualTopicPages } from "@/app/skagway/manual/manual";
 
 const BASE = "https://machiilabs.com";
 
@@ -41,9 +41,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   ];
 
   // first-launch lives at /skagway/manual (redirect); do not list the redirect URL.
-  const manualRoutes: MetadataRoute.Sitemap = MANUAL_PAGES.filter(
-    (page) => page.slug !== "first-launch",
-  ).map((page) => ({
+  const manualRoutes: MetadataRoute.Sitemap = getManualTopicPages().map((page) => ({
     url: `${BASE}/skagway/manual/${page.slug}`,
     lastModified: now,
     changeFrequency: "monthly" as const,

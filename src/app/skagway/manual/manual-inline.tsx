@@ -1,8 +1,11 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 import {
+  MANUAL_PART_LABELS,
+  MANUAL_PARTS,
   getManualNavPages,
   manualPageHref,
+  manualPart,
   manualSectionId,
 } from "./manual";
 
@@ -31,7 +34,22 @@ const ELLIPSIS_LABEL = String.raw`[A-Z][\w+\-/']*(?:\s+${ELLIPSIS_WORD})*…`;
  */
 const ACTION_LABELS = [
   "Use standard location on this Mac",
+  "Add Videos",
   "Ask every time I open Skagway",
+  "Resume Position (seconds)",
+  "Content Fingerprint",
+  "Original File Name",
+  "Add destination…",
+  "Last Metadata Import",
+  "Recently Converted",
+  "Multiple values",
+  "JSON Lines",
+  "Clear filter",
+  "Search tags",
+  "Or Higher",
+  "No Stars",
+  "New Tag",
+  "N Videos",
   "Drop to add to your library",
   "Make Thumbnail from Current Frame",
   "Bookmark Current Position",
@@ -120,10 +138,11 @@ function escapeRegExp(value: string): string {
 
 function buildSeeTargets(): string[] {
   const pageTitles = getManualNavPages().map((page) => page.title);
+  const partLabels = Object.values(MANUAL_PART_LABELS);
   const settingsPaths = SETTINGS_SECTIONS.map(
     (section) => `Settings → ${section}`,
   );
-  return [...new Set([...pageTitles, ...settingsPaths])].sort(
+  return [...new Set([...pageTitles, ...partLabels, ...settingsPaths])].sort(
     (a, b) => b.length - a.length,
   );
 }
@@ -138,13 +157,18 @@ function resolveSeeHref(label: string): string | null {
   const page = getManualNavPages().find((entry) => entry.title === trimmed);
   if (page) return manualPageHref(page.slug);
 
+  const part = MANUAL_PARTS.find((key) => MANUAL_PART_LABELS[key] === trimmed);
+  const firstInPart =
+    part && getManualNavPages().find((entry) => manualPart(entry) === part);
+  if (firstInPart) return manualPageHref(firstInPart.slug);
+
   return null;
 }
 
 function buildSeeLinkPattern(): RegExp {
   const targets = buildSeeTargets().map(escapeRegExp).join("|");
   return new RegExp(
-    String.raw`\bsee (?:the )?(?<label>${targets})(?: page)?(?=[.,;]|$| — )`,
+    String.raw`\bsee (?:the )?(?<label>${targets})(?: page)?(?=[.,;)]|$| — )`,
     "g",
   );
 }
@@ -159,7 +183,7 @@ const MANUAL_UI_PATTERN = new RegExp(
     ELLIPSIS_LABEL,
     String.raw`Rename (?:N|\d+) Files?`,
     ACTION_LABELS.map(escapeRegExp).join("|"),
-    String.raw`(?:(?<=\bclick )|(?<=\bClick )|(?<=\bthen )|(?<=\bThen ))(?:Add|Scan|Create)\b`,
+    String.raw`(?:(?<=\bclick )|(?<=\bClick )|(?<=\bthen )|(?<=\bThen ))(?:Add|Scan|Create|Clear|Remove)\b`,
     String.raw`\{[^{}]+\}`,
     String.raw`[⌘⌥⇧⌃]-click`,
     String.raw`[⌘⌥⇧⌃]+(?:Space|[A-Za-z0-9]|⌫|↩|←|→|↑|↓|,)`,
@@ -170,7 +194,31 @@ const MANUAL_UI_PATTERN = new RegExp(
 
 type InlineSegment =
   | { kind: "text"; value: string }
-  | { kind: "see-link"; label: string; href: string };
+  | { kind: "see-link"; label: string; href: string }
+  | { kind: "page-link"; label: string; href: string };
+
+/** [[Page Title]] links that page inline. Unknown titles fall back to plain text. */
+function splitLinks(text: string): InlineSegment[] {
+  const segments: InlineSegment[] = [];
+  const pattern = /\[\[([^\]]+)\]\]/g;
+  let last = 0;
+  let match: RegExpExecArray | null;
+
+  while ((match = pattern.exec(text)) !== null) {
+    if (match.index > last) {
+      segments.push(...splitSeeLinks(text.slice(last, match.index)));
+    }
+    const label = match[1];
+    const href = resolveSeeHref(label);
+    segments.push(
+      href ? { kind: "page-link", label, href } : { kind: "text", value: label },
+    );
+    last = match.index + match[0].length;
+  }
+
+  if (last < text.length) segments.push(...splitSeeLinks(text.slice(last)));
+  return segments;
+}
 
 function splitSeeLinks(text: string): InlineSegment[] {
   const segments: InlineSegment[] = [];
@@ -226,7 +274,7 @@ function formatUiText(text: string, keyPrefix: string): ReactNode[] {
 export function ManualInline({ text }: { text: string }): ReactNode {
   if (!text) return text;
 
-  const segments = splitSeeLinks(text);
+  const segments = splitLinks(text);
   const nodes: ReactNode[] = [];
 
   segments.forEach((segment, index) => {
@@ -235,7 +283,7 @@ export function ManualInline({ text }: { text: string }): ReactNode {
       return;
     }
 
-    nodes.push("see ");
+    if (segment.kind === "see-link") nodes.push("see ");
     nodes.push(
       <Link
         key={`see-${index}-${segment.href}`}
