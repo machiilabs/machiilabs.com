@@ -1,0 +1,16 @@
+---
+description: Every plan is written to a markdown file in the repo
+alwaysApply: true
+---
+
+# Write every plan to a markdown file
+
+**ALWAYS write ALL plans to a markdown file. EVERY TIME. NEVER create a plan without writing it to a markdown file.**
+
+A plan that exists only in the chat does not count. The full plan, with its markdown formatting, must be a `.md` file in the repository before the reply that presents it.
+
+This applies to every plan: marketing, implementation, design, go-to-market, release, and any other structured plan. It applies to the parent agent and to every subagent. A subagent that creates a plan writes the file before it returns. The parent does not treat a plan pasted only in a subagent message as saved.
+
+- Put the file in `docs/` unless the user named a different path.
+- Name the file for the plan, kebab-case, ending in `.md` (for example `docs/skagway-marketing-plan.md`).
+- The file is the full plan. The chat reply gives the path and may summarize. It does not replace the file.
