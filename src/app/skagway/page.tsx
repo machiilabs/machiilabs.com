@@ -53,7 +53,7 @@ export const metadata: Metadata = {
 };
 
 const latestRelease = latestSkagwayRelease();
-const VERSION_LABEL = skagwayVersionLabel(latestRelease.version);
+const VERSION_LABEL = skagwayVersionLabel(SKAGWAY_DOWNLOAD_VERSION);
 const olderReleases = SKAGWAY_RELEASES.slice(1);
 
 type Feature = {

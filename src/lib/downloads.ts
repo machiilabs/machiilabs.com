@@ -3,7 +3,7 @@ export const PRODUCT_DOWNLOADS = {
   winflasher: "https://downloads.machiilabs.com/15CEFlasher-Win-1.2.0-113.exe",
   // Query busts Safari's sticky cache of /Skagway.dmg; object key is still Skagway.dmg.
   // Bump ?v= on each release. Sparkle appcast keeps the bare Skagway.dmg URL.
-  skagway: "https://downloads.machiilabs.com/Skagway.dmg?v=1.3.0-1204",
+  skagway: "https://downloads.machiilabs.com/Skagway.dmg?v=1.3.1-1214",
 } as const;
 
 export type DownloadProduct = keyof typeof PRODUCT_DOWNLOADS;
