@@ -33,7 +33,7 @@ Every product the site offers for download gets the same treatment. Products: `s
 - It holds that release's unreleased site copy, release notes, manual changes, and download metadata.
 - It merges to `main` only when the user says to ship that release's site, after the signed build exists and the site has its real version, build, filename, and SHA-256 (see `skagway-site-versioning.mdc` for Skagway; the Flasher page and guide for Flasher).
 - Keep it current by merging `origin/main` into it, never the other way round.
-- To ship: open a pull request into `main` and add the label `ship:<product>-X.Y.Z`. The user merges it on GitHub.
+- To ship: open a pull request into `main` and add the label `ship:<product>-X.Y.Z`. The user merges it on GitHub. Merging that PR is the user saying to ship the site.
 
 ## If unreleased work reaches main anyway
 
@@ -48,6 +48,6 @@ Reverting it on `main` leaves the release commits in `main`'s history, so a late
   - carries commits from any `<product>-X.Y.Z` release branch without the label `ship:<product>-X.Y.Z`
   - changes any product's public download (version, build, SHA-256, filename, URL) or the Skagway coming-soon promo without that label
   - has a download whose build, SHA-256, filename, and URL disagree, or a non-numeric build
-- Add a `ship:` label only after the user explicitly says to ship that release. A red check means stop and tell the user, not relabel.
+- Add a `ship:` label only after the user explicitly says to ship that release. For Skagway, the user asking for a release ("release patch/minor/major") is that approval: Skagway's `scripts/release.sh` opens the `skagway-X.Y.Z` PR with the label after the DMG is live and verified. The user still merges it. A red check means stop and tell the user, not relabel.
 - **`scripts/git-hooks/pre-push`** runs the same check on local pushes to `main` (needs `MACHII_MAIN_PUSH=yes` and `MACHII_SHIP="<product>-X.Y.Z"`). Install once per clone with `bash scripts/install-git-hooks.sh`. Never use `--no-verify`.
 - The hook and the workflow both run the copy of the check that is on `main`, so a branch cannot weaken its own check.
