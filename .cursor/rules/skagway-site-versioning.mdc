@@ -11,7 +11,7 @@ On each Skagway release:
 3. Home page and `/skagway` read `latestSkagwayRelease()` — no separate `VERSION` constant.
 4. Update `skagway-download.ts` from the notarized `Skagway.dmg` (`shasum -a 256`).
 5. Update metadata in `src/app/page.tsx` / `src/app/layout.tsx` if the marketing story changed.
-6. Only after the user says to ship the site: open a pull request from `skagway-X.Y.Z` into `main` with the label `ship:skagway-X.Y.Z`. The user merges it (see `production-main.mdc`).
+6. Open a pull request from `skagway-X.Y.Z` into `main` with the label `ship:skagway-X.Y.Z`. A Skagway release request is the approval for this: Skagway's `scripts/release.sh` creates the branch from `origin/main` in a scratch worktree, sets the version, build, SHA-256, and download URL (step 4), and opens the labeled PR once the DMG is live. Steps 1–3 and 5 (release-note copy) are added to that same branch afterwards. For a patch, a short "X.Y.Z update" note below the current highlights on `/skagway` is enough. The user merges the PR (see `production-main.mdc`).
 
 Rules:
 
