@@ -280,6 +280,18 @@ export default function Home() {
           <span>© {new Date().getFullYear()} Mach II Labs</span>
           <div className="flex flex-wrap gap-x-5 gap-y-1">
             <Link
+              href="/about"
+              className="transition-colors hover:text-snow"
+            >
+              About
+            </Link>
+            <Link
+              href="/terms"
+              className="transition-colors hover:text-snow"
+            >
+              Terms
+            </Link>
+            <Link
               href="/privacy"
               className="transition-colors hover:text-snow"
             >

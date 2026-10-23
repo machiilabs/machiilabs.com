@@ -365,6 +365,18 @@ export default function FlasherPage() {
           </span>
           <div className="flex flex-wrap gap-x-5 gap-y-1">
             <Link
+              href="/about"
+              className="transition-colors hover:text-[#1a1a1a]"
+            >
+              About
+            </Link>
+            <Link
+              href="/terms"
+              className="transition-colors hover:text-[#1a1a1a]"
+            >
+              Terms
+            </Link>
+            <Link
               href="/privacy"
               className="transition-colors hover:text-[#1a1a1a]"
             >

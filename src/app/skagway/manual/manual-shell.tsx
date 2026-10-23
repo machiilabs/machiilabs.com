@@ -179,6 +179,12 @@ export function ManualShell({
         <div className="mx-auto flex max-w-7xl flex-col gap-1 text-sm text-[#6b7280] sm:flex-row sm:items-center sm:justify-between">
           <span>© {new Date().getFullYear()} Mach II Labs · Skagway Manual</span>
           <div className="flex flex-wrap gap-x-5 gap-y-1">
+            <Link href="/about" className="hover:text-[#1a1a1a]">
+              About
+            </Link>
+            <Link href="/terms" className="hover:text-[#1a1a1a]">
+              Terms
+            </Link>
             <Link href="/privacy" className="hover:text-[#1a1a1a]">
               Privacy
             </Link>
