@@ -1,6 +1,6 @@
 "use client";
 
-import { useId, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import {
   DOWNLOAD_PRODUCTS,
   DOWNLOAD_PRODUCT_LABELS,
@@ -19,11 +19,10 @@ const HEIGHT = 280;
 const PAD = { top: 16, right: 16, bottom: 36, left: 36 };
 
 export function DownloadsChart({ buckets }: { buckets: DownloadBucket[] }) {
-  const clipId = useId();
   const [active, setActive] = useState<number | null>(null);
 
-  const { max, points } = useMemo(() => {
-    const peak = Math.max(
+  const layout = useMemo(() => {
+    const max = Math.max(
       1,
       ...buckets.flatMap((bucket) =>
         DOWNLOAD_PRODUCTS.map((product) => bucket.counts[product]),
@@ -31,23 +30,32 @@ export function DownloadsChart({ buckets }: { buckets: DownloadBucket[] }) {
     );
     const innerW = WIDTH - PAD.left - PAD.right;
     const innerH = HEIGHT - PAD.top - PAD.bottom;
-    const xFor = (i: number) =>
-      PAD.left +
-      (buckets.length <= 1 ? innerW / 2 : (i / (buckets.length - 1)) * innerW);
-    const yFor = (value: number) =>
-      PAD.top + innerH - (value / peak) * innerH;
+    const groupW = buckets.length > 0 ? innerW / buckets.length : innerW;
+    const inset = groupW * 0.22;
+    const barW = (groupW - inset) / DOWNLOAD_PRODUCTS.length;
 
-    const seriesPoints = Object.fromEntries(
-      DOWNLOAD_PRODUCTS.map((product) => [
-        product,
-        buckets.map((bucket, i) => ({
-          x: xFor(i),
-          y: yFor(bucket.counts[product]),
-        })),
-      ]),
-    ) as Record<DownloadProduct, { x: number; y: number }[]>;
+    const groups = buckets.map((bucket, i) => {
+      const groupX = PAD.left + i * groupW;
+      const bars = DOWNLOAD_PRODUCTS.map((product, j) => {
+        const value = bucket.counts[product];
+        const raw = (value / max) * innerH;
+        const barH = value > 0 ? Math.max(raw, 1.5) : 0;
+        return {
+          product,
+          x: groupX + inset / 2 + j * barW,
+          y: PAD.top + innerH - barH,
+          height: barH,
+          width: Math.max(barW - 1.5, 1),
+        };
+      });
+      return {
+        groupX,
+        centerX: groupX + groupW / 2,
+        bars,
+      };
+    });
 
-    return { max: peak, points: seriesPoints };
+    return { max, groupW, groups };
   }, [buckets]);
 
   const hasData = buckets.some((bucket) =>
@@ -62,11 +70,10 @@ export function DownloadsChart({ buckets }: { buckets: DownloadBucket[] }) {
     );
   }
 
-  const yTicks = [...new Set([0, Math.round(max / 2), max])];
+  const yTicks = [...new Set([0, Math.round(layout.max / 2), layout.max])];
   const labelEvery = Math.max(1, Math.ceil(buckets.length / 8));
   const hover = active != null ? buckets[active] : null;
-  const hoverX =
-    active != null ? points.flasher[active]?.x : null;
+  const hoverX = active != null ? layout.groups[active]?.centerX : null;
 
   return (
     <div className="relative">
@@ -74,24 +81,13 @@ export function DownloadsChart({ buckets }: { buckets: DownloadBucket[] }) {
         viewBox={`0 0 ${WIDTH} ${HEIGHT}`}
         className="h-auto w-full"
         role="img"
-        aria-label="Downloads over time by product"
+        aria-label="Downloads by product as vertical bars"
         onMouseLeave={() => setActive(null)}
       >
-        <defs>
-          <clipPath id={clipId}>
-            <rect
-              x={PAD.left}
-              y={PAD.top}
-              width={WIDTH - PAD.left - PAD.right}
-              height={HEIGHT - PAD.top - PAD.bottom}
-            />
-          </clipPath>
-        </defs>
-
         {yTicks.map((tick) => {
           const y =
             PAD.top +
-            (HEIGHT - PAD.top - PAD.bottom) * (1 - tick / max);
+            (HEIGHT - PAD.top - PAD.bottom) * (1 - tick / layout.max);
           return (
             <g key={tick}>
               <line
@@ -114,67 +110,43 @@ export function DownloadsChart({ buckets }: { buckets: DownloadBucket[] }) {
           );
         })}
 
-        {buckets.map((bucket, i) =>
+        {layout.groups.map((group, i) =>
           i % labelEvery === 0 || i === buckets.length - 1 ? (
             <text
-              key={bucket.start}
-              x={points.flasher[i].x}
+              key={buckets[i].start}
+              x={group.centerX}
               y={HEIGHT - 10}
               textAnchor="middle"
               className="fill-fog"
               fontSize="10"
             >
-              {bucket.label}
+              {buckets[i].label}
             </text>
           ) : null,
         )}
 
-        <g clipPath={`url(#${clipId})`}>
-          {DOWNLOAD_PRODUCTS.map((product) => {
-            const series = points[product];
-            const line = series
-              .map((point, i) => `${i === 0 ? "M" : "L"}${point.x} ${point.y}`)
-              .join(" ");
-            return (
-              <path
-                key={product}
-                d={line}
-                fill="none"
-                stroke={SERIES[product].color}
-                strokeWidth="2"
-                strokeLinejoin="round"
-                strokeLinecap="round"
+        {layout.groups.map((group) =>
+          group.bars.map((bar) =>
+            bar.height > 0 ? (
+              <rect
+                key={`${bar.product}-${bar.x}`}
+                x={bar.x}
+                y={bar.y}
+                width={bar.width}
+                height={bar.height}
+                rx={1}
+                fill={SERIES[bar.product].color}
               />
-            );
-          })}
-        </g>
+            ) : null,
+          ),
+        )}
 
-        {hoverX != null ? (
-          <line
-            x1={hoverX}
-            x2={hoverX}
-            y1={PAD.top}
-            y2={HEIGHT - PAD.bottom}
-            stroke="rgba(255,255,255,0.2)"
-          />
-        ) : null}
-
-        {buckets.map((bucket, i) => (
+        {layout.groups.map((group, i) => (
           <rect
-            key={`${bucket.start}-hit`}
-            x={
-              i === 0
-                ? PAD.left
-                : (points.flasher[i].x + points.flasher[i - 1].x) / 2
-            }
+            key={`${buckets[i].start}-hit`}
+            x={group.groupX}
             y={PAD.top}
-            width={
-              i === 0
-                ? (points.flasher[1]?.x ?? WIDTH - PAD.right) - PAD.left
-                : i === buckets.length - 1
-                  ? WIDTH - PAD.right - (points.flasher[i].x + points.flasher[i - 1].x) / 2
-                  : (points.flasher[i + 1].x - points.flasher[i - 1].x) / 2
-            }
+            width={layout.groupW}
             height={HEIGHT - PAD.top - PAD.bottom}
             fill="transparent"
             onMouseEnter={() => setActive(i)}
@@ -205,7 +177,7 @@ export function DownloadsChart({ buckets }: { buckets: DownloadBucket[] }) {
         {DOWNLOAD_PRODUCTS.map((product) => (
           <li key={product} className="flex items-center gap-2">
             <span
-              className="inline-block size-2.5 rounded-full"
+              className="inline-block size-2.5 rounded-sm"
               style={{ background: SERIES[product].color }}
               aria-hidden
             />
