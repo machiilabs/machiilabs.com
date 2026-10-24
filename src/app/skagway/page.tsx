@@ -25,11 +25,11 @@ import {
 export const metadata: Metadata = {
   title: "Mac Video Organizer & Library — Skagway",
   description:
-    "A Mac video organizer for the files already on your drives. See every clip, find any moment by eye, and keep it private. Free forever from Mach II Labs.",
+    "A Mac video organizer for the files already on your drives. Stays fast with thousands of videos. See every clip, find any moment by eye, and keep it private. Free forever from Mach II Labs.",
   openGraph: {
     title: "Mac Video Organizer & Library — Skagway",
     description:
-      "See every clip on every drive. Find any moment by eye. Free forever, private by default.",
+      "Stays fast with thousands of videos. See every clip on every drive. Find any moment by eye. Free forever, private by default.",
     url: "https://machiilabs.com/skagway",
     images: [
       {
@@ -44,7 +44,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Mac Video Organizer & Library — Skagway",
     description:
-      "See every clip on every drive. Find any moment by eye. Free forever, private by default.",
+      "Stays fast with thousands of videos. See every clip on every drive. Find any moment by eye. Free forever, private by default.",
     images: ["/skagway/og.jpg"],
   },
   alternates: {
@@ -98,13 +98,13 @@ const benefits = [
     title: "Free forever, private by default",
     body: "No account, no ads, no subscription. No telemetry. Optional update checks stay off until you turn them on. None of your data leaves your Mac.",
   },
+  {
+    title: "Stays fast with thousands of videos",
+    body: "Long, short, tiny, and enormous files. The library stays smooth.",
+  },
 ];
 
 const supportingPoints = [
-  {
-    title: "Tuned for scale",
-    body: "Built to stay smooth with thousands of videos — long, short, tiny, and enormous files alike.",
-  },
   {
     title: "Keyboard-driven",
     body: "Arrows, Space, Play All, and one consistent modifier scheme — triage without reaching for the mouse.",
@@ -230,9 +230,9 @@ export default function SkagwayPage() {
             </p>
 
             <p className="anim-rise anim-rise-delay-3 mt-5 text-lg leading-relaxed text-fog sm:text-xl">
-              Browse, tag, filter, and play large collections — without locking
-              media into a proprietary container. Built to stay fast with
-              thousands of videos.
+              Built to stay fast with thousands of videos. Browse, tag, filter,
+              and play large collections — without locking media into a
+              proprietary container.
             </p>
 
             <div className="anim-rise anim-rise-delay-3 mt-10">
@@ -301,7 +301,7 @@ export default function SkagwayPage() {
           <h2 id="skagway-benefits" className="sr-only">
             What Skagway does
           </h2>
-          <div className="grid gap-10 sm:grid-cols-3 sm:gap-8">
+          <div className="grid gap-10 sm:grid-cols-2 sm:gap-x-8 sm:gap-y-10">
             {benefits.map((benefit) => (
               <div key={benefit.title}>
                 <h3 className="font-display text-xl font-bold tracking-tight text-snow sm:text-2xl">
@@ -528,6 +528,18 @@ export default function SkagwayPage() {
         <div className="mx-auto flex max-w-6xl flex-col gap-1 text-sm text-fog/70 sm:flex-row sm:items-center sm:justify-between">
           <span>© {new Date().getFullYear()} Mach II Labs · Skagway</span>
           <div className="flex flex-wrap gap-x-5 gap-y-1">
+            <Link
+              href="/about"
+              className="transition-colors hover:text-snow"
+            >
+              About
+            </Link>
+            <Link
+              href="/terms"
+              className="transition-colors hover:text-snow"
+            >
+              Terms
+            </Link>
             <Link
               href="/privacy"
               className="transition-colors hover:text-snow"

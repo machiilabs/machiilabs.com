@@ -185,13 +185,6 @@ export function skagwayVersionLabel(version: string): string {
   return `v${version}`;
 }
 
-export function skagwayHomeReleaseLines(release: SkagwayRelease): string[] {
-  if (!release.highlights?.length) return [];
-  return release.highlights.map(
-    (h) => h.homeLine ?? h.title,
-  );
-}
-
 export function skagwayReleaseItemLabel(kind: SkagwayReleaseItemKind): string {
   switch (kind) {
     case "feature":

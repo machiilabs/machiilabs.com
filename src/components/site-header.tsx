@@ -19,7 +19,9 @@ export type SiteNavActive =
   | (typeof PRODUCT_LINKS)["skagway"][number]["id"]
   | (typeof PRODUCT_LINKS)["flasher"][number]["id"]
   | "home"
-  | "privacy";
+  | "privacy"
+  | "about"
+  | "terms";
 
 type SiteHeaderProps = {
   product?: SiteNavProduct;
