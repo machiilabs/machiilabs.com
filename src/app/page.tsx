@@ -10,7 +10,6 @@ import { StudioPromises } from "@/components/studio-promises";
 import {
   latestSkagwayRelease,
   SKAGWAY_UPCOMING,
-  skagwayHomeReleaseLines,
   skagwayVersionLabel,
 } from "@/lib/skagway-releases";
 
@@ -56,63 +55,25 @@ export const metadata: Metadata = {
 
 export default function Home() {
   const latestSkagway = latestSkagwayRelease();
-  const skagwayReleaseLines = skagwayHomeReleaseLines(latestSkagway);
-  const skagwayMinorVersion = latestSkagway.version.replace(/\.0$/, "");
 
   return (
     <div
-      className={`${inter.className} relative min-h-dvh overflow-x-hidden bg-ink text-snow`}
+      className={`${inter.className} relative min-h-dvh overflow-x-hidden bg-[#fafafa] text-[#1a1a1a]`}
     >
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 sky-drift"
-        style={{
-          background: `
-            radial-gradient(120% 80% at 70% 110%, rgba(61, 111, 154, 0.45) 0%, transparent 55%),
-            radial-gradient(90% 60% at 15% 20%, rgba(232, 160, 69, 0.12) 0%, transparent 50%),
-            linear-gradient(165deg, #05080f 0%, #0a1220 42%, #081018 100%)
-          `,
-        }}
-      />
-      <div
-        aria-hidden
-        className="horizon-glow pointer-events-none absolute inset-x-0 bottom-0 h-[42vh]"
-        style={{
-          background:
-            "linear-gradient(to top, rgba(232, 160, 69, 0.22) 0%, rgba(61, 111, 154, 0.18) 35%, transparent 100%)",
-        }}
-      />
-      <svg
-        aria-hidden
-        className="pointer-events-none absolute inset-0 h-full w-full opacity-40"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <defs>
-          <linearGradient id="vapor" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="rgba(120,170,210,0)" />
-            <stop offset="40%" stopColor="rgba(120,170,210,0.35)" />
-            <stop offset="100%" stopColor="rgba(232,160,69,0.15)" />
-          </linearGradient>
-        </defs>
-        <g stroke="url(#vapor)" strokeWidth="1" fill="none">
-          <path d="M-40 62% L110% 48%" />
-          <path d="M-40 68% L110% 56%" opacity="0.7" />
-          <path d="M-40 74% L110% 63%" opacity="0.45" />
-        </g>
-      </svg>
+      <style>{`body{background:#fafafa;color:#1a1a1a}`}</style>
 
-      <SiteHeader active="home" bordered={false} hero className="relative z-10" />
+      <SiteHeader active="home" tone="light" hero className="relative z-10" />
 
       <main className="relative z-10 mx-auto flex min-h-[calc(100dvh-5rem)] w-full max-w-6xl flex-col justify-start px-6 pb-16 pt-5 sm:px-10 sm:pb-20 lg:pb-24 lg:pt-6">
-        <p className="anim-rise text-[0.7rem] font-semibold tracking-[0.28em] text-fog uppercase sm:text-xs">
+        <p className="anim-rise text-[0.7rem] font-semibold tracking-[0.28em] text-[#4b5563] uppercase sm:text-xs">
           Independent software lab
         </p>
 
         <div className="anim-rise anim-rise-delay-1 mt-5 w-fit text-[clamp(2.75rem,9vw,5.5rem)]">
           <h1>
-            <MachiiLogo href={null} wordmarkLayout="stacked" />
+            <MachiiLogo href={null} wordmarkLayout="stacked" tone="light" />
           </h1>
-          <p className="mt-[0.22em] text-center font-display text-[0.34em] leading-snug font-semibold tracking-tight text-fog">
+          <p className="mt-[0.22em] text-center font-display text-[0.34em] leading-snug font-semibold tracking-tight text-[#4b5563]">
             Software you keep
           </p>
         </div>
@@ -122,25 +83,25 @@ export default function Home() {
             aria-label="Jump to products"
             className="anim-rise anim-rise-delay-2 mt-10 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm sm:text-base"
           >
-            <span className="text-fog">Jump to</span>
-            <span className="text-fog/50" aria-hidden>
+            <span className="text-[#4b5563]">Jump to</span>
+            <span className="text-[#4b5563]/50" aria-hidden>
               →
             </span>
             <a
               href="#skagway"
-              className="font-semibold text-snow transition-colors hover:text-afterburn-soft"
+              className="font-semibold text-[#1a1a1a] transition-colors hover:text-[#8a5a20]"
             >
               Skagway
             </a>
             <a
               href="#flasher"
-              className="font-semibold text-snow transition-colors hover:text-afterburn-soft"
+              className="font-semibold text-[#1a1a1a] transition-colors hover:text-[#8a5a20]"
             >
               15CE Flasher
             </a>
             <a
               href="#promises"
-              className="font-semibold text-snow transition-colors hover:text-afterburn-soft"
+              className="font-semibold text-[#1a1a1a] transition-colors hover:text-[#8a5a20]"
             >
               Promises
             </a>
@@ -151,11 +112,11 @@ export default function Home() {
           <div className="grid items-stretch gap-6 lg:grid-cols-2 lg:gap-8">
             <article
               id="skagway"
-              className="flex scroll-mt-8 flex-col rounded-2xl border border-white/12 bg-ink-elevated/70 p-6 sm:p-8"
+              className="flex scroll-mt-8 flex-col rounded-2xl border border-[#e5e7eb] bg-white p-6 sm:p-8"
             >
               <Link
                 href="/skagway"
-                className="mb-6 block overflow-hidden rounded-xl border border-white/10 bg-black/40 transition-opacity hover:opacity-90"
+                className="mb-6 block overflow-hidden rounded-xl border border-[#e5e7eb] bg-[#f4f4f5] transition-opacity hover:opacity-90"
                 aria-label="Skagway"
               >
                 <Image
@@ -167,48 +128,37 @@ export default function Home() {
                   className="h-auto w-full"
                 />
               </Link>
-              <p className="text-sm font-semibold tracking-[0.18em] text-afterburn-soft uppercase">
+              <p className="text-sm font-semibold tracking-[0.18em] text-[#8a5a20] uppercase">
                 Newest release · {skagwayVersionLabel(latestSkagway.version)}
               </p>
               <Link
                 href="/skagway"
-                className="mt-3 block font-display text-3xl font-bold tracking-tight text-snow transition-colors hover:text-afterburn-soft sm:text-4xl"
+                className="mt-3 block font-display text-3xl font-bold tracking-tight text-[#1a1a1a] transition-colors hover:text-[#8a5a20] sm:text-4xl"
               >
                 Skagway
               </Link>
-              <p className="mt-3 text-base leading-relaxed text-fog sm:text-lg">
+              <p className="mt-3 text-base leading-relaxed text-[#4b5563] sm:text-lg">
                 A Mac video organizer and library for the files already on your
-                drives — browse, tag, filter, and play without locking media into
-                a proprietary container. Built to stay fast with thousands of
-                videos in the library — serious software. And it&apos;s{" "}
-                <span className="font-semibold text-snow">free forever</span>.
+                drives. It{" "}
+                <span className="font-semibold text-[#1a1a1a]">stays fast</span>{" "}
+                with thousands of videos. Browse, tag, filter, and play without
+                locking media into a proprietary container. And it&apos;s{" "}
+                <span className="font-semibold text-[#1a1a1a]">free forever</span>.
               </p>
-              {SKAGWAY_UPCOMING ? null : skagwayReleaseLines.length > 0 ? (
-                <div className="mt-5">
-                  <p className="text-xs font-semibold tracking-[0.16em] text-afterburn-soft uppercase">
-                    New in {skagwayMinorVersion}
-                  </p>
-                  <ul className="mt-2 space-y-2 text-sm leading-relaxed text-fog sm:text-base">
-                    {skagwayReleaseLines.map((line) => (
-                      <li key={line}>{line}</li>
-                    ))}
-                  </ul>
-                </div>
-              ) : null}
               <div className="mt-auto flex flex-wrap items-center gap-x-6 gap-y-3 pt-6">
                 <Link
                   href="/skagway"
-                  className="group relative inline-flex w-fit items-center text-base font-semibold tracking-wide text-snow transition-colors hover:text-afterburn-soft"
+                  className="group relative inline-flex w-fit items-center text-base font-semibold tracking-wide text-[#1a1a1a] transition-colors hover:text-[#8a5a20]"
                 >
                   Get Skagway
                   <span
                     aria-hidden
-                    className="cta-underline absolute -bottom-1 left-0 h-px w-full bg-afterburn"
+                    className="cta-underline absolute -bottom-1 left-0 h-px w-full bg-[#e8a045]"
                   />
                 </Link>
                 <Link
                   href="/skagway/manual"
-                  className="text-base text-fog transition-colors hover:text-afterburn-soft"
+                  className="text-base text-[#4b5563] transition-colors hover:text-[#8a5a20]"
                 >
                   Manual →
                 </Link>
@@ -217,11 +167,11 @@ export default function Home() {
 
             <article
               id="flasher"
-              className="flex scroll-mt-8 flex-col rounded-2xl border border-white/12 bg-ink-elevated/70 p-6 sm:p-8"
+              className="flex scroll-mt-8 flex-col rounded-2xl border border-[#e5e7eb] bg-white p-6 sm:p-8"
             >
               <Link
                 href="/flasher"
-                className="mb-6 flex justify-center overflow-hidden rounded-xl border border-white/10 bg-black/25 py-8 transition-opacity hover:opacity-90 sm:py-10"
+                className="mb-6 flex justify-center overflow-hidden rounded-xl border border-[#e5e7eb] bg-[#f4f4f5] py-8 transition-opacity hover:opacity-90 sm:py-10"
                 aria-label="15CE Flasher"
               >
                 <Image
@@ -232,34 +182,34 @@ export default function Home() {
                   className="h-28 w-28 sm:h-32 sm:w-32 lg:h-36 lg:w-36"
                 />
               </Link>
-              <p className="text-sm font-semibold tracking-[0.18em] text-afterburn-soft uppercase">
+              <p className="text-sm font-semibold tracking-[0.18em] text-[#8a5a20] uppercase">
                 Mac &amp; Windows
               </p>
               <Link
                 href="/flasher"
-                className="mt-3 block font-display text-3xl font-bold tracking-tight text-snow transition-colors hover:text-afterburn-soft sm:text-4xl"
+                className="mt-3 block font-display text-3xl font-bold tracking-tight text-[#1a1a1a] transition-colors hover:text-[#8a5a20] sm:text-4xl"
               >
                 15CE Flasher
               </Link>
-              <p className="mt-3 text-base leading-relaxed text-fog sm:text-lg">
+              <p className="mt-3 text-base leading-relaxed text-[#4b5563] sm:text-lg">
                 Flasher for the HP 15c and 16c Collector&apos;s Editions, on
                 Mac and Windows. Firmware updates without hassle,{" "}
-                <span className="font-semibold text-snow">free forever</span>.
+                <span className="font-semibold text-[#1a1a1a]">free forever</span>.
               </p>
               <div className="mt-auto flex flex-wrap items-center gap-x-6 gap-y-3 pt-6">
                 <Link
                   href="/flasher"
-                  className="group relative inline-flex w-fit items-center text-base font-semibold tracking-wide text-snow transition-colors hover:text-afterburn-soft"
+                  className="group relative inline-flex w-fit items-center text-base font-semibold tracking-wide text-[#1a1a1a] transition-colors hover:text-[#8a5a20]"
                 >
                   Get 15CE Flasher
                   <span
                     aria-hidden
-                    className="cta-underline absolute -bottom-1 left-0 h-px w-full bg-afterburn"
+                    className="cta-underline absolute -bottom-1 left-0 h-px w-full bg-[#e8a045]"
                   />
                 </Link>
                 <Link
                   href="/flasher/guide"
-                  className="text-base text-fog transition-colors hover:text-afterburn-soft"
+                  className="text-base text-[#4b5563] transition-colors hover:text-[#8a5a20]"
                 >
                   Install Guide →
                 </Link>
@@ -271,35 +221,35 @@ export default function Home() {
 
           <StudioPromises />
 
-          <AnnouncementSignup />
+          <AnnouncementSignup tone="light" />
         </div>
       </main>
 
-      <footer className="relative z-10 border-t border-white/5 px-6 py-5 sm:px-10">
-        <div className="mx-auto flex max-w-6xl flex-col gap-1 text-sm text-fog/70 sm:flex-row sm:items-center sm:justify-between">
+      <footer className="relative z-10 border-t border-[#e5e7eb] bg-white px-6 py-5 sm:px-10">
+        <div className="mx-auto flex max-w-6xl flex-col gap-1 text-sm text-[#4b5563] sm:flex-row sm:items-center sm:justify-between">
           <span>© {new Date().getFullYear()} Mach II Labs</span>
           <div className="flex flex-wrap gap-x-5 gap-y-1">
             <Link
               href="/about"
-              className="transition-colors hover:text-snow"
+              className="transition-colors hover:text-[#1a1a1a]"
             >
               About
             </Link>
             <Link
               href="/terms"
-              className="transition-colors hover:text-snow"
+              className="transition-colors hover:text-[#1a1a1a]"
             >
               Terms
             </Link>
             <Link
               href="/privacy"
-              className="transition-colors hover:text-snow"
+              className="transition-colors hover:text-[#1a1a1a]"
             >
               Privacy
             </Link>
             <a
               href="mailto:contact@machiilabs.com"
-              className="transition-colors hover:text-snow"
+              className="transition-colors hover:text-[#1a1a1a]"
             >
               Contact Mach II Labs
             </a>

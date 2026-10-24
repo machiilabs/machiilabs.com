@@ -26,6 +26,11 @@ const nextConfig: NextConfig = {
         destination: "/privacy",
         permanent: true,
       },
+      {
+        source: "/contact",
+        destination: "/about#contact",
+        permanent: false,
+      },
     ];
   },
 };

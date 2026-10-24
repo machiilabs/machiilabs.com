@@ -13,7 +13,7 @@ type MachiiLogoProps = {
   wordmarkLayout?: "inline" | "stacked";
   /** Mark size in pixels for inline layout (default 36). Ignored when stacked (uses em). */
   markSize?: number;
-  /** Wordmark color scheme for dark or light page chrome (inline only). */
+  /** Wordmark color scheme for dark or light page chrome. */
   tone?: "dark" | "light";
   /** Override inline wordmark classes. */
   wordmarkClassName?: string;
@@ -53,7 +53,7 @@ export function MachiiLogo({
 
   const content =
     wordmarkLayout === "stacked"
-      ? stackedLockup(className, withWordmark)
+      ? stackedLockup(className, withWordmark, tone)
       : inlineLockup({
           className,
           withWordmark,
@@ -144,7 +144,11 @@ function inlineLockup({
   );
 }
 
-function stackedLockup(className: string, withWordmark: boolean) {
+function stackedLockup(
+  className: string,
+  withWordmark: boolean,
+  tone: "dark" | "light",
+) {
   const box = `${STACKED_MARK_EM}em`;
   const opticalHeight = `calc(${STACKED_MARK_EM}em * ${BAR_BOTTOM - TIP})`;
   const offsetTop = `calc(-${STACKED_MARK_EM}em * ${TIP})`;
@@ -175,7 +179,7 @@ function stackedLockup(className: string, withWordmark: boolean) {
         >
           {/* Mach II baseline on the chevron foot (just above the bar). */}
           <span
-            className="absolute left-0 text-[1em] leading-none font-extrabold tracking-[-0.04em] text-snow"
+            className={`absolute left-0 text-[1em] leading-none font-extrabold tracking-[-0.04em] ${tone === "light" ? "text-[#1a1a1a]" : "text-snow"}`}
             style={{
               top: `${chevronBottomPct}%`,
               transform: "translateY(-100%)",

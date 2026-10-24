@@ -3,7 +3,12 @@
 import Link from "next/link";
 import { useState, type FormEvent } from "react";
 
-export function AnnouncementSignup() {
+export function AnnouncementSignup({
+  tone = "dark",
+}: {
+  tone?: "dark" | "light";
+}) {
+  const light = tone === "light";
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "done" | "error">(
     "idle",
@@ -37,17 +42,24 @@ export function AnnouncementSignup() {
   return (
     <div
       id="product-announcements"
-      className="w-full max-w-xl border-t border-white/10 pt-10"
+      className={`w-full max-w-xl border-t pt-10 ${light ? "border-[#e5e7eb]" : "border-white/10"}`}
     >
-      <p className="text-sm font-semibold tracking-[0.18em] text-afterburn-soft uppercase">
+      <p
+        className={`text-sm font-semibold tracking-[0.18em] uppercase ${light ? "text-[#8a5a20]" : "text-afterburn-soft"}`}
+      >
         Product announcements
       </p>
-      <p className="mt-3 text-base leading-relaxed text-fog sm:text-lg">
+      <p
+        className={`mt-3 text-base leading-relaxed sm:text-lg ${light ? "text-[#4b5563]" : "text-fog"}`}
+      >
         Occasional notes when Mach II Labs ships something new. Unsubscribe
         anytime.
       </p>
       {status === "done" ? (
-        <p className="mt-5 text-sm text-snow" role="status">
+        <p
+          className={`mt-5 text-sm ${light ? "text-[#1a1a1a]" : "text-snow"}`}
+          role="status"
+        >
           You’re on the list. We’ll only write when there’s a product update.
         </p>
       ) : (
@@ -67,7 +79,11 @@ export function AnnouncementSignup() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="you@example.com"
-            className="min-w-0 flex-1 rounded-md border border-white/15 bg-ink-elevated px-3 py-2.5 text-sm text-snow outline-none placeholder:text-fog/50 focus:border-afterburn/60"
+            className={
+              light
+                ? "min-w-0 flex-1 rounded-md border border-[#e5e7eb] bg-white px-3 py-2.5 text-sm text-[#1a1a1a] outline-none placeholder:text-[#9ca3af] focus:border-[#8a5a20]"
+                : "min-w-0 flex-1 rounded-md border border-white/15 bg-ink-elevated px-3 py-2.5 text-sm text-snow outline-none placeholder:text-fog/50 focus:border-afterburn/60"
+            }
           />
           {/* Honeypot — leave empty */}
           <input
@@ -88,15 +104,22 @@ export function AnnouncementSignup() {
         </form>
       )}
       {status === "error" ? (
-        <p className="mt-3 text-sm text-red-300" role="alert">
+        <p
+          className={`mt-3 text-sm ${light ? "text-red-700" : "text-red-300"}`}
+          role="alert"
+        >
           Couldn’t save that address. Check the email and try again.
         </p>
       ) : null}
-      <p className="mt-3 text-xs text-fog/70">
+      <p className={`mt-3 text-xs ${light ? "text-[#6b7280]" : "text-fog/70"}`}>
         See how we use this in our{" "}
         <Link
           href="/privacy"
-          className="text-fog underline-offset-2 hover:text-snow hover:underline"
+          className={
+            light
+              ? "text-[#4b5563] underline-offset-2 hover:text-[#1a1a1a] hover:underline"
+              : "text-fog underline-offset-2 hover:text-snow hover:underline"
+          }
         >
           privacy note
         </Link>
