@@ -42,14 +42,9 @@ export const SKAGWAY_RELEASES: SkagwayRelease[] = [
     version: "1.4.0",
     highlights: [
       {
-        title: "Rate from the card",
-        body: "Stars on the card, or keys 1–5. Option-click filters that rating and higher. A selected clip rates or tags every selected video.",
-        homeLine: "Rate from the card. A selected clip changes the whole selection.",
-      },
-      {
-        title: "Tags on the wall",
-        body: "Add, remove, and filter tags without opening the Inspector.",
-        homeLine: "Tags on the wall — add, remove, and filter without the Inspector.",
+        title: "Rate and tag from the card",
+        body: "Stars, keys 1–5, and tags, without opening the Inspector. Option-click filters. A selected clip changes every selected video.",
+        homeLine: "Rate and tag from the card, including a whole selection.",
       },
       {
         title: "Rename or delete a tag",
