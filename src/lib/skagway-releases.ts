@@ -36,41 +36,65 @@ export type SkagwayRelease = {
   items?: SkagwayReleaseItem[];
 };
 
-/** Newest first. Only `[0]` uses `highlights`; older entries use `items`. */
+/** Newest first. The product page shows every entry that still has `highlights`. Older entries use `items`. */
 export const SKAGWAY_RELEASES: SkagwayRelease[] = [
+  {
+    version: "1.4.0",
+    highlights: [
+      {
+        title: "Rate and tag from the card",
+        body: "Stars, keys 1–5, and tags, without opening the Inspector. Option-click filters. A selected clip changes every selected video.",
+        homeLine: "Rate and tag from the card, including a whole selection.",
+      },
+      {
+        title: "Rename or delete a tag",
+        body: "Right-click a tag in the Inspector.",
+        homeLine: "Rename or delete a tag from the Inspector.",
+      },
+    ],
+  },
+  {
+    version: "1.3.1",
+    items: [
+      {
+        kind: "feature",
+        text: "Delete Video is ⌘⌫, with a keyboard-friendly confirmation that names the files.",
+      },
+      {
+        kind: "feature",
+        text: "In Duplicates, a video that’s no longer a duplicate stays in view, marked Resolved.",
+      },
+    ],
+  },
   {
     version: "1.3.0",
     highlights: [
       {
         title: "Storyboard view",
-        body:
-          "A six-frame collage for every video (⌘3). Scan the library by eye; click a frame to play from there. Normal packing is the default; Compact fits more columns.",
+        body: "Six frames per video (⌘3). Click a frame to play from there.",
         homeLine: "Storyboard view — six frames per video (⌘3).",
         learnMoreHref: "/skagway/manual/browse#storyboard-layout",
       },
       {
         title: "Hide and show the Inspector",
-        body:
-          "⌘I hides the Inspector so the library can fill the window. Show it again at the width you left it.",
+        body: "⌘I hides it, and shows it again at the width you left it.",
         homeLine: "Hide and show the Inspector (⌘I).",
         learnMoreHref: "/skagway/manual/organize#hide-show-inspector",
       },
       {
         title: "Scroll index",
-        body:
-          "A rolodex-style chip beside the scrollbar as you scroll, labeled by whatever you sorted by.",
+        body: "A label beside the scrollbar as you scroll.",
         homeLine: "Rolodex-style scroll index beside the scrollbar.",
       },
       {
         title: "Reconnect",
-        body:
-          "When a folder moves, point Skagway at the new location. Preview the matches, apply, undo if you need to.",
+        body: "Point Skagway at a folder that moved. Preview, apply, undo.",
         homeLine: "Reconnect when files have moved.",
         learnMoreHref: "/skagway/manual/library#reconnect-missing-files",
       },
       {
         title: "Filmstrip in the player",
-        body: "A strip of frames above the scrubber — seek by picture.",
+        body: "Frames above the scrubber. Seek by picture.",
         homeLine: "Scrubber now includes a filmstrip.",
         learnMoreHref: "/skagway/manual/playback#filmstrip-in-the-player",
       },

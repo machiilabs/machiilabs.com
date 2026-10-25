@@ -284,13 +284,13 @@ export const MANUAL_PAGES: ManualPage[] = [
     blurb:
       "Grid, List, and Storyboard, plus selection, sorting, Play All, search, and the scroll index.",
     summary:
-      "Browse as a thumbnail Grid, a column List, or a six-frame Storyboard. Focus one clip, select others with the usual multi-select gestures, sort or shuffle, Play All through what is on screen, and search titles, filenames, tags, and custom fields.",
+      "Browse as a thumbnail Grid, a column List, or a six-frame Storyboard. Rate and tag from Grid and Storyboard cards. Focus one clip, select others with the usual multi-select gestures, sort or shuffle, Play All through what is on screen, and search titles, filenames, tags, and custom fields.",
     screenshot: "browse.png",
     screenshotCaption: "The Grid layout and the main toolbar",
     screenshotAlt:
       "Skagway Grid layout with the toolbar: layout buttons, sort menu, Play All, and Search videos field",
     screenshotHint:
-      "Populated Grid. Toolbar must show Grid, List, and Storyboard, the Sort menu and its direction arrow, Play All, Loop Play All, Search videos, and the video count. Include a “N videos selected” pill if two or more cards are checkmarked.",
+      "Populated Grid. Cards show rating stars and up to three tags, plus a +N count when more tags do not fit. Toolbar must show Grid, List, and Storyboard, the Sort menu and its direction arrow, Play All, Loop Play All, Search videos, and the video count. The pointer rests on one card so the tag icon is visible.",
     sections: [
       {
         title: "Grid and List",
@@ -298,15 +298,17 @@ export const MANUAL_PAGES: ManualPage[] = [
           "The view is the set of videos currently shown: whatever search, filters, a smart library, or an album leave on screen. Grid (⌘1), List (⌘2), and Storyboard (⌘3) are layouts. Each one shows the same view in a different way. Focus is the one clip the Inspector follows. The batch selection is a separate group you build while you browse, and it stays put when focus moves. Clicking a clip focuses it. It does not select it.",
         steps: [
           "Switch layouts with the Grid, List, and Storyboard buttons in the toolbar. ⌘1 is Grid. ⌘2 is List. Storyboard (⌘3) is covered in the next section.",
-          "A Grid card shows the thumbnail, duration, Title, date, and rating. A captions badge appears when the video is marked as having subtitles. A thin bar along the card shows watch progress after you have started it.",
+          "A Grid card shows the thumbnail, duration, Title, date, rating stars, and up to three tags. Further tags appear as a count, such as +2. The card does not grow taller as tags add up. List rows do not show those tags. A captions badge appears when the video is marked as having subtitles. A thin bar along the card shows watch progress after you have started it.",
           "Click a card or row once to focus it. Grid draws a dashed ring. List highlights the row. That clip is what the Inspector shows, unless the orange batch bar is up.",
           "⌘-click a clip to add it to the selection or remove it. ⇧-click selects every clip from the last click through this one. Press A to add or remove the focused clip. ⌘A selects every video in the current view. Selected clips show a blue checkmark.",
           "With two or more clips selected, a pill above the grid or list reads “N videos selected.” The Inspector title bar turns orange and reads N Videos Selected. Ratings, tags, and custom fields you change apply to every selected clip. TAGS notes that you are tagging the selection.",
           "Click one selected clip to inspect that clip alone. The title bar turns light blue and shows the clip’s name. Click that same focused clip again to return to the selection. On the light blue bar, click N Videos, or click the “N videos selected” pill, to return to the selection as well.",
           "Clear the set with the pill’s ✕, with Clear on the orange bar, or with ⇧⌘A. Arrow keys move focus and leave the checkmarks where they are.",
           "Rest the pointer on a Grid card or a List thumbnail for a silent Live Preview. Double-click a card or row to play that video in Skagway.",
+          "On a Grid or Storyboard card, click a star to rate that clip, and click the same star again to clear it. Click a tag to remove it. If that card is selected, the change applies to every selected video. If it is not selected, only that card changes.",
+          "Option-click a star to show that rating and every higher one. Option-click a tag to show only clips with it. Option-click the same star or tag again to clear. A pill above the grid names the filter.",
         ],
-        note: "Tags and ratings apply to the Inspector’s current target: the focused clip, or every selected clip while the orange bar is showing.",
+        note: "Keys 1–5 and the Inspector follow the orange or light blue bar. A click on a card follows whether that card is selected. See Organize.",
         noteHref: "/skagway/manual/organize",
         noteLinkLabel: "Organize",
         screenshots: [
@@ -335,6 +337,7 @@ export const MANUAL_PAGES: ManualPage[] = [
           "Click a frame once to focus that clip, even if the clip is already selected. Click the same focused collage again to play from that frame’s sample time. Playback leaves the selection as it is.",
           "Click the title or the footer under a collage to focus or to toggle batch inspect, without starting playback. Clicks on the frames themselves never toggle batch inspect.",
           "⌘-click, ⇧-click, and A select clips the same way they do in Grid. Hover preview is off here; use the collage frames.",
+          "Stars and tags sit under the collage, as they do on a Grid card. Click a star or a tag there. Clicks on the frames still focus or play, and do not rate or tag.",
         ],
         note: "Inspector Filmstrip (⌥⌘T) is a preview of one focused clip. It is not the Storyboard layout.",
         noteHref: "/skagway/manual/playback#play-from-the-filmstrip",
@@ -344,7 +347,7 @@ export const MANUAL_PAGES: ManualPage[] = [
             filename: "storyboard.png",
             caption: "The Storyboard layout: six frames from each clip",
             alt: "Skagway Storyboard layout with six-frame collages",
-            hint: "Storyboard layout (⌘3) of a populated library. Several six-frame collages visible. The Storyboard toolbar control shows Normal or Compact; open the density menu if it fits. One collage focused (dashed ring or equivalent). Playback not started.",
+            hint: "Storyboard layout (⌘3) of a populated library. Several six-frame collages visible, with rating stars and up to three tags under at least two of them. The Storyboard toolbar control shows Normal or Compact. One collage focused (dashed ring or equivalent). Playback not started.",
           },
         ],
       },
@@ -442,6 +445,7 @@ export const MANUAL_PAGES: ManualPage[] = [
           "Duration: type Min and Max in minutes, or click a range. The ranges are Any, < 1 min, 1–5 min, 5–30 min, and > 30 min.",
           "Quality: click a chip. The chips are SD, 480p, 720p, 1080p, 1440p, 4K, and 8K+.",
           "Tags: set Match to Any or All, then select tags. Any keeps a video that has one of the tags. All keeps a video only when it has every tag you selected. Search tags narrows the list of tag names. Clear filter on the Tags card, or on Collections, drops that card only.",
+          "On a Grid or Storyboard card, Option-click a star or a tag to set the same kind of filter without opening the drawer. Option-click it again to clear. The pill above the grid names it, for example Rating 4+, or the tag’s name.",
           "Press ⌘⌥Q for the Quick tab and ⌘⌥A for the Advanced tab. The drawer opens if it was closed. Search videos still narrows the filtered list.",
         ],
       },
@@ -539,15 +543,15 @@ export const MANUAL_PAGES: ManualPage[] = [
   {
     slug: "organize",
     title: "Organize",
-    blurb: "Ratings, tags, and custom metadata in the Inspector.",
+    blurb: "Ratings and tags on the card or in the Inspector, plus custom metadata.",
     summary:
-      "The Inspector is the pane on the right. It shows the focused clip’s preview, facts, Title, rating, tags, bookmarks, and custom fields. With two or more clips selected, the same pane edits the whole selection.",
+      "Rate and tag from a Grid or Storyboard card, or from the Inspector. The Inspector is the pane on the right. It shows the focused clip’s preview, facts, Title, rating, tags, bookmarks, and custom fields. With two or more clips selected, the same pane edits the whole selection.",
     screenshot: "organize.png",
     screenshotCaption: "The Inspector: title, rating, tags, and custom fields",
     screenshotAlt:
-      "Skagway Inspector with rating stars, assigned tags, the Add tags list, and custom fields",
+      "Skagway Inspector with rating stars, assigned tags, name suggestions, and custom fields",
     screenshotHint:
-      "Selected video with the Inspector open: display Title, Subtitles picker, filled rating stars, at least one assigned tag, and a custom field if defined.",
+      "Selected video with the Inspector open: display Title, Subtitles picker, filled rating stars, at least one assigned tag, a From the name row of dashed suggestions taken from the file or folder name, and a custom field if defined.",
     sections: [
       {
         title: "Hide / Show Inspector",
@@ -579,20 +583,39 @@ export const MANUAL_PAGES: ManualPage[] = [
       {
         title: "Rate videos",
         steps: [
-          "Focus a clip, or select several. In the Inspector, under RATING, click the star you want.",
-          "Click that same star again to clear the rating.",
+          "On a Grid or Storyboard card, click a star to set that rating. Click the same star again to clear it. If the card is selected, every selected video gets that rating. If it is not, only that clip changes.",
+          "Press 1, 2, 3, 4, or 5 to rate the Inspector’s current target, or 0 to clear it. Edit → Rating does the same: None, or 1 Star through 5 Stars. Typing in a text field still gets the digits.",
+          "In the Inspector, under RATING, click a star. That rates the orange selection, or the one clip on the light blue bar.",
+          "Option-click a star on a card to show that rating and every higher one. Option-click the same star again to clear. A pill names the filter, for example Rating 4+.",
           "In the List layout, with the Rating column on, click the stars in the row. That rates the video on that row.",
         ],
       },
       {
         title: "Tag videos",
         intro:
-          "TAGS shows the tags on the Inspector’s current target. On the orange bar, that target is every selected clip. On the light blue bar, or with a single focus, it is one clip.",
+          "Grid and Storyboard cards show tags on the wall. The Inspector’s TAGS section shows the tags on its current target: every selected clip on the orange bar, or one clip on the light blue bar.",
         steps: [
-          "Assigned tags are the chips at the top of TAGS. Click a chip to unassign it from the current target.",
+          "A card shows at most three tags on one row, or fewer when the names do not fit, then a count for the rest. Click a tag to remove it. If that card is selected, the tag comes off every selected video. If it is not, only that clip changes.",
+          "Option-click a tag to show only clips with it, and Option-click it again to clear. The pill names that tag.",
+          "Rest the pointer on the card and click the tag icon. The panel lists the library’s tags, a From the name group taken from the file name and folder name, and a New tag field. Nothing is applied until you click a chip or press Return. Nothing is uploaded.",
+          "In the Inspector, assigned tags are the chips at the top of TAGS. Click a chip to unassign it from the current target. From the name, just under those chips, offers the same suggestions. Click one to add it.",
           "Click Add tags to open the rest of your tags. The row includes a count, such as Add tags (8). Click a tag in that list to assign it.",
-          "Type a name in the field under TAGS and press Return to create the tag and assign it. New Tag does the same.",
-          "To rename a tag, or to delete it from the whole library, right-click the tag in the Quick Filter drawer’s Tags card. Delete removes it from every video.",
+          "Type a name in the New tag field and press Return to create the tag and assign it. New Tag does the same.",
+          "Right-click a tag in the Inspector and choose Rename Tag… or Delete Tag. Delete asks first, then takes the tag off every video. A click still only takes the tag off the current target. The Quick Filter drawer’s Tags card has the same right-click commands.",
+        ],
+        screenshots: [
+          {
+            filename: "wall-tags.png",
+            caption: "Tags on a Grid card, and the tag panel",
+            alt: "Skagway Grid card with tag chips and the tag panel open",
+            hint: "Grid, pointer resting on one card. That card shows up to three tag chips and a +N count if more tags do not fit, plus the tag icon. The tag panel is open: library tags, a From the name group of dashed chips taken from the file or folder name, and a New tag field. Nothing in the panel is half-typed unless the field itself shows a new name.",
+          },
+          {
+            filename: "tag-rename.png",
+            caption: "Rename or delete a tag from the Inspector",
+            alt: "Skagway Inspector tag with the Rename Tag and Delete Tag menu",
+            hint: "Inspector TAGS section with at least one assigned tag. Right-click menu open on that tag, showing Rename Tag… and Delete Tag. The From the name row is visible above the New tag field if the file or folder name yields a suggestion.",
+          },
         ],
       },
       {
@@ -611,7 +634,7 @@ export const MANUAL_PAGES: ManualPage[] = [
           "Select two or more clips with ⌘-click, ⇧-click, A, or ⌘A. The Inspector shows an orange bar labeled N Videos Selected.",
           "Arrow through the view and press A on keepers. Earlier checkmarks stay. Focus moves; the set does not.",
           "Click one selected clip to inspect it alone. The bar turns light blue and shows that clip’s name. Click the same focused clip again, click N Videos on the light blue bar, or click the “N videos selected” pill, to edit the selection again.",
-          "Set a rating, a tag, or a custom value while the orange bar is up. Skagway writes that value onto every selected video.",
+          "Set a rating, a tag, or a custom value while the orange bar is up. Skagway writes that value onto every selected video. On the wall, rating or tagging a selected card does the same, even while the light blue bar is showing one clip. Rating or tagging a card that is not selected changes only that card.",
           "When the selected videos disagree, the field shows Multiple values. Setting a value replaces Multiple values on every clip in the selection.",
           "Click Clear on the orange bar, click the pill’s ✕, or press ⇧⌘A, to clear the selection.",
         ],
@@ -1001,6 +1024,8 @@ export const MANUAL_PAGES: ManualPage[] = [
                 ["⌘I", "Show or hide the Inspector."],
                 ["⌥⌘T", "Switch the Inspector preview between Still and Filmstrip."],
                 ["Return", "Edit the focused video’s Title."],
+                ["1–5", "Rate the Inspector’s current target, from one star to five."],
+                ["0", "Clear that rating."],
                 ["Esc", "Cancel Title editing, or stop playback."],
               ],
             },
