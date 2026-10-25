@@ -36,7 +36,7 @@ export type SkagwayRelease = {
   items?: SkagwayReleaseItem[];
 };
 
-/** Newest first. Only `[0]` uses `highlights`; older entries use `items`. */
+/** Newest first. The product page shows every entry that still has `highlights`. Older entries use `items`. */
 export const SKAGWAY_RELEASES: SkagwayRelease[] = [
   {
     version: "1.4.0",
@@ -88,26 +88,39 @@ export const SKAGWAY_RELEASES: SkagwayRelease[] = [
   },
   {
     version: "1.3.0",
-    items: [
+    highlights: [
       {
-        kind: "feature",
-        text: "Storyboard view — a six-frame collage for every video (⌘3). Click a frame to play from there.",
+        title: "Storyboard view",
+        body:
+          "A six-frame collage for every video (⌘3). Scan the library by eye; click a frame to play from there. Normal packing is the default; Compact fits more columns.",
+        homeLine: "Storyboard view — six frames per video (⌘3).",
+        learnMoreHref: "/skagway/manual/browse#storyboard-layout",
       },
       {
-        kind: "feature",
-        text: "Hide and show the Inspector (⌘I).",
+        title: "Hide and show the Inspector",
+        body:
+          "⌘I hides the Inspector so the library can fill the window. Show it again at the width you left it.",
+        homeLine: "Hide and show the Inspector (⌘I).",
+        learnMoreHref: "/skagway/manual/organize#hide-show-inspector",
       },
       {
-        kind: "feature",
-        text: "Rolodex-style scroll index beside the scrollbar.",
+        title: "Scroll index",
+        body:
+          "A rolodex-style chip beside the scrollbar as you scroll, labeled by whatever you sorted by.",
+        homeLine: "Rolodex-style scroll index beside the scrollbar.",
       },
       {
-        kind: "feature",
-        text: "Reconnect when a folder moves. Preview the matches, apply, undo if you need to.",
+        title: "Reconnect",
+        body:
+          "When a folder moves, point Skagway at the new location. Preview the matches, apply, undo if you need to.",
+        homeLine: "Reconnect when files have moved.",
+        learnMoreHref: "/skagway/manual/library#reconnect-missing-files",
       },
       {
-        kind: "feature",
-        text: "Filmstrip in the player — a strip of frames above the scrubber.",
+        title: "Filmstrip in the player",
+        body: "A strip of frames above the scrubber — seek by picture.",
+        homeLine: "Scrubber now includes a filmstrip.",
+        learnMoreHref: "/skagway/manual/playback#filmstrip-in-the-player",
       },
     ],
   },

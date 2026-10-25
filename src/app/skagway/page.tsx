@@ -54,7 +54,8 @@ export const metadata: Metadata = {
 
 const latestRelease = latestSkagwayRelease();
 const VERSION_LABEL = skagwayVersionLabel(SKAGWAY_DOWNLOAD_VERSION);
-const olderReleases = SKAGWAY_RELEASES.slice(1);
+const featuredReleases = SKAGWAY_RELEASES.filter((release) => release.highlights?.length);
+const olderReleases = SKAGWAY_RELEASES.filter((release) => !release.highlights?.length);
 
 type Feature = {
   title: string;
@@ -328,35 +329,39 @@ export default function SkagwayPage() {
             className="relative left-1/2 mt-16 w-screen max-w-[100vw] -translate-x-1/2 sm:mt-20"
           >
             <div className="border-y border-[#dccfb8] bg-[#f3efe6] px-6 py-12 sm:px-10 sm:py-14">
-              <div className="mx-auto max-w-6xl">
-                <p
-                  id="skagway-new-in-version"
-                  className="text-xs font-semibold tracking-[0.16em] text-[#9a5b14] uppercase"
-                >
-                  New in version {latestRelease.version}
-                </p>
-                <div className="mt-8 grid gap-10 sm:grid-cols-2 lg:gap-8">
-                  {latestRelease.highlights?.map((item) => (
-                    <div key={item.title}>
-                      <h2 className="font-display text-lg font-bold tracking-tight text-[#1a1a1a] sm:text-xl">
-                        {item.title}
-                      </h2>
-                      <p className="mt-3 text-sm leading-relaxed text-[#4b5563] sm:text-base">
-                        {item.body}
-                      </p>
-                      {item.learnMoreHref ? (
-                        <p className="mt-3 text-sm sm:text-base">
-                          <Link
-                            href={item.learnMoreHref}
-                            className="font-semibold text-[#9a5b14] transition-colors hover:text-[#7a490f]"
-                          >
-                            Learn more
-                          </Link>
-                        </p>
-                      ) : null}
+              <div className="mx-auto max-w-6xl space-y-14 sm:space-y-16">
+                {featuredReleases.map((release, index) => (
+                  <div key={release.version}>
+                    <p
+                      id={index === 0 ? "skagway-new-in-version" : undefined}
+                      className="text-xs font-semibold tracking-[0.16em] text-[#9a5b14] uppercase"
+                    >
+                      New in version {release.version}
+                    </p>
+                    <div className="mt-8 grid gap-10 sm:grid-cols-2 lg:gap-8">
+                      {release.highlights?.map((item) => (
+                        <div key={`${release.version}-${item.title}`}>
+                          <h2 className="font-display text-lg font-bold tracking-tight text-[#1a1a1a] sm:text-xl">
+                            {item.title}
+                          </h2>
+                          <p className="mt-3 text-sm leading-relaxed text-[#4b5563] sm:text-base">
+                            {item.body}
+                          </p>
+                          {item.learnMoreHref ? (
+                            <p className="mt-3 text-sm sm:text-base">
+                              <Link
+                                href={item.learnMoreHref}
+                                className="font-semibold text-[#9a5b14] transition-colors hover:text-[#7a490f]"
+                              >
+                                Learn more
+                              </Link>
+                            </p>
+                          ) : null}
+                        </div>
+                      ))}
                     </div>
-                  ))}
-                </div>
+                  </div>
+                ))}
               </div>
             </div>
           </section>
