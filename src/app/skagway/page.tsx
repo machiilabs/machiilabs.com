@@ -68,12 +68,12 @@ type Feature = {
 const features: Feature[] = [
   {
     title: "Your folders. Your files.",
-    body: "Point Skagway at the folders you already keep. It builds a fast catalog and thumbnails — nothing moves into a proprietary container.",
+    body: "Point Skagway at the folders you already keep. It builds a fast catalog and thumbnails — nothing moves into a proprietary container. Rate and tag from the card, without opening the Inspector.",
     screenshot: "explore-grid.png",
     screenshotAlt:
-      "Skagway grid view showing a large video library with thumbnails, durations, and ratings",
+      "Skagway grid view showing a large video library with thumbnails, durations, ratings, and tags",
     screenshotHint:
-      "Full window in Grid view with a well-populated library — rich thumbnails, a few rated videos, toolbar with Grid/List, Sort, Play All, and Search videos.",
+      "Full window in Grid view with a well-populated library. Cards show rating stars and up to three tags. Toolbar with Grid, List, and Storyboard, Sort, Play All, and Search videos.",
   },
   {
     title: "See inside. Play without leaving.",
