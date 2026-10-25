@@ -334,7 +334,7 @@ export default function SkagwayPage() {
                   id="skagway-new-in-version"
                   className="text-xs font-semibold tracking-[0.16em] text-[#9a5b14] uppercase"
                 >
-                  New in {featuredReleases.map((release) => release.version).join(" and ")}
+                  New in {latestRelease.version}
                 </p>
                 <div className="mt-8 grid gap-x-8 gap-y-6 sm:grid-cols-2">
                   {featuredReleases.flatMap((release) =>
