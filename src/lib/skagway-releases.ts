@@ -43,32 +43,27 @@ export const SKAGWAY_RELEASES: SkagwayRelease[] = [
     highlights: [
       {
         title: "Rate from the card",
-        body:
-          "Grid and Storyboard cards show stars. Click a star to rate that clip, and click it again to clear. Keys 1–5 rate, and 0 clears. Option-click a star to show that rating and every higher one. Option-click it again to clear.",
+        body: "Stars on the card, or keys 1–5. Option-click filters that rating and higher.",
         homeLine: "Rate from the card, or filter by stars with Option-click.",
       },
       {
         title: "Tags on the wall",
-        body:
-          "Cards show up to three tags on one row, and a count for the rest. Click a tag to take it off that clip. Option-click to show only clips with that tag. The tag icon appears under the pointer: the library’s tags, suggestions from the file name and folder, and a field for a new tag. Nothing is applied until you click, and nothing is uploaded.",
+        body: "Add, remove, and filter tags without opening the Inspector.",
         homeLine: "Tags on the wall — add, remove, and filter without the Inspector.",
       },
       {
         title: "A selection changes together",
-        body:
-          "Rating or tagging a selected clip applies to every selected video. Doing it on a clip that is not selected changes only that clip.",
+        body: "Rating or tagging a selected clip applies to every selected video.",
         homeLine: "Rate or tag a whole selection from one selected card.",
       },
       {
         title: "Rename or delete a tag",
-        body:
-          "Right-click a tag in the Inspector to rename it, or to delete it from the library. Delete asks first, then takes the tag off every clip. A click still only takes the tag off the clip you are tagging.",
+        body: "Right-click a tag in the Inspector.",
         homeLine: "Rename or delete a tag from the Inspector.",
       },
       {
         title: "The first card previews once",
-        body:
-          "The first time a Grid wall has a clip long enough to preview, that first card plays a short muted preview on its own. After that, the preview runs only while the pointer rests on a card.",
+        body: "The first Grid card plays a short muted preview on its own.",
         homeLine: "The first Grid card previews once, on its own.",
       },
     ],
@@ -91,34 +86,30 @@ export const SKAGWAY_RELEASES: SkagwayRelease[] = [
     highlights: [
       {
         title: "Storyboard view",
-        body:
-          "A six-frame collage for every video (⌘3). Scan the library by eye; click a frame to play from there. Normal packing is the default; Compact fits more columns.",
+        body: "Six frames per video (⌘3). Click a frame to play from there.",
         homeLine: "Storyboard view — six frames per video (⌘3).",
         learnMoreHref: "/skagway/manual/browse#storyboard-layout",
       },
       {
         title: "Hide and show the Inspector",
-        body:
-          "⌘I hides the Inspector so the library can fill the window. Show it again at the width you left it.",
+        body: "⌘I hides it, and shows it again at the width you left it.",
         homeLine: "Hide and show the Inspector (⌘I).",
         learnMoreHref: "/skagway/manual/organize#hide-show-inspector",
       },
       {
         title: "Scroll index",
-        body:
-          "A rolodex-style chip beside the scrollbar as you scroll, labeled by whatever you sorted by.",
+        body: "A label beside the scrollbar as you scroll.",
         homeLine: "Rolodex-style scroll index beside the scrollbar.",
       },
       {
         title: "Reconnect",
-        body:
-          "When a folder moves, point Skagway at the new location. Preview the matches, apply, undo if you need to.",
+        body: "Point Skagway at a folder that moved. Preview, apply, undo.",
         homeLine: "Reconnect when files have moved.",
         learnMoreHref: "/skagway/manual/library#reconnect-missing-files",
       },
       {
         title: "Filmstrip in the player",
-        body: "A strip of frames above the scrubber — seek by picture.",
+        body: "Frames above the scrubber. Seek by picture.",
         homeLine: "Scrubber now includes a filmstrip.",
         learnMoreHref: "/skagway/manual/playback#filmstrip-in-the-player",
       },
