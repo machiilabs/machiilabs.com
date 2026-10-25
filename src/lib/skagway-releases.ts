@@ -43,8 +43,8 @@ export const SKAGWAY_RELEASES: SkagwayRelease[] = [
     highlights: [
       {
         title: "Rate from the card",
-        body: "Stars on the card, or keys 1–5. Option-click filters that rating and higher.",
-        homeLine: "Rate from the card, or filter by stars with Option-click.",
+        body: "Stars on the card, or keys 1–5. Option-click filters that rating and higher. A selected clip rates or tags every selected video.",
+        homeLine: "Rate from the card. A selected clip changes the whole selection.",
       },
       {
         title: "Tags on the wall",
@@ -52,19 +52,9 @@ export const SKAGWAY_RELEASES: SkagwayRelease[] = [
         homeLine: "Tags on the wall — add, remove, and filter without the Inspector.",
       },
       {
-        title: "A selection changes together",
-        body: "Rating or tagging a selected clip applies to every selected video.",
-        homeLine: "Rate or tag a whole selection from one selected card.",
-      },
-      {
         title: "Rename or delete a tag",
         body: "Right-click a tag in the Inspector.",
         homeLine: "Rename or delete a tag from the Inspector.",
-      },
-      {
-        title: "The first card previews once",
-        body: "The first Grid card plays a short muted preview on its own.",
-        homeLine: "The first Grid card previews once, on its own.",
       },
     ],
   },
