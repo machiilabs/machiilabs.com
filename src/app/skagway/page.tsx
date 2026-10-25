@@ -357,14 +357,6 @@ export default function SkagwayPage() {
                     </div>
                   ))}
                 </div>
-                {SKAGWAY_DOWNLOAD_VERSION === "1.3.1" ? (
-                  <p className="mt-10 text-sm leading-relaxed text-[#4b5563] sm:text-base">
-                    <span className="font-semibold text-[#1a1a1a]">1.3.1 update:</span> Delete
-                    Video now has a ⌘⌫ shortcut and a keyboard-friendly confirmation. In the
-                    Duplicates smart library, a video that’s no longer a duplicate now stays in
-                    view, marked Resolved.
-                  </p>
-                ) : null}
               </div>
             </div>
           </section>

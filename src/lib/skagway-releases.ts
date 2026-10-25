@@ -39,40 +39,75 @@ export type SkagwayRelease = {
 /** Newest first. Only `[0]` uses `highlights`; older entries use `items`. */
 export const SKAGWAY_RELEASES: SkagwayRelease[] = [
   {
-    version: "1.3.0",
+    version: "1.4.0",
     highlights: [
       {
-        title: "Storyboard view",
+        title: "Rate from the card",
         body:
-          "A six-frame collage for every video (⌘3). Scan the library by eye; click a frame to play from there. Normal packing is the default; Compact fits more columns.",
-        homeLine: "Storyboard view — six frames per video (⌘3).",
-        learnMoreHref: "/skagway/manual/browse#storyboard-layout",
+          "Grid and Storyboard cards show stars. Click a star to rate that clip, and click it again to clear. Keys 1–5 rate, and 0 clears. Option-click a star to show that rating and every higher one. Option-click it again to clear.",
+        homeLine: "Rate from the card, or filter by stars with Option-click.",
       },
       {
-        title: "Hide and show the Inspector",
+        title: "Tags on the wall",
         body:
-          "⌘I hides the Inspector so the library can fill the window. Show it again at the width you left it.",
-        homeLine: "Hide and show the Inspector (⌘I).",
-        learnMoreHref: "/skagway/manual/organize#hide-show-inspector",
+          "Cards show up to three tags on one row, and a count for the rest. Click a tag to take it off that clip. Option-click to show only clips with that tag. The tag icon appears under the pointer: the library’s tags, suggestions from the file name and folder, and a field for a new tag. Nothing is applied until you click, and nothing is uploaded.",
+        homeLine: "Tags on the wall — add, remove, and filter without the Inspector.",
       },
       {
-        title: "Scroll index",
+        title: "A selection changes together",
         body:
-          "A rolodex-style chip beside the scrollbar as you scroll, labeled by whatever you sorted by.",
-        homeLine: "Rolodex-style scroll index beside the scrollbar.",
+          "Rating or tagging a selected clip applies to every selected video. Doing it on a clip that is not selected changes only that clip.",
+        homeLine: "Rate or tag a whole selection from one selected card.",
       },
       {
-        title: "Reconnect",
+        title: "Rename or delete a tag",
         body:
-          "When a folder moves, point Skagway at the new location. Preview the matches, apply, undo if you need to.",
-        homeLine: "Reconnect when files have moved.",
-        learnMoreHref: "/skagway/manual/library#reconnect-missing-files",
+          "Right-click a tag in the Inspector to rename it, or to delete it from the library. Delete asks first, then takes the tag off every clip. A click still only takes the tag off the clip you are tagging.",
+        homeLine: "Rename or delete a tag from the Inspector.",
       },
       {
-        title: "Filmstrip in the player",
-        body: "A strip of frames above the scrubber — seek by picture.",
-        homeLine: "Scrubber now includes a filmstrip.",
-        learnMoreHref: "/skagway/manual/playback#filmstrip-in-the-player",
+        title: "The first card previews once",
+        body:
+          "The first time a Grid wall has a clip long enough to preview, that first card plays a short muted preview on its own. After that, the preview runs only while the pointer rests on a card.",
+        homeLine: "The first Grid card previews once, on its own.",
+      },
+    ],
+  },
+  {
+    version: "1.3.1",
+    items: [
+      {
+        kind: "feature",
+        text: "Delete Video is ⌘⌫, with a keyboard-friendly confirmation that names the files.",
+      },
+      {
+        kind: "feature",
+        text: "In Duplicates, a video that’s no longer a duplicate stays in view, marked Resolved.",
+      },
+    ],
+  },
+  {
+    version: "1.3.0",
+    items: [
+      {
+        kind: "feature",
+        text: "Storyboard view — a six-frame collage for every video (⌘3). Click a frame to play from there.",
+      },
+      {
+        kind: "feature",
+        text: "Hide and show the Inspector (⌘I).",
+      },
+      {
+        kind: "feature",
+        text: "Rolodex-style scroll index beside the scrollbar.",
+      },
+      {
+        kind: "feature",
+        text: "Reconnect when a folder moves. Preview the matches, apply, undo if you need to.",
+      },
+      {
+        kind: "feature",
+        text: "Filmstrip in the player — a strip of frames above the scrubber.",
       },
     ],
   },
