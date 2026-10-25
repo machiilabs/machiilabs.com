@@ -99,6 +99,28 @@ export const SKAGWAY_RELEASES: SkagwayRelease[] = [
         learnMoreHref: "/skagway/manual/playback#filmstrip-in-the-player",
       },
     ],
+    items: [
+      {
+        kind: "feature",
+        text: "Storyboard view — six frames per video (⌘3). Click a frame to play from there.",
+      },
+      {
+        kind: "feature",
+        text: "Hide and show the Inspector (⌘I).",
+      },
+      {
+        kind: "feature",
+        text: "A label beside the scrollbar as you scroll.",
+      },
+      {
+        kind: "feature",
+        text: "Reconnect when a folder moves. Preview, apply, undo.",
+      },
+      {
+        kind: "feature",
+        text: "Filmstrip in the player — frames above the scrubber.",
+      },
+    ],
   },
   {
     version: "1.2.0",
