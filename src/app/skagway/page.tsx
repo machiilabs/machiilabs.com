@@ -54,7 +54,8 @@ export const metadata: Metadata = {
 
 const latestRelease = latestSkagwayRelease();
 const VERSION_LABEL = skagwayVersionLabel(SKAGWAY_DOWNLOAD_VERSION);
-const olderReleases = SKAGWAY_RELEASES.slice(1);
+const featuredReleases = SKAGWAY_RELEASES.filter((release) => release.highlights?.length);
+const olderReleases = SKAGWAY_RELEASES.filter((release) => !release.highlights?.length);
 
 type Feature = {
   title: string;
@@ -67,12 +68,12 @@ type Feature = {
 const features: Feature[] = [
   {
     title: "Your folders. Your files.",
-    body: "Point Skagway at the folders you already keep. It builds a fast catalog and thumbnails — nothing moves into a proprietary container.",
+    body: "Point Skagway at the folders you already keep. It builds a fast catalog and thumbnails — nothing moves into a proprietary container. Rate and tag from the card, without opening the Inspector.",
     screenshot: "explore-grid.png",
     screenshotAlt:
-      "Skagway grid view showing a large video library with thumbnails, durations, and ratings",
+      "Skagway grid view showing a large video library with thumbnails, durations, ratings, and tags",
     screenshotHint:
-      "Full window in Grid view with a well-populated library — rich thumbnails, a few rated videos, toolbar with Grid/List, Sort, Play All, and Search videos.",
+      "Full window in Grid view with a well-populated library. Cards show rating stars and up to three tags. Toolbar with Grid, List, and Storyboard, Sort, Play All, and Search videos.",
   },
   {
     title: "See inside. Play without leaving.",
@@ -333,38 +334,38 @@ export default function SkagwayPage() {
                   id="skagway-new-in-version"
                   className="text-xs font-semibold tracking-[0.16em] text-[#9a5b14] uppercase"
                 >
-                  New in version {latestRelease.version}
+                  New in {latestRelease.version}
                 </p>
-                <div className="mt-8 grid gap-10 sm:grid-cols-2 lg:gap-8">
-                  {latestRelease.highlights?.map((item) => (
-                    <div key={item.title}>
-                      <h2 className="font-display text-lg font-bold tracking-tight text-[#1a1a1a] sm:text-xl">
-                        {item.title}
-                      </h2>
-                      <p className="mt-3 text-sm leading-relaxed text-[#4b5563] sm:text-base">
-                        {item.body}
-                      </p>
-                      {item.learnMoreHref ? (
-                        <p className="mt-3 text-sm sm:text-base">
-                          <Link
-                            href={item.learnMoreHref}
-                            className="font-semibold text-[#9a5b14] transition-colors hover:text-[#7a490f]"
-                          >
-                            Learn more
-                          </Link>
+                <div className="mt-8 grid gap-x-8 gap-y-6 sm:grid-cols-2">
+                  {featuredReleases.flatMap((release) =>
+                    (release.highlights ?? []).map((item) => (
+                      <div key={`${release.version}-${item.title}`}>
+                        <h2 className="font-display text-lg font-bold tracking-tight text-[#1a1a1a]">
+                          {item.title}
+                        </h2>
+                        <p className="mt-1 text-sm leading-relaxed text-[#4b5563] sm:text-base">
+                          {item.body}
+                          {item.learnMoreHref ? (
+                            <>
+                              {" "}
+                              <Link
+                                href={item.learnMoreHref}
+                                className="font-semibold text-[#9a5b14] transition-colors hover:text-[#7a490f]"
+                              >
+                                Learn more
+                              </Link>
+                            </>
+                          ) : null}
                         </p>
-                      ) : null}
-                    </div>
-                  ))}
+                      </div>
+                    )),
+                  )}
                 </div>
-                {SKAGWAY_DOWNLOAD_VERSION === "1.3.1" ? (
-                  <p className="mt-10 text-sm leading-relaxed text-[#4b5563] sm:text-base">
-                    <span className="font-semibold text-[#1a1a1a]">1.3.1 update:</span> Delete
-                    Video now has a ⌘⌫ shortcut and a keyboard-friendly confirmation. In the
-                    Duplicates smart library, a video that’s no longer a duplicate now stays in
-                    view, marked Resolved.
-                  </p>
-                ) : null}
+                <p className="mt-10 text-sm leading-relaxed text-[#4b5563] sm:text-base">
+                  <span className="font-semibold text-[#1a1a1a]">1.4.1 update:</span> The extra
+                  “+N” in the middle of a tag row is gone. The count for tags that do not fit
+                  stays at the end of the row.
+                </p>
               </div>
             </div>
           </section>

@@ -27,7 +27,7 @@ export const GUIDE_PAGES: ManualPage[] = [
     screenshotCaption: "The Storyboard layout: six frames from each clip",
     screenshotAlt: "Skagway Storyboard layout with six-frame collages",
     screenshotHint:
-      "Storyboard layout (⌘3) of a populated library. Several six-frame collages visible. One collage focused. Playback not started.",
+      "Storyboard layout (⌘3) of a populated library. Several six-frame collages visible, with rating stars and tags under at least two of them. One collage focused. Playback not started.",
     sections: [
       {
         title: "Look at frames, then search",
@@ -54,7 +54,7 @@ export const GUIDE_PAGES: ManualPage[] = [
     part: "tasks",
     blurb: "Describe your clips now, so you can find them later.",
     summary:
-      "Filters, search, and smart collections can only work with what Skagway knows about a clip, and a filename tells it very little. Every star, tag, and custom value you add in the Inspector is something you can filter, search, and sort by later. A few minutes of tagging now saves scrolling through the whole library next time.",
+      "Filters, search, and smart collections can only work with what Skagway knows about a clip, and a filename tells it very little. Stars and tags on a Grid or Storyboard card, and the same fields in the Inspector, are something you can filter, search, and sort by later. A few minutes of tagging now saves scrolling through the whole library next time.",
     screenshot: "organize.png",
     screenshotCaption: "Rating, tags, and custom fields in the Inspector",
     screenshotAlt: "Skagway Inspector with rating, tags, and the display title",
@@ -62,12 +62,13 @@ export const GUIDE_PAGES: ManualPage[] = [
       {
         title: "Rate and tag in the Inspector",
         intro:
-          "Press ⌘I if the Inspector is hidden. Whatever you set applies to the focused clip, or to every clip in the batch selection. To make one, see Build a selection (work on videos together).",
+          "On Grid and Storyboard, the card is enough for a star or a tag. Open the Inspector (⌘I) when you want the suggestions, a new tag, or a rename. Whatever you set in the Inspector applies to the focused clip, or to every clip in the batch selection. To make one, see Build a selection (work on videos together).",
         steps: [
-          "Focus a clip. Under RATING, click a star. Click the same star again to clear it.",
-          "Under TAGS, click Add tags and choose a tag from the list. To make a new tag, type its name in the field under TAGS and press Return.",
-          "Click a tag chip to remove that tag from the clip.",
-          "To rate or tag many clips at once, select them first with ⌘-click, or press ⌘A for everything in the view. The bar turns orange, and whatever you set goes onto every selected clip.",
+          "On a Grid or Storyboard card, click a star to rate that clip, or click a tag to remove it. If the card is selected, every selected video changes. If it is not, only that clip changes. Option-click a star or a tag to filter instead.",
+          "Press 1–5 to rate the Inspector’s current target, or 0 to clear it. Edit → Rating does the same.",
+          "Under TAGS, click a suggestion in From the name, or click Add tags and choose a tag. To make a new tag, type its name in New tag and press Return.",
+          "Click a tag chip to remove that tag from the current target. Right-click a tag and choose Rename Tag… or Delete Tag to change it for the whole library.",
+          "To rate or tag many clips at once from the Inspector, select them first with ⌘-click, or press ⌘A for everything in the view. The bar turns orange, and whatever you set goes onto every selected clip.",
         ],
         note: "Ratings, tags, and batch edits are covered in full on the Organize page.",
         noteHref: "/skagway/manual/organize",
@@ -141,7 +142,7 @@ export const GUIDE_PAGES: ManualPage[] = [
           "Click a clip once to focus it. That does not select it.",
           "⌘-click a clip to add it to the selection or remove it. ⇧-click selects everything from the last click through this one. Press A to add or remove the focused clip.",
           "Press ⌘A to select every video in the current view. Filter or search first if “everything on screen” is larger than the job.",
-          "With two or more clips selected, a pill reads “N videos selected.” The Inspector title bar turns orange and reads N Videos Selected. A rating or tag you set there is written onto every selected clip.",
+          "With two or more clips selected, a pill reads “N videos selected.” The Inspector title bar turns orange and reads N Videos Selected. A rating or tag you set there, or on a selected card, is written onto every selected clip.",
           "Right-click any selected clip to act on the whole selection. Commands that can work on several videos, such as Move Files…, Add to Album, Export Metadata…, and Bulk Rename…, apply to every selected clip. Commands that only make sense for one video, such as Edit Title… and Rename File…, do not apply to the whole selection.",
           "Arrow keys move focus and leave the checkmarks where they are. That is how you walk the list and press A on the keepers.",
           "Click Clear on the orange bar, click the pill’s ✕, or press ⇧⌘A, when the job is done.",
@@ -160,7 +161,7 @@ export const GUIDE_PAGES: ManualPage[] = [
     part: "tasks",
     blurb: "The pane that rates, tags, and names the clip you are looking at.",
     summary:
-      "The Inspector is where a video stops being only a file. Title, stars, tags, bookmarks, and custom fields live here, on the clip, not in the filename. Hide the pane when you want the wall of videos. Show it when you are deciding what a clip is.",
+      "The Inspector is where a video stops being only a file. Title, stars, tags, bookmarks, and custom fields live on the clip, not in the filename. Rate and tag from the card when the Inspector is hidden. Show the pane when you want the suggestions, a rename, or the rest of the fields.",
     screenshot: "organize.png",
     screenshotCaption: "The Inspector, showing the focused clip",
     screenshotAlt: "Skagway Inspector with rating, tags, and the display title",
@@ -171,7 +172,7 @@ export const GUIDE_PAGES: ManualPage[] = [
           "Use it on one clip when you are logging a take. Use it on the orange bar when the same tag or rating belongs on a whole group. Title is the name Skagway sorts and searches. It can differ from the file name on disk.",
         steps: [
           "Press ⌘I, or click the Inspector button in the toolbar, to show or hide the pane.",
-          "Focus one clip. Under RATING, click a star. Click that same star again to clear it. Under TAGS, click a chip to remove it, or click Add tags and choose one. Type a new name and press Return to create a tag and assign it.",
+          "Focus one clip. Under RATING, click a star. Click that same star again to clear it. Under TAGS, click a chip to remove it, click a From the name suggestion, or click Add tags and choose one. Type a new name and press Return to create a tag and assign it. Right-click a tag to rename it or delete it from the library.",
           "Press Return, or right-click → Edit Title…, to change the display name. The file on disk keeps its name. Rename File… is the command that changes the name on disk.",
           "Select two or more clips first if the edit should hit all of them. The bar turns orange and reads N Videos Selected. The value you set replaces that field on every clip in the selection.",
           "Click one selected clip when you want to look at it alone. The bar turns light blue and shows that clip’s name. Click it again, or click N Videos, to go back to editing the set.",
