@@ -361,11 +361,6 @@ export default function SkagwayPage() {
                     )),
                   )}
                 </div>
-                <p className="mt-10 text-sm leading-relaxed text-[#4b5563] sm:text-base">
-                  <span className="font-semibold text-[#1a1a1a]">1.4.1 update:</span> The extra
-                  “+N” in the middle of a tag row is gone. The count for tags that do not fit
-                  stays at the end of the row.
-                </p>
               </div>
             </div>
           </section>
