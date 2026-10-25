@@ -291,7 +291,6 @@ export const MANUAL_PAGES: ManualPage[] = [
       "Skagway Grid layout with the toolbar: layout buttons, sort menu, Play All, and Search videos field",
     screenshotHint:
       "Populated Grid. Cards show rating stars and up to three tags, plus a +N count when more tags do not fit. Toolbar must show Grid, List, and Storyboard, the Sort menu and its direction arrow, Play All, Loop Play All, Search videos, and the video count. The pointer rests on one card so the tag icon is visible.",
-    screenshotNeedsUpdate: true,
     sections: [
       {
         title: "Grid and List",
@@ -349,7 +348,6 @@ export const MANUAL_PAGES: ManualPage[] = [
             caption: "The Storyboard layout: six frames from each clip",
             alt: "Skagway Storyboard layout with six-frame collages",
             hint: "Storyboard layout (⌘3) of a populated library. Several six-frame collages visible, with rating stars and up to three tags under at least two of them. The Storyboard toolbar control shows Normal or Compact. One collage focused (dashed ring or equivalent). Playback not started.",
-            needsUpdate: true,
           },
         ],
       },
@@ -554,7 +552,6 @@ export const MANUAL_PAGES: ManualPage[] = [
       "Skagway Inspector with rating stars, assigned tags, name suggestions, and custom fields",
     screenshotHint:
       "Selected video with the Inspector open: display Title, Subtitles picker, filled rating stars, at least one assigned tag, a From the name row of dashed suggestions taken from the file or folder name, and a custom field if defined.",
-    screenshotNeedsUpdate: true,
     sections: [
       {
         title: "Hide / Show Inspector",

@@ -28,7 +28,6 @@ export const GUIDE_PAGES: ManualPage[] = [
     screenshotAlt: "Skagway Storyboard layout with six-frame collages",
     screenshotHint:
       "Storyboard layout (⌘3) of a populated library. Several six-frame collages visible, with rating stars and tags under at least two of them. One collage focused. Playback not started.",
-    screenshotNeedsUpdate: true,
     sections: [
       {
         title: "Look at frames, then search",
@@ -59,7 +58,6 @@ export const GUIDE_PAGES: ManualPage[] = [
     screenshot: "organize.png",
     screenshotCaption: "Rating, tags, and custom fields in the Inspector",
     screenshotAlt: "Skagway Inspector with rating, tags, and the display title",
-    screenshotNeedsUpdate: true,
     sections: [
       {
         title: "Rate and tag in the Inspector",
@@ -167,7 +165,6 @@ export const GUIDE_PAGES: ManualPage[] = [
     screenshot: "organize.png",
     screenshotCaption: "The Inspector, showing the focused clip",
     screenshotAlt: "Skagway Inspector with rating, tags, and the display title",
-    screenshotNeedsUpdate: true,
     sections: [
       {
         title: "Read one clip, or edit the set",
