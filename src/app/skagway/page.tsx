@@ -55,7 +55,9 @@ export const metadata: Metadata = {
 const latestRelease = latestSkagwayRelease();
 const VERSION_LABEL = skagwayVersionLabel(SKAGWAY_DOWNLOAD_VERSION);
 const featuredReleases = SKAGWAY_RELEASES.filter((release) => release.highlights?.length);
-const olderReleases = SKAGWAY_RELEASES.filter((release) => !release.highlights?.length);
+const olderReleases = SKAGWAY_RELEASES.filter(
+  (release) => release.version !== latestRelease.version && release.items?.length,
+);
 
 type Feature = {
   title: string;
