@@ -39,17 +39,40 @@ export type SkagwayRelease = {
 /** Newest first. The product page shows every entry that still has `highlights`. Older entries use `items`. */
 export const SKAGWAY_RELEASES: SkagwayRelease[] = [
   {
-    version: "1.4.0",
+    version: "1.5.0",
     highlights: [
       {
-        title: "Rate and tag from the card",
-        body: "Stars, keys 1–5, and tags, without opening the Inspector. Option-click filters. A selected clip changes every selected video.",
-        homeLine: "Rate and tag from the card, including a whole selection.",
+        title: "Make a playable copy",
+        body: "The original stays where it is. Skagway saves an MP4 beside it, and Play uses that copy.",
+        homeLine: "Make a playable copy beside the original.",
       },
       {
-        title: "Rename or delete a tag",
-        body: "Right-click a tag in the Inspector.",
-        homeLine: "Rename or delete a tag from the Inspector.",
+        title: "Files this Mac cannot play",
+        body: "WMV, WebM, DivX and Xvid, MPEG, MXF, DNx, CineForm, JPEG 2000, and older Flash video can be made playable. A file Skagway cannot finish stays as it is. Those files can still get a thumbnail.",
+        homeLine: "Play files this Mac cannot open, including WMV, WebM, and MPEG.",
+      },
+      {
+        title: "Unplayable",
+        body: "That library replaces Corrupt. Convert to play on a card adds the video to the queue. The card says In Queue, then Processing with the percent.",
+        homeLine: "Unplayable replaces Corrupt, and Convert to play queues from the card.",
+      },
+      {
+        title: "Rename from parts",
+        body: "A bulk rename is built from text, fields, and a number, with the first file’s new name on screen. Undo stays available after the window closes.",
+        homeLine: "Build a bulk rename from parts, and undo it after closing.",
+      },
+    ],
+  },
+  {
+    version: "1.4.0",
+    items: [
+      {
+        kind: "feature",
+        text: "Rate and tag from the card. Stars, keys 1–5, and tags, without opening the Inspector. Option-click filters. A selected clip changes every selected video.",
+      },
+      {
+        kind: "feature",
+        text: "Rename or delete a tag from the Inspector.",
       },
     ],
   },
@@ -68,37 +91,6 @@ export const SKAGWAY_RELEASES: SkagwayRelease[] = [
   },
   {
     version: "1.3.0",
-    highlights: [
-      {
-        title: "Storyboard view",
-        body: "Six frames per video (⌘3). Click a frame to play from there.",
-        homeLine: "Storyboard view — six frames per video (⌘3).",
-        learnMoreHref: "/skagway/manual/browse#storyboard-layout",
-      },
-      {
-        title: "Hide and show the Inspector",
-        body: "⌘I hides it, and shows it again at the width you left it.",
-        homeLine: "Hide and show the Inspector (⌘I).",
-        learnMoreHref: "/skagway/manual/organize#hide-show-inspector",
-      },
-      {
-        title: "Scroll index",
-        body: "A label beside the scrollbar as you scroll.",
-        homeLine: "Rolodex-style scroll index beside the scrollbar.",
-      },
-      {
-        title: "Reconnect",
-        body: "Point Skagway at a folder that moved. Preview, apply, undo.",
-        homeLine: "Reconnect when files have moved.",
-        learnMoreHref: "/skagway/manual/library#reconnect-missing-files",
-      },
-      {
-        title: "Filmstrip in the player",
-        body: "Frames above the scrubber. Seek by picture.",
-        homeLine: "Scrubber now includes a filmstrip.",
-        learnMoreHref: "/skagway/manual/playback#filmstrip-in-the-player",
-      },
-    ],
     items: [
       {
         kind: "feature",

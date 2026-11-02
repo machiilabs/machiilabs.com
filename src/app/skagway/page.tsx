@@ -70,7 +70,7 @@ type Feature = {
 const features: Feature[] = [
   {
     title: "Your folders. Your files.",
-    body: "Point Skagway at the folders you already keep. It builds a fast catalog and thumbnails — nothing moves into a proprietary container. Rate and tag from the card, without opening the Inspector.",
+    body: "Point Skagway at the folders you already keep. It builds a fast catalog and thumbnails — nothing moves into a proprietary container. A file this Mac cannot play can be saved as an MP4 beside the original.",
     screenshot: "explore-grid.png",
     screenshotAlt:
       "Skagway grid view showing a large video library with thumbnails, durations, ratings, and tags",
