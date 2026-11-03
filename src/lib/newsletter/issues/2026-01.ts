@@ -65,8 +65,8 @@ const issue: NewsletterIssue = {
       image: {
         path: "2026-01/flasher-wizard.jpg",
         width: 1200,
-        height: 1034,
-        alt: "15CE Flasher’s step-by-step wizard with a diagram of the pogo cable on the calculator",
+        height: 1012,
+        alt: "15CE Flasher 1.4.1’s first step: a diagram of the pogo cable seated in the calculator and plugged into a Mac",
       },
       intro:
         "Updating a Collector’s Edition calculator used to mean command-line tools and guesswork. 15CE Flasher walks you through every step over the official pogo cable, available from The Calculator Store. It works on the HP 15c and 16c Collector’s Editions and the post-2015 HP 12c.",
