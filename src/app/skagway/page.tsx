@@ -70,7 +70,7 @@ type Feature = {
 const features: Feature[] = [
   {
     title: "Your folders. Your files.",
-    body: "Point Skagway at the folders you already keep. It builds a fast catalog and thumbnails — nothing moves into a proprietary container. Rate and tag from the card, without opening the Inspector.",
+    body: "Point Skagway at the folders you already keep. It builds a fast catalog and thumbnails — nothing moves into a proprietary container. Convert natively unplayable files into playable copies. Many video formats are supported.",
     screenshot: "explore-grid.png",
     screenshotAlt:
       "Skagway grid view showing a large video library with thumbnails, durations, ratings, and tags",
@@ -330,7 +330,7 @@ export default function SkagwayPage() {
             aria-labelledby="skagway-new-in-version"
             className="relative left-1/2 mt-16 w-screen max-w-[100vw] -translate-x-1/2 sm:mt-20"
           >
-            <div className="border-y border-[#dccfb8] bg-[#f3efe6] px-6 py-12 sm:px-10 sm:py-14">
+            <div className="border-y border-[#dccfb8] bg-[#f3efe6] px-6 py-6 sm:px-10 sm:py-8">
               <div className="mx-auto max-w-6xl">
                 <p
                   id="skagway-new-in-version"
@@ -359,6 +359,19 @@ export default function SkagwayPage() {
                             </>
                           ) : null}
                         </p>
+                        {item.details?.length ? (
+                          <ul className="mt-2 space-y-1.5 text-sm leading-relaxed text-[#4b5563] sm:text-base">
+                            {item.details.map((line) => (
+                              <li key={line} className="flex gap-2.5">
+                                <span
+                                  aria-hidden
+                                  className="mt-2 size-1.5 shrink-0 rounded-full bg-[#c4a574]"
+                                />
+                                {line}
+                              </li>
+                            ))}
+                          </ul>
+                        ) : null}
                       </div>
                     )),
                   )}

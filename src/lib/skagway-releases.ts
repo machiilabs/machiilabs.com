@@ -15,6 +15,8 @@ export type SkagwayReleaseHighlight = {
   title: string;
   /** Paragraph on /skagway (newest release only). */
   body: string;
+  /** Extra lines under the paragraph on /skagway only. */
+  details?: string[];
   /** One line on the home page. Defaults to title when omitted. */
   homeLine?: string;
   /** Optional link to a manual section (shown on /skagway only). */
@@ -39,17 +41,43 @@ export type SkagwayRelease = {
 /** Newest first. The product page shows every entry that still has `highlights`. Older entries use `items`. */
 export const SKAGWAY_RELEASES: SkagwayRelease[] = [
   {
-    version: "1.4.0",
+    version: "1.5.0",
     highlights: [
       {
-        title: "Rate and tag from the card",
-        body: "Stars, keys 1–5, and tags, without opening the Inspector. Option-click filters. A selected clip changes every selected video.",
-        homeLine: "Rate and tag from the card, including a whole selection.",
+        title: "Make a playable copy",
+        body: "Convert natively unplayable files into playable copies. Many video formats are supported.",
+        details: [
+          "Your original file stays in the catalog. The converted MP4 copy is played.",
+          "The Corrupt smart library is renamed Unplayable.",
+        ],
+        homeLine: "Convert natively unplayable files into playable copies. Many video formats are supported.",
       },
       {
-        title: "Rename or delete a tag",
-        body: "Right-click a tag in the Inspector.",
-        homeLine: "Rename or delete a tag from the Inspector.",
+        title: "Bulk Rename",
+        body: "Usability enhancements, templates, and undo.",
+        homeLine: "Bulk Rename adds usability enhancements, templates, and undo.",
+      },
+    ],
+  },
+  {
+    version: "1.4.1",
+    items: [
+      {
+        kind: "bug",
+        text: "The extra “+N” in the middle of a tag row is gone. The count for tags that do not fit stays at the end of the row.",
+      },
+    ],
+  },
+  {
+    version: "1.4.0",
+    items: [
+      {
+        kind: "feature",
+        text: "Rate and tag from the card. Stars, keys 1–5, and tags, without opening the Inspector. Option-click filters. A selected clip changes every selected video.",
+      },
+      {
+        kind: "feature",
+        text: "Rename or delete a tag from the Inspector.",
       },
     ],
   },
@@ -68,37 +96,6 @@ export const SKAGWAY_RELEASES: SkagwayRelease[] = [
   },
   {
     version: "1.3.0",
-    highlights: [
-      {
-        title: "Storyboard view",
-        body: "Six frames per video (⌘3). Click a frame to play from there.",
-        homeLine: "Storyboard view — six frames per video (⌘3).",
-        learnMoreHref: "/skagway/manual/browse#storyboard-layout",
-      },
-      {
-        title: "Hide and show the Inspector",
-        body: "⌘I hides it, and shows it again at the width you left it.",
-        homeLine: "Hide and show the Inspector (⌘I).",
-        learnMoreHref: "/skagway/manual/organize#hide-show-inspector",
-      },
-      {
-        title: "Scroll index",
-        body: "A label beside the scrollbar as you scroll.",
-        homeLine: "Rolodex-style scroll index beside the scrollbar.",
-      },
-      {
-        title: "Reconnect",
-        body: "Point Skagway at a folder that moved. Preview, apply, undo.",
-        homeLine: "Reconnect when files have moved.",
-        learnMoreHref: "/skagway/manual/library#reconnect-missing-files",
-      },
-      {
-        title: "Filmstrip in the player",
-        body: "Frames above the scrubber. Seek by picture.",
-        homeLine: "Scrubber now includes a filmstrip.",
-        learnMoreHref: "/skagway/manual/playback#filmstrip-in-the-player",
-      },
-    ],
     items: [
       {
         kind: "feature",

@@ -1,3 +1,4 @@
+import crypto from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
 import Image from "next/image";
@@ -97,6 +98,7 @@ export function ManualSteps({ steps }: { steps: ManualStep[] }) {
                 scale={screenshot.scale}
                 className="mt-3"
                 needsUpdate={screenshot.needsUpdate}
+                staleHash={screenshot.staleHash}
               />
             ) : null}
           </li>
@@ -106,20 +108,42 @@ export function ManualSteps({ steps }: { steps: ManualStep[] }) {
   );
 }
 
+function manualScreenshotPath(filename: string): string {
+  return path.join(process.cwd(), "public", "skagway", "manual", filename);
+}
+
 export function manualScreenshotExists(filename: string): boolean {
-  return fs.existsSync(
-    path.join(process.cwd(), "public", "skagway", "manual", filename),
-  );
+  return fs.existsSync(manualScreenshotPath(filename));
+}
+
+const screenshotHashCache = new Map<string, { mtimeMs: number; hash: string }>();
+
+/** SHA-256 of the PNG on disk. Cached until the file's mtime changes. */
+export function manualScreenshotHash(filename: string): string | null {
+  const filePath = manualScreenshotPath(filename);
+  if (!fs.existsSync(filePath)) return null;
+  const { mtimeMs } = fs.statSync(filePath);
+  const cached = screenshotHashCache.get(filePath);
+  if (cached && cached.mtimeMs === mtimeMs) return cached.hash;
+  const hash = crypto
+    .createHash("sha256")
+    .update(fs.readFileSync(filePath))
+    .digest("hex");
+  screenshotHashCache.set(filePath, { mtimeMs, hash });
+  return hash;
+}
+
+/** True while the file on disk is still the hashed outdated capture. */
+function screenshotStillStale(
+  filename: string,
+  staleHash: string | undefined,
+): boolean {
+  if (!staleHash) return true;
+  return manualScreenshotHash(filename) === staleHash;
 }
 
 function manualScreenshotSrc(filename: string): string {
-  const filePath = path.join(
-    process.cwd(),
-    "public",
-    "skagway",
-    "manual",
-    filename,
-  );
+  const filePath = manualScreenshotPath(filename);
   const version = fs.statSync(filePath).mtimeMs;
   return `/skagway/manual/${filename}?v=${Math.floor(version)}`;
 }
@@ -269,6 +293,7 @@ export function ManualFigure({
   scale = 1,
   className = "mt-8",
   needsUpdate = false,
+  staleHash,
 }: {
   screenshot: string;
   caption?: string;
@@ -277,20 +302,25 @@ export function ManualFigure({
   scale?: number;
   className?: string;
   needsUpdate?: boolean;
+  /** SHA-256 of the outdated PNG. A different file hides the update notice. */
+  staleHash?: string;
 }) {
   const exists = manualScreenshotExists(screenshot);
+  const stale = Boolean(
+    needsUpdate && exists && screenshotStillStale(screenshot, staleHash),
+  );
   const figureStyle =
     scale < 1 ? { width: `${Math.round(scale * 100)}%` } : undefined;
 
-  if (!exists || needsUpdate) {
+  if (!exists || stale) {
     return (
       <figure className={className} style={figureStyle}>
         <ManualShotBrief
           screenshot={screenshot}
           hint={hint}
-          stale={exists && needsUpdate}
+          stale={stale}
         />
-        {exists && needsUpdate ? (
+        {stale ? (
           <div className="mt-3 border border-[#e5e7eb] bg-white p-2 sm:p-3">
             <p className="mb-2 text-xs font-medium tracking-wide text-[#9ca3af] uppercase">
               Current capture (outdated)
@@ -331,6 +361,7 @@ export function ManualPageFigure({ page }: { page: ManualPage }) {
       hint={page.screenshotHint}
       scale={page.screenshotScale}
       needsUpdate={page.screenshotNeedsUpdate}
+      staleHash={page.screenshotStaleHash}
     />
   );
 }
@@ -418,6 +449,7 @@ export function ManualSectionScreenshots({
           scale={shot.scale}
           className="mt-0"
           needsUpdate={shot.needsUpdate}
+          staleHash={shot.staleHash}
         />
       ))}
     </div>

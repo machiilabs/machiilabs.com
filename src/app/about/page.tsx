@@ -33,7 +33,7 @@ export default function AboutPage() {
           </h2>
           <p className="mt-4 text-base leading-relaxed sm:text-lg">
             Software, for work or for play, should be powerful and pleasant to
-            use. It should not leave you shackled to a subscription.
+            use forever. It should not leave you shackled to a subscription.
           </p>
           <p className="mt-4 text-base leading-relaxed sm:text-lg">
             Premium features belong in the product itself, not behind another
@@ -41,7 +41,7 @@ export default function AboutPage() {
           </p>
           <p className="mt-4 text-base leading-relaxed sm:text-lg">
             We take everything we do seriously, and we make it with care and
-            attention. That is how we make software for you to keep.
+            attention. That is how we make software you will keep.
           </p>
         </section>
 

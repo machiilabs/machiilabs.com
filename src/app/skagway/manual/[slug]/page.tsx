@@ -8,6 +8,7 @@ import {
   manualPartLabel,
   manualPlainText,
 } from "../manual";
+import { BulkRenameGuide } from "../bulk-rename-guide";
 import { ManualInline } from "../manual-inline";
 import {
   ManualPageFigure,
@@ -72,11 +73,15 @@ export default async function SkagwayManualTopicPage({ params }: Props) {
 
       {page.slug === MANUAL_TASKS_OVERVIEW_SLUG ? <ManualTaskCards /> : null}
 
-      <div className="mt-10 space-y-10">
-        {page.sections.map((section) => (
-          <ManualSectionBlock key={section.title} section={section} />
-        ))}
-      </div>
+      {page.slug === "bulk-rename" ? (
+        <BulkRenameGuide />
+      ) : (
+        <div className="mt-10 space-y-10">
+          {page.sections.map((section) => (
+            <ManualSectionBlock key={section.title} section={section} />
+          ))}
+        </div>
+      )}
 
       <ManualPager prev={prev} next={next} />
     </ManualShell>

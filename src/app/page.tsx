@@ -25,14 +25,14 @@ const SHOW_HOME_JUMP_LINKS = false;
 export const metadata: Metadata = {
   title: "Mach II Labs",
   description:
-    "Independent Mac software lab. Skagway 1.4 — free video organizer for files already on your drives. Also: 15CE Flasher for HP 15c CE.",
+    "Independent Mac software lab. Skagway 1.5 — free video organizer for files already on your drives. Also: 15CE Flasher for HP 15c CE.",
   alternates: {
     canonical: "https://machiilabs.com",
   },
   openGraph: {
-    title: "Mach II Labs — Skagway 1.4",
+    title: "Mach II Labs — Skagway 1.5",
     description:
-      "Skagway 1.4 is out: rate and tag from the wall, without opening the Inspector. Free Mac video organizer for the files already on your drives.",
+      "Skagway 1.5 converts natively unplayable files into playable copies. Many video formats are supported. Free Mac video organizer for the files already on your drives.",
     url: "https://machiilabs.com",
     siteName: "Mach II Labs",
     images: [
@@ -46,9 +46,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Mach II Labs — Skagway 1.4",
+    title: "Mach II Labs — Skagway 1.5",
     description:
-      "Skagway 1.4 is out: rate and tag from the wall, without opening the Inspector.",
+      "Skagway 1.5 converts natively unplayable files into playable copies. Many video formats are supported.",
     images: ["/skagway/og.jpg"],
   },
 };
@@ -145,6 +145,20 @@ export default function Home() {
                 locking media into a proprietary container. And it&apos;s{" "}
                 <span className="font-semibold text-[#1a1a1a]">free forever</span>.
               </p>
+              <ul className="mt-5 grid gap-y-2">
+                {(latestSkagway.highlights ?? []).map((item) => (
+                  <li
+                    key={item.title}
+                    className="flex gap-2.5 text-sm leading-relaxed text-[#4b5563] sm:text-base"
+                  >
+                    <span
+                      aria-hidden
+                      className="mt-2 size-1.5 shrink-0 rounded-full bg-[#e8a045]"
+                    />
+                    {item.homeLine ?? item.title}
+                  </li>
+                ))}
+              </ul>
               <div className="mt-auto flex flex-wrap items-center gap-x-6 gap-y-3 pt-6">
                 <Link
                   href="/skagway"
