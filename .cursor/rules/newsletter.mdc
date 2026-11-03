@@ -1,0 +1,15 @@
+---
+description: Newsletter issues, corrections, and sends to subscribers. Use for any work on the Mach II Labs newsletter.
+alwaysApply: false
+---
+
+# Newsletter
+
+The newsletter has one process, and it lives in `.claude/skills/newsletter/SKILL.md`. Read that file and follow it exactly for any newsletter work: starting, editing, reviewing, sending, or correcting an issue. Don't keep a second copy of the process here, so the two can't drift.
+
+Short version of the rules that never bend:
+
+- Read the state first: `npm run newsletter status`.
+- Send only on the owner's word in that session.
+- One newsletter per calendar month. Only an emergency correction is exempt.
+- Issue files hold plain text only. The look lives in `src/lib/newsletter/render.ts`.

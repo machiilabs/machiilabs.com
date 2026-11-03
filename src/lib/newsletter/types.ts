@@ -1,14 +1,19 @@
 /**
- * One newsletter issue. The web page (`/newsletter/<slug>`), the HTML email,
- * and the plain-text email are all rendered from this, so they never disagree.
+ * Newsletter data. The web page (`/newsletter/<slug>`), the HTML email, and
+ * the plain-text email are all rendered from an issue, so they never disagree.
  *
- * An issue is a snapshot: it keeps its own copy and version numbers instead of
- * reading the live release data, so it still says what it said when it went out.
+ * Issues hold text, image names, and links only. The look lives in render.ts;
+ * each product's identity (name, icon, colors, link) lives in products.ts.
+ * Lifecycle (status, approval, sends) lives in registry.json.
+ *
+ * Process: .claude/skills/newsletter/SKILL.md. Plan: docs/newsletter-process-plan.md.
  */
 
+import type { NewsletterProductId } from "./products";
+
 export type NewsletterImage = {
-  /** File name in `public/newsletter/<slug>/`. */
-  file: string;
+  /** Path under `public/newsletter/`, e.g. "2026-01/skagway-library.jpg" or "shared/logo-mark.png". */
+  path: string;
   width: number;
   height: number;
   alt: string;
@@ -19,33 +24,28 @@ export type NewsletterPoint = {
   body: string;
 };
 
-export type NewsletterProduct = {
-  /** Small caps line above the name, e.g. "Video organizer · Mac · Free". */
-  eyebrow: string;
-  name: string;
+/** One product card. Everything that identifies the product comes from products.ts. */
+export type NewsletterProductCard = {
+  product: NewsletterProductId;
   /** One sentence on what the product is, for readers who don't know it yet. */
   tagline: string;
-  icon: NewsletterImage;
+  /** Screenshot or photo, 1200 px wide, in this issue's folder. */
   image: NewsletterImage;
   /** A short introduction for newcomers. */
   intro: string;
-  /** The product's main highlights. */
+  /** Three or four main highlights. */
   highlights: NewsletterPoint[];
-  /** Heading for the what's-new box, e.g. "New in 1.5". */
+  /** Heading for the what's-new box, e.g. "New in Skagway 1.5". */
   whatsNewTitle: string;
+  /** Two to four items. */
   whatsNew: NewsletterPoint[];
-  /** Line under the button, e.g. "macOS 26 or later". */
-  requirements: string;
-  cta: { label: string; path: string };
-  /** Card header tint. */
-  tint: string;
+  /** Button text, e.g. "Get Skagway 1.5". */
+  ctaLabel: string;
 };
 
 export type NewsletterIssue = {
-  /** `YYYY-NN`: the year and the issue's number within that year. */
+  /** `YYYY-NN`: the year it goes out and its number within that year. */
   slug: string;
-  /** Shown in the header, e.g. "No. 1 · November 2026". */
-  dateline: string;
   subject: string;
   /** Hidden line most inboxes show after the subject. */
   preheader: string;
@@ -53,7 +53,19 @@ export type NewsletterIssue = {
   subhead: string;
   greeting: string;
   intro: string[];
-  products: NewsletterProduct[];
+  products: NewsletterProductCard[];
   closing: string[];
   signature: string[];
+};
+
+/** An emergency correction to an issue that has already gone out. */
+export type NewsletterCorrection = {
+  /** The sent issue this corrects. */
+  issue: string;
+  /** Email subject. */
+  subject: string;
+  heading: string;
+  /** At most 600 characters in all, in one or two paragraphs. */
+  body: string[];
+  link?: { label: string; path: string };
 };

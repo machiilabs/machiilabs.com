@@ -64,7 +64,7 @@ The issue keeps its own copy and version numbers rather than reading `skagway-re
 - Every recipient's image URLs and "View in browser" link are identical. No per-person tokens appear anywhere except the unsubscribe link, so a page view or an image load can't be tied to a person. No open or click tracking.
 - `/privacy` gains a line saying newsletter images load from machiilabs.com and nothing tracks who opened what.
 
-### Sending: `scripts/send-mailing.py`
+### Sending: `scripts/send-mailing.py` (superseded by `docs/newsletter-process-plan.md`)
 
 - The draft file shrinks to `From:` and `Issue: 2026-01`.
 - The script fetches `/newsletter/2026-01/email` and `/email/text` from the site, takes the subject from the issue, and refuses to send unless the issue page itself answers 200. That guarantees "View in browser" works before anyone receives the email.

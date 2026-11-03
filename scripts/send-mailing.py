@@ -1,36 +1,33 @@
 #!/usr/bin/env python3
-"""Send a Mach II Labs announcement, one message per subscriber, through iCloud SMTP.
+"""Send a Mach II Labs newsletter issue or correction through iCloud SMTP, one message per subscriber.
 
-  send-mailing.py DRAFT LIST --dry-run       show the first message; sends nothing
-  send-mailing.py DRAFT LIST --test EMAIL    send one [Test] copy to EMAIL
-  send-mailing.py DRAFT LIST                 send to everyone (asks first)
+  send-mailing.py issue SLUG --list FILE --dry-run       show the first message; sends nothing
+  send-mailing.py issue SLUG --list FILE --test EMAIL    send one [Test] copy to EMAIL
+  send-mailing.py issue SLUG --list FILE                 send to the list (asks first)
+  send-mailing.py correction SLUG --list FILE ...        the same for an issue's correction
 
-DRAFT is one of two kinds:
+The process around this script is .claude/skills/newsletter/SKILL.md. Every
+send, test or real, first runs `npm run newsletter send-check`, which enforces
+the rules: approved and unchanged since approval, one newsletter a calendar
+month, one correction per issue within 30 days of it, and so on.
 
-  A newsletter issue. Two lines, and the site supplies the rest:
-      From: Mach II Labs <support@machiilabs.com>
-      Issue: 2026-01
-  The subject, HTML, and plain text come from machiilabs.com/newsletter/<issue>.
-  The issue page must be live first, so "View in browser" works. Use
-  --site http://localhost:3000 to preview a local issue with --dry-run or --test.
-
-  A plain announcement. "From:" and "Subject:" lines, a blank line, then the
-  body. Blank lines split paragraphs, a "---" line is a rule, and
-  [text](https://…) is a link.
-
-Either way, ~unsubscribe_token is replaced with each subscriber's token.
+The content comes from the live site (machiilabs.com/newsletter/SLUG/email),
+and must match what was approved byte for byte. --site points --dry-run and
+--test at a dev server; a real send only uses machiilabs.com.
 
 LIST: the admin page's "Generate mailing list" output, `email, token` per line.
+A correction goes only to people who got the issue and are still on the list.
 
 Sign-in comes from the Keychain. Set it up once (it prompts for the password):
   security add-generic-password -s machii-mailer -a YOUR_ICLOUD_LOGIN -w
 
-Each send is recorded in DRAFT.sent.log. A rerun skips anyone already sent,
-so after a stop (daily cap, network) just run the same command again.
+Progress is kept in ~/Documents/Mailings/SLUG/. A rerun skips anyone already
+sent, so after a stop (daily cap, network) run the same command again.
 """
 
 import argparse
-import html
+import hashlib
+import json
 import re
 import smtplib
 import ssl
@@ -44,10 +41,14 @@ from datetime import datetime, timedelta, timezone
 from email.message import EmailMessage
 from email.utils import formatdate, make_msgid, parseaddr
 from pathlib import Path
-from typing import NamedTuple
 
-SMTP_HOST, SMTP_PORT = "smtp.mail.me.com", 587
+ROOT = Path(__file__).resolve().parent.parent
+REGISTRY = ROOT / "src/lib/newsletter/registry.json"
+MAILINGS = Path.home() / "Documents/Mailings"
+
+SENDER = "Mach II Labs <support@machiilabs.com>"
 SITE = "https://machiilabs.com"
+SMTP_HOST, SMTP_PORT = "smtp.mail.me.com", 587
 KEYCHAIN_SERVICE = "machii-mailer"
 ONE_CLICK_URL = "https://machiilabs.com/api/mailing-list/unsubscribe?token={token}"
 PLACEHOLDER = "~unsubscribe_token"
@@ -60,80 +61,10 @@ LINE_RE = re.compile(
     r"([0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12})$",
     re.I,
 )
-LINK_RE = re.compile(r"\[([^\]]+)\]\((https?://[^)\s]+)\)")
-ISSUE_RE = re.compile(r"^\d{4}-\d{2}$")
-
-
-class Mailing(NamedTuple):
-    """What every subscriber gets, before their token is filled in."""
-    subject: str
-    text: str
-    html: str
 
 
 def fail(message):
     sys.exit(f"send-mailing: {message}")
-
-
-def read_draft(path):
-    """Returns (sender, issue, mailing): an issue slug for a newsletter, or the mailing itself."""
-    head, sep, body = path.read_text(encoding="utf-8").strip().partition("\n\n")
-    headers = {}
-    for line in head.splitlines():
-        key, _, value = line.partition(":")
-        headers[key.strip().lower()] = value.strip()
-    sender = headers.get("from", "")
-    if "@" not in parseaddr(sender)[1]:
-        fail(f"{path}: needs a From: line with an address")
-
-    issue = headers.get("issue", "")
-    if issue:
-        if not ISSUE_RE.match(issue):
-            fail(f"{path}: Issue: should look like 2026-01")
-        if body.strip() or headers.get("subject"):
-            fail(f"{path}: an Issue: draft gets its subject and body from the site; remove them")
-        return sender, issue, None
-
-    subject = headers.get("subject", "")
-    if not sep:
-        fail(f"{path}: put a blank line between the From/Subject lines and the body")
-    if not subject:
-        fail(f"{path}: needs a Subject: line (or an Issue: line for a newsletter)")
-    if PLACEHOLDER not in body:
-        fail(f"{path}: the body has no {PLACEHOLDER} for the unsubscribe link")
-    body = body.strip()
-    return sender, None, Mailing(subject, LINK_RE.sub(r"\1 (\2)", body) + "\n", to_html(body))
-
-
-def fetch(url):
-    request = urllib.request.Request(url, headers={"User-Agent": "send-mailing"})
-    try:
-        with urllib.request.urlopen(request, timeout=30) as response:
-            return response.status, response.headers, response.read().decode("utf-8")
-    except urllib.error.HTTPError as error:
-        return error.code, error.headers, ""
-    except urllib.error.URLError as error:
-        fail(f"can't reach {url}: {error.reason}")
-
-
-def fetch_issue(site, issue):
-    page = f"{site}/newsletter/{issue}"
-    status, _, _ = fetch(page)
-    if status != 200:
-        fail(f"{page} answered {status}. The issue page must be live first, so View in browser works.")
-    status, headers, html_part = fetch(f"{page}/email")
-    if status != 200:
-        fail(f"{page}/email answered {status}")
-    subject = urllib.parse.unquote(headers.get("X-Newsletter-Subject", ""))
-    if not subject:
-        fail(f"{page}/email didn't name a subject")
-    status, _, text_part = fetch(f"{page}/email/text")
-    if status != 200:
-        fail(f"{page}/email/text answered {status}")
-    for part, name in ((html_part, "HTML"), (text_part, "plain text")):
-        if PLACEHOLDER not in part:
-            fail(f"the issue's {name} has no {PLACEHOLDER} for the unsubscribe link")
-    return Mailing(subject, text_part, html_part)
 
 
 def read_list(path):
@@ -154,37 +85,66 @@ def read_list(path):
     return subscribers
 
 
-def to_html(text):
-    blocks = []
-    for block in re.split(r"\n\s*\n", text):
-        if block.strip() == "---":
-            blocks.append("<hr>")
-            continue
-        escaped = LINK_RE.sub(r'<a href="\2">\1</a>', html.escape(block.strip(), quote=False))
-        blocks.append("<p>" + escaped.replace("\n", "<br>\n") + "</p>")
-    return (
-        '<!doctype html><html><body style="font-family: -apple-system, Helvetica, '
-        'sans-serif; font-size: 15px; line-height: 1.5;">\n'
-        + "\n".join(blocks)
-        + "\n</body></html>\n"
-    )
+def send_check(slug, kind, test):
+    """The rules, from scripts/newsletter.ts. Returns its verdict."""
+    args = ["npx", "tsx", "scripts/newsletter.ts", "send-check", slug]
+    if kind == "correction":
+        args.append("--correction")
+    if test:
+        args.append("--test")
+    result = subprocess.run(args, cwd=ROOT, capture_output=True, text=True)
+    try:
+        return json.loads(result.stdout.strip().splitlines()[-1])
+    except (IndexError, json.JSONDecodeError):
+        fail(f"send-check didn't answer:\n{result.stderr.strip() or result.stdout.strip()}")
 
 
-def build_message(sender, mailing, recipient, token, test=False):
+def newsletter(*args):
+    subprocess.run(["npx", "tsx", "scripts/newsletter.ts", *args], cwd=ROOT, check=True)
+
+
+def fetch(url):
+    request = urllib.request.Request(url, headers={"User-Agent": "send-mailing"})
+    try:
+        with urllib.request.urlopen(request, timeout=30) as response:
+            return response.status, response.headers, response.read()
+    except urllib.error.HTTPError as error:
+        return error.code, error.headers, b""
+    except urllib.error.URLError as error:
+        fail(f"can't reach {url}: {error.reason}")
+
+
+def fetch_content(site, slug, kind):
+    page = f"{site}/newsletter/{slug}"
+    email = f"{page}/email" if kind == "issue" else f"{page}/correction/email"
+    status, _, _ = fetch(page)
+    if status != 200:
+        fail(f"{page} answered {status}. The page must be live first, so View in browser works.")
+    status, headers, html = fetch(email)
+    if status != 200:
+        fail(f"{email} answered {status}")
+    status, _, text = fetch(f"{email}/text")
+    if status != 200:
+        fail(f"{email}/text answered {status}")
+    subject = urllib.parse.unquote(headers.get("X-Newsletter-Subject", ""))
+    return subject, html, text
+
+
+def build_message(subject, text, html, recipient, token):
     quoted = urllib.parse.quote(token)
+    address = parseaddr(SENDER)[1]
     msg = EmailMessage()
-    msg["From"] = sender
+    msg["From"] = SENDER
     msg["To"] = recipient
-    msg["Subject"] = f"[Test] {mailing.subject}" if test else mailing.subject
+    msg["Subject"] = subject
     msg["Date"] = formatdate(localtime=True)
-    msg["Message-ID"] = make_msgid(domain=parseaddr(sender)[1].split("@")[1])
+    msg["Message-ID"] = make_msgid(domain=address.split("@")[1])
     msg["List-Unsubscribe"] = (
-        f"<{ONE_CLICK_URL.format(token=quoted)}>, "
-        f"<mailto:{parseaddr(sender)[1]}?subject=unsubscribe>"
+        f"<{ONE_CLICK_URL.format(token=quoted)}>, <mailto:{address}?subject=unsubscribe>"
     )
     msg["List-Unsubscribe-Post"] = "List-Unsubscribe=One-Click"
-    msg.set_content(mailing.text.replace(PLACEHOLDER, quoted))
-    msg.add_alternative(mailing.html.replace(PLACEHOLDER, quoted), subtype="html")
+    msg.set_content(text.replace(PLACEHOLDER, quoted))
+    msg.add_alternative(html.replace(PLACEHOLDER, quoted), subtype="html")
     return msg
 
 
@@ -217,19 +177,6 @@ def connect():
     return smtp
 
 
-def read_log(path):
-    sent, recent = set(), 0
-    if path.exists():
-        since = datetime.now(timezone.utc) - timedelta(days=1)
-        for line in path.read_text(encoding="utf-8").splitlines():
-            stamp, email, status = (line.split("\t") + ["", ""])[:3]
-            if status == "sent":
-                sent.add(email)
-                if datetime.fromisoformat(stamp) > since:
-                    recent += 1
-    return sent, recent
-
-
 def send_one(smtp, msg):
     """Send, reconnecting once if iCloud dropped the connection. Returns the connection."""
     try:
@@ -241,60 +188,131 @@ def send_one(smtp, msg):
         return smtp
 
 
+def read_log(path):
+    """{email: status} for everyone the log has tried; the latest attempt wins."""
+    statuses = {}
+    if path.exists():
+        for line in path.read_text(encoding="utf-8").splitlines():
+            _, email, status = (line.split("\t") + ["", ""])[:3]
+            statuses[email] = status
+    return statuses
+
+
+def sent_last_24_hours():
+    """Messages sent from any mailing, for iCloud's daily limit."""
+    since = datetime.now(timezone.utc) - timedelta(days=1)
+    total = 0
+    for log in MAILINGS.glob("*/*.log"):
+        for line in log.read_text(encoding="utf-8").splitlines():
+            stamp, _, status = (line.split("\t") + ["", ""])[:3]
+            if status == "sent" and datetime.fromisoformat(stamp) > since:
+                total += 1
+    return total
+
+
+def now_local():
+    return datetime.now().astimezone().isoformat(timespec="seconds")
+
+
+def unfinished_entry(registry, slug, kind):
+    return next((e for e in registry["sends"] if e["issue"] == slug and e["kind"] == kind and not e["finishedAt"]), None)
+
+
+def read_registry():
+    return json.loads(REGISTRY.read_text(encoding="utf-8"))
+
+
+def write_registry(registry):
+    REGISTRY.write_text(json.dumps(registry, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__.split("\n")[0])
-    parser.add_argument("draft", type=Path)
-    parser.add_argument("list", type=Path)
+    parser.add_argument("kind", choices=["issue", "correction"])
+    parser.add_argument("slug", help="the issue, e.g. 2026-01")
+    parser.add_argument("--list", required=True, type=Path, help="the admin page's mailing list")
     mode = parser.add_mutually_exclusive_group()
     mode.add_argument("--dry-run", action="store_true", help="show the first message; send nothing")
     mode.add_argument("--test", metavar="EMAIL", help="send one [Test] copy to EMAIL")
-    parser.add_argument("--site", default=SITE, help=f"where to fetch an issue from (default {SITE})")
+    parser.add_argument("--site", default=SITE, help=f"where to fetch from (default {SITE}); only for --dry-run and --test")
     args = parser.parse_args()
     site = args.site.rstrip("/")
+    real = not (args.dry_run or args.test)
+    if real and site != SITE:
+        fail(f"a real send only uses {SITE}; --site is for --dry-run and --test")
 
-    sender, issue, mailing = read_draft(args.draft)
     subscribers = read_list(args.list)
-    if issue:
-        if site != SITE and not (args.dry_run or args.test):
-            fail(f"send to the list only from {SITE}; --site is for --dry-run and --test")
-        mailing = fetch_issue(site, issue)
-    subject = mailing.subject
+    folder = MAILINGS / args.slug
+    folder.mkdir(parents=True, exist_ok=True)
+    log_path = folder / f"{args.kind}.log"
+
+    # The rules. A dry run reports them; anything that sends must pass them.
+    verdict = send_check(args.slug, args.kind, test=not real)
+    if not verdict["ok"]:
+        problems = "\n  ".join(verdict["problems"])
+        if not args.dry_run:
+            fail(f"can't send {args.kind} {args.slug}:\n  {problems}")
+        print(f"(not sendable yet:\n  {problems})\n")
+
+    # The content, from the site. From machiilabs.com it must be exactly what was approved.
+    subject, html, text = fetch_content(site, args.slug, args.kind)
+    if site == SITE:
+        served = (hashlib.sha256(html).hexdigest(), hashlib.sha256(text).hexdigest())
+        if served != (verdict["htmlSha256"], verdict["textSha256"]):
+            fail(f"{SITE} isn't serving the approved version of {args.slug}. Merge the approved pull request first.")
+    html, text = html.decode("utf-8"), text.decode("utf-8")
+
+    # Who gets it. A correction goes only to people who got the issue.
+    if args.kind == "correction":
+        got_issue = {e for e, s in read_log(folder / "issue.log").items() if s == "sent"}
+        if real and not got_issue:
+            fail(f"{folder / 'issue.log'} has no record of who got {args.slug}")
+        recipients = {e: t for e, t in subscribers.items() if e in got_issue}
+    else:
+        recipients = subscribers
 
     if args.dry_run:
-        email, token = next(iter(subscribers.items()))
-        msg = build_message(sender, mailing, email, token)
-        preview = args.draft.with_suffix(".preview.html")
+        email, token = next(iter(recipients.items()), next(iter(subscribers.items())))
+        msg = build_message(subject, text, html, email, token)
+        preview = folder / f"{args.kind}-preview.html"
         preview.write_text(msg.get_body(("html",)).get_content(), encoding="utf-8")
         for key in ("From", "To", "Subject", "List-Unsubscribe", "List-Unsubscribe-Post"):
             print(f"{key}: {msg[key]}")
         print("\n" + msg.get_body(("plain",)).get_content())
-        print(f"(dry run: {len(subscribers)} subscribers, nothing sent. HTML preview: {preview})")
+        print(f"(dry run: {len(recipients)} recipients, nothing sent. HTML preview: {preview})")
         return
 
     if args.test:
         email = args.test.strip().lower()
-        msg = build_message(sender, mailing, email, subscribers.get(email, TEST_TOKEN), test=True)
+        msg = build_message(f"[Test] {subject}", text, html, email, subscribers.get(email, TEST_TOKEN))
         send_one(connect(), msg).quit()
         print(f"Sent a test to {email}. Check it, then run without --test.")
         return
 
-    log_path = args.draft.with_suffix(".sent.log")
-    already, sent_today = read_log(log_path)
-    pending = [(e, t) for e, t in subscribers.items() if e not in already]
+    # The real send.
+    done = read_log(log_path)
+    pending = [(e, t) for e, t in recipients.items() if done.get(e) not in ("sent", "refused")]
     if not pending:
-        print(f"Everyone on the list already has this mailing (see {log_path.name}).")
-        return
-    room = DAILY_CAP - sent_today
+        fail(f"everyone has this {args.kind} already (see {log_path})")
+    room = DAILY_CAP - sent_last_24_hours()
     if room <= 0:
-        fail(f"{sent_today} sent in the last 24 hours; the cap is {DAILY_CAP}. Run again tomorrow.")
-
+        fail(f"{DAILY_CAP} sent in the last 24 hours; run the same command again tomorrow")
     batch = pending[:room]
-    note = f" ({len(already)} already sent)" if already else ""
-    later = f"; {len(pending) - len(batch)} wait for tomorrow's cap" if len(batch) < len(pending) else ""
-    answer = input(f'Send "{subject}" to {len(batch)} subscribers{note}{later}? [y/N] ')
+    resuming = f" (resuming; {len(recipients) - len(pending)} already done)" if verdict.get("resuming") else ""
+    later = f"; {len(pending) - len(batch)} wait for tomorrow" if len(batch) < len(pending) else ""
+    answer = input(f'Send "{subject}" to {len(batch)} recipients{resuming}{later}? [y/N] ')
     if answer.strip().lower() != "y":
         print("Nothing sent.")
         return
+
+    # The ledger holds the month's slot from the moment a send starts.
+    registry = read_registry()
+    if not unfinished_entry(registry, args.slug, args.kind):
+        registry["sends"].append({
+            "issue": args.slug, "kind": args.kind, "startedAt": now_local(),
+            "finishedAt": None, "recipients": len(recipients),
+        })
+        write_registry(registry)
 
     smtp = connect()
     sent = failed = in_a_row = 0
@@ -302,7 +320,7 @@ def main():
         for number, (email, token) in enumerate(batch, 1):
             status = "sent"
             try:
-                smtp = send_one(smtp, build_message(sender, mailing, email, token))
+                smtp = send_one(smtp, build_message(subject, text, html, email, token))
                 sent += 1
                 in_a_row = 0
             except smtplib.SMTPRecipientsRefused:
@@ -317,11 +335,23 @@ def main():
             log.flush()
             print(f"\r  {number}/{len(batch)} · {sent} sent · {failed} failed", end="", flush=True)
             if in_a_row == 3:
-                print(f"\nStopped: iCloud refused three in a row ({status}). Rerun later to resume.")
+                print(f"\nStopped: iCloud refused three in a row ({status}). Run the same command later to resume.")
                 break
             time.sleep(PAUSE_SECONDS)
     smtp.quit()
-    print(f"\nDone. Log: {log_path}")
+    print(f"\nLog: {log_path}")
+
+    # Finished once everyone has been sent to or refused for good.
+    done = read_log(log_path)
+    left = sum(done.get(e) not in ("sent", "refused") for e in recipients)
+    if left:
+        print(f"{left} still to send. Run the same command again to finish.")
+        return
+    registry = read_registry()
+    unfinished_entry(registry, args.slug, args.kind)["finishedAt"] = now_local()
+    write_registry(registry)
+    newsletter("freeze" if args.kind == "issue" else "correction-sent", args.slug)
+    print("Finished. Next: commit the registry and frozen copy in a pull request (the skill's close step).")
 
 
 if __name__ == "__main__":

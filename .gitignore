@@ -43,3 +43,6 @@ next-env.d.ts
 
 # Pond kit reference photos. Local only; this repo is public.
 /reference/pond-kits/
+
+# newsletter review screenshots (npm run newsletter snap)
+/.newsletter-review/

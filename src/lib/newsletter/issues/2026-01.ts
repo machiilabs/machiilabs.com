@@ -1,8 +1,7 @@
 import type { NewsletterIssue } from "../types";
 
-export const issue202601: NewsletterIssue = {
+const issue: NewsletterIssue = {
   slug: "2026-01",
-  dateline: "No. 1 · November 2026",
   subject: "New from Mach II Labs: Skagway 1.5 and 15CE Flasher 1.4",
   preheader:
     "Skagway makes playable copies of stubborn videos, and 15CE Flasher now recognizes your calculator’s firmware.",
@@ -15,12 +14,10 @@ export const issue202601: NewsletterIssue = {
   ],
   products: [
     {
-      eyebrow: "Video organizer · Mac · Free",
-      name: "Skagway",
+      product: "skagway",
       tagline: "A Mac video organizer for the files already on your drives.",
-      icon: { file: "skagway-icon.png", width: 112, height: 112, alt: "Skagway icon" },
       image: {
-        file: "skagway-library.jpg",
+        path: "2026-01/skagway-library.jpg",
         width: 1200,
         height: 574,
         alt: "Skagway’s grid view: a large video library with thumbnails, ratings, and tags",
@@ -60,17 +57,13 @@ export const issue202601: NewsletterIssue = {
           body: "Since 1.4, stars (keys 1–5) and tags work right on the card, without opening the Inspector.",
         },
       ],
-      requirements: "macOS 26 or later",
-      cta: { label: "Get Skagway 1.5", path: "/skagway" },
-      tint: "#eef3f8",
+      ctaLabel: "Get Skagway 1.5",
     },
     {
-      eyebrow: "Calculator firmware · Mac & Windows · Free",
-      name: "15CE Flasher",
+      product: "flasher",
       tagline: "A guided flasher for the HP 15c and 16c Collector’s Editions.",
-      icon: { file: "flasher-icon.png", width: 112, height: 112, alt: "15CE Flasher icon" },
       image: {
-        file: "flasher-wizard.jpg",
+        path: "2026-01/flasher-wizard.jpg",
         width: 1200,
         height: 1034,
         alt: "15CE Flasher’s step-by-step wizard with a diagram of the pogo cable on the calculator",
@@ -114,9 +107,7 @@ export const issue202601: NewsletterIssue = {
           body: "Windows 1.2 brings all of this to the PC.",
         },
       ],
-      requirements: "macOS 13+ · Windows 10/11 (64-bit) · official pogo cable",
-      cta: { label: "Get 15CE Flasher", path: "/flasher" },
-      tint: "#f8f1e8",
+      ctaLabel: "Get 15CE Flasher",
     },
   ],
   closing: [
@@ -124,3 +115,5 @@ export const issue202601: NewsletterIssue = {
   ],
   signature: ["Thanks for using our apps,", "Paul", "Mach II Labs"],
 };
+
+export default issue;
