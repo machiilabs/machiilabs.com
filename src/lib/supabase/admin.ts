@@ -1,7 +1,7 @@
 import { createClient } from "@supabase/supabase-js";
 
 /**
- * Service-role client for server routes that must write mailing-list rows.
+ * Service-role client for server routes that read or write mailing-list rows.
  * Never import this into client components.
  */
 export function createServiceClient() {

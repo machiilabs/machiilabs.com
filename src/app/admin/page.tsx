@@ -3,6 +3,7 @@ import Link from "next/link";
 import { requireAdmin } from "@/lib/supabase/auth";
 import { loadDownloadSummary } from "@/lib/load-download-dashboard";
 import { DownloadsCard } from "./downloads-card";
+import { MailingListCard } from "./mailing-list-card";
 import { signOutAdmin } from "./actions";
 
 export const metadata: Metadata = {
@@ -85,6 +86,8 @@ export default async function AdminDashboardPage() {
       </header>
 
       <DownloadsCard initial={summary} />
+
+      <MailingListCard />
 
       <section className="mt-10">
         <h2 className="font-display text-lg font-semibold text-snow">
