@@ -122,5 +122,5 @@ export const issue202601: NewsletterIssue = {
   closing: [
     "Questions, ideas, or a bug to report? Just reply to this email. It comes straight to us.",
   ],
-  signature: ["Thanks for using our apps,", "Paul Kleimeyer", "Mach II Labs"],
+  signature: ["Thanks for using our apps,", "Paul", "Mach II Labs"],
 };
