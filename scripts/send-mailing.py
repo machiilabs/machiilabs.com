@@ -5,9 +5,20 @@
   send-mailing.py DRAFT LIST --test EMAIL    send one [Test] copy to EMAIL
   send-mailing.py DRAFT LIST                 send to everyone (asks first)
 
-DRAFT: "From:" and "Subject:" lines, a blank line, then the body. Blank lines
-split paragraphs, a "---" line is a rule, [text](https://…) is a link, and
-~unsubscribe_token is replaced with each subscriber's token.
+DRAFT is one of two kinds:
+
+  A newsletter issue. Two lines, and the site supplies the rest:
+      From: Mach II Labs <support@machiilabs.com>
+      Issue: 2026-01
+  The subject, HTML, and plain text come from machiilabs.com/newsletter/<issue>.
+  The issue page must be live first, so "View in browser" works. Use
+  --site http://localhost:3000 to preview a local issue with --dry-run or --test.
+
+  A plain announcement. "From:" and "Subject:" lines, a blank line, then the
+  body. Blank lines split paragraphs, a "---" line is a rule, and
+  [text](https://…) is a link.
+
+Either way, ~unsubscribe_token is replaced with each subscriber's token.
 
 LIST: the admin page's "Generate mailing list" output, `email, token` per line.
 
@@ -26,13 +37,17 @@ import ssl
 import subprocess
 import sys
 import time
+import urllib.error
 import urllib.parse
+import urllib.request
 from datetime import datetime, timedelta, timezone
 from email.message import EmailMessage
 from email.utils import formatdate, make_msgid, parseaddr
 from pathlib import Path
+from typing import NamedTuple
 
 SMTP_HOST, SMTP_PORT = "smtp.mail.me.com", 587
+SITE = "https://machiilabs.com"
 KEYCHAIN_SERVICE = "machii-mailer"
 ONE_CLICK_URL = "https://machiilabs.com/api/mailing-list/unsubscribe?token={token}"
 PLACEHOLDER = "~unsubscribe_token"
@@ -46,6 +61,14 @@ LINE_RE = re.compile(
     re.I,
 )
 LINK_RE = re.compile(r"\[([^\]]+)\]\((https?://[^)\s]+)\)")
+ISSUE_RE = re.compile(r"^\d{4}-\d{2}$")
+
+
+class Mailing(NamedTuple):
+    """What every subscriber gets, before their token is filled in."""
+    subject: str
+    text: str
+    html: str
 
 
 def fail(message):
@@ -53,21 +76,64 @@ def fail(message):
 
 
 def read_draft(path):
-    head, sep, body = path.read_text(encoding="utf-8").partition("\n\n")
-    if not sep:
-        fail(f"{path}: put a blank line between the From/Subject lines and the body")
+    """Returns (sender, issue, mailing): an issue slug for a newsletter, or the mailing itself."""
+    head, sep, body = path.read_text(encoding="utf-8").strip().partition("\n\n")
     headers = {}
     for line in head.splitlines():
         key, _, value = line.partition(":")
         headers[key.strip().lower()] = value.strip()
-    sender, subject = headers.get("from", ""), headers.get("subject", "")
+    sender = headers.get("from", "")
     if "@" not in parseaddr(sender)[1]:
         fail(f"{path}: needs a From: line with an address")
+
+    issue = headers.get("issue", "")
+    if issue:
+        if not ISSUE_RE.match(issue):
+            fail(f"{path}: Issue: should look like 2026-01")
+        if body.strip() or headers.get("subject"):
+            fail(f"{path}: an Issue: draft gets its subject and body from the site; remove them")
+        return sender, issue, None
+
+    subject = headers.get("subject", "")
+    if not sep:
+        fail(f"{path}: put a blank line between the From/Subject lines and the body")
     if not subject:
-        fail(f"{path}: needs a Subject: line")
+        fail(f"{path}: needs a Subject: line (or an Issue: line for a newsletter)")
     if PLACEHOLDER not in body:
         fail(f"{path}: the body has no {PLACEHOLDER} for the unsubscribe link")
-    return sender, subject, body.strip()
+    body = body.strip()
+    return sender, None, Mailing(subject, LINK_RE.sub(r"\1 (\2)", body) + "\n", to_html(body))
+
+
+def fetch(url):
+    request = urllib.request.Request(url, headers={"User-Agent": "send-mailing"})
+    try:
+        with urllib.request.urlopen(request, timeout=30) as response:
+            return response.status, response.headers, response.read().decode("utf-8")
+    except urllib.error.HTTPError as error:
+        return error.code, error.headers, ""
+    except urllib.error.URLError as error:
+        fail(f"can't reach {url}: {error.reason}")
+
+
+def fetch_issue(site, issue):
+    page = f"{site}/newsletter/{issue}"
+    status, _, _ = fetch(page)
+    if status != 200:
+        fail(f"{page} answered {status}. The issue page must be live first, so View in browser works.")
+    status, headers, html_part = fetch(f"{page}/email")
+    if status != 200:
+        fail(f"{page}/email answered {status}")
+    subject = urllib.parse.unquote(headers.get("X-Newsletter-Subject", ""))
+    if not subject:
+        fail(f"{page}/email didn't name a subject")
+    status, _, text_part = fetch(f"{page}/email/text")
+    if status != 200:
+        fail(f"{page}/email/text answered {status}")
+    for part, name in ((html_part, "HTML"), (text_part, "plain text")):
+        if PLACEHOLDER not in part:
+            fail(f"the issue's {name} has no {PLACEHOLDER} for the unsubscribe link")
+    return Mailing(subject, text_part, html_part)
 
 
 def read_list(path):
@@ -104,13 +170,12 @@ def to_html(text):
     )
 
 
-def build_message(sender, subject, body, recipient, token):
+def build_message(sender, mailing, recipient, token, test=False):
     quoted = urllib.parse.quote(token)
-    text = body.replace(PLACEHOLDER, quoted)
     msg = EmailMessage()
     msg["From"] = sender
     msg["To"] = recipient
-    msg["Subject"] = subject
+    msg["Subject"] = f"[Test] {mailing.subject}" if test else mailing.subject
     msg["Date"] = formatdate(localtime=True)
     msg["Message-ID"] = make_msgid(domain=parseaddr(sender)[1].split("@")[1])
     msg["List-Unsubscribe"] = (
@@ -118,8 +183,8 @@ def build_message(sender, subject, body, recipient, token):
         f"<mailto:{parseaddr(sender)[1]}?subject=unsubscribe>"
     )
     msg["List-Unsubscribe-Post"] = "List-Unsubscribe=One-Click"
-    msg.set_content(LINK_RE.sub(r"\1 (\2)", text) + "\n")
-    msg.add_alternative(to_html(text), subtype="html")
+    msg.set_content(mailing.text.replace(PLACEHOLDER, quoted))
+    msg.add_alternative(mailing.html.replace(PLACEHOLDER, quoted), subtype="html")
     return msg
 
 
@@ -183,22 +248,32 @@ def main():
     mode = parser.add_mutually_exclusive_group()
     mode.add_argument("--dry-run", action="store_true", help="show the first message; send nothing")
     mode.add_argument("--test", metavar="EMAIL", help="send one [Test] copy to EMAIL")
+    parser.add_argument("--site", default=SITE, help=f"where to fetch an issue from (default {SITE})")
     args = parser.parse_args()
+    site = args.site.rstrip("/")
 
-    sender, subject, body = read_draft(args.draft)
+    sender, issue, mailing = read_draft(args.draft)
     subscribers = read_list(args.list)
+    if issue:
+        if site != SITE and not (args.dry_run or args.test):
+            fail(f"send to the list only from {SITE}; --site is for --dry-run and --test")
+        mailing = fetch_issue(site, issue)
+    subject = mailing.subject
 
     if args.dry_run:
         email, token = next(iter(subscribers.items()))
-        msg = build_message(sender, subject, body, email, token)
-        print(msg.as_string(policy=msg.policy.clone(max_line_length=200)))
-        print(f"\n(dry run: {len(subscribers)} subscribers, nothing sent)")
+        msg = build_message(sender, mailing, email, token)
+        preview = args.draft.with_suffix(".preview.html")
+        preview.write_text(msg.get_body(("html",)).get_content(), encoding="utf-8")
+        for key in ("From", "To", "Subject", "List-Unsubscribe", "List-Unsubscribe-Post"):
+            print(f"{key}: {msg[key]}")
+        print("\n" + msg.get_body(("plain",)).get_content())
+        print(f"(dry run: {len(subscribers)} subscribers, nothing sent. HTML preview: {preview})")
         return
 
     if args.test:
         email = args.test.strip().lower()
-        msg = build_message(sender, f"[Test] {subject}", body, email,
-                            subscribers.get(email, TEST_TOKEN))
+        msg = build_message(sender, mailing, email, subscribers.get(email, TEST_TOKEN), test=True)
         send_one(connect(), msg).quit()
         print(f"Sent a test to {email}. Check it, then run without --test.")
         return
@@ -227,7 +302,7 @@ def main():
         for number, (email, token) in enumerate(batch, 1):
             status = "sent"
             try:
-                smtp = send_one(smtp, build_message(sender, subject, body, email, token))
+                smtp = send_one(smtp, build_message(sender, mailing, email, token))
                 sent += 1
                 in_a_row = 0
             except smtplib.SMTPRecipientsRefused:
