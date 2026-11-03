@@ -32,7 +32,7 @@ If an unfinished send is listed, finishing it comes first: rerun the same `send-
 
 - **Send only on the owner's word in this session.** Never run a real send, or a test send, without the owner saying so here. Approving the test isn't permission to send to the list; ask, and wait for "send."
 - **One newsletter per calendar month.** The script refuses a second, with no override. Don't look for a way around it. Only an emergency correction can go out in the same month.
-- **The look lives in the renderer.** Issue files hold plain text, image names, and links only. Never put HTML, styles, or Markdown in an issue. If an issue needs something the design doesn't have (a new block type, a single-product layout, a different color), stop: that's a design change (see below).
+- **The look lives in the renderer.** Issue files hold plain text, image names, and links only. Never put HTML, styles, or Markdown in an issue. To link a phrase in a product card's intro (for example, the store that sells a needed accessory), list it in that card's `introLinks`. The phrase must appear in the intro, and the address must be https. Links anywhere else are a design change. If an issue needs something the design doesn't have (a new block type, a single-product layout, a different color), stop: that's a design change (see below).
 - **Work happens on a branch from `origin/main`.** `main` is the live site and only takes pull requests the owner merges (`.cursor/rules/production-main.mdc`).
 - **The owner's full name never appears.** Sign as in the previous issue ("Paul" / "Mach II Labs").
 - **Never edit `registry.json` or `frozen/` by hand.** Only `npm run newsletter …` and `send-mailing.py` write them.

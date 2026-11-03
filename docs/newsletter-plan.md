@@ -95,3 +95,4 @@ The Mac sending app is on hold until the first issue has gone out.
 
 - 2026-11-03: Built the issue data, the shared renderer, the three routes, and issue 2026-01's draft copy and images on `newsletter-2026-01`. Checked in WebKit at 760 px and 390 px. The email HTML is 19.6 KB (Gmail clips at 102 KB). The production build lists all three routes as dynamic.
 - Before sending: the 15CE Flasher screenshot shows version 1.1.0 and its old "will not flash other calculators" warning, which contradicts the issue's 16c and 12c news. It needs a current image.
+- 2026-11-03: Design addition, at the owner’s request. A product card can link phrases in its intro (`introLinks`), and the check confirms each phrase appears and the address is https. First use: 15CE Flasher’s intro links “The Calculator Store” to its pogo cable page, the same link the Flasher page uses.

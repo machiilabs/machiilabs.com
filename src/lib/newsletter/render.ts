@@ -17,6 +17,7 @@ import type {
   NewsletterCorrection,
   NewsletterImage,
   NewsletterIssue,
+  NewsletterLink,
   NewsletterPoint,
   NewsletterProductCard,
 } from "./types";
@@ -84,6 +85,22 @@ function img(origin: string, image: NewsletterImage, width: number, style = ""):
   );
 }
 
+/** Escapes `text` and links the first occurrence of each phrase. */
+function linked(text: string, links: readonly NewsletterLink[] = []): string {
+  let html = esc(text);
+  for (const link of links) {
+    html = html.replace(esc(link.text), `<a href="${esc(link.url)}" style="${LINK}">${esc(link.text)}</a>`);
+  }
+  return html;
+}
+
+/** Plain-text version: the address follows the phrase in parentheses. */
+function linkedText(text: string, links: readonly NewsletterLink[] = []): string {
+  let out = text;
+  for (const link of links) out = out.replace(link.text, `${link.text} (${link.url})`);
+  return out;
+}
+
 function spacer(px: number): string {
   return `<div style="height:${px}px;line-height:${px}px;font-size:0;">&nbsp;</div>`;
 }
@@ -128,7 +145,7 @@ ${eyebrow(product.eyebrow, COLOR.muted)}
 </td></tr>
 <tr><td style="padding:0;border-top:1px solid ${COLOR.border};border-bottom:1px solid ${COLOR.border};">${img(origin, card.image, CARD_IMAGE)}</td></tr>
 <tr><td class="card-pad" style="padding:22px 24px 26px;">
-<p style="margin:0;font-family:${FONT};font-size:16px;line-height:25px;color:${COLOR.text};">${esc(card.intro)}</p>
+<p style="margin:0;font-family:${FONT};font-size:16px;line-height:25px;color:${COLOR.text};">${linked(card.intro, card.introLinks)}</p>
 ${spacer(22)}
 ${eyebrow("Highlights", COLOR.muted)}
 ${spacer(10)}
@@ -309,7 +326,7 @@ export function renderNewsletterText(issue: NewsletterIssue, { origin, dateline 
       "",
       card.tagline,
       "",
-      card.intro,
+      linkedText(card.intro, card.introLinks),
       "",
       "Highlights",
       textPoints(card.highlights),

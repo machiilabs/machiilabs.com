@@ -199,6 +199,10 @@ function issueContentRules(issue: NewsletterIssue): Findings {
     if (!(card.product in NEWSLETTER_PRODUCTS)) errors.push(`${w}: unknown product`);
     length(`${w} tagline`, card.tagline, 80, errors);
     length(`${w} intro`, card.intro, 400, errors, 120);
+    for (const link of card.introLinks ?? []) {
+      if (!card.intro.includes(link.text)) errors.push(`${w} intro link: “${link.text}” doesn’t appear in the intro`);
+      if (!/^https:\/\/[^\s"<>]+$/.test(link.url)) errors.push(`${w} intro link: “${link.url}” must be an https:// address`);
+    }
     count(`${w} highlights`, card.highlights, 3, 4, errors);
     card.highlights.forEach((h, i) => {
       length(`${w} highlight ${i + 1} title`, h.title, 40, errors);
@@ -228,6 +232,7 @@ function issueContentRules(issue: NewsletterIssue): Findings {
       [`${c.product} tagline`, c.tagline], [`${c.product} intro`, c.intro],
       [`${c.product} what’s-new title`, c.whatsNewTitle], [`${c.product} button`, c.ctaLabel],
       [`${c.product} image alt`, c.image.alt],
+      ...(c.introLinks ?? []).map((l): [string, string] => [`${c.product} intro link`, l.text]),
       ...[...c.highlights, ...c.whatsNew].flatMap((h): [string, string][] => [
         [`${c.product} “${h.title}”`, h.title], [`${c.product} “${h.title}” body`, h.body],
       ]),

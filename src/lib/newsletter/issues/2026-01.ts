@@ -69,7 +69,13 @@ const issue: NewsletterIssue = {
         alt: "15CE Flasher’s step-by-step wizard with a diagram of the pogo cable on the calculator",
       },
       intro:
-        "Updating a Collector’s Edition calculator used to mean command-line tools and guesswork. 15CE Flasher walks you through every step over the official pogo cable. It works on the HP 15c and 16c Collector’s Editions and the post-2015 HP 12c.",
+        "Updating a Collector’s Edition calculator used to mean command-line tools and guesswork. 15CE Flasher walks you through every step over the official pogo cable, available from The Calculator Store. It works on the HP 15c and 16c Collector’s Editions and the post-2015 HP 12c.",
+      introLinks: [
+        {
+          text: "The Calculator Store",
+          url: "https://www.thecalculatorstore.com/p/data-cable-for-hp-calculators",
+        },
+      ],
       highlights: [
         {
           title: "A seven-step wizard",

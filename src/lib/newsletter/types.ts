@@ -19,6 +19,13 @@ export type NewsletterImage = {
   alt: string;
 };
 
+/** A link on a phrase that already appears in the text. Text stays plain; the renderer adds the link. */
+export type NewsletterLink = {
+  text: string;
+  /** An https:// address. */
+  url: string;
+};
+
 export type NewsletterPoint = {
   title: string;
   body: string;
@@ -33,6 +40,8 @@ export type NewsletterProductCard = {
   image: NewsletterImage;
   /** A short introduction for newcomers. */
   intro: string;
+  /** Phrases in `intro` to link, e.g. a store that sells a needed accessory. Each phrase must appear in `intro`. */
+  introLinks?: NewsletterLink[];
   /** Three or four main highlights. */
   highlights: NewsletterPoint[];
   /** Heading for the what's-new box, e.g. "New in Skagway 1.5". */
