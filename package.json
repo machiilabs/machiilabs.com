@@ -8,7 +8,7 @@
     "predev": "npm run manual:index",
     "prebuild": "npm run manual:index",
     "dev": "bash scripts/dev.sh",
-    "build": "next build",
+    "build": "next build --webpack",
     "start": "next start",
     "lint": "eslint"
   },
