@@ -41,6 +41,7 @@ const COLOR = {
   snow: "#eef2f7",
   afterburn: "#e8a045",
   horizon: "#3d6f9a",
+  link: "#1d4ed8", // the site’s link blue on light pages (e.g. /flasher)
   newBox: "#fdf5e9",
   correctionBox: "#fff4d6",
 };
@@ -55,7 +56,8 @@ const LOGO: NewsletterImage = { path: "shared/logo-mark.png", width: 96, height:
 
 const BODY_TEXT = `font-family:${FONT};font-size:17px;line-height:26px;color:${COLOR.text};`;
 const FOOTER_TEXT = `margin:0 0 8px;font-family:${FONT};font-size:13px;line-height:19px;color:${COLOR.muted};`;
-const LINK = `color:${COLOR.horizon};text-decoration:underline;`;
+// The site’s link style: blue, semibold, no underline; underlined on hover where the mail app supports it.
+const LINK = `color:${COLOR.link};font-weight:600;text-decoration:none;`;
 
 function esc(text: string): string {
   return text
@@ -89,7 +91,7 @@ function img(origin: string, image: NewsletterImage, width: number, style = ""):
 function linked(text: string, links: readonly NewsletterLink[] = []): string {
   let html = esc(text);
   for (const link of links) {
-    html = html.replace(esc(link.text), `<a href="${esc(link.url)}" style="${LINK}">${esc(link.text)}</a>`);
+    html = html.replace(esc(link.text), `<a href="${esc(link.url)}" class="nl-link" style="${LINK}">${esc(link.text)}</a>`);
   }
   return html;
 }
@@ -174,7 +176,7 @@ function shell(
   const topBar =
     mode === "email"
       ? `<tr><td align="right" class="px" style="padding:14px 32px 10px;font-family:${FONT};font-size:12px;line-height:16px;color:${COLOR.muted};">
-<a href="${esc(parts.viewUrl)}" style="${LINK}">View in browser</a></td></tr>`
+<a href="${esc(parts.viewUrl)}" class="nl-link" style="${LINK}">View in browser</a></td></tr>`
       : `<tr><td style="padding:14px 0 10px;font-size:0;line-height:0;">&nbsp;</td></tr>
 ${CORRECTIONS_MARKER}`;
 
@@ -186,7 +188,7 @@ ${CORRECTIONS_MARKER}`;
   const footer =
     mode === "email"
       ? `<p style="${FOOTER_TEXT}">You’re receiving this because you signed up for Mach II Labs product news at machiilabs.com.</p>
-<p style="${FOOTER_TEXT}">If you don’t want to receive this type of email in the future, please <a href="${esc(unsubscribeUrl(origin))}" style="${LINK}">unsubscribe</a>.</p>`
+<p style="${FOOTER_TEXT}">If you don’t want to receive this type of email in the future, please <a href="${esc(unsubscribeUrl(origin))}" class="nl-link" style="${LINK}">unsubscribe</a>.</p>`
       : `<p style="${FOOTER_TEXT}">This is the web copy of a Mach II Labs newsletter. Subscribers can leave the list with the unsubscribe link at the bottom of the email.</p>`;
 
   return `<!doctype html>
@@ -199,7 +201,8 @@ ${CORRECTIONS_MARKER}`;
 ${mode === "web" ? '<meta name="robots" content="noindex, nofollow">\n' : ""}<title>${esc(parts.title)}</title>
 <style>
   body { margin: 0; padding: 0; -webkit-text-size-adjust: 100%; }
-  a { color: ${COLOR.horizon}; }
+  a { color: ${COLOR.link}; }
+  a.nl-link:hover { text-decoration: underline !important; text-underline-offset: 2px; }
   @media (max-width: 620px) {
     .px { padding-left: 16px !important; padding-right: 16px !important; }
     .card-pad { padding-left: 18px !important; padding-right: 18px !important; }
@@ -228,7 +231,7 @@ ${parts.body}
 <tr><td class="px" style="padding:24px 32px 0;">
 ${footer}
 <p style="${FOOTER_TEXT}">${esc(POSTAL_ADDRESS)}</p>
-<p style="${FOOTER_TEXT}"><a href="${esc(origin)}" style="${LINK}">machiilabs.com</a> · <a href="${esc(origin)}/privacy" style="${LINK}">Privacy</a> · <a href="mailto:support@machiilabs.com" style="${LINK}">support@machiilabs.com</a></p>
+<p style="${FOOTER_TEXT}"><a href="${esc(origin)}" class="nl-link" style="${LINK}">machiilabs.com</a> · <a href="${esc(origin)}/privacy" class="nl-link" style="${LINK}">Privacy</a> · <a href="mailto:support@machiilabs.com" class="nl-link" style="${LINK}">support@machiilabs.com</a></p>
 </td></tr>
 </table>
 </td></tr>
@@ -262,7 +265,7 @@ ${paragraphs(issue.closing)}
 
 function correctionBlock(origin: string, correction: NewsletterCorrection): string {
   const link = correction.link
-    ? `<p style="margin:14px 0 0;font-family:${FONT};font-size:16px;line-height:24px;"><a href="${esc(origin + correction.link.path)}" style="${LINK}font-weight:700;">${esc(correction.link.label)}</a></p>`
+    ? `<p style="margin:14px 0 0;font-family:${FONT};font-size:16px;line-height:24px;"><a href="${esc(origin + correction.link.path)}" class="nl-link" style="${LINK}font-weight:700;">${esc(correction.link.label)}</a></p>`
     : "";
   return `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr>
 <td bgcolor="${COLOR.correctionBox}" style="padding:18px 20px;border-left:4px solid ${COLOR.afterburn};">
@@ -287,7 +290,7 @@ export function renderCorrectionHtml(correction: NewsletterCorrection, ctx: Cont
 <p style="margin:0 0 20px;${BODY_TEXT}">We need to correct something in our last newsletter.</p>
 ${correctionBlock(ctx.origin, correction)}
 ${spacer(20)}
-<p style="margin:0 0 16px;${BODY_TEXT}">The <a href="${esc(issueUrl(ctx.origin, correction.issue))}" style="${LINK}">web copy of the newsletter</a> shows this correction too. Sorry for the trouble.</p>
+<p style="margin:0 0 16px;${BODY_TEXT}">The <a href="${esc(issueUrl(ctx.origin, correction.issue))}" class="nl-link" style="${LINK}">web copy of the newsletter</a> shows this correction too. Sorry for the trouble.</p>
 <p style="margin:0 0 24px;${BODY_TEXT}">Mach II Labs</p>
 </td></tr>`;
 
