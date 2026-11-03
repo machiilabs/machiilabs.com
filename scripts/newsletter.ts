@@ -557,6 +557,10 @@ function cmdReopen(slug: string, correction: boolean): void {
   const table = correction ? registry.corrections : registry.issues;
   const state = table[slug] ?? fail(`nothing to reopen for ${slug}`);
   if (state.status === "sent") fail(`${slug}${correction ? "’s correction" : ""} has been sent; it’s frozen`);
+  // Mid-send, some people already have this version; the rest must get the same one.
+  if (registry.sends.some((e) => e.issue === slug && e.kind === (correction ? "correction" : "issue"))) {
+    fail(`a send of ${slug}${correction ? "’s correction" : ""} has started, so it can’t be unapproved. Rerun the send to finish it.`);
+  }
   table[slug] = { status: "draft" };
   writeRegistry(registry);
   console.log(`${slug}${correction ? " correction" : ""} is a draft again. It needs the check and approval before it can go out.`);

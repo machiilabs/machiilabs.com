@@ -118,6 +118,8 @@ If the daily cap (900) stops it, tell the owner how many are left. The same comm
 2. If it's `ready`, run `npm run newsletter reopen YYYY-NN` first, then make the edit.
 3. Continue from step 5.
 
+**Unapproving.** `npm run newsletter reopen YYYY-NN` withdraws approval at any time before the send starts, whether or not you're editing. If the issue is already live, the site keeps the approved version until a pull request with the reopened status merges; then production hides it. Once a send has started, reopening is refused: everyone must get the same version, so finish the send instead.
+
 An approved issue that changes without being reopened fails the check and the build ("changed since it was approved"). That's the safety net, not the process.
 
 ## Corrections (emergencies only)
