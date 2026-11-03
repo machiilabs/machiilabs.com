@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "https://machiilabs.com/privacy" },
 };
 
-const lastUpdated = "September 25, 2026";
+const lastUpdated = "November 3, 2026";
 
 export default function PrivacyPage() {
   return (
@@ -98,6 +98,13 @@ export default function PrivacyPage() {
             updates). We keep that address only for that purpose. We do not
             sell or distribute it. You can leave anytime via the unsubscribe
             link in an announcement; that removes your address from the list.
+          </p>
+          <p className="mt-3 text-sm leading-relaxed text-[#4b5563]">
+            Newsletter images load from machiilabs.com when your mail app
+            shows them. Every subscriber gets the same image and page links,
+            so we can&apos;t tell who opened a newsletter or what they clicked.
+            Only the unsubscribe link is personal, and it does nothing except
+            unsubscribe you.
           </p>
 
           <h3 className="mt-6 text-base font-semibold text-[#1a1a1a]">
