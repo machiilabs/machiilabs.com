@@ -65,7 +65,7 @@ const issue: NewsletterIssue = {
       image: {
         path: "2026-01/flasher-wizard.jpg",
         width: 1200,
-        height: 1012,
+        height: 1027,
         alt: "15CE Flasher 1.4.1’s first step: a diagram of the pogo cable seated in the calculator and plugged into a Mac",
       },
       intro:
