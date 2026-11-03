@@ -15,6 +15,8 @@ export type SkagwayReleaseHighlight = {
   title: string;
   /** Paragraph on /skagway (newest release only). */
   body: string;
+  /** Extra lines under the paragraph on /skagway only. */
+  details?: string[];
   /** One line on the home page. Defaults to title when omitted. */
   homeLine?: string;
   /** Optional link to a manual section (shown on /skagway only). */
@@ -43,23 +45,26 @@ export const SKAGWAY_RELEASES: SkagwayRelease[] = [
     highlights: [
       {
         title: "Make a playable copy",
-        body: "The original stays where it is. Skagway saves an MP4 beside it, and Play uses that copy.",
-        homeLine: "Make a playable copy beside the original.",
+        body: "Convert natively unplayable files into playable copies. Many video formats are supported.",
+        details: [
+          "Your original file stays in the catalog. The converted MP4 copy is played.",
+          "The Corrupt smart library is renamed Unplayable.",
+        ],
+        homeLine: "Convert natively unplayable files into playable copies. Many video formats are supported.",
       },
       {
-        title: "Files this Mac cannot play",
-        body: "WMV, WebM, DivX and Xvid, MPEG, MXF, DNx, CineForm, JPEG 2000, and older Flash video can be made playable. A file Skagway cannot finish stays as it is. Those files can still get a thumbnail.",
-        homeLine: "Play files this Mac cannot open, including WMV, WebM, and MPEG.",
+        title: "Bulk Rename",
+        body: "Usability enhancements, templates, and undo.",
+        homeLine: "Bulk Rename adds usability enhancements, templates, and undo.",
       },
+    ],
+  },
+  {
+    version: "1.4.1",
+    items: [
       {
-        title: "Unplayable",
-        body: "That library replaces Corrupt. Convert to play on a card adds the video to the queue. The card says In Queue, then Processing with the percent.",
-        homeLine: "Unplayable replaces Corrupt, and Convert to play queues from the card.",
-      },
-      {
-        title: "Rename from parts",
-        body: "A bulk rename is built from text, fields, and a number, with the first file’s new name on screen. Undo stays available after the window closes.",
-        homeLine: "Build a bulk rename from parts, and undo it after closing.",
+        kind: "bug",
+        text: "The extra “+N” in the middle of a tag row is gone. The count for tags that do not fit stays at the end of the row.",
       },
     ],
   },

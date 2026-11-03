@@ -32,7 +32,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Mach II Labs — Skagway 1.5",
     description:
-      "Skagway 1.5 makes a playable copy beside the original. Free Mac video organizer for the files already on your drives.",
+      "Skagway 1.5 converts natively unplayable files into playable copies. Many video formats are supported. Free Mac video organizer for the files already on your drives.",
     url: "https://machiilabs.com",
     siteName: "Mach II Labs",
     images: [
@@ -48,7 +48,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Mach II Labs — Skagway 1.5",
     description:
-      "Skagway 1.5 makes a playable copy beside the original.",
+      "Skagway 1.5 converts natively unplayable files into playable copies. Many video formats are supported.",
     images: ["/skagway/og.jpg"],
   },
 };

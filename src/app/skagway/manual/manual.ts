@@ -25,8 +25,10 @@ export type ManualScreenshot = {
   hint?: string;
   /** Display width as a fraction of the content column (e.g. 0.75). Default 1. */
   scale?: number;
-  /** File is missing or predates 0.80 — show an on-page capture brief. */
+  /** Show a capture brief until this file is replaced. */
   needsUpdate?: boolean;
+  /** SHA-256 of the outdated PNG. A different file hides the update notice. */
+  staleHash?: string;
 };
 
 /** A top-level step, optionally with lettered substeps, a table, and/or a figure. */
@@ -108,8 +110,10 @@ export type ManualPage = {
   screenshotHint?: string;
   /** Display width as a fraction of the content column (e.g. 0.75). Default 1. */
   screenshotScale?: number;
-  /** Hero figure is missing or predates 0.80 — show an on-page capture brief. */
+  /** Show a capture brief until this file is replaced. */
   screenshotNeedsUpdate?: boolean;
+  /** SHA-256 of the outdated hero PNG. A different file hides the update notice. */
+  screenshotStaleHash?: string;
   sections: ManualSection[];
 };
 
@@ -272,7 +276,7 @@ export const MANUAL_PAGES: ManualPage[] = [
       {
         title: "Which files count as video",
         steps: [
-          "A scan picks up these extensions: mp4, mov, m4v, avi, mkv, wmv, flv, webm, mpg, mpeg, 3gp, ts, mts, vob, ogv, divx, dv, m2ts, and mxf.",
+          "A scan picks up these extensions: mp4, mov, m4v, avi, mkv, wmv, flv, webm, mpg, mpeg, 3gp, ts, mts, vob, ogv, divx, dv, m2t, m2ts, and mxf. .m2t is on by default, for an HDV capture.",
           "To treat another extension as video, or to ignore one of these, open Settings → Extensions. Check or uncheck the list, or add an extension that is not there yet.",
         ],
       },
@@ -432,8 +436,11 @@ export const MANUAL_PAGES: ManualPage[] = [
     screenshotCaption: "The filter drawer, Quick tab",
     screenshotAlt:
       "Skagway Quick Filter drawer showing Smart Libraries, Collections, Rating, Duration, Quality, and Tags cards",
+    screenshotNeedsUpdate: true,
+    screenshotStaleHash:
+      "45e4e0bbf4de2a5f39f2671ceadb0555a12328ead7e6595f8ec590e81af28eec",
     screenshotHint:
-      "Quick Filter drawer (⇧⌘F) over a populated library. Rating row: No Stars, 1–5 stars, Or Higher. Smart Libraries, Collections, Duration, Quality, and Tags visible.",
+      "Quick Filter drawer (⇧⌘F) over a populated library. The Smart Libraries list includes a row named Unplayable. Rating row: No Stars, 1–5 stars, Or Higher. Collections, Duration, Quality, and Tags visible.",
     sections: [
       {
         title: "Quick Filter (⇧⌘F)",
@@ -458,10 +465,10 @@ export const MANUAL_PAGES: ManualPage[] = [
           "Recently Added and Recently Played show videos from the last N days. N is the day count in Settings → Library.",
           "Top Rated shows videos at or above the star threshold you set in that same Settings pane.",
           "Duplicates groups videos whose file content matches, even when the names differ.",
-          "Corrupt lists files Skagway could not read metadata or a thumbnail from.",
+          "Unplayable lists files this Mac cannot play. A playable copy on disk leaves that list. Missing stays separate.",
           "Missing lists files whose path no longer exists, including an unmounted drive or a moved file. Click the refresh arrow on that row to look again. Reconnect…, from the banner or File → Reconnect…, points the catalog at the new folders.",
-          "Last Added lists videos found by the most recent Scan for New Videos.",
-          "Recently Converted appears in the smart-library list used for re-encoded videos. Last Metadata Import appears after you import metadata. Both are the places those jobs leave their results.",
+          "Last Added lists videos found by the most recent Scan for New Videos. Renaming or moving one of those files keeps it in Last Added.",
+          "Recently Converted appears after you make a playable copy. Last Metadata Import appears after you import metadata. Both are the places those jobs leave their results.",
         ],
       },
       {
@@ -688,7 +695,7 @@ export const MANUAL_PAGES: ManualPage[] = [
         intro:
           "This strip is part of the player, just above the scrubber. It is not the Inspector filmstrip (⌥⌘T), and it is not the Storyboard layout (⌘3).",
         steps: [
-          "In Compact, Windowed, and Full screen, a horizontal row of frames sits above the scrubber. It fades in and out with the transport controls.",
+          "In Compact, Windowed, and Full screen, a horizontal row of frames sits above the scrubber. It fades with the transport controls. It waits a few seconds while the pointer stays in the player, and hides shortly after the pointer leaves.",
           "Click a frame to seek to that time. The playhead highlight follows the current playback time.",
           "Show filmstrip in player, under Settings → Video, is on by default. Turn it off to hide the row. Compact uses a thinner strip than Windowed and Full screen.",
         ],
@@ -784,15 +791,18 @@ export const MANUAL_PAGES: ManualPage[] = [
   {
     slug: "file-operations",
     title: "File operations",
-    blurb: "Rename, bulk rename, move, re-encode, and delete, with queues.",
+    blurb: "Rename, bulk rename, move, make a playable copy, and delete, with queues.",
     summary:
       "Right-click a video, or a batch selection, for file commands. Long jobs report in the activity strip at the bottom of the window and in queues that survive a restart.",
     screenshot: "file-operations.png",
     screenshotCaption: "The right-click menu’s file commands",
+    screenshotNeedsUpdate: true,
+    screenshotStaleHash:
+      "d7cfe8844fd32167a20abda5cec899526ad33334892506405c9e612b979c9959",
     screenshotAlt:
-      "Skagway grid context menu with Bulk Rename…, Move Files…, and Fix for Built-in Player…",
+      "Skagway grid context menu with Bulk Rename…, Move Files…, and Make a playable copy…",
     screenshotHint:
-      "Right-click a grid card so the full context menu is readable, including Bulk Rename…, Move Files…, Fix for Built-in Player…, and Set Poster from Image….",
+      "Right-click a grid card so the full context menu is readable, including Make a playable copy…, Bulk Rename…, Move Files…, and Set Poster from Image….",
     screenshotScale: 0.75,
     sections: [
       {
@@ -809,63 +819,14 @@ export const MANUAL_PAGES: ManualPage[] = [
       {
         title: "Bulk Rename…",
         intro:
-          "Bulk rename changes file names on disk for many videos at once. Original File Name in the catalog is kept for search and export. Title, the display name, is left as it is.",
+          "Bulk Rename renames many files on disk from parts you stack. Each file stays in its folder. The window, the examples, templates, and undo are a separate guide.",
         steps: [
           "Choose File → Bulk Rename… to rename every video in the current view, including the effect of search and filters. Or select videos, right-click, and choose Bulk Rename… to rename only that selection.",
-          {
-            text: "Build a Name pattern from the field groups Identity, Media, Library, and Custom, and from these Special tokens. The sheet previews every resulting name before anything is renamed.",
-            table: {
-              columns: [
-                "Token",
-                "Optional arguments",
-                "What it inserts",
-                "Examples",
-              ],
-              rows: [
-                [
-                  "{Inc …}",
-                  "Starting number. The number of digits sets zero-padding.",
-                  "A counter that steps once per file in the batch.",
-                  "{Inc 1}, {Inc 015}",
-                ],
-                [
-                  "{Conflict …}",
-                  "A prefix, then a starting number.",
-                  "Nothing when the new name is unique. On a collision, a disambiguator so the name can still be written.",
-                  "{Conflict -1}, {Conflict -01}",
-                ],
-                [
-                  "{Stem}",
-                  "Case: lower or L, upper or U, title or T, Name or N.",
-                  "The current file name without its extension.",
-                  "{Stem}, {Stem lower}",
-                ],
-                [
-                  "{Date …}",
-                  "A date format string.",
-                  "Today’s date in the format you write.",
-                  "{Date yyyy-MM-dd}, {Date MMM-yyyy}",
-                ],
-                [
-                  "{UUID8}",
-                  "—",
-                  "Eight random hex characters, different for each file.",
-                  "{UUID8}",
-                ],
-              ],
-            },
-          },
-          "Read the Preview columns. A skipped row includes the reason it will not be renamed.",
-          "Click Rename N Files. If any names fail, the results sheet offers Retry Failed for another pass at those files.",
+          "Nothing is written until the preview looks right and you click Rename N Files.",
         ],
-        screenshots: [
-          {
-            filename: "bulk-rename.png",
-            caption: "The Bulk Rename… sheet: name pattern and preview",
-            alt: "Skagway Bulk Rename sheet with a name pattern and preview",
-            hint: "Bulk Rename sheet. Name pattern field showing at least two tokens, for example {Stem} and {Inc 1}. Field groups Identity, Media, Library, Custom, and Special visible if they fit. Preview table with several rows, including one skipped row whose reason is readable. Rename N Files button visible.",
-          },
-        ],
+        note: "Parts, examples, templates, and undo.",
+        noteHref: "/skagway/manual/bulk-rename",
+        noteLinkLabel: "Bulk Rename",
       },
       {
         title: "Move files",
@@ -877,40 +838,39 @@ export const MANUAL_PAGES: ManualPage[] = [
         ],
       },
       {
-        title: "Fix for Built-in Player… (re-encode)",
+        title: "Make a playable copy",
         intro:
-          "Most files play with no conversion. Use this when a file will not play in Skagway’s player. You can also hand that file to another app with Play in External Player, and skip ffmpeg entirely.",
+          "Most files play with no conversion. Use this when this Mac cannot play a file in Skagway. You can also hand that file to another app with Play in External Player.",
         steps: [
-          "Right-click the video and choose Fix for Built-in Player…. Skagway re-encodes it to an MP4 with H.264 video and AAC audio. The command needs ffmpeg. Point Skagway at it once under Settings → Tools.",
-          "The original file is kept, with _backup in the name, until you delete that backup. A failed encode, or a change of mind, still has the original.",
-          "Jobs run one at a time. While one is running, open the queue from the activity strip. After it finishes, click the circular-arrows pill in the header — the tooltip reads “Re-encode queue — click to manage” — or choose View → Re-encode Queue…. Restore a backup, or delete it, from that queue.",
-          "Finished conversions appear in the Recently Converted smart library.",
+          "Right-click the video and choose Make a playable copy…. On a Grid or Storyboard card the same command is the Convert to play mark. If playback cannot start, the player offers Make a playable copy… as well.",
+          "Your original file stays in the catalog, in the folder it is already in. Skagway saves an MP4 copy beside it and plays that copy. The library entry stays one video. If that name is already taken, the copy uses the next free name.",
+          "A card reads In Queue while the copy waits, and Processing with the percent while it runs. The activity strip shows the same job, for example Re-encode 42% · +2. Click the strip, or choose View → Re-encode Queue…, to open the queue.",
+          "When the copy is saved, the strip keeps a line such as “1 playable copy.” In the queue, Delete original moves the original file to the Trash and points the catalog entry at the copy. Clear from queue leaves both files and drops the row. Finished copies also appear in the Recently Converted smart library.",
         ],
       },
       {
-        title: "Queue pills and the activity strip",
+        title: "The activity strip",
         intro:
-          "The activity strip is the progress line along the bottom of the library window. The header pill is only for re-encode, and only so you can get back to backups after the strip has cleared.",
+          "The activity strip is the progress line along the bottom of the library window. A playable copy keeps a line there after it finishes, so the queue can still be opened. A finished move clears itself.",
         steps: [
           {
-            text: "While a move or a re-encode is running, the strip shows the job and a percent, for example Re-encode 42% or Moving 18% · +2. The +N is further work still queued. Click the strip to open that queue.",
+            text: "While a move or a playable copy is running, the strip shows the job and a percent, for example Re-encode 42% or Moving 18% · +2. The +N is further work still queued. Click the strip to open that queue.",
             screenshot: {
               filename: "queue-activity-strip.png",
               caption: "The activity strip at the bottom of the window",
-              alt: "Skagway bottom activity strip showing move or re-encode progress",
-              hint: "Tight crop of the bottom activity strip while a move or re-encode is running — text and percent readable (for example Re-encode 42% or Moving 18% · +2).",
+              alt: "Skagway bottom activity strip showing move or playable-copy progress",
+              hint: "Tight crop of the bottom activity strip while a move or a playable copy is running — text and percent readable (for example Re-encode 42% or Moving 18% · +2).",
             },
           },
           {
-            text: "When a re-encode finishes, the strip clears and a circular-arrows pill remains in the header, to the right of the video count. Click it to open the re-encode queue. A successful move uses the strip only, and clears itself when it is done.",
+            text: "When the copy is saved, the strip reads “1 playable copy,” or a count. Click it to open Re-encode Queue. Delete original or Clear from queue is on that row.",
             screenshot: {
-              filename: "queue-header-pills.png",
-              caption: "The re-encode pill in the header, beside the video count",
-              alt: "Skagway header re-encode pill next to the video count",
-              hint: "Tight crop of the header to the right of the video count after a re-encode has finished (backup still kept): one circular-arrows pill. Tooltip “Re-encode queue — click to manage” if it fits.",
+              filename: "playable-copy-queue.png",
+              caption: "Re-encode Queue after a playable copy is saved",
+              alt: "Re-encode Queue with a finished playable copy, Delete original, and Clear from queue",
+              hint: "The Re-encode Queue sheet after a copy finishes. A completed row reads Playable copy and the new file name. Delete original and Clear from queue are visible.",
             },
           },
-          "A re-encode row stays in the queue while its _backup file is still there. Restore the original from that row, or delete the backup, and the row can leave.",
         ],
       },
       {
@@ -939,6 +899,101 @@ export const MANUAL_PAGES: ManualPage[] = [
           "Right-click → Modify Filmstrip… to change the rows and columns of that video’s filmstrip preview. The library-wide default for the Inspector filmstrip is Settings → Video → Default Filmstrip Size.",
           "For a thumbnail taken from the exact frame on screen, play the video and press ⌥⌘M instead of regenerating.",
         ],
+      },
+    ],
+  },
+  {
+    slug: "bulk-rename",
+    title: "Bulk Rename",
+    blurb: "Rename many files from parts, with a preview and undo.",
+    summary:
+      "Bulk Rename builds a new file name by assembling parts you specify: literal text, a field in the file’s catalog entry, custom data or number sequence. The preview shows every resulting name before anything is written. Undo puts the names back.",
+    screenshot: "bulk-rename.png",
+    screenshotCaption: "The Bulk Rename window",
+    screenshotAlt: "Bulk Rename window with parts, a sample, and a preview of new file names",
+    screenshotNeedsUpdate: true,
+    screenshotStaleHash:
+      "2003f891287ecee820938726fa51a3c9776248867bd10193f4d0d8d0de4489da",
+    screenshotHint:
+      "Bulk Rename window. Title Bulk Rename. Parts already filled: Title, a text part of a dot, and Extension. Columns Type, Parameters, Case, and Sample. First new name, and the preview list of Current File Name, New File Name, and Status.",
+    sections: [
+      {
+        title: "What changes, and what stays",
+        intro:
+          "Bulk Rename changes file names on disk. Each file stays in its folder. Original File Name keeps the previous name for search. If Title still matches the file name, Title follows the new name. A Title you set yourself stays. A slash, colon, or other character a file name cannot hold is rewritten. A name longer than 255 bytes is shortened. A leading dot is removed.",
+        steps: [],
+      },
+      {
+        title: "Choose the files",
+        intro:
+          "File → Bulk Rename… renames every video in the current view, including search and filters. Right-click → Bulk Rename… renames only the selection. The window names the set, for example 12 filtered videos. Nothing is written until Rename N Files.",
+        steps: [],
+      },
+      {
+        title: "How the window is laid out",
+        intro:
+          "The window opens as Title, a dot, and Extension. New name is the stack of parts. The blank last row adds a part. Columns are Type, Parameters, Case, and Sample. First new name is the whole new name of the first file. Preview lists Current File Name, New File Name, and Status. Sort sets the list order, the numbers, and the rename order. File Name, ascending, is the default.",
+        steps: [],
+      },
+      {
+        title: "The parts",
+        intro:
+          "Text is characters you type. A field inserts Title, the folder, a date, a tag, or another value Skagway knows, grouped as Identity, Media, Library, and Custom. Number counts through the files. If taken adds text only when the new name is already taken.",
+        steps: [],
+      },
+      {
+        title: "Examples",
+        intro:
+          "Title and Extension turn IMG_2044.mov into Harbor.mov. A Number written 01 continues 02, 03 in preview order and does not restart when the title changes. If taken leaves a unique name alone and writes Harbor-1.mov only for a collision. Today’s date yyyy-MM-dd plus the old name makes 2026-11-01-interview.mp4. After the first “ - ” keeps Take 2 from Interview - Take 2. A blank Last Played drops the hyphen in front of it.",
+        steps: [],
+      },
+      {
+        title: "Fields you can insert",
+        intro:
+          "Identity includes Name without extension, Title, File Name, Original File Name, Extension, Parent Folder, Volume, Path, and Database ID. Media includes Duration, Width, Height, Resolution, Quality, Codec, Frame Rate, File Size, and Subtitles. Library includes Rating, Tags, Plays, Date Imported, Date Created, Last Played, Content Fingerprint, Resume Position, Unplayable, Missing File, Duplicate, Date Converted, Today’s date, and Random id. Custom fields appear by name.",
+        steps: [],
+      },
+      {
+        title: "Numbers and names already taken",
+        intro:
+          "Number 1 goes 1, 2, 3. Number 01 goes 01, 02, 03. If taken has text before the number, the number, and text after it, and the whole part is empty when the name is free. A repeated name without If taken is a Collision, and those rows are not renamed.",
+        steps: [],
+      },
+      {
+        title: "Dates, duration, and case",
+        intro:
+          "An empty date format is yyyy-MM-dd. MMM-yyyy is Nov-2026. Duration is 1h02m03s, or mmm for total minutes, sss for total seconds, hhh for total hours. Title Case capitalizes each word. Name case capitalizes the first letter only.",
+        steps: [],
+      },
+      {
+        title: "Before and after a separator",
+        intro:
+          "Before the first keeps the text before the first separator. After the first keeps the text after it, and a later separator stays. City-roll-a cut on - is City, or roll-a. A value with no separator is kept whole. The cut happens before Case.",
+        steps: [],
+      },
+      {
+        title: "When a field is empty",
+        intro:
+          "An empty field adds nothing. A short separator just before it, one to three spaces, hyphens, underscores, or dots, is left out too. Topic- stays, because it is longer than a separator. An empty Title leaves out the dot in front of Extension.",
+        steps: [],
+      },
+      {
+        title: "Read the preview",
+        intro:
+          "The status line counts will rename, warnings, skipped, and unchanged. OK will rename. No extension still renames. Unchanged, Empty name, and Collision do not. Click a row for the current name, the new name, and the status.",
+        steps: [],
+      },
+      {
+        title: "Rename, then undo",
+        intro:
+          "Rename N Files leaves the window open. Renamed files say Renamed. A failure says the file is missing, the name is already taken, a move is still in progress, or macOS refused the name. Done closes the window. Retry Failed tries the failures again. Undo puts the names back. After Done, the activity strip keeps N files renamed · Undo. Edit → Undo Rename and ⌘Z do the same while that undo is waiting. Undo is one step. If Skagway quits during a rename, the next launch puts the file back.",
+        steps: [],
+      },
+      {
+        title: "Templates",
+        intro:
+          "Save As Template… stores the parts under a name. Choosing the template later fills the parts again and does not rename until Rename N Files. Saving the same name replaces the template. Delete Template removes one.",
+        steps: [],
       },
     ],
   },
@@ -1118,19 +1173,22 @@ export const MANUAL_PAGES: ManualPage[] = [
     title: "Settings",
     blurb: "Every tab in Skagway → Settings…",
     summary:
-      "Open Settings with ⌘, or from Skagway → Settings…. A library has to be open for the library-specific tabs. The sidebar is Library, Video, Data Sources, Extensions, Tools, and Custom Metadata, with a search field above the list.",
+      "Open Settings with ⌘, or from Skagway → Settings…. A library has to be open for the library-specific tabs. The sidebar is Library, Video, Data Sources, Extensions, and Custom Metadata, with a search field above the list.",
     screenshot: "settings.png",
     screenshotCaption: "Settings, on the Library tab",
     screenshotAlt: "Skagway Settings window on the Library tab",
+    screenshotNeedsUpdate: true,
+    screenshotStaleHash:
+      "ac914fb7f94a338dedbcbd605c5f8c6d4553b1dca1a674399c781c99e5a4ea55",
     screenshotHint:
-      "Settings window on the Library tab: Smart Libraries toggles, Change Library Location… / Change Thumbnail Cache Location…, and List view columns.",
+      "Settings on the Library tab. Sidebar: Library, Video, Data Sources, Extensions, Custom Metadata. Smart Libraries includes Unplayable. Exclude unplayable files from filters is visible, along with Change Library Location… and Change Thumbnail Cache Location….",
     sections: [
       {
         title: "Library",
         intro:
           "This tab is about the open library: where its files live, which smart libraries you see, and which List columns are on.",
         steps: [
-          "Exclude corrupt files from filters leaves corrupt files out of ordinary filters. They stay in the Corrupt smart library, and search can still find them.",
+          "Exclude unplayable files from filters leaves those files out of ordinary filters. They stay in the Unplayable smart library, and search can still find them.",
           "Confirm deletions asks before Delete Video… moves a file to the Trash. Turn it off to skip that question.",
           "Change Library Location… quits Skagway and opens the catalog chooser. Files on disk are not deleted. The choices on that screen are described on the Library page.",
           "Change Thumbnail Cache Location… points this library at a different cache folder. Other libraries are unaffected. The command retargets the pointer. Existing cache files are left in place.",
@@ -1172,15 +1230,6 @@ export const MANUAL_PAGES: ManualPage[] = [
           "Checked extensions are the ones a scan treats as video. Uncheck an extension to ignore new files of that type.",
           "Use the Add extension field for an extension that is not in the list.",
           "Click Reset to defaults to restore the standard list.",
-        ],
-      },
-      {
-        title: "Tools",
-        intro:
-          "FFmpeg is used only by Fix for Built-in Player…, the optional re-encode to MP4. Browse, tag, filter, and playback do not need it. For a file the built-in player cannot open, Play in External Player is the other route.",
-        steps: [
-          "Skagway looks for a Homebrew ffmpeg, and for an install under /usr/local.",
-          "If the binary lives somewhere else, click Choose… and select the ffmpeg file.",
         ],
       },
       {

@@ -36,11 +36,11 @@ Write UI labels with the same capitalization as the app so they match. Section h
 PNG files live in `public/skagway/manual/`. Each page (and some inline steps) names a file plus a **capture brief** (`screenshotHint`).
 
 - If the PNG is **missing**, the page shows a dashed “Screenshot needed” box with the filename and brief.
-- If the PNG exists but is **stale**, set `screenshotNeedsUpdate: true` (or `needsUpdate: true` on an inline shot). The page shows a “Screenshot needs update” brief **above** the current capture, labeled outdated.
+- If the PNG exists but is **stale**, set `screenshotNeedsUpdate: true` (or `needsUpdate: true` on an inline shot) and set `screenshotStaleHash` / `staleHash` to that file’s SHA-256. The page shows a “Screenshot needs update” brief **above** the current capture, labeled outdated. Replacing the file with a different PNG hides the notice on refresh. A file that was missing shows “Screenshot needed” until the PNG is added, then the notice is gone.
 - Figures with a PNG are **clickable** — opens a full-size lightbox (Esc or click outside to close).
 - Every image needs a visible **caption** that says what it highlights: `screenshotCaption` on a page, `caption` on a section or step image (the type requires it). Write the caption for the page it sits on; the same PNG can carry different captions on different pages.
 
-Clear the flag after you drop in a current PNG. Do not leave a stale shot unmarked — readers will treat it as current.
+Do not leave a stale shot unmarked. Readers will treat an unmarked PNG as current.
 
 `npm run manual:index` also runs automatically on **`predev`** and **`prebuild`**, so a normal `npm run dev` / `npm run build` refreshes the index before the app starts. Do not treat the index as a separate optional step.
 

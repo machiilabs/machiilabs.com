@@ -25,6 +25,10 @@ export function StudioPromises() {
       </ul>
 
       <p className="mt-8 text-base leading-relaxed text-[#4b5563] sm:text-lg">
+        We will not move our free products, or any feature we add to them,
+        behind a paywall or subscription.
+      </p>
+      <p className="mt-4 text-base leading-relaxed text-[#4b5563] sm:text-lg">
         The software lives on your computer. There is no account and no backend
         we can turn off. We&apos;ll keep shipping updates as long as we can.
       </p>

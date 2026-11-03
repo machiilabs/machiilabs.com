@@ -128,7 +128,6 @@ const SETTINGS_SECTIONS = [
   "Video",
   "Data Sources",
   "Extensions",
-  "Tools",
   "Custom Metadata",
 ] as const;
 
