@@ -10,7 +10,6 @@ const issue: NewsletterIssue = {
   greeting: "Hello,",
   intro: [
     "Thanks for signing up for news from Mach II Labs. This is our first newsletter. We’ll only send one when there’s something worth your time.",
-    "We make two free apps, and you may have signed up because of either one. So each section below starts with a short introduction, then covers what’s new.",
   ],
   products: [
     {
