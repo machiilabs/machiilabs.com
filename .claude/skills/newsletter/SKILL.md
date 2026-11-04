@@ -36,6 +36,7 @@ If an unfinished send is listed, finishing it comes first: rerun the same `send-
 - **Work happens on a branch from `origin/main`.** `main` is the live site and only takes pull requests the owner merges (`.cursor/rules/production-main.mdc`).
 - **The owner's full name never appears.** Sign as in the previous issue ("Paul" / "Mach II Labs").
 - **Never edit `registry.json` or `frozen/` by hand.** Only `npm run newsletter …` and `send-mailing.py` write them.
+- **Keep the owner's guide current.** `docs/newsletter-guide.md` is the owner's version of this process. Any change to the steps, gates, commands, or rules updates it in the same commit.
 
 ## Starting a new issue
 

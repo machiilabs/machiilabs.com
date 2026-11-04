@@ -21,4 +21,4 @@ A plan in the chat does not count. Before the reply that presents a plan, write 
 
 # Newsletter
 
-All newsletter work (new issues, edits, sends, corrections) follows `.claude/skills/newsletter/SKILL.md`, invoked as `/newsletter`. Start with `npm run newsletter status`. The rules are enforced in code: one newsletter per calendar month, approved issues can't change unnoticed, and sent issues are frozen.
+All newsletter work (new issues, edits, sends, corrections) follows `.claude/skills/newsletter/SKILL.md`, invoked as `/newsletter`. The owner's guide is `docs/newsletter-guide.md`; keep it current with the skill. Start with `npm run newsletter status`. The rules are enforced in code: one newsletter per calendar month, approved issues can't change unnoticed, and sent issues are frozen.
