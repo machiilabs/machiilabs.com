@@ -56,7 +56,7 @@ export function MailingListCard() {
       </h2>
       <p className="mt-1 text-sm text-fog">
         Copies the email and unsubscribe token for each subscriber, one line
-        each. Send the mail from PostMach.
+        each. Paste it into scripts/send-mailing.py to send.
       </p>
       <button
         type="button"

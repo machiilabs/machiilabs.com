@@ -1,5 +1,5 @@
 /**
- * One paste line per subscriber for PostMach.
+ * One paste line per subscriber for scripts/send-mailing.py.
  * The site does not send mail. Each line is `email, unsubscribe_token`.
  */
 

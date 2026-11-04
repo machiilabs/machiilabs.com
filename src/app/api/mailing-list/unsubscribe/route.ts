@@ -13,11 +13,21 @@ export async function POST(request: Request) {
       const body = (await request.json()) as { token?: string };
       token = (body.token ?? "").trim();
     } catch {
-      return NextResponse.json({ ok: false }, { status: 400 });
+      token = "";
     }
   } else {
-    const form = await request.formData();
-    token = String(form.get("token") ?? "").trim();
+    try {
+      const form = await request.formData();
+      token = String(form.get("token") ?? "").trim();
+    } catch {
+      token = "";
+    }
+  }
+
+  // One-click posts List-Unsubscribe=One-Click and puts the token in the URL.
+  // The confirm page sends the token in the body instead.
+  if (!token) {
+    token = new URL(request.url).searchParams.get("token")?.trim() ?? "";
   }
 
   if (!token || !UUID_RE.test(token)) {
