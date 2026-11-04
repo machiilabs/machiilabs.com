@@ -9,7 +9,7 @@ const issue: NewsletterIssue = {
   subhead: "Skagway 1.5 · 15CE Flasher 1.4 for Mac and 1.2 for Windows",
   greeting: "Hello,",
   intro: [
-    "Thanks for signing up for news from Mach II Labs. This is our first newsletter. We’ll only send one when there’s something worth your time.",
+    "Thanks for signing up for news from Mach II Labs. We’ll only write when there’s something worth your time.",
     "Mach II Labs currently offers two free apps, Skagway and 15CE Flasher.",
   ],
   products: [
