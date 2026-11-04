@@ -5,8 +5,9 @@
   "scripts": {
     "manual:index": "npx tsx scripts/generate-manual-search-index.ts",
     "manual:index:check": "npx tsx scripts/generate-manual-search-index.ts --check",
+    "newsletter": "npx tsx scripts/newsletter.ts",
     "predev": "npm run manual:index",
-    "prebuild": "npm run manual:index",
+    "prebuild": "npm run manual:index && npm run newsletter -- check --build",
     "dev": "bash scripts/dev.sh",
     "build": "next build",
     "start": "next start",

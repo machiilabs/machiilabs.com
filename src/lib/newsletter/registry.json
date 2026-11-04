@@ -1,0 +1,15 @@
+{
+  "issues": {
+    "2026-01": {
+      "status": "ready",
+      "month": "2026-11",
+      "approved": {
+        "hash": "446e16899e11a35bdea84fd3e9ccfaccb5a63ec51220327bf03d7719696659cd",
+        "design": "a9b872b84248209087db5a2bd350d70aa1d2b50cb6864747140175554addd5eb",
+        "on": "2026-11-03"
+      }
+    }
+  },
+  "corrections": {},
+  "sends": []
+}
