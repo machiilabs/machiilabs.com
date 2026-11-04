@@ -26,7 +26,8 @@ A newsletter takes twelve steps, half of them yours. Claude never sends anything
 Do these once. After that, every issue follows the same steps.
 
 - [x] **iCloud sign-in in your Keychain**, under the name `machii-mailer`. If you ever revoke that app-specific password, make a new one at account.apple.com and store it again with `security add-generic-password -U -s machii-mailer -a <your @icloud.com address> -w`.
-- [ ] **DMARC record** for machiilabs.com: a TXT record at `_dmarc` with `v=DMARC1; p=none; rua=mailto:support@machiilabs.com`. It keeps newsletters out of spam folders.
+- [x] **DMARC record** for machiilabs.com, added in Cloudflare on November 3, 2026: a TXT record at `_dmarc` with `v=DMARC1; p=none; rua=mailto:support@machiilabs.com`. It keeps newsletters out of spam and lets mail providers spot impersonators.
+- [ ] **Tighten DMARC around December 1, 2026.** Once the reports show your real mail passing, change `p=none` to `p=quarantine` in Cloudflare, so mail faking machiilabs.com goes to spam. Later, `p=reject` blocks it outright.
 - [ ] **Merge pull request #27**, which adds one-click unsubscribe and the send script.
 - [ ] **Merge the newsletter pull request**, which Claude opens once #27 is in. It holds the process, the checks and issue 2026-01.
 
