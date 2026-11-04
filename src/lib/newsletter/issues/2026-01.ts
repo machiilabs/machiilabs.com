@@ -117,7 +117,7 @@ const issue: NewsletterIssue = {
     },
   ],
   closing: [
-    "Questions, ideas, or a bug to report? Just reply to this email. It comes straight to us.",
+    "Questions, ideas, or a bug to report? Just reply to this email.",
   ],
   signature: ["Thanks for using our apps,", "Paul", "Mach II Labs"],
 };
