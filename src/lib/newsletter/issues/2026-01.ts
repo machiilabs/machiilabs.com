@@ -10,7 +10,7 @@ const issue: NewsletterIssue = {
   greeting: "Hello,",
   intro: [
     "Thanks for signing up for news from Mach II Labs. We’ll only write when there’s something worth your time.",
-    "Mach II Labs currently offers two free apps, Skagway and 15CE Flasher.",
+    "Mach II Labs currently offers two free apps, Skagway and 15CE Flasher, with more terrific apps on the way.",
   ],
   products: [
     {
