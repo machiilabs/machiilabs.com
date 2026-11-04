@@ -23,7 +23,7 @@ const issue: NewsletterIssue = {
         alt: "Skagway’s grid view: a large video library with thumbnails, ratings, and tags",
       },
       intro:
-        "Point Skagway at the folders you already keep, on this Mac or an external drive. It catalogs every clip and builds thumbnails, and your files stay exactly where they are.",
+        "Point Skagway at the folders you already have, on this Mac or an external drive. It catalogs every clip and builds thumbnails, and your files stay exactly where they are.",
       highlights: [
         {
           title: "Find any moment by eye",
