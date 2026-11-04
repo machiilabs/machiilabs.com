@@ -9,7 +9,7 @@
     "predev": "npm run manual:index",
     "prebuild": "npm run manual:index && npm run newsletter -- check --build",
     "dev": "bash scripts/dev.sh",
-    "build": "next build",
+    "build": "next build --webpack",
     "start": "next start",
     "lint": "eslint"
   },
