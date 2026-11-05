@@ -52,7 +52,7 @@ const points: Point[] = [
   },
   {
     title: "Pay once. Every update included.",
-    body: "One price for your Mac, iPhone and iPad, and every future version is yours too. No subscription, no upgrade fees, no account to create with us.",
+    body: "One price includes apps for your Mac, iPhone and iPad, and every future version is yours too. No subscription, no upgrade fees, no account to create with us.",
   },
 ];
 
