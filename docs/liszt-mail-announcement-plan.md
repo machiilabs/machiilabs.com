@@ -19,7 +19,7 @@
   3. Private by design (no tracking, analytics or ads; remote images blocked until allowed; passwords in your Keychain; mail on your devices).
   4. Every account in one app (Gmail with Sign in with Google, iCloud, Yahoo, Fastmail, any IMAP).
   5. Fast with years of mail (opening, clearing and search without waiting on the network).
-  6. No subscription (free; no account with us).
+  6. No subscription (pay once for all devices; no account with us). The owner will set the price later; recommended one-time universal purchase, about $29.99, with a 14-day trial (2026-11-05).
 - **Sign-up:** the existing company-wide `AnnouncementSignup` ("Product announcements"). No database change.
 - **Header:** `SiteHeader` in its lab form (no product nav), so the site's navigation is unchanged.
 

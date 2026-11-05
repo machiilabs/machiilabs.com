@@ -52,7 +52,7 @@ const points: Point[] = [
   },
   {
     title: "No subscription.",
-    body: "Free, with no account to create with us. Your mail is between you and your mail provider.",
+    body: "Pay once, use it on all your devices. No account to create with us: your mail is between you and your mail provider.",
   },
 ];
 
