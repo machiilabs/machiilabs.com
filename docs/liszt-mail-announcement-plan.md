@@ -25,7 +25,7 @@
 
 ## Not in this change
 
-- No home-page link or nav entry until the owner says (the page is reachable by URL and by the domain).
+- The site header's navigation is unchanged. **Home page (owner, 2026-11-05):** a full-width "Coming soon" Liszt Mail card under the two product cards (text only, no icon yet), and "Liszt Mail" in the jump links when they show.
 - No screenshots yet (the app's look may still change before launch).
 - No release branch: there is nothing to download.
 
