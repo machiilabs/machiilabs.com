@@ -19,7 +19,7 @@
   3. Private by design (no tracking, analytics or ads; remote images blocked until allowed; passwords in your Keychain; mail on your devices).
   4. Every account in one app (Gmail with Sign in with Google, iCloud, Yahoo, Fastmail, any IMAP).
   5. Fast with years of mail (opening, clearing and search without waiting on the network).
-  6. **$29.99 once, every update included** (owner, 2026-11-05): one price for Mac, iPhone and iPad; every future version free; no subscription, no upgrade fees, no account with us. A public, permanent promise: no paid major upgrades, ever.
+  6. **Pay once, every update included** (owner, 2026-11-05; the price, $29.99, isn't shown on the site for now): one price for Mac, iPhone and iPad; every future version free; no subscription, no upgrade fees, no account with us. A public, permanent promise: no paid major upgrades, ever.
 - **Sign-up:** the existing company-wide `AnnouncementSignup` ("Product announcements"). No database change.
 - **Header:** `SiteHeader` in its lab form (no product nav), so the site's navigation is unchanged.
 

@@ -255,7 +255,7 @@ export default function Home() {
               the mail that matters from the mail that doesn&apos;t, and keeps
               it on your own devices.{" "}
               <span className="font-semibold text-[#1a1a1a]">
-                $29.99 once, every update included.
+                Pay once, every update included.
               </span>
             </p>
             <div className="mt-auto pt-6">
