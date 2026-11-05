@@ -51,8 +51,8 @@ const points: Point[] = [
     body: "Opening, clearing and searching don’t wait on the network. Your mail is kept on your device, so the app stays quick however much of it you have.",
   },
   {
-    title: "No subscription.",
-    body: "Pay once, use it on all your devices. No account to create with us: your mail is between you and your mail provider.",
+    title: "$29.99 once. Every update included.",
+    body: "One price for your Mac, iPhone and iPad, and every future version is yours too. No subscription, no upgrade fees, no account to create with us.",
   },
 ];
 
