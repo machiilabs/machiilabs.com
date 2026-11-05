@@ -100,6 +100,12 @@ export default function Home() {
               15CE Flasher
             </a>
             <a
+              href="#lisztmail"
+              className="font-semibold text-[#1a1a1a] transition-colors hover:text-[#8a5a20]"
+            >
+              Liszt Mail
+            </a>
+            <a
               href="#promises"
               className="font-semibold text-[#1a1a1a] transition-colors hover:text-[#8a5a20]"
             >
@@ -230,6 +236,41 @@ export default function Home() {
               </div>
             </article>
           </div>
+
+          <article
+            id="lisztmail"
+            className="flex scroll-mt-8 flex-col rounded-2xl border border-[#e5e7eb] bg-white p-6 sm:p-8"
+          >
+            <p className="text-sm font-semibold tracking-[0.18em] text-[#8a5a20] uppercase">
+              Coming soon · Mac, iPhone &amp; iPad
+            </p>
+            <Link
+              href="/lisztmail"
+              className="mt-3 block font-display text-3xl font-bold tracking-tight text-[#1a1a1a] transition-colors hover:text-[#8a5a20] sm:text-4xl"
+            >
+              Liszt Mail
+            </Link>
+            <p className="mt-3 max-w-3xl text-base leading-relaxed text-[#4b5563] sm:text-lg">
+              Make your inbox a short list. A private email app that separates
+              the mail that matters from the mail that doesn&apos;t, and keeps
+              it on your own devices.{" "}
+              <span className="font-semibold text-[#1a1a1a]">
+                Pay once, every update included.
+              </span>
+            </p>
+            <div className="mt-auto pt-6">
+              <Link
+                href="/lisztmail"
+                className="group relative inline-flex w-fit items-center text-base font-semibold tracking-wide text-[#1a1a1a] transition-colors hover:text-[#8a5a20]"
+              >
+                Meet Liszt Mail
+                <span
+                  aria-hidden
+                  className="cta-underline absolute -bottom-1 left-0 h-px w-full bg-[#e8a045]"
+                />
+              </Link>
+            </div>
+          </article>
 
           {SKAGWAY_UPCOMING ? <SkagwayComingSoon variant="home" /> : null}
 
