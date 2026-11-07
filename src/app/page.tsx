@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
 import { AnnouncementSignup } from "@/components/announcement-signup";
@@ -12,12 +11,6 @@ import {
   SKAGWAY_UPCOMING,
   skagwayVersionLabel,
 } from "@/lib/skagway-releases";
-
-const inter = Inter({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
-  style: ["normal", "italic"],
-});
 
 /** Home jump links — off while the product cards sit in view. Flip to show. */
 const SHOW_HOME_JUMP_LINKS = false;
@@ -58,7 +51,7 @@ export default function Home() {
 
   return (
     <div
-      className={`${inter.className} relative min-h-dvh overflow-x-hidden bg-[#fafafa] text-[#1a1a1a]`}
+      className="font-display relative min-h-dvh overflow-x-hidden bg-[#fafafa] text-[#1a1a1a]"
     >
       <style>{`body{background:#fafafa;color:#1a1a1a}`}</style>
 

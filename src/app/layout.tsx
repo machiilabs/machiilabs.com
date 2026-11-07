@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Instrument_Sans, Inter } from "next/font/google";
+import localFont from "next/font/local";
 import { SiteAnalytics } from "@/components/site-analytics";
 import "./globals.css";
 
@@ -7,16 +7,28 @@ import "./globals.css";
 // would otherwise treat it as an app crash. Real errors still surface.
 const IGNORE_INJECTED_WALLET_ERROR = `(function(){window.addEventListener("error",function(event){var message=String((event&&event.message)||(event.error&&event.error.message)||"");if(message.indexOf("ethereum")===-1&&message.indexOf("selectedAddress")===-1)return;event.preventDefault();event.stopImmediatePropagation();},true);})();`;
 
-const inter = Inter({
+const inter = localFont({
+  src: [
+    {
+      path: "./fonts/InterVariable.woff2",
+      weight: "100 900",
+      style: "normal",
+    },
+    {
+      path: "./fonts/InterVariable-Italic.woff2",
+      weight: "100 900",
+      style: "italic",
+    },
+  ],
   variable: "--font-inter",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
+  display: "swap",
 });
 
-const instrument = Instrument_Sans({
+const instrument = localFont({
+  src: "./fonts/InstrumentSansVariable.woff2",
+  weight: "100 900",
   variable: "--font-instrument",
-  subsets: ["latin"],
-  weight: ["400", "500", "600"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {

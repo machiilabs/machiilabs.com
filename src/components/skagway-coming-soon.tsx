@@ -1,13 +1,7 @@
-import { Inter } from "next/font/google";
 import {
   SKAGWAY_UPCOMING,
   skagwayVersionLabel,
 } from "@/lib/skagway-releases";
-
-const inter = Inter({
-  subsets: ["latin"],
-  weight: ["700"],
-});
 
 function Emphasize({ text, phrase }: { text: string; phrase: string }) {
   const index = text.indexOf(phrase);
@@ -40,7 +34,7 @@ function ComingSoonInner({
         {skagwayVersionLabel(SKAGWAY_UPCOMING.version)}
       </p>
       <p
-        className={`${inter.className} mt-5 max-w-2xl text-xl font-bold tracking-tight text-[#1a140c] sm:text-2xl`}
+        className="mt-5 max-w-2xl font-display text-xl font-bold tracking-tight text-[#1a140c] sm:text-2xl"
       >
         {SKAGWAY_UPCOMING.lede}
       </p>
