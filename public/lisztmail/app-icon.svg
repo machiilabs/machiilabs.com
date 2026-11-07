@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 140" width="1024" height="1024" role="img" aria-label="Liszt Mail">
+  <title>Liszt Mail</title>
+  <rect width="140" height="140" rx="32" fill="#0A1220"/>
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M38 40H28V100H38M102 40H112V100H102" stroke="#E8A045" stroke-width="7"/>
+    <path d="M46 50L70 72L94 50M46 90H94" stroke="#F4F1EA" stroke-width="9"/>
+  </g>
+</svg>
