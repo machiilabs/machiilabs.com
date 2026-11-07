@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { inter } from "./fonts/site-fonts";
 import Image from "next/image";
 import Link from "next/link";
 import { AnnouncementSignup } from "@/components/announcement-signup";
@@ -13,11 +13,6 @@ import {
   skagwayVersionLabel,
 } from "@/lib/skagway-releases";
 
-const inter = Inter({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
-  style: ["normal", "italic"],
-});
 
 /** Home jump links — off while the product cards sit in view. Flip to show. */
 const SHOW_HOME_JUMP_LINKS = false;
@@ -239,16 +234,39 @@ export default function Home() {
 
           <article
             id="lisztmail"
-            className="flex scroll-mt-8 flex-col rounded-2xl border border-[#e5e7eb] bg-white p-6 sm:p-8"
+            className="flex scroll-mt-8 flex-col gap-6 rounded-2xl border border-[#e5e7eb] bg-white p-6 sm:flex-row sm:items-start sm:gap-8 sm:p-8"
           >
+            <Link
+              href="/lisztmail"
+              className="shrink-0 transition-opacity hover:opacity-90"
+              aria-label="Liszt Mail"
+            >
+              <Image
+                src="/lisztmail/app-icon.svg"
+                alt=""
+                width={1024}
+                height={1024}
+                unoptimized
+                className="h-24 w-24 sm:h-28 sm:w-28"
+              />
+            </Link>
+            <div className="flex flex-1 flex-col">
             <p className="text-sm font-semibold tracking-[0.18em] text-[#8a5a20] uppercase">
               Coming soon · Mac, iPhone &amp; iPad
             </p>
             <Link
               href="/lisztmail"
-              className="mt-3 block font-display text-3xl font-bold tracking-tight text-[#1a1a1a] transition-colors hover:text-[#8a5a20] sm:text-4xl"
+              className="mt-3 block w-fit transition-opacity hover:opacity-80"
+              aria-label="Liszt Mail"
             >
-              Liszt Mail
+              <Image
+                src="/lisztmail/wordmark-on-light.svg"
+                alt=""
+                width={1796}
+                height={420}
+                unoptimized
+                className="h-8 w-auto sm:h-10"
+              />
             </Link>
             <p className="mt-3 max-w-3xl text-base leading-relaxed text-[#4b5563] sm:text-lg">
               Make your inbox a short list. A private email app that separates
@@ -269,6 +287,7 @@ export default function Home() {
                   className="cta-underline absolute -bottom-1 left-0 h-px w-full bg-[#e8a045]"
                 />
               </Link>
+            </div>
             </div>
           </article>
 

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { AnnouncementSignup } from "@/components/announcement-signup";
 import { SiteHeader } from "@/components/site-header";
 
@@ -79,12 +80,31 @@ export default function LisztMailPage() {
 
       <main className="relative z-10 mx-auto w-full max-w-6xl px-6 pb-24 pt-6 sm:px-10 sm:pt-8">
         <section className="max-w-2xl">
+          <Image
+            src="/lisztmail/app-icon.svg"
+            alt=""
+            width={1024}
+            height={1024}
+            unoptimized
+            priority
+            className="anim-rise mb-8 h-20 w-20 sm:h-24 sm:w-24"
+          />
           <p className="anim-rise font-display text-[0.7rem] font-semibold tracking-[0.28em] text-afterburn-soft uppercase sm:text-xs">
             Coming soon · Mac, iPhone and iPad
           </p>
 
-          <h1 className="anim-rise anim-rise-delay-1 mt-5 font-display text-[clamp(2.75rem,8vw,4.75rem)] leading-[1.1] font-extrabold tracking-[-0.04em] text-snow">
-            Liszt Mail
+          {/* The Liszt[Mail] wordmark (Design/brand in the app's repo); screen readers get the name. */}
+          <h1 className="anim-rise anim-rise-delay-1 mt-5">
+            <span className="sr-only">Liszt Mail</span>
+            <Image
+              src="/lisztmail/wordmark-on-dark.svg"
+              alt=""
+              width={1796}
+              height={420}
+              unoptimized
+              priority
+              className="h-[clamp(2.5rem,7.5vw,4.25rem)] w-auto"
+            />
           </h1>
 
           <p className="anim-rise anim-rise-delay-2 mt-6 font-display text-2xl leading-snug font-semibold tracking-tight text-snow sm:text-3xl">

@@ -1,11 +1,5 @@
 import type { Metadata } from "next";
-import {
-  Archivo,
-  Chakra_Petch,
-  Sora,
-  Space_Grotesk,
-  Special_Elite,
-} from "next/font/google";
+import { archivo, chakraPetch, sora, spaceGrotesk, specialElite } from "../fonts/sample-fonts";
 import { SiteHeader } from "@/components/site-header";
 
 export const metadata: Metadata = {
@@ -13,30 +7,6 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
-const specialElite = Special_Elite({
-  weight: "400",
-  subsets: ["latin"],
-});
-
-const spaceGrotesk = Space_Grotesk({
-  weight: ["600", "700"],
-  subsets: ["latin"],
-});
-
-const chakraPetch = Chakra_Petch({
-  weight: ["600", "700"],
-  subsets: ["latin"],
-});
-
-const archivo = Archivo({
-  weight: ["700", "800"],
-  subsets: ["latin"],
-});
-
-const sora = Sora({
-  weight: ["600", "700", "800"],
-  subsets: ["latin"],
-});
 
 const samples = [
   {

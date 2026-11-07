@@ -1,13 +1,9 @@
-import { Inter } from "next/font/google";
+import { inter } from "@/app/fonts/site-fonts";
 import {
   SKAGWAY_UPCOMING,
   skagwayVersionLabel,
 } from "@/lib/skagway-releases";
 
-const inter = Inter({
-  subsets: ["latin"],
-  weight: ["700"],
-});
 
 function Emphasize({ text, phrase }: { text: string; phrase: string }) {
   const index = text.indexOf(phrase);
