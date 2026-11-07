@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Instrument_Sans, Inter } from "next/font/google";
+import { inter, instrument } from "./fonts/site-fonts";
 import { SiteAnalytics } from "@/components/site-analytics";
 import "./globals.css";
 
@@ -7,17 +7,6 @@ import "./globals.css";
 // would otherwise treat it as an app crash. Real errors still surface.
 const IGNORE_INJECTED_WALLET_ERROR = `(function(){window.addEventListener("error",function(event){var message=String((event&&event.message)||(event.error&&event.error.message)||"");if(message.indexOf("ethereum")===-1&&message.indexOf("selectedAddress")===-1)return;event.preventDefault();event.stopImmediatePropagation();},true);})();`;
 
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
-});
-
-const instrument = Instrument_Sans({
-  variable: "--font-instrument",
-  subsets: ["latin"],
-  weight: ["400", "500", "600"],
-});
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://machiilabs.com"),

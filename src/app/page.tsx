@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { inter } from "./fonts/site-fonts";
 import Image from "next/image";
 import Link from "next/link";
 import { AnnouncementSignup } from "@/components/announcement-signup";
@@ -13,11 +13,6 @@ import {
   skagwayVersionLabel,
 } from "@/lib/skagway-releases";
 
-const inter = Inter({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
-  style: ["normal", "italic"],
-});
 
 /** Home jump links — off while the product cards sit in view. Flip to show. */
 const SHOW_HOME_JUMP_LINKS = false;

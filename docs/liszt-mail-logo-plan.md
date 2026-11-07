@@ -9,3 +9,9 @@
 - SVGs load through `next/image` with `unoptimized` (no SVG optimization config change).
 
 **Steps:** branch `liszt-mail-logo` from `origin/main`; type-check and lint; commit; on the owner's word, push and open a PR (Vercel builds a preview); the owner merges.
+
+## Added: fonts hosted with the site (owner, 2026-11-07)
+
+**Why:** Vercel builds had started failing on the first attempt while fetching Google fonts (`next/font/google queries have exactly one entry`) and passing on a retry with no code change (PR #33's first preview). Hosting the fonts removes that fetch from the build; visitors' browsers no longer contact Google either.
+
+**What:** `src/app/fonts/`: Latin-only woff2 from Google Fonts (the subsets already used): Inter 400–800 upright and italic, Instrument Sans 400–600, and the hidden /font-sample page's Special Elite, Space Grotesk, Chakra Petch, Archivo and Sora; licenses in `src/app/fonts/licenses/` (SIL OFL; Apache 2.0 for Special Elite). `site-fonts.ts` and `sample-fonts.ts` load them with `next/font/local`, with the same CSS variables (`--font-inter`, `--font-instrument`). No `next/font/google` import remains; the built site has no fonts.googleapis.com or fonts.gstatic.com reference.
