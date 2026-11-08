@@ -16,6 +16,14 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
+      // lisztmail.com and lisztmail.app (and www.) are the app's own domains; until the app has a site of its own,
+      // every visit lands on its page here. Temporary (307) so browsers don't cache it past that.
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "(?:www\\.)?lisztmail\\.(?:com|app)" }],
+        destination: "https://machiilabs.com/lisztmail",
+        permanent: false,
+      },
       {
         source: "/skagway/explore",
         destination: "/skagway",
