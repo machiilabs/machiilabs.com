@@ -69,7 +69,9 @@ export default function Home() {
             <MachiiLogo href={null} wordmarkLayout="stacked" tone="light" />
           </h1>
           <p className="mt-[0.22em] text-center font-display text-[0.34em] leading-snug font-semibold tracking-tight text-[#4b5563]">
-            Software you keep
+            Trust we earn.
+            <br />
+            Software you keep.
           </p>
         </div>
 
