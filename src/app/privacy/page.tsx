@@ -5,11 +5,11 @@ import { SiteHeader } from "@/components/site-header";
 export const metadata: Metadata = {
   title: "Privacy Statement",
   description:
-    "How Mach II Labs handles the website, downloads, announcement list, and apps.",
+    "How Mach II Labs handles the website, downloads, announcement list, and apps, including Liszt Mail.",
   alternates: { canonical: "https://machiilabs.com/privacy" },
 };
 
-const lastUpdated = "November 3, 2026";
+const lastUpdated = "November 9, 2026";
 
 export default function PrivacyPage() {
   return (
@@ -35,7 +35,8 @@ export default function PrivacyPage() {
           <p className="mt-3 text-sm leading-relaxed text-[#4b5563]">
             This statement covers the website (machiilabs.com), application
             downloads, the optional product-announcement list, support email,
-            and Mach II Labs applications including Skagway and 15CE Flasher.
+            and Mach II Labs applications including Liszt Mail, Skagway, and
+            15CE Flasher.
           </p>
         </section>
 
@@ -46,11 +47,12 @@ export default function PrivacyPage() {
           <ul className="mt-4 list-disc space-y-2 pl-5 text-sm leading-relaxed text-[#4b5563]">
             <li>
               No invisible reports from the apps. Usage logs, crash reports,
-              and other telemetry stay on your computer unless you send them.
+              and other telemetry stay on your device unless you send them.
             </li>
             <li>
-              The software lives on your computer. There is no account and no
-              backend we can turn off in order for the app to keep running.
+              The software lives on your device. There is no Mach II Labs
+              account and no backend we can turn off in order for the app to
+              keep running.
             </li>
             <li>
               Bug reports and diagnostics are user-initiated. Email you send is
@@ -130,11 +132,90 @@ export default function PrivacyPage() {
           </p>
 
           <h3 className="mt-6 text-base font-semibold text-[#1a1a1a]">
+            Liszt Mail
+          </h3>
+          <p className="mt-3 text-sm leading-relaxed text-[#4b5563]">
+            Liszt Mail connects directly from your device to the mail servers
+            of the accounts you add, such as Gmail, iCloud, Yahoo, or Outlook.
+            Your messages and attachments are stored on your device. Mach II
+            Labs has no server in between: we never receive, see, or store
+            your mail.
+          </p>
+          <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-relaxed text-[#4b5563]">
+            <li>
+              <strong className="font-semibold text-[#1a1a1a]">Passwords and sign-in tokens</strong> 
+              are kept in your device&apos;s Keychain. If you use iCloud
+              Keychain, Apple syncs them between your devices with end-to-end
+              encryption. They are never sent to us.
+            </li>
+            <li>
+              <strong className="font-semibold text-[#1a1a1a]">Settings that follow you between devices</strong> 
+              (pinned and kept messages, your decisions about senders, and
+              your aliases) are saved as small messages in a &ldquo;Liszt&rdquo;
+              folder in your own mailbox, so your other devices can read them.
+              They stay with your mail provider, like the rest of your mail.
+            </li>
+            <li>
+              <strong className="font-semibold text-[#1a1a1a]">Notifications</strong> 
+              about new mail are created on your device. There is no push
+              server.
+            </li>
+            <li>
+              <strong className="font-semibold text-[#1a1a1a]">Remote images</strong> 
+              in messages are off by default. If you load them for a message,
+              the servers hosting those images (usually the sender&apos;s)
+              see an ordinary request from your device, as they would in any
+              mail app.
+            </li>
+            <li>
+              <strong className="font-semibold text-[#1a1a1a]">Ad and tracker blocking</strong> 
+              is optional and off by default. If you turn it on, Liszt Mail
+              downloads a public list of tracker hostnames from jsDelivr, a
+              content delivery network. The request contains nothing about you
+              or your mail.
+            </li>
+          </ul>
+
+          <h3 className="mt-6 text-base font-semibold text-[#1a1a1a]">
+            Gmail and Google accounts
+          </h3>
+          <p className="mt-3 text-sm leading-relaxed text-[#4b5563]">
+            When you add a Gmail or Google Workspace account with Sign in with
+            Google, Liszt Mail asks for access to your mail
+            (https://mail.google.com/) and your email address. It uses that
+            access only to show, search, organize, and send your mail on your
+            device, and the address only to identify the account in the app.
+          </p>
+          <p className="mt-3 text-sm leading-relaxed text-[#4b5563]">
+            Data received from Google stays on your device and with Google. We
+            do not transfer it to anyone, sell it, use it for advertising, or
+            use it to train AI models, and no person at Mach II Labs reads it.
+          </p>
+          <p className="mt-3 text-sm leading-relaxed text-[#4b5563]">
+            Liszt Mail&apos;s use and transfer to any other app of information
+            received from Google APIs will adhere to the 
+            <a
+              href="https://developers.google.com/terms/api-services-user-data-policy"
+              className="text-[#1a1a1a] underline-offset-4 hover:text-[#8a5a20] hover:underline"
+            >
+              Google API Services User Data Policy
+            </a>
+            , including the Limited Use requirements.
+          </p>
+          <p className="mt-3 text-sm leading-relaxed text-[#4b5563]">
+            You can remove Liszt Mail&apos;s access at any time from your 
+            <a href="https://myaccount.google.com/permissions" className="text-[#1a1a1a] underline-offset-4 hover:text-[#8a5a20] hover:underline">
+              Google Account&apos;s third-party access page
+            </a>
+            .
+          </p>
+
+          <h3 className="mt-6 text-base font-semibold text-[#1a1a1a]">
             Applications
           </h3>
           <p className="mt-3 text-sm leading-relaxed text-[#4b5563]">
             Mach II Labs apps do not send usage analytics or silent
-            diagnostics. Your library and files stay on your computer.
+            diagnostics. Your library, files, and mail stay on your devices.
           </p>
           <p className="mt-3 text-sm leading-relaxed text-[#4b5563]">
             Some apps offer optional update checks that are off by default. If
@@ -153,6 +234,10 @@ export default function PrivacyPage() {
             <li>To count visits and downloads in aggregate</li>
             <li>To send announcements you asked for</li>
             <li>To answer support and contact mail</li>
+            <li>
+              In Liszt Mail, your mail and account data are used only on your
+              device, to provide the app&apos;s features
+            </li>
           </ul>
         </section>
 
@@ -171,8 +256,9 @@ export default function PrivacyPage() {
             Service providers
           </h2>
           <p className="mt-3 text-sm leading-relaxed text-[#4b5563]">
-            We use third parties for hosting the site. They see only what is
-            needed to deliver the pages and downloads.
+            We use third parties for hosting the site, and Liszt Mail&apos;s
+            optional tracker list is served by jsDelivr. They see only what is
+            needed to deliver the pages, downloads, and that list.
           </p>
         </section>
 
@@ -204,6 +290,12 @@ export default function PrivacyPage() {
             <li>
               You can leave automatic update checks off. The apps keep
               working.
+            </li>
+            <li>
+              In Liszt Mail, removing an account deletes its messages from your
+              device; deleting the app removes everything it stored there.
+              For Google accounts, you can also revoke access from your Google
+              Account.
             </li>
             <li>
               If you want us to delete support mail or an announcement
