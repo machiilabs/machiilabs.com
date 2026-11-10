@@ -145,12 +145,12 @@ export default function PrivacyPage() {
             organize, and send your mail on your device. We never transfer or
             sell it, or use it for advertising or AI, and no person at Mach II
             Labs can read it. Liszt Mail&apos;s use and transfer of information
-            received from Google APIs will adhere to the 
+            received from Google APIs will adhere to the{" "}
             <a href="https://developers.google.com/terms/api-services-user-data-policy" className="text-[#1a1a1a] underline-offset-4 hover:text-[#8a5a20] hover:underline">
               Google API Services User Data Policy
             </a>
             , including the Limited Use requirements. You can revoke access in
-            your 
+            your{" "}
             <a href="https://myaccount.google.com/permissions" className="text-[#1a1a1a] underline-offset-4 hover:text-[#8a5a20] hover:underline">
               Google Account
             </a>
