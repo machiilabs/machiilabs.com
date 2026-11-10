@@ -5,11 +5,11 @@ import { SiteHeader } from "@/components/site-header";
 export const metadata: Metadata = {
   title: "Privacy Statement",
   description:
-    "How Mach II Labs handles the website, downloads, announcement list, and apps.",
+    "How Mach II Labs handles the website, downloads, announcement list, and apps, including Liszt Mail.",
   alternates: { canonical: "https://machiilabs.com/privacy" },
 };
 
-const lastUpdated = "November 3, 2026";
+const lastUpdated = "November 9, 2026";
 
 export default function PrivacyPage() {
   return (
@@ -35,7 +35,8 @@ export default function PrivacyPage() {
           <p className="mt-3 text-sm leading-relaxed text-[#4b5563]">
             This statement covers the website (machiilabs.com), application
             downloads, the optional product-announcement list, support email,
-            and Mach II Labs applications including Skagway and 15CE Flasher.
+            and Mach II Labs applications including Liszt Mail, Skagway, and
+            15CE Flasher.
           </p>
         </section>
 
@@ -46,11 +47,12 @@ export default function PrivacyPage() {
           <ul className="mt-4 list-disc space-y-2 pl-5 text-sm leading-relaxed text-[#4b5563]">
             <li>
               No invisible reports from the apps. Usage logs, crash reports,
-              and other telemetry stay on your computer unless you send them.
+              and other telemetry stay on your device unless you send them.
             </li>
             <li>
-              The software lives on your computer. There is no account and no
-              backend we can turn off in order for the app to keep running.
+              The software lives on your device. There is no Mach II Labs
+              account and no backend we can turn off in order for the app to
+              keep running.
             </li>
             <li>
               Bug reports and diagnostics are user-initiated. Email you send is
@@ -130,11 +132,37 @@ export default function PrivacyPage() {
           </p>
 
           <h3 className="mt-6 text-base font-semibold text-[#1a1a1a]">
+            Liszt Mail
+          </h3>
+          <p className="mt-3 text-sm leading-relaxed text-[#4b5563]">
+            Liszt Mail connects your device directly to your mail providers.
+            Your mail, passwords, and settings stay on your devices and with
+            your mail provider. Mach II Labs never receives any of it. Remote
+            images are off until you load them.
+          </p>
+          <p className="mt-3 text-sm leading-relaxed text-[#4b5563]">
+            For Gmail, Liszt Mail uses Google&apos;s access only to show,
+            organize, and send your mail on your device. We never transfer or
+            sell it, or use it for advertising or AI, and no person at Mach II
+            Labs can read it. Liszt Mail&apos;s use and transfer of information
+            received from Google APIs will adhere to the{" "}
+            <a href="https://developers.google.com/terms/api-services-user-data-policy" className="text-[#1a1a1a] underline-offset-4 hover:text-[#8a5a20] hover:underline">
+              Google API Services User Data Policy
+            </a>
+            , including the Limited Use requirements. You can revoke access in
+            your{" "}
+            <a href="https://myaccount.google.com/permissions" className="text-[#1a1a1a] underline-offset-4 hover:text-[#8a5a20] hover:underline">
+              Google Account
+            </a>
+            .
+          </p>
+
+          <h3 className="mt-6 text-base font-semibold text-[#1a1a1a]">
             Applications
           </h3>
           <p className="mt-3 text-sm leading-relaxed text-[#4b5563]">
             Mach II Labs apps do not send usage analytics or silent
-            diagnostics. Your library and files stay on your computer.
+            diagnostics. Your library, files, and mail stay on your devices.
           </p>
           <p className="mt-3 text-sm leading-relaxed text-[#4b5563]">
             Some apps offer optional update checks that are off by default. If
