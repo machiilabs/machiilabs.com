@@ -189,7 +189,7 @@ export default function PrivacyPage() {
           <p className="mt-3 text-sm leading-relaxed text-[#4b5563]">
             Data received from Google stays on your device and with Google. We
             do not transfer it to anyone, sell it, use it for advertising, or
-            use it to train AI models, and no person at Mach II Labs reads it.
+            use it to train AI models, and no person at Mach II Labs can read it.
           </p>
           <p className="mt-3 text-sm leading-relaxed text-[#4b5563]">
             Liszt Mail&apos;s use and transfer to any other app of information
