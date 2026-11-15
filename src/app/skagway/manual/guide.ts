@@ -411,7 +411,7 @@ export const GUIDE_PAGES: ManualPage[] = [
     screenshotAlt: "Skagway Duplicates smart library with a group of matching files",
     screenshotNeedsUpdate: true,
     screenshotStaleHash:
-      "4ccf1319052e8889805fb3925f3ba4cc4ff832ae61203fbf08fa63ee9fca46cb",
+      "fa731981b213ab7c81908fb79b32f0395065ba5ac21eea2264455f87a8cfd4f5",
     screenshotHint:
       "Quick Filter open on Duplicates. The smart-library list includes Unplayable. At least one group of matching videos. If the context menu is open, it shows Not a Duplicate and the usual file commands (Make a playable copy… or Remove playable copy…, and Try to play anyway… on an unplayable file, depending on the clip).",
     sections: [

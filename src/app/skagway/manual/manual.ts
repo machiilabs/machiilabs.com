@@ -667,7 +667,7 @@ export const MANUAL_PAGES: ManualPage[] = [
       {
         title: "Start and stop",
         steps: [
-          "Focus a video, then press Space, double-click its Grid card or List row, or click Play in the Inspector.",
+          "Focus a video, then start playback with any one of these: press Space, double-click its Grid card or List row, or click Play in the Inspector.",
           "When this Mac cannot play the file and no playable copy is on disk yet, Space does not open the player. Use Make a playable copy… or Convert to play on the card. Right-click → Try to play anyway… still opens the built-in player if you want to test it.",
           "While the player is open, Space pauses and resumes.",
           "Press ⌥Space to play from the start of the file. That ignores any saved resume position.",
