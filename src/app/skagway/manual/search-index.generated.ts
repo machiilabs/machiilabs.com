@@ -6,7 +6,7 @@
  * Regenerate: npm run manual:index
  * (also runs on predev / prebuild)
  *
- * Generated: 2026-11-15T05:25:12.874Z
+ * Generated: 2026-11-15T05:41:11.657Z
  * Documents: 123
  */
 import type { ManualSearchDocument } from "./search-documents";
@@ -631,7 +631,7 @@ export const MANUAL_SEARCH_INDEX: ManualSearchDocument[] = [
     "sectionTitle": "Start and stop",
     "href": "/skagway/manual/playback#start-and-stop",
     "title": "Playback » Start and stop",
-    "body": "Focus a video, then press Space, double-click its Grid card or List row, or click Play in the Inspector.\nWhen this Mac cannot play the file and no playable copy is on disk yet, Space does not open the player. Use Make a playable copy… or Convert to play on the card. Right-click → Try to play anyway… still opens the built-in player if you want to test it.\nWhile the player is open, Space pauses and resumes.\nPress ⌥Space to play from the start of the file. That ignores any saved resume position.\nPress Esc, or click the red traffic-light Stop, to stop. Skagway saves the position you left.\nIf the cursor is in Search videos or an Inspector field, press Esc once so the next Space plays instead of typing."
+    "body": "Focus a video, then start playback with any one of these: press Space, double-click its Grid card or List row, or click Play in the Inspector.\nWhen this Mac cannot play the file and no playable copy is on disk yet, Space does not open the player. Use Make a playable copy… or Convert to play on the card. Right-click → Try to play anyway… still opens the built-in player if you want to test it.\nWhile the player is open, Space pauses and resumes.\nPress ⌥Space to play from the start of the file. That ignores any saved resume position.\nPress Esc, or click the red traffic-light Stop, to stop. Skagway saves the position you left.\nIf the cursor is in Search videos or an Inspector field, press Esc once so the next Space plays instead of typing."
   },
   {
     "id": "playback__play-all-p",
