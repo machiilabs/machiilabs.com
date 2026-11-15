@@ -6,7 +6,7 @@
  * Regenerate: npm run manual:index
  * (also runs on predev / prebuild)
  *
- * Generated: 2026-11-03T03:51:42.266Z
+ * Generated: 2026-11-15T07:02:50.636Z
  * Documents: 123
  */
 import type { ManualSearchDocument } from "./search-documents";
@@ -631,7 +631,7 @@ export const MANUAL_SEARCH_INDEX: ManualSearchDocument[] = [
     "sectionTitle": "Start and stop",
     "href": "/skagway/manual/playback#start-and-stop",
     "title": "Playback » Start and stop",
-    "body": "Focus a video, then press Space, double-click its Grid card or List row, or click Play in the Inspector.\nWhile the player is open, Space pauses and resumes.\nPress ⌥Space to play from the start of the file. That ignores any saved resume position.\nPress Esc, or click the red traffic-light Stop, to stop. Skagway saves the position you left.\nIf the cursor is in Search videos or an Inspector field, press Esc once so the next Space plays instead of typing."
+    "body": "Focus a video, then start playback with any one of these: press Space, double-click its Grid card or List row, or click Play in the Inspector.\nWhen this Mac cannot play the file and no sidecar MP4 is attached, Space does not open the player. Use Make a playable copy… or Convert to play on the card. Right-click → Try to play anyway… still opens the built-in player if you want to test it.\nWhile the player is open, Space pauses and resumes.\nPress ⌥Space to play from the start of the file. That ignores any saved resume position.\nPress Esc, or click the red traffic-light Stop, to stop. Skagway saves the position you left.\nIf the cursor is in Search videos or an Inspector field, press Esc once so the next Space plays instead of typing."
   },
   {
     "id": "playback__play-all-p",
@@ -775,7 +775,7 @@ export const MANUAL_SEARCH_INDEX: ManualSearchDocument[] = [
     "sectionTitle": "Make a playable copy",
     "href": "/skagway/manual/file-operations#make-a-playable-copy",
     "title": "File operations » Make a playable copy",
-    "body": "Most files play with no conversion. Use this when this Mac cannot play a file in Skagway. You can also hand that file to another app with Play in External Player.\nRight-click the video and choose Make a playable copy…. On a Grid or Storyboard card the same command is the Convert to play mark. If playback cannot start, the player offers Make a playable copy… as well.\nYour original file stays in the catalog, in the folder it is already in. Skagway saves an MP4 copy beside it and plays that copy. The library entry stays one video. If that name is already taken, the copy uses the next free name.\nA card reads In Queue while the copy waits, and Processing with the percent while it runs. The activity strip shows the same job, for example Re-encode 42% · +2. Click the strip, or choose View → Re-encode Queue…, to open the queue.\nWhen the copy is saved, the strip keeps a line such as “1 playable copy.” In the queue, Delete original moves the original file to the Trash and points the catalog entry at the copy. Clear from queue leaves both files and drops the row. Finished copies also appear in the Recently Converted smart library."
+    "body": "Most files play with no conversion. Use this when this Mac cannot play a file in Skagway. You can also hand that file to another app with Play in External Player.\nMake a playable copy… is on the menu whenever the video has no sidecar MP4 attached — including playable originals. Remove playable copy… replaces it after a sidecar is saved beside the original.\nFor a file this Mac cannot play inline, right-click → Try to play anyway… appears above Make a playable copy…. The card mark Convert to play runs the same command.\nYour original file stays in the catalog, in the folder it is already in. Skagway saves an MP4 copy beside it and plays that copy. The library entry stays one video. If that name is already taken, the copy uses the next free name.\nAfter a sidecar exists, Remove playable copy… moves only that MP4 to the Trash. With Confirm deletions on (Settings → Library), Skagway asks first.\nA card reads In Queue while the copy waits, and Processing with the percent while it runs. The activity strip shows the same job, for example Re-encode 42% · +2. Click the strip, or choose View → Re-encode Queue…, to open the queue.\nWhen the copy is saved, the strip keeps a line such as “1 playable copy.” In the queue, Delete original moves the original file to the Trash and points the catalog entry at the copy. Clear from queue leaves both files and drops the row. Finished copies also appear in the Recently Converted smart library."
   },
   {
     "id": "file-operations__the-activity-strip",

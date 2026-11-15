@@ -340,8 +340,7 @@ export const GUIDE_PAGES: ManualPage[] = [
     screenshot: "file-operations.png",
     screenshotCaption: "Move Files… in the right-click menu",
     screenshotAlt:
-      "Skagway context menu with Move Files… and the other file commands",
-    screenshotNeedsUpdate: false,
+      "Skagway context menu on a playable video with Move Files… and other everyday file commands",
     sections: [
       {
         title: "Move from inside Skagway",
