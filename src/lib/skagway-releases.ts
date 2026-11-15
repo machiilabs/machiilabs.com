@@ -41,21 +41,39 @@ export type SkagwayRelease = {
 /** Newest first. The product page shows every entry that still has `highlights`. Older entries use `items`. */
 export const SKAGWAY_RELEASES: SkagwayRelease[] = [
   {
-    version: "1.5.0",
+    version: "1.6.0",
     highlights: [
       {
-        title: "Make a playable copy",
-        body: "Convert natively unplayable files into playable copies. Many video formats are supported.",
+        title: "Play and copy improvements",
+        body: "Inline Play respects files this Mac cannot play—same rule as Convert to play on the card—with a clear activity message and a pulsing convert badge. Make a playable copy now handles AV1 and Opus in WebM and MKV (typical YouTube 4K downloads) by remuxing to MP4 without re-encoding.",
         details: [
-          "Your original file stays in the catalog. The converted MP4 copy is played.",
-          "The Corrupt smart library is renamed Unplayable.",
+          "Grid and list menus offer Remove playable copy when a sidecar MP4 is attached.",
+          "Try to play anyway in the context menu still opens the player when you need it.",
         ],
-        homeLine: "Convert natively unplayable files into playable copies. Many video formats are supported.",
+        homeLine:
+          "Smarter inline Play, faster AV1/Opus copies, and menus to remove a playable sidecar.",
       },
       {
-        title: "Bulk Rename",
-        body: "Usability enhancements, templates, and undo.",
-        homeLine: "Bulk Rename adds usability enhancements, templates, and undo.",
+        title: "Wall tags",
+        body: "The add-tag popover uses larger text and chips. The +N hidden-tag count no longer draws on top of the first visible tag on a card.",
+        homeLine: "Easier-to-read tag popover and a fix for overlapping tag counts on cards.",
+      },
+    ],
+  },
+  {
+    version: "1.5.0",
+    items: [
+      {
+        kind: "feature",
+        text: "Make a playable copy converts natively unplayable files to MP4; the catalog entry keeps pointing at your original.",
+      },
+      {
+        kind: "feature",
+        text: "Convert to play on the card, re-encode queue in the activity strip, and the Unplayable smart library (formerly Corrupt).",
+      },
+      {
+        kind: "feature",
+        text: "Bulk Rename with templates, preview, and undo.",
       },
     ],
   },
