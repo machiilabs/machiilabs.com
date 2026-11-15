@@ -797,9 +797,6 @@ export const MANUAL_PAGES: ManualPage[] = [
       "Right-click a video, or a batch selection, for file commands. Long jobs report in the activity strip at the bottom of the window and in queues that survive a restart.",
     screenshot: "file-operations.png",
     screenshotCaption: "The right-click menu’s file commands",
-    screenshotNeedsUpdate: true,
-    screenshotStaleHash:
-      "d7cfe8844fd32167a20abda5cec899526ad33334892506405c9e612b979c9959",
     screenshotAlt:
       "Skagway grid context menu on a playable video with Rename File…, Bulk Rename…, and Move Files…",
     screenshotHint:
