@@ -6,7 +6,7 @@
  * Regenerate: npm run manual:index
  * (also runs on predev / prebuild)
  *
- * Generated: 2026-11-15T05:41:11.657Z
+ * Generated: 2026-11-15T05:46:46.790Z
  * Documents: 123
  */
 import type { ManualSearchDocument } from "./search-documents";
