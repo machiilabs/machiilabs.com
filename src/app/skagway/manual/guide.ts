@@ -317,8 +317,7 @@ export const GUIDE_PAGES: ManualPage[] = [
           "Make a playable copy… saves an MP4 beside the original. The original stays in the catalog. Skagway plays the copy.",
         steps: [
           "If you just need to watch it, right-click → Play in External Player and choose an app that already opens the file. Nothing is converted.",
-          "To make a file Skagway can play, right-click → Make a playable copy… when no copy exists yet, or use Convert to play on the card. Try to play anyway… on the menu opens the built-in player even when the file is unplayable.",
-          "When a copy is already on disk, right-click → Remove playable copy… drops the sidecar MP4. Play uses the original again.",
+          "To make a file Skagway can play, right-click → Make a playable copy…, or use Convert to play on the card. The player offers the same command when playback cannot start.",
           "Jobs run one at a time. The activity strip at the bottom of the window shows progress. Click the strip to open Re-encode Queue.",
           "When the copy is saved, the strip keeps a line such as “1 playable copy.” Delete original points the catalog entry at the copy. Clear from queue leaves both files.",
           "Finished copies show up in the Recently Converted smart library. The video leaves Unplayable once the copy is on disk.",
@@ -341,9 +340,7 @@ export const GUIDE_PAGES: ManualPage[] = [
     screenshot: "file-operations.png",
     screenshotCaption: "Move Files… in the right-click menu",
     screenshotAlt:
-      "Skagway context menu with Move Files…, Make a playable copy…, and the other file commands",
-    screenshotHint:
-      "Same capture as the File operations page: right-click menu with Move Files… and the current playable-copy items (Make… or Remove…, plus Try to play anyway… on an unplayable file when relevant).",
+      "Skagway context menu on a playable video with Move Files… and other everyday file commands",
     screenshotNeedsUpdate: true,
     screenshotStaleHash:
       "d7cfe8844fd32167a20abda5cec899526ad33334892506405c9e612b979c9959",
@@ -409,8 +406,11 @@ export const GUIDE_PAGES: ManualPage[] = [
     screenshot: "duplicates.png",
     screenshotCaption: "The Duplicates smart library: a group of matching files",
     screenshotAlt: "Skagway Duplicates smart library with a group of matching files",
+    screenshotNeedsUpdate: true,
+    screenshotStaleHash:
+      "4ccf1319052e8889805fb3925f3ba4cc4ff832ae61203fbf08fa63ee9fca46cb",
     screenshotHint:
-      "Quick Filter open on Duplicates. The smart-library list includes Unplayable. At least one group of matching videos. If the context menu is open, it shows Not a Duplicate and the usual file commands.",
+      "Quick Filter open on Duplicates. The smart-library list includes Unplayable. At least one group of matching videos. If the context menu is open, it includes Make a playable copy… and Not a Duplicate.",
     sections: [
       {
         title: "Scan, duplicates, and leaving the catalog",
