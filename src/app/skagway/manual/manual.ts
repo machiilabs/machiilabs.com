@@ -667,7 +667,8 @@ export const MANUAL_PAGES: ManualPage[] = [
       {
         title: "Start and stop",
         steps: [
-          "Focus a video, then press Space, double-click its Grid card or List row, or click Play in the Inspector.",
+          "Focus a video, then start playback with any one of these: press Space, double-click its Grid card or List row, or click Play in the Inspector.",
+          "When this Mac cannot play the file and no sidecar MP4 is attached, Space does not open the player. Use Make a playable copy… or Convert to play on the card. Right-click → Try to play anyway… still opens the built-in player if you want to test it.",
           "While the player is open, Space pauses and resumes.",
           "Press ⌥Space to play from the start of the file. That ignores any saved resume position.",
           "Press Esc, or click the red traffic-light Stop, to stop. Skagway saves the position you left.",
@@ -796,13 +797,10 @@ export const MANUAL_PAGES: ManualPage[] = [
       "Right-click a video, or a batch selection, for file commands. Long jobs report in the activity strip at the bottom of the window and in queues that survive a restart.",
     screenshot: "file-operations.png",
     screenshotCaption: "The right-click menu’s file commands",
-    screenshotNeedsUpdate: true,
-    screenshotStaleHash:
-      "d7cfe8844fd32167a20abda5cec899526ad33334892506405c9e612b979c9959",
     screenshotAlt:
-      "Skagway grid context menu with Bulk Rename…, Move Files…, and Make a playable copy…",
+      "Skagway grid context menu on a playable video with Rename File…, Bulk Rename…, and Move Files…",
     screenshotHint:
-      "Right-click a grid card so the full context menu is readable, including Make a playable copy…, Bulk Rename…, Move Files…, and Set Poster from Image….",
+      "Hero for everyday file commands — not an unplayable demo. Right-click one playable video Skagway can play inline (H.264 or HEVC .mp4/.mov). Use All Videos; card must not show Convert to play. Single selection only. Menu must include Show in Finder, Edit Title…, Rename File…, Bulk Rename…, Move Files…, Set Poster from Image…. Make a playable copy… is expected when no sidecar MP4 is attached, even on playable files — keep it in frame. Must not show Try to play anyway… (only on unplayable files) or Remove playable copy… (only when a sidecar exists). Unplayable / Remove shots: playable-copy-context-menu.png and playable-copy-remove-menu.png under Make a playable copy below.",
     screenshotScale: 0.75,
     sections: [
       {
@@ -842,8 +840,26 @@ export const MANUAL_PAGES: ManualPage[] = [
         intro:
           "Most files play with no conversion. Use this when this Mac cannot play a file in Skagway. You can also hand that file to another app with Play in External Player.",
         steps: [
-          "Right-click the video and choose Make a playable copy…. On a Grid or Storyboard card the same command is the Convert to play mark. If playback cannot start, the player offers Make a playable copy… as well.",
+          "Make a playable copy… is on the menu whenever the video has no sidecar MP4 attached — including playable originals. Remove playable copy… replaces it after a sidecar is saved beside the original.",
+          {
+            text: "For a file this Mac cannot play inline, right-click → Try to play anyway… appears above Make a playable copy…. The card mark Convert to play runs the same command.",
+            screenshot: {
+              filename: "playable-copy-context-menu.png",
+              caption: "Try to play anyway… and Make a playable copy… on an unplayable file",
+              alt: "Skagway context menu on an unplayable video with Try to play anyway… and Make a playable copy…",
+              hint: "Unplayable file (e.g. AV1 WebM) with Convert to play on the card. Single selection. Menu shows Try to play anyway… then Make a playable copy…. Not file-operations.png.",
+            },
+          },
           "Your original file stays in the catalog, in the folder it is already in. Skagway saves an MP4 copy beside it and plays that copy. The library entry stays one video. If that name is already taken, the copy uses the next free name.",
+          {
+            text: "After a sidecar exists, Remove playable copy… moves only that MP4 to the Trash. With Confirm deletions on (Settings → Library), Skagway asks first.",
+            screenshot: {
+              filename: "playable-copy-remove-menu.png",
+              caption: "Remove playable copy… when a sidecar is on disk",
+              alt: "Skagway context menu with Remove playable copy… and no Make a playable copy…",
+              hint: "Same video after Make a playable copy… finished. Make a playable copy… must be absent; Remove playable copy… visible. No Convert to play on the card. Single selection.",
+            },
+          },
           "A card reads In Queue while the copy waits, and Processing with the percent while it runs. The activity strip shows the same job, for example Re-encode 42% · +2. Click the strip, or choose View → Re-encode Queue…, to open the queue.",
           "When the copy is saved, the strip keeps a line such as “1 playable copy.” In the queue, Delete original moves the original file to the Trash and points the catalog entry at the copy. Clear from queue leaves both files and drops the row. Finished copies also appear in the Recently Converted smart library.",
         ],
