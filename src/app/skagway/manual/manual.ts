@@ -668,6 +668,7 @@ export const MANUAL_PAGES: ManualPage[] = [
         title: "Start and stop",
         steps: [
           "Focus a video, then press Space, double-click its Grid card or List row, or click Play in the Inspector.",
+          "When this Mac cannot play the file and no playable copy is on disk yet, Space does not open the player. Use Make a playable copy… or Convert to play on the card. Right-click → Try to play anyway… still opens the built-in player if you want to test it.",
           "While the player is open, Space pauses and resumes.",
           "Press ⌥Space to play from the start of the file. That ignores any saved resume position.",
           "Press Esc, or click the red traffic-light Stop, to stop. Skagway saves the position you left.",
@@ -800,9 +801,9 @@ export const MANUAL_PAGES: ManualPage[] = [
     screenshotStaleHash:
       "d7cfe8844fd32167a20abda5cec899526ad33334892506405c9e612b979c9959",
     screenshotAlt:
-      "Skagway grid context menu with Bulk Rename…, Move Files…, and Make a playable copy…",
+      "Skagway grid context menu with Bulk Rename…, Move Files…, Make a playable copy…, and Try to play anyway…",
     screenshotHint:
-      "Right-click a grid card so the full context menu is readable, including Make a playable copy…, Bulk Rename…, Move Files…, and Set Poster from Image….",
+      "Right-click an Unplayable grid card that has no playable copy yet. The menu should show Make a playable copy…, Try to play anyway…, Bulk Rename…, Move Files…, and Set Poster from Image…. (After a copy exists on disk, capture Remove playable copy… instead of Make… — see Make a playable copy below.)",
     screenshotScale: 0.75,
     sections: [
       {
@@ -842,8 +843,18 @@ export const MANUAL_PAGES: ManualPage[] = [
         intro:
           "Most files play with no conversion. Use this when this Mac cannot play a file in Skagway. You can also hand that file to another app with Play in External Player.",
         steps: [
-          "Right-click the video and choose Make a playable copy…. On a Grid or Storyboard card the same command is the Convert to play mark. If playback cannot start, the player offers Make a playable copy… as well.",
+          "Right-click the video and choose Make a playable copy…. The item appears only when no playable copy is on disk yet. On a Grid or Storyboard card the same command is the Convert to play mark. If playback cannot start, the player offers Make a playable copy… as well.",
           "Your original file stays in the catalog, in the folder it is already in. Skagway saves an MP4 copy beside it and plays that copy. The library entry stays one video. If that name is already taken, the copy uses the next free name.",
+          {
+            text: "When a playable copy is already beside the original, right-click → Remove playable copy… moves that MP4 to the Trash and play uses the original again. With Confirm deletions on under Settings → Library, Skagway asks before it removes the copy.",
+            screenshot: {
+              filename: "playable-copy-remove-menu.png",
+              caption: "Remove playable copy… after a copy is on disk",
+              alt: "Skagway right-click menu showing Remove playable copy… instead of Make a playable copy…",
+              needsUpdate: true,
+              hint: "Right-click a video that already has a playable sidecar MP4. Make a playable copy… should be absent; Remove playable copy… should be visible with the other file commands.",
+            },
+          },
           "A card reads In Queue while the copy waits, and Processing with the percent while it runs. The activity strip shows the same job, for example Re-encode 42% · +2. Click the strip, or choose View → Re-encode Queue…, to open the queue.",
           "When the copy is saved, the strip keeps a line such as “1 playable copy.” In the queue, Delete original moves the original file to the Trash and points the catalog entry at the copy. Clear from queue leaves both files and drops the row. Finished copies also appear in the Recently Converted smart library.",
         ],
